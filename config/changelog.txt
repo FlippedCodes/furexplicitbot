@@ -1,0 +1,8 @@
+**Changelog:**
++ added rule34
++ added alternative commands
+* updated status message to change all 20 secs.
+
+Comming soon: 
+Inkbunny API
+replacement of FA website parsing with unoffical Furaffinity API

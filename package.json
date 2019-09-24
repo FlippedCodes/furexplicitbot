@@ -1,0 +1,36 @@
+{
+  "name": "furexplicitbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlipperLP/furexplicitbot.git"
+  },
+  "keywords": [],
+  "author": "phil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlipperLP/furexplicitbot/issues"
+  },
+  "homepage": "https://github.com/FlipperLP/furexplicitbot#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^11.5.1",
+    "furaffinity": "github:FlipperLP/furaffinity",
+    "heroku-client": "^3.0.7",
+    "mysql": "^2.17.1",
+    "pretty-ms": "^4.0.0",
+    "puppeteer": "^1.18.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}

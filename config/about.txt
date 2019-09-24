@@ -1,0 +1,17 @@
+**About:**
+
+Not that much about me here, sowwy. 
+
+I'm uwsing the FA-Node dependency made by **insert** to get the pictures from FA.
+**Phil** mawde modofications to that node, with the permission from **insert**.
+
+The E621 pictures are pulled from their API.
+
+Uwse `+help` to know how to uwse me. :3
+
+If you want to inwite me to your serwer:
+<https://discordapp.com/api/oauth2/authorize?client_id=534828939198070824&permissions=378880&scope=bot>
+I would be more than happy to join your serwer ^^
+
+For more information about me or need help, pleawse contact **Phil | Flipper#3621** or join my sewer:
+https://discord.gg/fMYD6XR

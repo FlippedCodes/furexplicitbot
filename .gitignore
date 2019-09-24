@@ -1,0 +1,6 @@
+/node_modules
+.eslintrc.json
+test_token.json
+.vscode/settings.json
+mawbot/config/test_token testbot.json
+mawbot/config/test_token main.json
