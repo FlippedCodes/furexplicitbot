@@ -1,6 +1,6 @@
 module.exports.run = async (client, fs) => {
   client.user.setStatus('online');
-  if (fs.existsSync('./furexplicitbot/config/test_token.json')) {
+  if (fs.existsSync('./config/test_token.json')) {
     client.user.setActivity('with the Testaccount from Flipper');
   } else {
     setInterval(() => {

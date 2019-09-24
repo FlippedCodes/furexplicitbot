@@ -25,7 +25,7 @@ let token;
 let clientID;
 let fa_token_A;
 let fa_token_B;
-if (fs.existsSync('./furexplicitbot/config/test_token.json')) {
+if (fs.existsSync('./config/test_token.json')) {
   token = require('./config/test_token.json');
   client.login(token.test_token_fa);
   clientID = config.clientIDTesting;
@@ -39,7 +39,7 @@ if (fs.existsSync('./furexplicitbot/config/test_token.json')) {
 }
 
 client.commands = new Discord.Collection();
-fs.readdir('./furexplicitbot/commands/', (err, files) => {
+fs.readdir('./commands/', (err, files) => {
   if (err) console.error(err);
 
   let jsfiles = files.filter(f => f.split('.').pop() === 'js');
@@ -60,7 +60,7 @@ fs.readdir('./furexplicitbot/commands/', (err, files) => {
 // ---------------------
 
 client.functions = new Discord.Collection();
-fs.readdir('./furexplicitbot/functions/', (err, files) => {
+fs.readdir('./functions/', (err, files) => {
   if (err) console.error(err);
 
   let jsfiles = files.filter(f => f.split('.').pop() === 'js');

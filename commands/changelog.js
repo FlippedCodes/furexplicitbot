@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const version = require('../../package.json');
+const version = require('../package.json');
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
   fs.readFile('./config/furaffinity/changelog.txt', 'utf8', (err, data) => {
