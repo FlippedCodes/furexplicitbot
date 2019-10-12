@@ -4,6 +4,8 @@ const { RichEmbed } = require('discord.js');
 
 const client = new Discord.Client({ disableEveryone: true });
 
+const mysql = require('mysql');
+
 const fs = require('fs');
 
 const config = require('./config/config.json');
