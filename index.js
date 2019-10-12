@@ -123,6 +123,8 @@ client.on('message', async (message) => {
   let cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
 
   if (cmd) {
+    client.functions.get('seenChangelog').run(client, message, DB)
+      .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
       timeout(message.author.id);
       cmd.run(client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B)
