@@ -33,11 +33,23 @@ if (fs.existsSync('./config/test_token.json')) {
   clientID = config.clientIDTesting;
   fa_token_A = token.fa_cookie_a;
   fa_token_B = token.fa_cookie_b;
+  DB = mysql.createConnection({
+    host: token.DB_host,
+    user: token.DB_user,
+    password: token.DB_passw,
+    database: token.DB_name,
+  });
 } else {
   client.login(process.env.BOT_TOKEN_FA);
   clientID = config.clientID;
   fa_token_A = process.env.FA_COOKIE_A;
   fa_token_B = process.env.FA_COOKIE_B;
+  DB = mysql.createConnection({
+    host: process.env.DB_host,
+    user: process.env.DB_user,
+    password: process.env.DB_passw,
+    database: process.env.DB_name,
+  });
 }
 
 client.commands = new Discord.Collection();
