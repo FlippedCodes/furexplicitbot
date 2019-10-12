@@ -4,7 +4,7 @@ function Timeout(msg, userID, messageOwner, config) {
   messageOwner.set(msg.id, userID);
   setTimeout(() => {
     messageOwner.delete(msg.id);
-    msg.clearReactions();
+    msg.clearReactions().catch();
   }, config.reactionsTimeout);
 }
 
