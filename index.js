@@ -120,7 +120,6 @@ client.on('message', async (message) => {
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  // TODO: image deletion if inapropiete
   if (user.bot) return;
   if (!reaction.me) return;
   client.functions.get('e621_detailed').run(client, reaction, user, config, RichEmbed, fs, messageOwner);

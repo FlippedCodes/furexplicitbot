@@ -1,6 +1,5 @@
 const rp = require('request-promise');
 // TODO: get pool and child posts
-// TODO: Remove reactions after some time
 // TODO: changable prefix and saved to DB
 // TODO: add pic resolution
 // TODO: remove triggered recations. like expantion (needs permission checking before removal)
