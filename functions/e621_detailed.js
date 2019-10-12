@@ -47,10 +47,12 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messa
           let artists = post.artist.join(', ');
           let typeArtists = 'All artists';
           if (post.artist.length === 1) typeArtists = 'Artist';
-          let arrow = '🔽';
-          const extantion = post.file_ext;
-          if (extantion === 'webm' || extantion === 'swf') arrow = post.file_url;
-          let embed = new RichEmbed()
+          const extention = post.file_ext;
+          let embed = new RichEmbed();
+          if (extention === 'webm' || extention === 'swf') {
+            embed.addField('Direct video link', post.file_url);
+          }
+          embed
             .setAuthor(`${typeArtists}: ${post.artist[0]}`)
             .setColor(color)
             .setTitle('E621 Link')
@@ -62,7 +64,6 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messa
             .addField('Resolution', `${post.width}x${post.height}`, true)
             .addField(typeSources, source)
             .addField('Full Picture link', post.file_url)
-            .addField('Full Picture', arrow)
             .setImage(post.file_url)
             .setFooter('e621.net', config.logo_e621)
             .setTimestamp();

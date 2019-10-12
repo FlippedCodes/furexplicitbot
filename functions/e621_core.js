@@ -50,22 +50,23 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           const randomChoice = Math.floor(Math.random() * pool.length);
           let typePic = 'Preview';
           let picURL = pool[randomChoice].sample_url;
-          let arrow = '🔽';
           const extention = pool[randomChoice].file_ext;
+          let embed = new RichEmbed();
+          embed
+          // .setAuthor(`Main Artist: ${pool[randomChoice].artist[0]}`)
+          .setColor(config.color_e621)
+          .setTitle(`Artist: ${pool[randomChoice].artist[0]} [e621 link]`)
+          .setURL(`https://e621.net/post/show/${pool[randomChoice].id}`)
+          .setImage(picURL)
+          .setFooter('e621.net', config.logo_e621)
+          .setTimestamp();
           if (extention === 'gif' || extention === 'webm' || extention === 'swf') {
-            typePic = 'Full Picture';
+            typePic = 'Direct video link';
             picURL = pool[randomChoice].file_url;
-            if (extention === 'webm' || extention === 'swf') arrow = pool[randomChoice].file_url;
+            if (extention === 'webm' || extention === 'swf') {
+              embed.addField(typePic, pool[randomChoice].file_url);
+            }
           }
-          let embed = new RichEmbed()
-            .setAuthor(`Main Artist: ${pool[randomChoice].artist[0]}`)
-            .setColor(config.color_e621)
-            .setTitle('E621 Link')
-            .setURL(`https://e621.net/post/show/${pool[randomChoice].id}`)
-            .addField(typePic, arrow)
-            .setImage(picURL)
-            .setFooter('e621.net', config.logo_e621)
-            .setTimestamp();
           message.channel.send({ embed })
             .then((msg) => {
               msg.react('↗')
