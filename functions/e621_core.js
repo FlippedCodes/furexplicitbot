@@ -24,14 +24,14 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     if (message.channel.nsfw === false) uri = 'https://e926.net/post/index.json';
     if (limit > 10 && message.author.id !== config.owner) {
       message.reply('you can only requwest a maximum of 10 images at the twime.')
-        .then(msg => msg.delete(10000));
+        .then((msg) => msg.delete(10000));
       reaction_loading.remove(client.user);
       return;
     }
     if (limit > 3) {
       let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
       message.channel.send({ embed })
-        .then(msg => msg.delete(10000));
+        .then((msg) => msg.delete(10000));
     }
     let request = {
       method: 'POST',
@@ -53,13 +53,12 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           const extention = pool[randomChoice].file_ext;
           let embed = new RichEmbed();
           embed
-          // .setAuthor(`Main Artist: ${pool[randomChoice].artist[0]}`)
-          .setColor(config.color_e621)
-          .setTitle(`Artist: ${pool[randomChoice].artist[0]} [e621 link]`)
-          .setURL(`https://e621.net/post/show/${pool[randomChoice].id}`)
-          .setImage(picURL)
-          .setFooter('e621.net', config.logo_e621)
-          .setTimestamp();
+            .setColor(config.color_e621)
+            .setTitle(`Artist: ${pool[randomChoice].artist[0]} [e621 link]`)
+            .setURL(`https://e621.net/post/show/${pool[randomChoice].id}`)
+            .setImage(picURL)
+            .setFooter('e621.net', config.logo_e621)
+            .setTimestamp();
           if (extention === 'gif' || extention === 'webm' || extention === 'swf') {
             typePic = 'Direct video link';
             picURL = pool[randomChoice].file_url;
