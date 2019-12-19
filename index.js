@@ -27,6 +27,7 @@ let token;
 let clientID;
 let fa_token_A;
 let fa_token_B;
+let DB;
 if (fs.existsSync('./config/test_token.json')) {
   token = require('./config/test_token.json');
   client.login(token.test_token_fa);
