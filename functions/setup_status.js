@@ -5,7 +5,7 @@ module.exports.run = async (client, fs) => {
   } else {
     setInterval(() => {
       setTimeout(() => {
-        client.user.setActivity(`ower ${client.guilds.reduce((previousCount, currentGuild) => previousCount + currentGuild.memberCount, 0)} members.`, { type: 'WATCHING' });
+        client.user.setActivity(`in ${client.guilds.size} servers.`, { type: 'LISTENING' });
       }, 20000);
       client.user.setActivity('with \'+help\' command');
     }, 1 * 40000);
