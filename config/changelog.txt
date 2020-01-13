@@ -4,4 +4,4 @@
 
 Comming soon: 
 Inkbunny API
-apply updated look to all serives
+apply updated look to all services
