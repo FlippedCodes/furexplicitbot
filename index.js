@@ -57,7 +57,7 @@ client.commands = new Discord.Collection();
 fs.readdir('./commands/', (err, files) => {
   if (err) console.error(err);
 
-  let jsfiles = files.filter(f => f.split('.').pop() === 'js');
+  let jsfiles = files.filter((f) => f.split('.').pop() === 'js');
   if (jsfiles.length <= 0) {
     console.log('No CMD(s) to load!');
     return;
@@ -78,7 +78,7 @@ client.functions = new Discord.Collection();
 fs.readdir('./functions/', (err, files) => {
   if (err) console.error(err);
 
-  let jsfiles = files.filter(f => f.split('.').pop() === 'js');
+  let jsfiles = files.filter((f) => f.split('.').pop() === 'js');
   if (jsfiles.length <= 0) {
     console.log('No function(s) to load!');
     return;
