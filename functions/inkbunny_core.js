@@ -1,8 +1,9 @@
 const rp = require('request-promise');
 
-function checkResult(result) {
-  
-}
+// TODO: check error code, try login, if failed again, give error. Give error if code is other then invalid session
+// function checkResult(result) {
+//   if (result.error_code) {}
+// }
 
 function httpRequest(apiFunction, args) {
   let uri = `https://inkbunny.net/api_${apiFunction}.php?output_mode=json&${args}`;
@@ -11,7 +12,8 @@ function httpRequest(apiFunction, args) {
     uri,
     headers: { 'User-Agent': 'DiscordBot - FurExplicitBot' },
   };
-  return checkResult(rp(request));
+  // return checkResult(rp(request));
+  return rp(request);
 }
 
 function loginAssembly(params) {
