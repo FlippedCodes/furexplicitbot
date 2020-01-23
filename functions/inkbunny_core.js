@@ -86,5 +86,5 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
 };
 
 module.exports.help = {
-  name: 'ib',
+  name: 'inkbunny_core',
 };
