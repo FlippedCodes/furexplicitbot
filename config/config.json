@@ -11,5 +11,9 @@
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
     "color_fa": "FAAF3A",
     "logo_r34": "https://rule34.xxx/favicon.ico",
-    "color_r34": "aae5a3"
+    "color_r34": "aae5a3",
+    "ib": {
+        "logo": "https://nl.ib.metapix.net/images78/favicon.ico",
+        "color": "73d216"
+    }
 }
