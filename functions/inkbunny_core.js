@@ -117,8 +117,7 @@ async function checkSID(client) {
 // TEMP: Editor note
 function editorNote(message, RichEmbed) {
   let note = '**Editor note:** This command is still in beta. There are going to be features added soon. In the meantime, you might experience long image waiting times.';
-  let embed = new RichEmbed().setDescription(note);
-  message.channel.send({ embed });
+  noteSend(note, message.channel, RichEmbed);
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
