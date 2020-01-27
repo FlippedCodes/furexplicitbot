@@ -132,7 +132,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     let [ammount] = args;
     if (isNaN(ammount) || ammount <= 0) ammount = 1;
     else tags = tags.slice(ammount.length + 1);
-    let result = await seachAssembly(await checkChannelRating(client, message.channel), tags, ammount);
+    let result = await seachAssembly(
+      await checkChannelRating(client, message.channel),
+      tags,
+      limmiter(ammount, config, message, RichEmbed),
+    );
     messageSend(config, message, RichEmbed, result);
     await reaction_loading.remove(client.user);
   })
