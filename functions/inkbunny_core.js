@@ -50,13 +50,17 @@ function SFWRatingAssembly(sid) {
 }
 
 // checking if channel is nsfw
-function checkChannelRating(sid, channel) {
-  if (channel.nsfw === true) NSFWRatingAssembly(sid);
-  else SFWRatingAssembly(sid);
+function checkChannelRating(client, channel) {
+  let sidSFW = client.IB_SID_SFW;
+  let sidNSFW = client.IB_SID_NSFW;
+  switch (channel.nsfw) {
+    case true: return sidNSFW;
+    case false: return sidSFW;
+    default: return sidSFW;
+  }
 }
 
-async function seachAssembly(channel, sid, searchQuery, ammount) {
-  await checkChannelRating(sid, channel);
+async function seachAssembly(sid, searchQuery, ammount) {
   let postTypes = '1,2,3,4,5,8,9';
   let args = `sid=${sid}&text=${searchQuery}&submissions_per_page=${ammount}&random=yes&type=${postTypes}`;
   let result = await httpRequest('search', args);
@@ -65,12 +69,26 @@ async function seachAssembly(channel, sid, searchQuery, ammount) {
 
 // checking session ID
 async function checkSID(client) {
-  // generates, when first request is made
-  if (!client.IB_SID) client.IB_SID = await loginAssembly();
-  // checks if SID is still valid
-  let args = `sid=${client.IB_SID}&submissions_per_page=0&no_submissions=yes`;
-  let result = await httpRequest('search', args);
-  if (result.error_code === 2) await loginAssembly();
+  if (client.IB_SID_SFW && client.IB_SID_NSFW) {
+    [client.IB_SID_SFW, client.IB_SID_NSFW].forEach(async (SID) => {
+      let args = `sid=${SID}&submissions_per_page=0&no_submissions=yes`;
+      let result = await httpRequest('search', args);
+      if (result.error_code === 2) {
+        SID = await loginAssembly();
+        SFWRatingAssembly(SID);
+      }
+    });
+  } else {
+    // generates, when first request is made
+    if (!client.IB_SID_SFW) {
+      client.IB_SID_SFW = await loginAssembly();
+      SFWRatingAssembly(client.IB_SID_SFW);
+    }
+    if (!client.IB_SID_NSFW) {
+      client.IB_SID_NSFW = await loginAssembly();
+      NSFWRatingAssembly(client.IB_SID_NSFW);
+    }
+  }
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
@@ -83,7 +101,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     let [ammount] = args;
     if (isNaN(ammount) || ammount <= 0) ammount = 1;
     else tags = tags.slice(ammount.length + 1);
-    let result = await seachAssembly(message.channel, client.IB_SID, tags, ammount);
+    let result = await seachAssembly(await checkChannelRating(client, message.channel), tags, ammount);
     messageSend(config, message, RichEmbed, result);
   });
 };
