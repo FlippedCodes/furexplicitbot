@@ -72,6 +72,16 @@ function checkChannelRating(client, channel) {
   }
 }
 
+function limmiter(ammount, config, message, RichEmbed) {
+  let newAmmount = ammount;
+  if (ammount > 10 && message.author.id !== config.owner) {
+    let note = 'You can only requwest a maximum of 10 images at the twime. I hawe limited it fowor you ^w^';
+    noteSend(note, message.channel, RichEmbed);
+    newAmmount = 10;
+  }
+  return newAmmount;
+}
+
 // assembles the search querry
 async function seachAssembly(sid, searchQuery, ammount) {
   let postTypes = '1,2,3,4,5,8,9';
