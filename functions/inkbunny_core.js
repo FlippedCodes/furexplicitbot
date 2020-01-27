@@ -109,8 +109,14 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     if (isNaN(ammount) || ammount <= 0) ammount = 1;
     else tags = tags.slice(ammount.length + 1);
     let result = await seachAssembly(await checkChannelRating(client, message.channel), tags, ammount);
-    messageSend(config, message, RichEmbed, result);
-  });
+    messageSend(config, message, RichEmbed, result)
+      .then(() => reaction_loading.remove(client.user));
+  })
+    .catch((err) => {
+      message.channel.send('Sowwy, but it seems like something went wrong... Pleawse report this to my creator. uwu\'')
+        .then(() => message.react('❌'));
+      console.error(err);
+    });
 };
 
 module.exports.help = {
