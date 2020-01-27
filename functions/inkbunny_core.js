@@ -11,6 +11,12 @@ function messageBuilder(config, RichEmbed, title, url, image) {
     .setTimestamp();
 }
 
+// sends note
+function noteSend(message, channel, RichEmbed) {
+  let embed = new RichEmbed().setDescription(message);
+  channel.send({ embed });
+}
+
 // prepares message values and sends
 function messageSend(config, message, RichEmbed, result) {
   result.submissions.forEach((submission) => {
