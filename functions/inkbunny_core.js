@@ -31,7 +31,6 @@ function messageSend(config, message, RichEmbed, result) {
 // runs http request
 async function httpRequest(apiFunction, args) {
   let uri = `https://inkbunny.net/api_${apiFunction}.php?output_mode=json&${args}`;
-  console.log(uri);
   let request = {
     method: 'GET',
     uri,
