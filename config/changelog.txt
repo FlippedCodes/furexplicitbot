@@ -1,7 +1,6 @@
 **Changelog:**
-+ added changelog-viewer
-* updated e621 embed to look smaller
++ Inkbunny API [BETA]
 
 Comming soon: 
-Inkbunny API
 apply updated look to all services
+code rewrite for FA, e621 and r34
