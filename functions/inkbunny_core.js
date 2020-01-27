@@ -1,5 +1,6 @@
 const rp = require('request-promise');
 
+// prepares message embed
 function messageBuilder(config, RichEmbed, title, url, image) {
   return new RichEmbed()
     .setTitle(title)
@@ -10,6 +11,7 @@ function messageBuilder(config, RichEmbed, title, url, image) {
     .setTimestamp();
 }
 
+// prepares message values and sends
 function messageSend(config, message, RichEmbed, result) {
   result.submissions.forEach((submission) => {
     let url = `https://inkbunny.net/s/${submission.submission_id}`;
@@ -20,6 +22,7 @@ function messageSend(config, message, RichEmbed, result) {
   });
 }
 
+// runs http request
 async function httpRequest(apiFunction, args) {
   let uri = `https://inkbunny.net/api_${apiFunction}.php?output_mode=json&${args}`;
   console.log(uri);
@@ -33,19 +36,22 @@ async function httpRequest(apiFunction, args) {
   return result;
 }
 
+// assembles the guest login querry
 async function loginAssembly() {
   let args = 'username=guest&password=';
   let result = await httpRequest('login', args);
   return result.sid;
 }
 
-function NSFWRatingAssembly(sid) {
-  let args = `sid=${sid}&tag[2]=yes&tag[3]=yes&tag[4]=yes&tag[5]=yes`;
+// assembles the SFW search querry
+function SFWRatingAssembly(sid) {
+  let args = `sid=${sid}&tag[2]=no&tag[3]=no&tag[4]=no&tag[5]=no`;
   httpRequest('userrating', args);
 }
 
-function SFWRatingAssembly(sid) {
-  let args = `sid=${sid}&tag[2]=no&tag[3]=no&tag[4]=no&tag[5]=no`;
+// assembles the NSFW search querry
+function NSFWRatingAssembly(sid) {
+  let args = `sid=${sid}&tag[2]=yes&tag[3]=yes&tag[4]=yes&tag[5]=yes`;
   httpRequest('userrating', args);
 }
 
@@ -60,6 +66,7 @@ function checkChannelRating(client, channel) {
   }
 }
 
+// assembles the search querry
 async function seachAssembly(sid, searchQuery, ammount) {
   let postTypes = '1,2,3,4,5,8,9';
   let args = `sid=${sid}&text=${searchQuery}&submissions_per_page=${ammount}&random=yes&type=${postTypes}`;
