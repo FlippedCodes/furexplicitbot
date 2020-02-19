@@ -4,7 +4,7 @@ const { RichEmbed } = require('discord.js');
 
 const client = new Discord.Client({ disableEveryone: true });
 
-const mysql = require('mysql');
+// const mysql = require('mysql');
 
 const fs = require('fs');
 
@@ -34,23 +34,23 @@ if (fs.existsSync('./config/test_token.json')) {
   clientID = config.clientIDTesting;
   fa_token_A = token.fa_cookie_a;
   fa_token_B = token.fa_cookie_b;
-  DB = mysql.createConnection({
-    host: token.DB_host,
-    user: token.DB_user,
-    password: token.DB_passw,
-    database: token.DB_name,
-  });
+  // DB = mysql.createConnection({
+  //   host: token.DB_host,
+  //   user: token.DB_user,
+  //   password: token.DB_passw,
+  //   database: token.DB_name,
+  // });
 } else {
   client.login(process.env.BOT_TOKEN_FA);
   clientID = config.clientID;
   fa_token_A = process.env.FA_COOKIE_A;
   fa_token_B = process.env.FA_COOKIE_B;
-  DB = mysql.createConnection({
-    host: process.env.DB_host,
-    user: process.env.DB_user,
-    password: process.env.DB_passw,
-    database: process.env.DB_name,
-  });
+  // DB = mysql.createConnection({
+  //   host: process.env.DB_host,
+  //   user: process.env.DB_user,
+  //   password: process.env.DB_passw,
+  //   database: process.env.DB_name,
+  // });
 }
 
 client.commands = new Discord.Collection();
@@ -124,8 +124,8 @@ client.on('message', async (message) => {
   let cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
 
   if (cmd) {
-    client.functions.get('seenChangelog').run(client, message, DB)
-      .catch(console.log);
+    // client.functions.get('seenChangelog').run(client, message, DB)
+    //   .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
       timeout(message.author.id);
       cmd.run(client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B)
