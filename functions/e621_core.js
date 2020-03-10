@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
         .then((msg) => msg.delete(10000));
     }
     let request = {
-      method: 'POST',
+      method: 'GET',
       uri,
       body: {
         limit: '300',
@@ -46,26 +46,27 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       json: true,
     };
     rp(request)
-      .then((pool) => {
+      .then((pics) => {
+        const pool = pics.posts;
         if (pool.length === 0) return message.channel.send('Sowwy, I found no pictures with your tags. uwu');
         for (let i = 0; i < limit; i++) {
           const randomChoice = Math.floor(Math.random() * pool.length);
           let typePic = 'Preview';
-          let picURL = pool[randomChoice].sample_url;
-          const extention = pool[randomChoice].file_ext;
+          let picURL = pool[randomChoice].sample.url;
+          const extention = pool[randomChoice].file.ext;
           let embed = new RichEmbed();
           embed
             .setColor(config.color_e621)
-            .setTitle(`Artist: ${pool[randomChoice].artist[0]} [e621 link]`)
+            .setTitle(`Artist: ${pool[randomChoice].tags.artist[0]} [e621 link]`)
             .setURL(`https://e621.net/posts/${pool[randomChoice].id}`)
             .setImage(picURL)
             .setFooter('e621.net', config.logo_e621)
             .setTimestamp();
           if (extention === 'gif' || extention === 'webm' || extention === 'swf') {
             typePic = 'Direct video link';
-            picURL = pool[randomChoice].file_url;
+            picURL = pool[randomChoice].file.url;
             if (extention === 'webm' || extention === 'swf') {
-              embed.addField(typePic, pool[randomChoice].file_url);
+              embed.addField(typePic, pool[randomChoice].file.url);
             }
           }
           message.channel.send({ embed })
