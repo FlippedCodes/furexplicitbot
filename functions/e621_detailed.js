@@ -23,7 +23,7 @@ function tagsReplace(tags, search, replace) {
 module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messageOwner) => {
   switch (reaction.emoji.name) {
     case '↗':
-      const id = reaction.message.embeds[0].url.replace('https://e621.net/post/show/', '');
+      const id = reaction.message.embeds[0].url.replace('https://e621.net/posts/', '');
       const color = reaction.message.embeds[0].color;
       let e621_id = {
         method: 'POST',
@@ -56,7 +56,7 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messa
             .setAuthor(`${typeArtists}: ${post.artist[0]}`)
             .setColor(color)
             .setTitle('E621 Link')
-            .setURL(`https://e621.net/post/show/${post.id}`)
+            .setURL(`https://e621.net/posts/${post.id}`)
             .setDescription(`**Tags:** \`\`\`${tagsReplace(post.tags, ' ', ', ')}\`\`\``)
             .addField('Rating', post.rating, true)
             .addField('Score', post.score, true)
