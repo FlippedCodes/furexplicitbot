@@ -8,7 +8,7 @@ const rp = require('request-promise');
 const version = require('../package.json');
 
 function missingPermissions(message) {
-  message.channel.send('You are nowt allowoed to delewt this message <.<')
+  message.channel.send('You are nowt allowoed to delewt this message <.<\'')
     .then((msg) => msg.delete(10000));
   // FIXME: Delete reaction by user
   // TODO: make rich embed

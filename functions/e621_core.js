@@ -22,8 +22,8 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     if (isNaN(limit) || limit === 0) limit = 1;
     else tags = tags.slice(limit.length + 1);
 
-    let uri = 'https://e621.net/post/index.json';
-    if (message.channel.nsfw === false) uri = 'https://e926.net/post/index.json';
+    let uri = 'https://e621.net/posts.json';
+    if (message.channel.nsfw === false) uri = 'https://e926.net/posts.json';
     if (limit > 10 && message.author.id !== config.owner) {
       message.reply('you can only requwest a maximum of 10 images at the twime.')
         .then((msg) => msg.delete(10000));
@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           embed
             .setColor(config.color_e621)
             .setTitle(`Artist: ${pool[randomChoice].artist[0]} [e621 link]`)
-            .setURL(`https://e621.net/post/show/${pool[randomChoice].id}`)
+            .setURL(`https://e621.net/posts/${pool[randomChoice].id}`)
             .setImage(picURL)
             .setFooter('e621.net', config.logo_e621)
             .setTimestamp();
