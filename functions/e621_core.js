@@ -42,7 +42,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
         limit: '300',
         tags,
       },
-      headers: { 'User-Agent': `FurExplicitBot/${version.version}` },
+      headers: { 'User-Agent': `FurExplicitBot/${version.version} by Flipper on e6` },
       json: true,
     };
     rp(request)
