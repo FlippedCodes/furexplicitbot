@@ -139,7 +139,5 @@ client.on('message', async (message) => {
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  if (user.bot) return;
-  if (!reaction.me) return;
-  client.functions.get('e621_detailed_rewrite').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
+  client.functions.get('FUNC_messageReactionAdd').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
 });
