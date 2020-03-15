@@ -1,91 +1,97 @@
-const rp = require('request-promise');
-// TODO: get pool and child posts
-// TODO: changable prefix and saved to DB
-// TODO: add pic resolution
-// TODO: remove triggered recations. like expantion (needs permission checking before removal)
-
-// eslint-disable-next-line import/no-unresolved
-const version = require('../package.json');
-
-function missingPermissions(message) {
-  message.channel.send('You are nowt allowoed to delewt this message <.<\'')
+// creates a embed messagetemplate for failed actions
+function messageFail(message, body) {
+  const client = message.client;
+  client.functions.get('FUNC_richEmbedMessage')
+    .run(client.user, message.channel, body, '', 16449540, false)
     .then((msg) => msg.delete(10000));
-  // FIXME: Delete reaction by user
-  // TODO: make rich embed
 }
 
-function messageDelete(message, messageOwner) {
-  if (messageOwner.has(message.id)) messageOwner.delete(message.id);
-  message.delete();
+function buildRequest(id) {
+  const version = require('../package.json');
+  return {
+    method: 'GET',
+    uri: `https://e621.net/posts/${id}.json`,
+    headers: {
+      'User-Agent': `FurExplicitBot/${version.version} by Flipper on e621`,
+    },
+    json: true,
+  };
 }
 
-function tagsReplace(tags, search, replace) {
-  return tags.replace(new RegExp(search, 'g'), replace);
+async function getRequest(request) {
+  const rp = require('request-promise');
+  const pics = await rp(request);
+  return pics.post;
 }
 
-module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messageOwner) => {
+async function requestPicture(id) {
+  const post = await getRequest(buildRequest(id));
+  return post;
+}
+
+function formatTags(tags) {
+  const joinedTags = tags.join(', ');
+  return `\`${joinedTags}\``;
+}
+
+function getTags(post, embed) {
+  const tags = post.tags;
+  const artists = tags.artist.join(', ');
+  let typeArtists = 'All artists';
+  if (tags.artist.length === 1) typeArtists = 'Artist';
+  embed.setAuthor(`${typeArtists}: ${artists}`);
+
+  const extention = post.file.ext;
+  if (extention === 'webm' || extention === 'swf') {
+    embed.addField('Direct video link', post.file_url);
+  }
+
+  if (tags.character.length !== 0) embed.addField('Character tags', formatTags(tags.character), true);
+  if (tags.species.length !== 0) embed.addField('Species tags', formatTags(tags.species), true);
+  if (tags.copyright.length !== 0) embed.addField('Copyright tags', formatTags(tags.copyright), true);
+  if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
+  if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
+  if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
+}
+
+function postPicture(reaction, RichEmbed, previewMessage, config, post) {
+  const embed = new RichEmbed();
+
+  getTags(post, embed);
+
+  let source = 'none';
+  let typeSources = 'Sources';
+  if (post.sources) {
+    source = post.sources.join('\n');
+    if (post.sources.length === 1) typeSources = 'Source';
+  }
+
+  embed
+    .setColor(previewMessage.color)
+    .setTitle('E621 Link')
+    .setURL(`https://e621.net/posts/${post.id}`)
+    .setDescription(`**Tags:** \`\`\`${post.tags.general.join(', ')}\`\`\``)
+    .addField('Rating', post.rating, true)
+    .addField('Score', post.score.total, true)
+    .addField('ID', post.id, true)
+    .addField('Resolution', `${post.file.width}x${post.file.height}`, true)
+    .addField(typeSources, source)
+    .addField('Full Picture link', post.file.url)
+    .setImage(post.file.url)
+    .setFooter(config.e621.label, config.e621.logo)
+    .setTimestamp();
+  reaction.message.edit({ embed });
+}
+
+module.exports.run = async (reaction, config, RichEmbed) => {
   switch (reaction.emoji.name) {
-    // DISABLED: function for one post request missing/not found
-    // case '↗':
-    //   const id = reaction.message.embeds[0].url.replace('https://e621.net/posts/', '');
-    //   const color = reaction.message.embeds[0].color;
-    //   let e621_id = {
-    //     method: 'POST',
-    //     uri: 'https://e621.net/post/show.json',
-    //     body: {
-    //       id,
-    //     },
-    //     headers: {
-    //       'User-Agent': `FurExplicitBot/${version.version}`,
-    //     },
-    //     json: true,
-    //   };
-    //   rp(e621_id)
-    //     .then((post) => {
-    //       let source = 'none';
-    //       let typeSources = 'Sources';
-    //       if (post.sources) {
-    //         source = post.sources.join('\n');
-    //         if (post.sources.length === 1) typeSources = 'Source';
-    //       }
-    //       let artists = post.artist.join(', ');
-    //       let typeArtists = 'All artists';
-    //       if (post.artist.length === 1) typeArtists = 'Artist';
-    //       const extention = post.file_ext;
-    //       let embed = new RichEmbed();
-    //       if (extention === 'webm' || extention === 'swf') {
-    //         embed.addField('Direct video link', post.file_url);
-    //       }
-    //       embed
-    //         .setAuthor(`${typeArtists}: ${post.artist[0]}`)
-    //         .setColor(color)
-    //         .setTitle('E621 Link')
-    //         .setURL(`https://e621.net/posts/${post.id}`)
-    //         .setDescription(`**Tags:** \`\`\`${tagsReplace(post.tags, ' ', ', ')}\`\`\``)
-    //         .addField('Rating', post.rating, true)
-    //         .addField('Score', post.score, true)
-    //         .addField('ID', post.id, true)
-    //         .addField('Resolution', `${post.width}x${post.height}`, true)
-    //         .addField(typeSources, source)
-    //         .addField('Full Picture link', post.file_url)
-    //         .setImage(post.file_url)
-    //         .setFooter('e621.net', config.logo_e621)
-    //         .setTimestamp();
-    //       reaction.message.edit({ embed });
-    //     });
-    //   return;
-    case '❌':
-      // FIXME: removal of reaction (refferes to missingPermissions function)
-      if (reaction.message.guild.member(user).hasPermission('MANAGE_MESSAGES')) {
-        messageDelete(reaction.message, messageOwner);
-      } else if (messageOwner.has(reaction.message.id)) {
-        if (messageOwner.get(reaction.message.id) === user.id) {
-          messageDelete(reaction.message, messageOwner);
-        } else missingPermissions(reaction.message);
-      } else missingPermissions(reaction.message);
+    case '↗': {
+      const embed = reaction.message.embeds[0];
+      const id = embed.url.replace('https://e621.net/posts/', '');
+      postPicture(reaction, RichEmbed, embed, config, await requestPicture(id));
       return;
-    default:
-      return;
+    }
+    default: return;
   }
 };
 
