@@ -103,8 +103,10 @@ client.on('ready', async () => {
 
 client.on('message', async (message) => {
   if (message.author.bot) return;
-  if (message.mentions.members.first()) {
-    if (message.mentions.members.first().id === client.user.id) return message.author.send('>.< You piwned me! uwu. hmm... Maybe you downt know how to uwse me... You can swee all the commands with `+help` that I know. ^w^');
+  if (!message.channel.type === 'dm') {
+    if (message.mentions.members.first()) {
+      if (message.mentions.members.first().id === client.user.id) return message.author.send('>.< You piwned me! uwu. hmm... Maybe you downt know how to uwse me... You can swee all the commands with `+help` that I know. ^w^');
+    }
   }
   if (message.content.indexOf(config.prefix) !== 0) return;
   // {
