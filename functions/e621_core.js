@@ -93,7 +93,7 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
       .setTitle(`Artist: ${post.tags.artist.join(', ')} [e621 link]`)
       .setURL(`https://e621.net/posts/${post.id}`)
       .setImage(picURL)
-      .setFooter('e621.net', config.e621.logo)
+      .setFooter(config.e621.label, config.e621.logo)
       .setTimestamp();
     const msg = await message.channel.send({ embed });
     await msg.react('❌');

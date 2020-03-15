@@ -22,6 +22,7 @@
             "sfw": "https://e926.net/posts.json"
         },
         "logo": "https://s3.amazonaws.com/gt7sp-prod/decal/76/91/55/8223656485231559176_1.png",
-        "color": "012E57"
+        "color": "012E57",
+        "label": "e621.net"
     }
 }
