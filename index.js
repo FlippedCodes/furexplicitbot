@@ -12,7 +12,7 @@ const config = require('./config/config.json');
 
 const usedRecently = new Set();
 
-let messageOwner = new Map();
+const messageOwner = new Map();
 
 function timeout(id) {
   usedRecently.add(id);
@@ -57,7 +57,7 @@ client.commands = new Discord.Collection();
 fs.readdir('./commands/', (err, files) => {
   if (err) console.error(err);
 
-  let jsfiles = files.filter((f) => f.split('.').pop() === 'js');
+  const jsfiles = files.filter((f) => f.split('.').pop() === 'js');
   if (jsfiles.length <= 0) {
     console.log('No CMD(s) to load!');
     return;
@@ -65,7 +65,7 @@ fs.readdir('./commands/', (err, files) => {
 
   console.log(`Loading ${jsfiles.length} command(s)...`);
   jsfiles.forEach((f, i) => {
-    let probs = require(`./commands/${f}`);
+    const probs = require(`./commands/${f}`);
     console.log(`    ${i + 1}) Loaded: ${f}!`);
     client.commands.set(probs.help.name, probs);
   });
@@ -78,7 +78,7 @@ client.functions = new Discord.Collection();
 fs.readdir('./functions/', (err, files) => {
   if (err) console.error(err);
 
-  let jsfiles = files.filter((f) => f.split('.').pop() === 'js');
+  const jsfiles = files.filter((f) => f.split('.').pop() === 'js');
   if (jsfiles.length <= 0) {
     console.log('No function(s) to load!');
     return;
@@ -86,7 +86,7 @@ fs.readdir('./functions/', (err, files) => {
 
   console.log(`Loading ${jsfiles.length} function(s)...`);
   jsfiles.forEach((f, i) => {
-    let probs = require(`./functions/${f}`);
+    const probs = require(`./functions/${f}`);
     console.log(`    ${i + 1}) Loaded: ${f}!`);
     client.functions.set(probs.help.name, probs);
   });
@@ -117,13 +117,13 @@ client.on('message', async (message) => {
   // TODO: implement own prefix
   // TODO: bot reacting on ping
 
-  let messageArray = message.content.split(/\s+/g);
-  let command = messageArray[0];
-  let args = messageArray.slice(1);
+  const messageArray = message.content.split(/\s+/g);
+  const command = messageArray[0];
+  const args = messageArray.slice(1);
 
   if (!command.startsWith(config.prefix)) return;
 
-  let cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
+  const cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
 
   if (cmd) {
     // client.functions.get('seenChangelog').run(client, message, DB)
@@ -141,5 +141,5 @@ client.on('message', async (message) => {
 client.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
   if (!reaction.me) return;
-  client.functions.get('e621_detailed').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
+  client.functions.get('e621_detailed_rewrite').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
 });
