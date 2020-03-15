@@ -82,8 +82,8 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
   if (pool.length !== limit) {
     if (pool.length !== 10 && limit !== 10) messageFail(message, `Thewe arwe ownly ${pool.length + 1} post(s) with your tawgs.`);
   }
-  const embed = new RichEmbed();
   pool.forEach(async (post) => {
+    const embed = new RichEmbed();
     const extention = post.file.ext;
     let picURL = post.sample.url;
     if (extention === 'gif') picURL = post.file.url;
