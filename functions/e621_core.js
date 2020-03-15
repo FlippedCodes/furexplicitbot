@@ -90,7 +90,7 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
     if (extention === 'webm' || extention === 'swf') embed.addField('Direct video link', post.file.url);
     embed
       .setColor(config.e621.color)
-      .setTitle(`Artist: ${post.tags.artist.join(', ')} [e621 link]`)
+      .setTitle(`Artist: ${post.tags.artist[0]} [e621 link]`)
       .setURL(`https://e621.net/posts/${post.id}`)
       .setImage(picURL)
       .setFooter(config.e621.label, config.e621.logo)
