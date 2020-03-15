@@ -31,11 +31,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       return;
     }
     if (limit > 3) {
-      let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+      const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
       message.channel.send({ embed })
         .then((msg) => msg.delete(10000));
     }
-    let request = {
+    const request = {
       method: 'GET',
       uri,
       body: {
@@ -54,7 +54,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           let typePic = 'Preview';
           let picURL = pool[randomChoice].sample.url;
           const extention = pool[randomChoice].file.ext;
-          let embed = new RichEmbed();
+          const embed = new RichEmbed();
           embed
             .setColor(config.color_e621)
             .setTitle(`Artist: ${pool[randomChoice].tags.artist[0]} [e621 link]`)
