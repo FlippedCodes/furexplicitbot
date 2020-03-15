@@ -139,5 +139,5 @@ client.on('message', async (message) => {
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  client.functions.get('FUNC_messageReactionAdd').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
+  client.functions.get('FUNC_messageReactionAdd').run(client, reaction, user, config, RichEmbed, messageOwner);
 });

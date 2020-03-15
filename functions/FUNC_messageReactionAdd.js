@@ -18,7 +18,7 @@ function checkPermissions(reaction, user, messageOwner) {
   return permissions;
 }
 
-module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messageOwner) => {
+module.exports.run = async (client, reaction, user, config, RichEmbed, messageOwner) => {
   if (user.bot) return;
   if (!reaction.me) return;
 
@@ -30,7 +30,7 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, fs, messa
 
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
-      client.functions.get('e621_detailed_rewrite').run(client, reaction, user, config, RichEmbed, fs, messageOwner);
+      client.functions.get('e621_detailed').run(reaction, config, RichEmbed);
       return;
     }
     default:
