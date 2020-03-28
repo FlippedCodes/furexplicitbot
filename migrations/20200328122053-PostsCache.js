@@ -18,13 +18,7 @@ module.exports = {
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
-  },
-  {
-    uniqueKeys: {
-      postUnique: {
-        fields: ['postID', 'tags'],
-      },
-    },
   }),
+  // }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('postsCache'),
 };

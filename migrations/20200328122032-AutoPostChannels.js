@@ -10,6 +10,10 @@ module.exports = {
       primary: true,
       allowNull: false,
     },
+    tags: {
+      type: Sequelize.TEXT('tiny'),
+      allowNull: false,
+    },
     nextEvent: {
       type: Sequelize.STRING(20),
       allowNull: false,
