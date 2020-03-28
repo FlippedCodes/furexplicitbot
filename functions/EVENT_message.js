@@ -48,5 +48,5 @@ module.exports.run = async (client, message, config, messageOwner, timeout, used
 };
 
 module.exports.help = {
-  name: 'FUNC_message',
+  name: 'EVENT_message',
 };

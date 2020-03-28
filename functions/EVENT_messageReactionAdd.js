@@ -39,5 +39,5 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, messageOw
 };
 
 module.exports.help = {
-  name: 'FUNC_messageReactionAdd',
+  name: 'EVENT_messageReactionAdd',
 };

@@ -32,9 +32,9 @@ client.on('ready', async () => {
 });
 
 client.on('message', async (message) => {
-  client.functions.get('FUNC_message').run(client, message, config, messageOwner, usedRecently);
+  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently);
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  client.functions.get('FUNC_messageReactionAdd').run(client, reaction, user, config, RichEmbed, messageOwner);
+  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, RichEmbed, messageOwner);
 });
