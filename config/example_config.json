@@ -1,0 +1,10 @@
+{
+    "token": "**************************",
+    "development": {
+        "username": "***",
+        "password": "*****************",
+        "database": "furexplicitbot",
+        "host": "*****************",
+        "dialect": "mysql"
+    }
+}
