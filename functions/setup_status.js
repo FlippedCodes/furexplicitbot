@@ -1,6 +1,6 @@
-module.exports.run = async (client, fs) => {
+module.exports.run = async (client, config) => {
   client.user.setStatus('online');
-  if (fs.existsSync('./config/test_token.json')) {
+  if (!config.env.get('inDev')) {
     client.user.setActivity('with the Testaccount from Flipper');
   } else {
     setInterval(() => {
@@ -13,5 +13,5 @@ module.exports.run = async (client, fs) => {
 };
 
 module.exports.help = {
-  name: 'setup_status',
+  name: 'SETUP_status',
 };
