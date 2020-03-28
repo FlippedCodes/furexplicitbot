@@ -8,7 +8,7 @@ const client = new Discord.Client({ disableEveryone: true });
 
 const fs = require('fs');
 
-const config = require('./config/config.json');
+const config = require('./config/main.json');
 
 const usedRecently = new Set();
 
