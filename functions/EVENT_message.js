@@ -10,7 +10,7 @@ function timeout(id, usedRecently) {
   // 5sec timeout
 }
 
-module.exports.run = async (client, message, config, messageOwner, timeout, usedRecently) => {
+module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
   if (message.author.bot) return;
   if (!message.channel.type === 'dm') {
     if (message.mentions.members.first()) {
@@ -35,8 +35,8 @@ module.exports.run = async (client, message, config, messageOwner, timeout, used
   const cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
 
   if (cmd) {
-    // client.functions.get('seenChangelog').run(client, message, DB)
-    //   .catch(console.log);
+    client.functions.get('FUNC_seenChangelog').run(client, message)
+      .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
       timeout(message.author.id, usedRecently);
       cmd.run(client, message, args, config, RichEmbed, messageOwner, credetials.fa_token_A, credetials.fa_token_B)
