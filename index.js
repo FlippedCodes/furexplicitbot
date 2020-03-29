@@ -14,6 +14,11 @@ const usedRecently = new Set();
 
 const messageOwner = new Map();
 
+// create new collections in client and config
+client.functions = new Discord.Collection();
+client.commands = new Discord.Collection();
+config.env = new Discord.Collection();
+
 // import Functions and Commands
 config.setup.startupFunctions.forEach((FCN) => {
   const INIT = require(`./functions/${FCN}.js`);
@@ -22,6 +27,9 @@ config.setup.startupFunctions.forEach((FCN) => {
 
 // create conenction to DB
 require('./database/SETUP_DBConnection');
+
+// Login the bot
+client.login(config.env.get('token'));
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag} serving ${client.guilds.size} Servers!`);
