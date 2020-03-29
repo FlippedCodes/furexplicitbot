@@ -32,7 +32,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently,
     client.functions.get('FUNC_seenChangelog').run(client, message)
       .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
-      timeout(message.author.id, usedRecently);
+      timeout(message.author.id, usedRecently, 5000);
       cmd.run(client, message, args, config, RichEmbed, messageOwner, credetials.fa_token_A, credetials.fa_token_B)
         .catch(console.log);
     } else {
