@@ -36,7 +36,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently,
       cmd.run(client, message, args, config, RichEmbed, messageOwner, credetials.fa_token_A, credetials.fa_token_B)
         .catch(console.log);
     } else {
-      message.reply('sowwy, but you can\'t use me that often. Plewse wait 5 secounds between commands.');
+      message.reply('sowwy, but you can\'t uwse me that owten. Plewse wait 5 seconds between commands.');
     }
   }
 };
