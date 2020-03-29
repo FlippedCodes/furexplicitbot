@@ -7,6 +7,7 @@ function timeout(id, usedRecently, time) {
   setTimeout(() => usedRecently.delete(id), time);
 }
 
+module.exports.run = async (client, message, config, messageOwner, usedRecently, prefixCache) => {
   let text = message.content;
   }
 
