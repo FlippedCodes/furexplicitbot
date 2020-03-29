@@ -1,6 +1,7 @@
 **Changelog:**
-+ Inkbunny API [BETA]
++ added bot usage with mentioning it in the beginning of the command
++ own prefix
 
 Comming soon: 
-apply updated look to all services
-code rewrite for FA, e621 and r34
+apply updated message-look to all services
+code rewrite for FA and r34, IB
