@@ -9,6 +9,14 @@ function timeout(id, usedRecently, time) {
 
 module.exports.run = async (client, message, config, messageOwner, usedRecently, prefixCache) => {
   let text = message.content;
+  if (
+    message.channel.type !== 'dm'
+    && message.mentions.members.first()
+    && message.mentions.members.first().id === client.user.id
+  ) {
+    text = text.split('>')[1];
+    if (text.charAt(0) === ' ') text = text.split(' ')[1];
+    text = `${config.prefix}${text}`;
   }
 
   if (text.indexOf(config.prefix) !== 0) return;
