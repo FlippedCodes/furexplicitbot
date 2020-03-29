@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('serversSettings', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('serverPrefixes', {
     serverID: {
       type: Sequelize.STRING(30),
       allowNull: false,
@@ -11,5 +11,5 @@ module.exports = {
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('serversSettings'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('serverPrefixes'),
 };
