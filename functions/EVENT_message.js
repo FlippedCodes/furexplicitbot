@@ -2,22 +2,15 @@ const { RichEmbed } = require('discord.js');
 
 const credetials = './config/config.json';
 
-function timeout(id, usedRecently) {
+function timeout(id, usedRecently, time) {
   usedRecently.add(id);
-  setTimeout(() => {
-    usedRecently.delete(id);
-  }, 5000);
-  // 5sec timeout
+  setTimeout(() => usedRecently.delete(id), time);
 }
 
-module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
-  if (message.author.bot) return;
-  if (!message.channel.type === 'dm') {
-    if (message.mentions.members.first()) {
-      if (message.mentions.members.first().id === client.user.id) return message.author.send('>.< You piwned me! uwu. hmm... Maybe you downt know how to uwse me... You can swee all the commands with `+help` that I know. ^w^');
-    }
+  let text = message.content;
   }
-  if (message.content.indexOf(config.prefix) !== 0) return;
+
+  if (text.indexOf(config.prefix) !== 0) return;
   // {
   // if (message.mentions.members.first()) {
 
@@ -26,7 +19,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   // TODO: implement own prefix
   // TODO: bot reacting on ping
 
-  const messageArray = message.content.split(/\s+/g);
+  const messageArray = text.split(/\s+/g);
   const command = messageArray[0];
   const args = messageArray.slice(1);
 
