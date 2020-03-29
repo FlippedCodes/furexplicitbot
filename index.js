@@ -12,6 +12,8 @@ const config = require('./config/main.json');
 
 const usedRecently = new Set();
 
+const prefixCache = new Set();
+
 const messageOwner = new Map();
 
 // create new collections in client and config
@@ -40,7 +42,7 @@ client.on('ready', async () => {
 });
 
 client.on('message', async (message) => {
-  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently);
+  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently, prefixCache);
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
