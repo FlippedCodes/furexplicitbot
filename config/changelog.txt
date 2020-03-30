@@ -1,6 +1,6 @@
 **Changelog:**
 + added bot usage with mentioning it in the beginning of the command
-+ own prefix
++ own prefix per server (+prefix)
 
 Comming soon: 
 apply updated message-look to all services
