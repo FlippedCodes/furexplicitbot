@@ -19,7 +19,7 @@ function tagsReplace(tags, search, replace) {
 }
 
 function previewMessage(submission, RichEmbed, config, message, messageOwner, reaction_loading, client) {
-  let embed = new RichEmbed()
+  const embed = new RichEmbed()
     .setAuthor(`Artist: ${submission.author.name}`)
     .setColor(config.color_fa)
     .setTitle('Furaffinity Link')
@@ -38,7 +38,8 @@ function previewMessage(submission, RichEmbed, config, message, messageOwner, re
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
   message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
-    let [subcmd, limit] = args;
+    const subcmd = args[0];
+    let limit = args[1];
     let searchwords = args.join(' ');
     // tags = tagsReplace(tags, ', ', ' ');
     searchwords = searchwords.slice(subcmd.length + 1);
@@ -68,7 +69,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           return;
         }
         if (limit > 3) {
-          let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+          const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
             .then((msg) => msg.delete(10000));
         }
@@ -135,7 +136,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           return;
         }
         if (limit > 3) {
-          let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+          const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
             .then((msg) => msg.delete(10000));
         }
@@ -147,7 +148,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
         });
         return;
       case 'help':
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
           .setAuthor('USAGE: Furaffinity')
           .setColor(message.member.displayColor)
           .addField('Search', `
