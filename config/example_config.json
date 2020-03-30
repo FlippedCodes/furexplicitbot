@@ -5,6 +5,13 @@
     "development": {
         "username": "***",
         "password": "*****************",
+        "database": "dev_furexplicitbot",
+        "host": "*****************",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "***",
+        "password": "*****************",
         "database": "furexplicitbot",
         "host": "*****************",
         "dialect": "mysql"
