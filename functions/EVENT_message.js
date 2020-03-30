@@ -7,7 +7,7 @@ function timeout(id, usedRecently, time) {
   setTimeout(() => usedRecently.delete(id), time);
 }
 
-module.exports.run = async (client, message, config, messageOwner, usedRecently, prefixCache) => {
+module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
   let text = message.content;
   if (
     message.channel.type !== 'dm'
