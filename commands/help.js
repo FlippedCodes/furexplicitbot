@@ -3,21 +3,21 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     .setAuthor('How to use me:')
     .setColor(message.member.displayColor)
     .addField('E621', `
-      ${config.prefix}e6 (AMMOUNT) TAGS
+      ${config.defaultPrefix}e6 (AMMOUNT) TAGS
       You can requwest up to 10 pictures at the twime.
       The ammount is alternatiwe and doewsn't need to be prowidewd.
       `)
     .addField('InkBunny', `
-      ${config.prefix}ib (AMMOUNT) TAGS
+      ${config.defaultPrefix}ib (AMMOUNT) TAGS
       You can requwest up to 10 pictures at the twime.
       The ammount is alternatiwe and doewsn't need to be prowidewd.
       `)
     .addField('FurAffinity', `
-      ${config.prefix}fa help
+      ${config.defaultPrefix}fa help
       Get additional hewlp for furaffinity.
       `)
     .addField('About', `
-      ${config.prefix}about
+      ${config.defaultPrefix}about
       Learn mowre about me.
       `)
     .addField('Need Help?', `

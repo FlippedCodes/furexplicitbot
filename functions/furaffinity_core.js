@@ -151,16 +151,16 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           .setAuthor('USAGE: Furaffinity')
           .setColor(message.member.displayColor)
           .addField('Search', `
-            ${config.prefix}fa search (AMMOUNT) SEARCH
+            ${config.defaultPrefix}fa search (AMMOUNT) SEARCH
             Search for pictuwres on fa.
             `)
           .addField('Recent', `
-            ${config.prefix}fa recent (AMMOUNT)
+            ${config.defaultPrefix}fa recent (AMMOUNT)
             You can requwest up to 10 pictures at the twime.
             The ammount is alternatiwe and doewsn't need to be prowidewd.
             `)
           .addField('Help', `
-            ${config.prefix}fa
+            ${config.defaultPrefix}fa
             Get thwis hewlp.
             `)
           .setFooter(client.user.tag, client.user.displayAvatarURL)

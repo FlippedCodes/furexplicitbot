@@ -16,10 +16,10 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently,
   ) {
     text = text.split('>')[1];
     if (text.charAt(0) === ' ') text = text.split(' ')[1];
-    text = `${config.prefix}${text}`;
+    text = `${config.defaultPrefix}${text}`;
   }
 
-  if (text.indexOf(config.prefix) !== 0) return;
+  if (text.indexOf(config.defaultPrefix) !== 0) return;
   // {
   // if (message.mentions.members.first()) {
 
@@ -32,9 +32,9 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently,
   const command = messageArray[0];
   const args = messageArray.slice(1);
 
-  if (!command.startsWith(config.prefix)) return;
+  if (!command.startsWith(config.defaultPrefix)) return;
 
-  const cmd = client.commands.get(command.slice(config.prefix.length).toLowerCase());
+  const cmd = client.commands.get(command.slice(config.defaultPrefix.length).toLowerCase());
 
   if (cmd) {
     client.functions.get('FUNC_seenChangelog').run(client, message)
