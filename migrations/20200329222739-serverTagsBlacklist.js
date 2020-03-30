@@ -3,6 +3,7 @@ module.exports = {
     serverID: {
       type: Sequelize.STRING(30),
       allowNull: false,
+      primaryKey: true,
     },
     tag: {
       type: Sequelize.STRING(3),

@@ -3,6 +3,7 @@ module.exports = {
     serverID: {
       type: Sequelize.STRING(30),
       allowNull: false,
+      primaryKey: true,
     },
     prefix: {
       type: Sequelize.STRING(3),
