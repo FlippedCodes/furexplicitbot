@@ -5,4 +5,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
 
 module.exports.help = {
   name: 'fa',
+  usage: 'help',
+  title: 'FurAffinity',
+  desc: 'Get additional hewlp for furaffinity',
 };

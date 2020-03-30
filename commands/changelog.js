@@ -16,4 +16,6 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
 
 module.exports.help = {
   name: 'changelog',
+  title: 'Changelog',
+  desc: 'Gwet the resent changes.',
 };

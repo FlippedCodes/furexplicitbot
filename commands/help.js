@@ -1,28 +1,17 @@
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  let embed = new RichEmbed()
-    .setAuthor('How to use me:')
-    .setColor(message.member.displayColor)
-    .addField('E621', `
-      ${config.defaultPrefix}e6 (AMMOUNT) TAGS
-      You can requwest up to 10 pictures at the twime.
-      The ammount is alternatiwe and doewsn't need to be prowidewd.
-      `)
-    .addField('InkBunny', `
-      ${config.defaultPrefix}ib (AMMOUNT) TAGS
-      You can requwest up to 10 pictures at the twime.
-      The ammount is alternatiwe and doewsn't need to be prowidewd.
-      `)
-    .addField('FurAffinity', `
-      ${config.defaultPrefix}fa help
-      Get additional hewlp for furaffinity.
-      `)
-    .addField('About', `
-      ${config.defaultPrefix}about
-      Learn mowre about me.
-      `)
-    .addField('Need Help?', `
-      I've got you covered.
-      Join the help server here: https://discord.gg/fMYD6XR
+  const embed = new RichEmbed()
+    .setAuthor('How to uwse me:')
+    .setColor(message.member.displayColor);
+    // creating embed fields for every command
+  client.commands.forEach((CMD) => {
+    if (!CMD.help.title) return;
+    embed.addField(CMD.help.title,
+      `\`${config.defaultPrefix}${CMD.help.name} ${CMD.help.usage || ''}\`
+      ${CMD.help.desc}`, false);
+  });
+  embed.addField('Need Help?', `
+      I've got you cowered.
+      Join the halp serwer here: https://discord.gg/fMYD6XR
       `)
     .setFooter(client.user.tag, client.user.displayAvatarURL)
     .setTimestamp();

@@ -5,4 +5,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
 
 module.exports.help = {
   name: 'ib',
+  usage: '(AMMOUNT) TAGS',
+  title: 'InkBunny',
+  desc: 'You can requwest up to 10 pictures at the twime. The ammount is alternatiwe and doewsn\'t need to be prowidewd.',
 };
