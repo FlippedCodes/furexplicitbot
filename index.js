@@ -4,15 +4,11 @@ const { RichEmbed } = require('discord.js');
 
 const client = new Discord.Client({ disableEveryone: true });
 
-// const mysql = require('mysql');
-
 const fs = require('fs');
 
 const config = require('./config/main.json');
 
 const usedRecently = new Set();
-
-const prefixCache = new Set();
 
 const messageOwner = new Map();
 
@@ -42,7 +38,7 @@ client.on('ready', async () => {
 });
 
 client.on('message', async (message) => {
-  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently, prefixCache);
+  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently);
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
