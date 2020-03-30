@@ -8,6 +8,8 @@ function timeout(id, usedRecently, time) {
 }
 
 module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
+  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message.guild.id);
+
   let text = message.content;
   if (
     message.channel.type !== 'dm'
@@ -16,6 +18,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   ) {
     text = text.split('>')[1];
     if (text.charAt(0) === ' ') text = text.split(' ')[1];
+    if (!text) return message.channel.send(`Hewwo! please try using \`${prefix}help\` and gewt to know mwe! ^^`);
     text = `${config.defaultPrefix}${text}`;
   }
 
