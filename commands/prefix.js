@@ -6,7 +6,7 @@ function messageFail(message, body) {
     .then((msg) => msg.delete(10000));
 }
 
-const description = 'To make this easy for everyone (me and you), we add the prefix to my Discord bots name:';
+// const description = 'To make this easy for everyone (me and you), we add the prefix to my Discord bots name:';
 const desktop = `
 1. Rightclick my name.
 2. Click "Change Nickname"
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   const embed = new RichEmbed()
     .setAuthor('Howo two change the prefix:')
     .setColor(message.member.displayColor)
-    .setDescription(description)
+    // .setDescription(description)
     .addField('Desktop', desktop)
     .addField('Mobile', mobile)
     .addField('Hawing trowble?', `
