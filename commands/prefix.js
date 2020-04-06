@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       I've got you cowered.
       Join the halp serwer here: https://discord.gg/fMYD6XR
       `)
-    .addField('Why thwis complicated!?', expain)
+    .addField('Why thwis complicated!?', expain);
   message.channel.send({ embed });
 };
 
