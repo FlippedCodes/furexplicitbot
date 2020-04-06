@@ -1,6 +1,6 @@
 const prefixCache = new Map();
 
-const ServerPrefix = require('../../database/models/ServerPrefix');
+// const ServerPrefix = require('../../database/models/ServerPrefix');
 
 const config = require('../../config/main.json');
 

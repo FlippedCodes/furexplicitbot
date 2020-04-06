@@ -18,5 +18,5 @@ module.exports.run = async (client, message) => {
 };
 
 module.exports.help = {
-  name: 'FUNC_seenchangelog',
+  name: 'FUNC_seenChangelog',
 };
