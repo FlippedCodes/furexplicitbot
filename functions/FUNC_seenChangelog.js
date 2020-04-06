@@ -1,4 +1,4 @@
-const seenchangelog = require('../database/models/seenChangelog');
+const seenchangelog = require('../database/models/seenchangelog-');
 
 const errHander = (err) => {
   console.error('ERROR:', err);
