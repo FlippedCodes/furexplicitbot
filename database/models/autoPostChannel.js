@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const Sequelize = require('sequelize');
 
-module.exports = sequelize.define('autoPostChannel', {
+module.exports = sequelize.define('autopostchannel', {
   channelID: {
     type: Sequelize.STRING(30),
     primary: true,

@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('seenChangelogs', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('seenchangelogs', {
     userID: {
       type: Sequelize.STRING(30),
       allowNull: false,
@@ -8,5 +8,5 @@ module.exports = {
     },
   },
   { timestamps: false }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('seenChangelogs'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('seenchangelogs'),
 };

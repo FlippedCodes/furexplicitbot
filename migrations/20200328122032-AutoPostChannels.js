@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('autoPostChannels', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('autopostchannels', {
     channelID: {
       type: Sequelize.STRING(30),
       primary: true,
@@ -32,5 +32,5 @@ module.exports = {
       },
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('autoPostChannels'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('autopostchannels'),
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const Sequelize = require('sequelize');
 
-module.exports = sequelize.define('postCache', {
+module.exports = sequelize.define('postcache', {
   postID: {
     type: Sequelize.INTEGER(10),
     primaryKey: true,

@@ -1,4 +1,4 @@
-const SeenChangelog = require('../database/models/SeenChangelog');
+const seenchangelog = require('../database/models/seenchangelog');
 
 const errHander = (err) => {
   console.error('ERROR:', err);
@@ -13,10 +13,10 @@ function postChangelog(message, client) {
 
 module.exports.run = async (client, message) => {
   const userID = message.author.id;
-  if (!await SeenChangelog.findOne({ where: { userID } })) postChangelog(message, client);
-  await SeenChangelog.findOrCreate({ where: { userID } }).catch(errHander);
+  if (!await seenchangelog.findOne({ where: { userID } })) postChangelog(message, client);
+  await seenchangelog.findOrCreate({ where: { userID } }).catch(errHander);
 };
 
 module.exports.help = {
-  name: 'FUNC_seenChangelog',
+  name: 'FUNC_seenchangelog',
 };
