@@ -10,7 +10,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       `\`${prefix}${CMD.help.name} ${CMD.help.usage || ''}\`
       ${CMD.help.desc}`, false);
   });
-  embed.addField('Need Help?', `
+  embed.addField('Have an idewa for me? 💡', `
+      Down't lewt it dwie!
+      Suggest it here: https://forms.gle/eh4fS8Qd8XmGqEi38
+      `)
+    .addField('Need Help?', `
       I've got you cowered.
       Join the halp serwer here: https://discord.gg/fMYD6XR
       `)
