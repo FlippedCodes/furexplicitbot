@@ -1,11 +1,10 @@
 const credetialFile = './config/config.json';
 
-const credetials = require('../config/config.json');
-
 module.exports.run = async (client, fs, config) => {
   // setting inDev var
   console.log(`[${module.exports.help.name}] Setting environment variables...`);
   if (fs.existsSync(credetialFile)) {
+    const credetials = require('../config/config.json');
     const token = credetials.token;
     config.env.set('inDev', true);
     config.env.set('token', token);
