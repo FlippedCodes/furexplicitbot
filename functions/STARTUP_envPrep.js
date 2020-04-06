@@ -1,15 +1,21 @@
-const testToken = './config/config.json';
+const credetialFile = './config/config.json';
+
+const credetials = require('../config/config.json');
 
 module.exports.run = async (client, fs, config) => {
   // setting inDev var
   console.log(`[${module.exports.help.name}] Setting environment variables...`);
-  if (fs.existsSync(testToken)) {
-    const token = require(`.${testToken}`).token;
+  if (fs.existsSync(credetialFile)) {
+    const token = credetials.token;
     config.env.set('inDev', true);
     config.env.set('token', token);
+    config.env.set('fa_cookie_a', credetials.fa_cookie_a);
+    config.env.set('fa_cookie_b', credetials.fa_cookie_b);
   } else {
     config.env.set('inDev', false);
-    config.env.set('token', process.env.BotTokenAgentBlack);
+    config.env.set('token', process.env.BotToken);
+    config.env.set('fa_cookie_a', process.env.FA_COOKIE_A);
+    config.env.set('fa_cookie_b', process.env.FA_COOKIE_B);
   }
   console.log(`[${module.exports.help.name}] Environment variables set!`);
 };

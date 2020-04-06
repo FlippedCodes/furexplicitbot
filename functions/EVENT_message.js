@@ -1,7 +1,5 @@
 const { RichEmbed } = require('discord.js');
 
-const credetials = './config/config.json';
-
 function timeout(id, usedRecently, time) {
   usedRecently.add(id);
   setTimeout(() => usedRecently.delete(id), time);
@@ -44,7 +42,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
       .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
       timeout(message.author.id, usedRecently, 5000);
-      cmd.run(client, message, args, config, RichEmbed, messageOwner, credetials.fa_token_A, credetials.fa_token_B)
+      cmd.run(client, message, args, config, RichEmbed, messageOwner, config.env.get('fa_cookie_a'), config.env.get('fa_cookie_b'))
         .catch(console.log);
     } else {
       message.reply('sowwy, but you can\'t uwse me that owten. Plewse wait 5 seconds between commands.');
