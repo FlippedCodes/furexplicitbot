@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   client.commands.forEach((CMD) => {
     if (!CMD.help.title) return;
     embed.addField(CMD.help.title,
-      `\`${config.defaultPrefix}${CMD.help.name} ${CMD.help.usage || ''}\`
+      `\`${config.prefix.default}${CMD.help.name} ${CMD.help.usage || ''}\`
       ${CMD.help.desc}`, false);
   });
   embed.addField('Need Help?', `
