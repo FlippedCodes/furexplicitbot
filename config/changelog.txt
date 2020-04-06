@@ -1,7 +1,12 @@
 **Changelog:**
 + added bot usage with mentioning it in the beginning of the command
-+ own prefix per server (+prefix)
++ own server prefix (+prefix)
++ recoded +help command
++ created a suggestions-page (+help)
+(* orgnaized files and code cleanup)
 
-Comming soon: 
+Working on:
+auto posting for e621 command
 apply updated message-look to all services
 code rewrite for FA and r34, IB
+update Code to Discord.JS v.12
