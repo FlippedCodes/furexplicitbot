@@ -1,6 +1,6 @@
 module.exports.run = async (client, config) => {
   client.user.setStatus('online');
-  if (!config.env.get('inDev')) {
+  if (config.env.get('inDev')) {
     client.user.setActivity('with the Testaccount from Flipper');
   } else {
     setInterval(() => {
