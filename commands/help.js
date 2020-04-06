@@ -1,4 +1,5 @@
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
   const embed = new RichEmbed()
     .setAuthor('How to uwse me:')
     .setColor(message.member.displayColor);
@@ -6,7 +7,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   client.commands.forEach((CMD) => {
     if (!CMD.help.title) return;
     embed.addField(CMD.help.title,
-      `\`${config.prefix.default}${CMD.help.name} ${CMD.help.usage || ''}\`
+      `\`${prefix}${CMD.help.name} ${CMD.help.usage || ''}\`
       ${CMD.help.desc}`, false);
   });
   embed.addField('Need Help?', `

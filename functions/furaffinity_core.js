@@ -37,6 +37,7 @@ function previewMessage(submission, RichEmbed, config, message, messageOwner, re
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
   message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
     const subcmd = args[0];
     let limit = args[1];
@@ -152,16 +153,16 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           .setAuthor('USAGE: Furaffinity')
           .setColor(message.member.displayColor)
           .addField('Search', `
-            ${config.prefix.default}fa search (AMMOUNT) SEARCH
+            ${prefix}fa search (AMMOUNT) SEARCH
             Search for pictuwres on fa.
             `)
           .addField('Recent', `
-            ${config.prefix.default}fa recent (AMMOUNT)
+            ${prefix}fa recent (AMMOUNT)
             You can requwest up to 10 pictures at the twime.
             The ammount is alternatiwe and doewsn't need to be prowidewd.
             `)
           .addField('Help', `
-            ${config.prefix.default}fa
+            ${prefix}fa
             Get thwis hewlp.
             `)
           .setFooter(client.user.tag, client.user.displayAvatarURL)

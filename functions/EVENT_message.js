@@ -8,7 +8,7 @@ function timeout(id, usedRecently, time) {
 }
 
 module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
-  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message.guild.id);
+  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
 
   let text = message.content;
   if (
@@ -19,10 +19,10 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
     text = text.split('>')[1];
     if (text.charAt(0) === ' ') text = text.split(' ')[1];
     if (!text) return message.channel.send(`Hewwo! please try using \`${prefix}help\` and gewt to know mwe! ^^`);
-    text = `${config.defaultPrefix}${text}`;
+    text = `${prefix}${text}`;
   }
 
-  if (text.indexOf(config.defaultPrefix) !== 0) return;
+  if (text.indexOf(prefix) !== 0) return;
   // {
   // if (message.mentions.members.first()) {
 
@@ -35,9 +35,9 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   const command = messageArray[0];
   const args = messageArray.slice(1);
 
-  if (!command.startsWith(config.defaultPrefix)) return;
+  if (!command.startsWith(prefix)) return;
 
-  const cmd = client.commands.get(command.slice(config.defaultPrefix.length).toLowerCase());
+  const cmd = client.commands.get(command.slice(prefix.length).toLowerCase());
 
   if (cmd) {
     client.functions.get('FUNC_seenChangelog').run(client, message)
