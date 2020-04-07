@@ -28,13 +28,12 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   }
 
   if (text.indexOf(prefix) !== 0) return;
-  // {
-  // if (message.mentions.members.first()) {
-
-  // } else return;
-  // }
-  // TODO: implement own prefix
-  // TODO: bot reacting on ping
+  if (!await client.functions.get('FUNC_checkBotPermissions').run(message)) {
+    // FIXME: catch handler doesnt work
+    // message.react('❌').catch();
+    messageFail(message, 'Sowwy, I am missing permissions sewnd the messages to that channel. uwu');
+    return;
+  }
 
   const messageArray = text.split(/\s+/g);
   const command = messageArray[0];
