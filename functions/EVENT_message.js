@@ -23,7 +23,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   ) {
     text = text.split('>')[1];
     if (text.charAt(0) === ' ') text = text.split(' ')[1];
-    if (!text) return message.channel.send(`Hewwo! please try using \`${prefix}help\` and gewt to know mwe! ^^`);
+    if (!text) return message.channel.send(`Hewwo! Please try using \`${prefix}help\` and gewt to know mwe! ^^`);
     text = `${prefix}${text}`;
   }
 
