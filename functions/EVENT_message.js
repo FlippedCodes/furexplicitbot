@@ -5,6 +5,13 @@ function timeout(id, usedRecently, time) {
   setTimeout(() => usedRecently.delete(id), time);
 }
 
+function messageFail(message, body) {
+  const client = message.client;
+  client.functions.get('FUNC_richEmbedMessage')
+    .run(client.user, message.author, body, '', 16449540, false);
+}
+
+
 module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
   const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
 
