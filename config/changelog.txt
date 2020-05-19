@@ -11,3 +11,4 @@ auto posting for e621 command
 apply updated message-look to all services
 code rewrite for FA and r34, IB
 update code to Discord.JS v.12 ᵏᶦˡˡ ᵐᵉ
+image reverse search comamnd and serverwide
