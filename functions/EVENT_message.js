@@ -13,7 +13,7 @@ function messageFail(message, body) {
 
 
 module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
-  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
+  const prefix = await client.functions.get('FUNC_getPrefix').run(message);
 
   let text = message.content;
   if (
