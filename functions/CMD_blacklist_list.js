@@ -7,7 +7,7 @@ async function getTags(serverID) {
   return result;
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed) => {
+module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
   const DBentries = await getTags(message.guild.id);
   const blacklistedTags = [];
   DBentries.forEach((entry) => {
