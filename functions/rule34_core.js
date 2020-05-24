@@ -13,13 +13,14 @@ function tagsReplace(tags, search, replace) {
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
+  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then(async (reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
     tags = tagsReplace(tags, ', ', '+');
     tags = tagsReplace(tags, ' ', '+');
     if (isNaN(limit) || limit === 0) limit = 1;
     else tags = tags.slice(limit.length + 1);
+    tags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
 
     if (message.channel.nsfw === false) {
       message.reply('sowwy, but rule34 is a complete nsfw siwte. So there are almowst no sfw post on there. >.<')
