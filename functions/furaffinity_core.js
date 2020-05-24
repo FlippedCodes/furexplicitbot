@@ -80,7 +80,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           }
         });
         return;
-      // disabled due to issues in fa-node
+      // DISABLED: due to issues in fa-node
       // case 'submission':
       //   // TODO: NSFW forbidden!
       //   let post = limit;
