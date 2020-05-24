@@ -15,11 +15,11 @@ module.exports.run = async (client, message, args, config) => {
   if (message.channel.type === 'dm') return messageFail(client, message, 'This comamnd is for servers only.');
   const [subcmd] = args;
   const commandValues = ['add', 'remove', 'list'];
+  const currentCMD = module.exports.help;
   if (commandValues.includes(subcmd)) {
-    client.functions.get(`CMD_hub_${subcmd}`)
+    client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
       .run(client, message, args, config);
   } else {
-    const currentCMD = module.exports.help;
     messageFail(client, message, CommandUsage(config.prefix, currentCMD.name, currentCMD.usage));
   }
 };
