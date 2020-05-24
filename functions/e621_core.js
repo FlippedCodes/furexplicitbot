@@ -97,7 +97,7 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
       .setTimestamp();
     const msg = await message.channel.send({ embed });
     await msg.react('❌');
-    await msg.react('↗');
+    await msg.react(message.client.guilds.get(config.emojiServer).emojis.get(config.detailsEmoji));
     Timeout(msg, message.author.id, messageOwner, config);
   });
 }

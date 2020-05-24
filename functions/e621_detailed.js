@@ -84,8 +84,8 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
-  switch (reaction.emoji.name) {
-    case '↗': {
+  switch (reaction.emoji.identifier) {
+    case await reaction.message.client.guilds.get(config.emojiServer).emojis.get(config.detailsEmoji).identifier: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
       postPicture(reaction, RichEmbed, embed, config, await requestPicture(id));
