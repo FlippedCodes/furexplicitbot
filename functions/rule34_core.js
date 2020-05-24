@@ -34,11 +34,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       return;
     }
     if (limit > 3) {
-      let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+      const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
       message.channel.send({ embed })
         .then((msg) => msg.delete(10000));
     }
-    let request = {
+    const request = {
       method: 'GET',
       uri: `https://r34-json-api.herokuapp.com/posts?limit=300&tags=${tags}`,
       json: true,
@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
             picURL = json[randomChoice].file_url;
             if (extention === 'webm' || extention === 'swf') arrow = json[randomChoice].file_url;
           }
-          let embed = new RichEmbed()
+          const embed = new RichEmbed()
             .setColor(config.color_r34)
             .setTitle('Rule34 Link')
             .setURL(`https://rule34.xxx/index.php?page=post&s=view&id=${json[randomChoice].id}`)
