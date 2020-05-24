@@ -16,11 +16,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   const [subcmd] = args;
   const commandValues = ['add', 'remove', 'list'];
   const currentCMD = module.exports.help;
+  const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   if (commandValues.includes(subcmd)) {
     client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
-      .run(client, message, args, config, RichEmbed);
+      .run(client, message, args, config, RichEmbed, prefix);
   } else {
-    const prefix = await client.functions.get('FUNC_getPrefix').run(message);
     messageFail(client, message, CommandUsage(prefix, currentCMD.name, currentCMD.usage));
   }
 };
