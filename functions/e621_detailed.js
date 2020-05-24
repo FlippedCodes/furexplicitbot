@@ -75,6 +75,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
     .addField('Score', post.score.total, true)
     .addField('ID', post.id, true)
     .addField('Resolution', `${post.file.width}x${post.file.height}`, true)
+    // FIXME: details do not get shown, if no source
     .addField(typeSources, source)
     .addField('Full Picture link', post.file.url)
     .setImage(post.file.url)
