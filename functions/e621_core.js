@@ -19,13 +19,14 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-function getTags(args) {
+async function getTags(message, args) {
   let [limit] = args;
   let tags = args.join(' ');
   tags = tagsReplace(tags, ', ', ' ');
   if (isNaN(limit) || limit === 0) limit = 1;
   else tags = tags.slice(limit.length + 1);
-  return [tags, limit];
+  const safeTags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
+  return [safeTags, limit];
 }
 
 function checkRequestedLimit(message, limit) {
@@ -38,20 +39,10 @@ function checkRequestedLimit(message, limit) {
   return decision;
 }
 
-// switched as the e926 api is broken
-// function getEndpoint(message, config) {
-//   let uri = config.e621.endpoint.sfw;
-//   if (message.channel.nsfw) uri = config.e621.endpoint.nsfw;
-//   return uri;
-// }
 function getEndpoint(message, config) {
-  let uri = config.e621.endpoint.nsfw;
-  let safe = ' rating=s';
-  if (message.channel.nsfw) {
-    uri = config.e621.endpoint.nsfw;
-    safe = '';
-  }
-  return [uri, safe];
+  let uri = config.e621.endpoint.sfw;
+  if (message.channel.nsfw) uri = config.e621.endpoint.nsfw;
+  return uri;
 }
 
 function buildRequest(uri) {
@@ -71,8 +62,8 @@ async function getRequest(request) {
 }
 
 async function requestPictures(message, config, tags, limit) {
-  const [endpoint, rating] = getEndpoint(message, config);
-  const uri = `${endpoint}?tags=${tags} order:random${rating}&limit=${limit}`;
+  const endpoint = getEndpoint(message, config);
+  const uri = `${endpoint}?tags=${tags} order:random&limit=${limit}`;
   const posts = await getRequest(buildRequest(uri));
   return posts;
 }
@@ -97,14 +88,14 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
       .setTimestamp();
     const msg = await message.channel.send({ embed });
     await msg.react('❌');
-    await msg.react('↗');
+    await msg.react(message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details));
     Timeout(msg, message.author.id, messageOwner, config);
   });
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
-  const reaction_loading = await message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji));
-  const editedTags = getTags(args);
+  const reaction_loading = await message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading));
+  const editedTags = await getTags(message, args);
   const tags = editedTags[0];
   let limit = editedTags[1];
   if (!await checkRequestedLimit(message, limit, reaction_loading)) limit = 10;

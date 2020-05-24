@@ -13,13 +13,14 @@ function tagsReplace(tags, search, replace) {
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
+  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then(async (reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
     tags = tagsReplace(tags, ', ', '+');
     tags = tagsReplace(tags, ' ', '+');
     if (isNaN(limit) || limit === 0) limit = 1;
     else tags = tags.slice(limit.length + 1);
+    tags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
 
     if (message.channel.nsfw === false) {
       message.reply('sowwy, but rule34 is a complete nsfw siwte. So there are almowst no sfw post on there. >.<')
@@ -34,11 +35,11 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       return;
     }
     if (limit > 3) {
-      let embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+      const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
       message.channel.send({ embed })
         .then((msg) => msg.delete(10000));
     }
-    let request = {
+    const request = {
       method: 'GET',
       uri: `https://r34-json-api.herokuapp.com/posts?limit=300&tags=${tags}`,
       json: true,
@@ -57,7 +58,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
             picURL = json[randomChoice].file_url;
             if (extention === 'webm' || extention === 'swf') arrow = json[randomChoice].file_url;
           }
-          let embed = new RichEmbed()
+          const embed = new RichEmbed()
             .setColor(config.color_r34)
             .setTitle('Rule34 Link')
             .setURL(`https://rule34.xxx/index.php?page=post&s=view&id=${json[randomChoice].id}`)

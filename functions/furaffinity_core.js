@@ -37,8 +37,8 @@ function previewMessage(submission, RichEmbed, config, message, messageOwner, re
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
-  message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
+  const prefix = await client.functions.get('FUNC_getPrefix').run(message);
+  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
     const subcmd = args[0];
     let limit = args[1];
     let searchwords = args.join(' ');
@@ -80,7 +80,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           }
         });
         return;
-      // disabled due to issues in fa-node
+      // DISABLED: due to issues in fa-node
       // case 'submission':
       //   // TODO: NSFW forbidden!
       //   let post = limit;

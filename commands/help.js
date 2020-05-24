@@ -1,5 +1,5 @@
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  const prefix = await client.functions.get('FUNC_getOwnPrefix').run(message);
+  const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   const embed = new RichEmbed()
     .setAuthor('How to uwse me:');
   if (message.channel.type !== 'dm') embed.setColor(message.member.displayColor);

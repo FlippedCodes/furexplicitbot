@@ -61,7 +61,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
 
   let source = 'none';
   let typeSources = 'Sources';
-  if (post.sources) {
+  if (post.sources.length !== 0) {
     source = post.sources.join('\n');
     if (post.sources.length === 1) typeSources = 'Source';
   }
@@ -84,8 +84,8 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
-  switch (reaction.emoji.name) {
-    case '↗': {
+  switch (reaction.emoji.identifier) {
+    case await reaction.message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details).identifier: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
       postPicture(reaction, RichEmbed, embed, config, await requestPicture(id));

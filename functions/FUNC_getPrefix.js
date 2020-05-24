@@ -21,5 +21,5 @@ module.exports.run = async (message) => {
 };
 
 module.exports.help = {
-  name: 'FUNC_getOwnPrefix',
+  name: 'FUNC_getPrefix',
 };

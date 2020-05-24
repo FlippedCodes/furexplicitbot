@@ -20,7 +20,7 @@ const mobile = `
     So it looks like something like this \`thebotthatgivespictures | f?\`
 4. Hit the save icon that shows up in the bottom right
 5. Leave the menu and you are done!`;
-const expain = 'I decided to dwo it thwis way, to save space on my database for other stwuff I cawnt store in Discord itself.';
+const expain = 'I decided to dwo it thwis way, to save space on my database for other stwuff I cawnt store in Discord itself. Also thwis way eweryone can see the prefix.';
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
   // check if user can manage nicknames
