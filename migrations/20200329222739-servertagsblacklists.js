@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('servertagsblacklist', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('servertagsblacklists', {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -24,5 +24,5 @@ module.exports = {
       },
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('servertagsblacklist'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('servertagsblacklists'),
 };
