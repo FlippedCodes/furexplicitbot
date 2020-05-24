@@ -6,11 +6,11 @@ function messageFail(message, body) {
     .then((msg) => msg.delete(10000));
 }
 
-function buildRequest(id) {
+function buildRequest(id, config) {
   const version = require('../package.json');
   return {
     method: 'GET',
-    uri: `https://e621.net/posts/${id}.json`,
+    uri: `https://e621.net/posts/${id}.json?login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`,
     headers: {
       'User-Agent': `FurExplicitBot/${version.version} by Flipper on e621`,
     },
@@ -24,8 +24,8 @@ async function getRequest(request) {
   return pics.post;
 }
 
-async function requestPicture(id) {
-  const post = await getRequest(buildRequest(id));
+async function requestPicture(id, config) {
+  const post = await getRequest(buildRequest(id, config));
   return post;
 }
 
@@ -88,7 +88,7 @@ module.exports.run = async (reaction, config, RichEmbed) => {
     case await reaction.message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details).identifier: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
-      postPicture(reaction, RichEmbed, embed, config, await requestPicture(id));
+      postPicture(reaction, RichEmbed, embed, config, await requestPicture(id, config));
       return;
     }
     default: return;
