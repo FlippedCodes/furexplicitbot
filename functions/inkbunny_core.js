@@ -123,7 +123,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   editorNote(message, RichEmbed);
   await checkSID(client);
   // getting loading emoji
-  let loadingEmoji = client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji);
+  let loadingEmoji = client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading);
   message.react(loadingEmoji).then(async (reaction_loading) => {
     // checking for requested ammounts of pictures and parses tags
     let tags = args.join(' ');

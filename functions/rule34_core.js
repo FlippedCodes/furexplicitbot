@@ -13,7 +13,7 @@ function tagsReplace(tags, search, replace) {
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
+  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
     tags = tagsReplace(tags, ', ', '+');

@@ -38,7 +38,7 @@ function previewMessage(submission, RichEmbed, config, message, messageOwner, re
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
-  message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji)).then((reaction_loading) => {
+  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
     const subcmd = args[0];
     let limit = args[1];
     let searchwords = args.join(' ');

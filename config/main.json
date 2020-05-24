@@ -4,11 +4,14 @@
         "nicknameSpacer": " | "
     },
     "owner": "172031697355800577",
+    "managementServerID": "569178297515245578",
     "clientID": "534828939198070824",
     "clientIDTesting": "395581313052180483",
-    "emojiServer": "569178297515245578",
-    "loadingEmoji": "714093562576502867",
-    "detailsEmoji": "714094023396032593",
+    "emoji": {
+        "serverID": "569178297515245578",
+        "loading": "714093562576502867",
+        "details": "714094023396032593"
+    },
     "reactionsTimeout": "7200000",
     "setup": {
         "moduleFolders": {

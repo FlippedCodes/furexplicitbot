@@ -87,13 +87,13 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
       .setTimestamp();
     const msg = await message.channel.send({ embed });
     await msg.react('❌');
-    await msg.react(message.client.guilds.get(config.emojiServer).emojis.get(config.detailsEmoji));
+    await msg.react(message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details));
     Timeout(msg, message.author.id, messageOwner, config);
   });
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
-  const reaction_loading = await message.react(client.guilds.get(config.emojiServer).emojis.get(config.loadingEmoji));
+  const reaction_loading = await message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading));
   const editedTags = getTags(args);
   const tags = editedTags[0];
   let limit = editedTags[1];
