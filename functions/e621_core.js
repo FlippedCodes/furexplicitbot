@@ -19,13 +19,14 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-function getTags(args) {
+async function getTags(message, args) {
   let [limit] = args;
   let tags = args.join(' ');
   tags = tagsReplace(tags, ', ', ' ');
   if (isNaN(limit) || limit === 0) limit = 1;
   else tags = tags.slice(limit.length + 1);
-  return [tags, limit];
+  const safeTags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
+  return [safeTags, limit];
 }
 
 function checkRequestedLimit(message, limit) {
@@ -94,7 +95,7 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
 
 module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
   const reaction_loading = await message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading));
-  const editedTags = getTags(args);
+  const editedTags = await getTags(message, args);
   const tags = editedTags[0];
   let limit = editedTags[1];
   if (!await checkRequestedLimit(message, limit, reaction_loading)) limit = 10;
