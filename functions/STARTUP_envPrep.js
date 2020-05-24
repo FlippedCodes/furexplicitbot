@@ -5,9 +5,8 @@ module.exports.run = async (client, fs, config) => {
   console.log(`[${module.exports.help.name}] Setting environment variables...`);
   if (fs.existsSync(credetialFile)) {
     const credetials = require('../config/config.json');
-    const token = credetials.token;
     config.env.set('inDev', true);
-    config.env.set('token', token);
+    config.env.set('token', credetials.token);
     config.env.set('fa_cookie_a', credetials.fa_cookie_a);
     config.env.set('fa_cookie_b', credetials.fa_cookie_b);
   } else {
