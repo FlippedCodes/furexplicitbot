@@ -38,20 +38,10 @@ function checkRequestedLimit(message, limit) {
   return decision;
 }
 
-// switched as the e926 api is broken
-// function getEndpoint(message, config) {
-//   let uri = config.e621.endpoint.sfw;
-//   if (message.channel.nsfw) uri = config.e621.endpoint.nsfw;
-//   return uri;
-// }
 function getEndpoint(message, config) {
-  let uri = config.e621.endpoint.nsfw;
-  let safe = ' rating=s';
-  if (message.channel.nsfw) {
-    uri = config.e621.endpoint.nsfw;
-    safe = '';
-  }
-  return [uri, safe];
+  let uri = config.e621.endpoint.sfw;
+  if (message.channel.nsfw) uri = config.e621.endpoint.nsfw;
+  return uri;
 }
 
 function buildRequest(uri) {
@@ -71,8 +61,8 @@ async function getRequest(request) {
 }
 
 async function requestPictures(message, config, tags, limit) {
-  const [endpoint, rating] = getEndpoint(message, config);
-  const uri = `${endpoint}?tags=${tags} order:random${rating}&limit=${limit}`;
+  const endpoint = getEndpoint(message, config);
+  const uri = `${endpoint}?tags=${tags} order:random&limit=${limit}`;
   const posts = await getRequest(buildRequest(uri));
   return posts;
 }
