@@ -20,7 +20,8 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
     client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
       .run(client, message, args, config, RichEmbed);
   } else {
-    messageFail(client, message, CommandUsage(config.prefix, currentCMD.name, currentCMD.usage));
+    const prefix = await client.functions.get('FUNC_getPrefix').run(message);
+    messageFail(client, message, CommandUsage(prefix, currentCMD.name, currentCMD.usage));
   }
 };
 
