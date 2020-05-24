@@ -9,3 +9,5 @@ auto posting for e621 command
 apply updated message-look (e621) to all services
 code rewrite for FA and r34, IB
 update code to Discord.JS v.12 ᵏᶦˡˡ ᵐᵉ
+
+If you notice any bugs or somethings not woring propery, feel free to report it on my discord server. Link is in `+help`.
