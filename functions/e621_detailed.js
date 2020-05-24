@@ -61,7 +61,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
 
   let source = 'none';
   let typeSources = 'Sources';
-  if (post.sources.length === 0) {
+  if (post.sources.length !== 0) {
     source = post.sources.join('\n');
     if (post.sources.length === 1) typeSources = 'Source';
   }
