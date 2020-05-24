@@ -22,4 +22,5 @@ module.exports.run = async (client, message, args, config, RichEmbed) => {
 
 module.exports.help = {
   name: 'CMD_blacklist_list',
+  parent: 'blacklist',
 };
