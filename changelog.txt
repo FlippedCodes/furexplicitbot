@@ -2,6 +2,7 @@
 + added global tag ban list for rule34 and e621 (required by discords TOS)
 + added server wide tag banning (+blacklist)
 + added alias overview (+alias)
++ added api key to e621 requests for more pictures
 (* organized files and code cleanup)
 
 Working on:
