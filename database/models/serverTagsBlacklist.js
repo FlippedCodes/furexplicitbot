@@ -2,13 +2,25 @@
 const Sequelize = require('sequelize');
 
 module.exports = sequelize.define('servertagsblacklist', {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   serverID: {
     type: Sequelize.STRING(30),
     allowNull: false,
-    primaryKey: true,
   },
   tag: {
-    type: Sequelize.STRING(3),
+    type: Sequelize.STRING(30),
     allowNull: false,
+  },
+},
+{
+  uniqueKeys: {
+    uniqueBlock: {
+      fields: ['serverID', 'tag'],
+    },
   },
 });

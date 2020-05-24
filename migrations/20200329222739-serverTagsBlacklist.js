@@ -1,16 +1,28 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('servertagsblacklist', {
+    id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     serverID: {
       type: Sequelize.STRING(30),
       allowNull: false,
-      primaryKey: true,
     },
     tag: {
-      type: Sequelize.STRING(3),
+      type: Sequelize.STRING(30),
       allowNull: false,
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
+  },
+  {
+    uniqueKeys: {
+      uniqueBlock: {
+        fields: ['serverID', 'tag'],
+      },
+    },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('servertagsblacklist'),
 };
