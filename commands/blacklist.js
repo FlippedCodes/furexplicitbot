@@ -29,5 +29,5 @@ module.exports.help = {
   name: 'blacklist',
   title: 'Manage tagws',
   usage: 'add|remove|list',
-  desc: 'Manage blacklisted tagws in this serwer',
+  desc: 'Manage blacklisted tagws in this serwer for e621 and rule34.',
 };
