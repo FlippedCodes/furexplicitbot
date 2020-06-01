@@ -45,7 +45,9 @@
         "color": "012E57",
         "label": "e621.net",
         "autopost": {
-            "intervalChecker": 10000
+            "intervalChecker": 60000,
+            "dbOffset": 7200000,
+            "maxCache": 100
         }
     }
 }
