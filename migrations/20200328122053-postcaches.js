@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('postscache', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('postcaches', {
     ID: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
@@ -35,5 +35,5 @@ module.exports = {
       },
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('postscache'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('postcaches'),
 };
