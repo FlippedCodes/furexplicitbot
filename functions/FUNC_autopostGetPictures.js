@@ -35,6 +35,7 @@ async function requestPictures(config, nsfw, tags) {
 
 async function getPicture(channelID) {
   const result = await postcache.findOne({ where: { channelID } }).catch(errHander);
+  if (!result) return null;
   await postcache.destroy({ where: { ID: result.ID } }).catch(errHander);
   return result;
 }
