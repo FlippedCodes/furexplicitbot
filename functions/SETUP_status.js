@@ -10,6 +10,7 @@ module.exports.run = async (client, config) => {
       client.user.setActivity('with \'+help\' command');
     }, 1 * 40000);
   }
+  await console.log('Set status!');
 };
 
 module.exports.help = {
