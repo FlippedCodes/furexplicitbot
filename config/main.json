@@ -23,7 +23,10 @@
             "STARTUP_initFunctions",
             "STARTUP_envPrep"
         ],
-        "setupFunctions": ["SETUP_status"]
+        "setupFunctions": [
+            "SETUP_status",
+            "TCKR_autopost"
+        ]
     },
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
     "color_fa": "FAAF3A",
