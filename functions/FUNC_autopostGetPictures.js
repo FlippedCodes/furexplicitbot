@@ -42,8 +42,8 @@ async function getPicture(channelID) {
 async function storePictures(channelID, pool) {
   await pool.forEach((post) => {
     postcache.findOrCreate({
-      where: { channelID, postID: post.ID },
-      default: { artist: post.tags.artist[0], directLink: post.file.url },
+      where: { channelID, postID: post.id },
+      defaults: { artist: post.tags.artist[0], directLink: post.file.url },
     }).catch(errHander);
   });
 }
