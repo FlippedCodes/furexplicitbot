@@ -27,6 +27,13 @@ module.exports = {
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
+  },
+  {
+    uniqueKeys: {
+      autoPostUnique: {
+        fields: ['channelID', 'postID'],
+      },
+    },
   }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('postscache'),
 };

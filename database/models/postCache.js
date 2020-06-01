@@ -27,4 +27,11 @@ module.exports = sequelize.define('postcache', {
     type: Sequelize.TEXT('tiny'),
     allowNull: false,
   },
+},
+{
+  uniqueKeys: {
+    autoPostUnique: {
+      fields: ['channelID', 'postID'],
+    },
+  },
 });
