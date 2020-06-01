@@ -1,13 +1,7 @@
 **Changelog:**
-+ added global tag ban list for rule34 and e621 (required by discords TOS)
-+ added server wide tag banning (+blacklist)
-+ added alias overview (+alias)
-+ added api key to e621 requests for more pictures
-(* organized files and code cleanup)
++ added auto-post (+autopost) command
 
 Working on:
-auto posting for e621 command
-apply updated message-look (e621) to all services
 code rewrite for FA and r34, IB
 update code to Discord.JS v.12 ᵏᶦˡˡ ᵐᵉ
 
