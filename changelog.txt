@@ -2,6 +2,7 @@
 + added auto-post (+autopost) command
 
 Working on:
+autodetect source
 code rewrite for FA and r34, IB
 update code to Discord.JS v.12 ᵏᶦˡˡ ᵐᵉ
 
