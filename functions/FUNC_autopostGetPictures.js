@@ -28,7 +28,7 @@ async function getRequest(request) {
 
 async function requestPictures(config, nsfw, tags) {
   const endpoint = getEndpoint(nsfw, config);
-  const uri = `${endpoint}?tags=${tags} order:random&limit=320&login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`;
+  const uri = `${endpoint}?tags=${tags} order:random&limit=${config.e621.autopost.maxCache}&login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`;
   const posts = await getRequest(buildRequest(uri));
   return posts;
 }
