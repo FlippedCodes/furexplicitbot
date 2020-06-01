@@ -4,7 +4,6 @@ const Sequelize = require('sequelize');
 module.exports = sequelize.define('servertagsblacklist', {
   id: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },

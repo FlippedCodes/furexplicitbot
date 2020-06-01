@@ -2,12 +2,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('autopostchannels', {
     channelID: {
       type: Sequelize.STRING(30),
-      primary: true,
-      allowNull: false,
+      primaryKey: true,
     },
     serverID: {
       type: Sequelize.STRING(30),
-      primary: true,
       allowNull: false,
     },
     tags: {

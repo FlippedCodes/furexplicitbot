@@ -2,7 +2,6 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('servertagsblacklists', {
     id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },

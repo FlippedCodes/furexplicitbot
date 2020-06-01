@@ -1,24 +1,32 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('postscache', {
-    postID: {
+    ID: {
       type: Sequelize.INTEGER(10),
       primaryKey: true,
+      autoIncrement: true,
     },
-    tags: {
-      type: Sequelize.TEXT('tiny'),
+    channelID: {
+      type: Sequelize.STRING(30),
+      allowNull: false,
+      references: {
+        model: 'autopostchannels',
+        key: 'channelID',
+      },
+    },
+    postID: {
+      type: Sequelize.INTEGER(10),
       allowNull: false,
     },
     artist: {
       type: Sequelize.TEXT('tiny'),
       allowNull: false,
     },
-    link: {
+    directLink: {
       type: Sequelize.TEXT('tiny'),
       allowNull: false,
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   }),
-  // }),
   down: (queryInterface, Sequelize) => queryInterface.dropTable('postscache'),
 };

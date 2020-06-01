@@ -4,12 +4,14 @@ const Sequelize = require('sequelize');
 module.exports = sequelize.define('autopostchannel', {
   channelID: {
     type: Sequelize.STRING(30),
-    primary: true,
-    allowNull: false,
+    primaryKey: true,
   },
   serverID: {
     type: Sequelize.STRING(30),
-    primary: true,
+    allowNull: false,
+  },
+  tags: {
+    type: Sequelize.TEXT('tiny'),
     allowNull: false,
   },
   nextEvent: {
