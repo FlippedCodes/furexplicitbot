@@ -13,7 +13,7 @@ module.exports = {
       allowNull: false,
     },
     nextEvent: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.DATE,
       allowNull: false,
     },
     intervall: {

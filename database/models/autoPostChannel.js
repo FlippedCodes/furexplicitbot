@@ -15,7 +15,7 @@ module.exports = sequelize.define('autopostchannel', {
     allowNull: false,
   },
   nextEvent: {
-    type: Sequelize.STRING(20),
+    type: Sequelize.DATE,
     allowNull: false,
   },
   intervall: {
