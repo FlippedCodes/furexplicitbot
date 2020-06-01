@@ -32,9 +32,10 @@ client.login(config.env.get('token'));
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag} serving ${client.guilds.size} Servers!`);
 
-  // set status
-  client.functions.get('SETUP_status').run(client, config)
-    .then(() => console.log('Set status!'));
+  // start setup Functions
+  config.setup.setupFunctions.forEach((FCN) => {
+    client.functions.get(FCN).run(client, config);
+  });
 });
 
 client.on('message', async (message) => {
