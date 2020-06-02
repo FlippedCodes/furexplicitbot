@@ -34,8 +34,6 @@ async function getTags(message, tags) {
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
-  // TODO: check if max allowed channels is hit
-  // TODO: check if interval minisecs is to low/high
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   const [subcmd, interval, tagCheck] = args;
