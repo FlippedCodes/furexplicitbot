@@ -31,9 +31,9 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   const added = await removeAutopost(message.channel.id);
   if (added) {
-    messageSuccess(message, 'This channel does now no longer autopost.');
+    messageSuccess(message, 'This channel dowes now no longer autopowst.');
   } else {
-    messageFail(message, 'This channel doesn\'t have an autopost configured!');
+    messageFail(message, 'This channel doewsn\'t have an autopowst configured!');
   }
 };
 

@@ -94,7 +94,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   }
   if (interval > config.e621.autopost.maxPostTime || interval < config.e621.autopost.minPostTime) {
     return messageFail(message,
-      `Interval needs to be between ${config.e621.autopost.minPostTime} and ${config.e621.autopost.maxPostTime} milliseconds.
+      `Interval neewds to bwe between ${config.e621.autopost.minPostTime} and ${config.e621.autopost.maxPostTime} milliseconds.
       Command usage: 
       \`\`\`${prefix}${module.exports.help.parent} ${subcmd} INTERVALINMILLISECONDS TAGNAME\`\`\``);
   }
@@ -105,24 +105,24 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   }
   const tags = await getTags(message, args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
   if (tags.length > 255) {
-    return messageFail(message, 'Your tags are too long. The maximum length is 255 characters, minus the blacklisted tags in this server.');
+    return messageFail(message, 'Your tawgs are too lowng. The maximum length is 255 characters, minus the blackliwsted tawgs in this serwer.');
   }
   if (await checkAmmount(config, tags, message.channel.nsfw)) {
-    return messageFail(message, `Your provided tags don't return the minimum ammount of ${config.e621.autopost.maxCache} posts.`);
+    return messageFail(message, `Your prowided tawgs don't return the minimum ammount of ${config.e621.autopost.maxCache} powsts.`);
   }
   const added = await addAutopost(tags, interval, message.channel.id, message.guild.id, config.e621.autopost.maxChannels);
   switch (added) {
     case true:
-      messageSuccess(message, `Your autopost with the tags \`${tags}\` has been created. The first post appear soon.`);
+      messageSuccess(message, `Your autopowst with the tawgs \`${tags}\` has been created. The first powst appear sowon.`);
       return;
     case 1:
-      messageFail(message, 'You already have 2 autopost channels in this server!');
+      messageFail(message, 'You alreawdy hawe 2 autopowst channels in this serwer!');
       return;
     case 2:
-      messageFail(message, 'You are already using this channel as an autopost channel!');
+      messageFail(message, 'You are alreawdy uwsing this channel as an autopowst channel!');
       return;
     default:
-      messageFail(message, 'Woops, seems like the wizard behind the curtain has tripped! Try again later.');
+      messageFail(message, 'Woops, seems like the wizard behind the curtain has tripped! Try again later. uwu');
       return;
   }
 };
