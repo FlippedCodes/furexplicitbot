@@ -39,10 +39,22 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   const [subcmd, interval, tagCheck] = args;
-  if (!tagCheck) {
+  if (!interval || !tagCheck) {
     return messageFail(message,
       `Command usage: 
-      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} INTERVALMILLISECONDS TAGNAME\`\`\``);
+      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} ${interval | 'INTERVALINMILLISECONDS'} ${tagCheck | 'TAGNAME'}...\`\`\``);
+  }
+  if (isNaN(interval)) {
+    return messageFail(message,
+      `Interval needs to be a number.
+      Command usage: 
+      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} INTERVALINMILLISECONDS TAGNAME\`\`\``);
+  }
+  if (interval > config.e621.autopost.maxPostTime || interval < config.e621.autopost.minPostTime) {
+    return messageFail(message,
+      `Interval needs to be between ${config.e621.autopost.minPostTime} and ${config.e621.autopost.maxPostTime} milliseconds.
+      Command usage: 
+      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} INTERVALINMILLISECONDS TAGNAME\`\`\``);
   }
   const tags = await getTags(message, args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
   if (tags.length > 255) {
