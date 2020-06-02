@@ -1,22 +1,22 @@
 const config = require('../config/main.json');
 
-const servertagsblacklist = require('../database/models/servertagsblacklist');
+const autopostchannel = require('../database/models/autopostchannel');
 
-async function getTags(serverID) {
-  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.managementServerID] }, order: [['tag', 'ASC']] });
+async function getChannels(serverID) {
+  const result = await autopostchannel.findAll({ where: { serverID } });
   return result;
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
-  const DBentries = await getTags(message.guild.id);
-  const blacklistedTags = [];
-  DBentries.forEach((entry) => {
-    blacklistedTags.push(entry.tag);
+  const DBentries = await getChannels(message.guild.id);
+  const embed = new RichEmbed();
+  await DBentries.forEach(async (entry) => {
+    const channel = await client.channels.find((channel) => channel.id === entry.channelID);
+    embed.addField(`'#${channel.name}' - ${entry.interval}`, `${entry.tags}`, false);
   });
-  const embed = new RichEmbed()
+  embed
     .setColor(message.member.displayColor)
-    .setAuthor('Blacklisted tagws in thwis serwer:')
-    .setDescription(`\`\`\`${blacklistedTags.join(', ')}\`\`\``);
+    .setAuthor('Autopost channels in this server:');
   message.channel.send({ embed });
 };
 
