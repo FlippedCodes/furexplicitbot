@@ -45,6 +45,9 @@ client.on('message', async (message) => {
 // trigger on guildDelete
 client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
 
+// trigger on channelDeletion
+client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
+
 client.on('messageReactionAdd', async (reaction, user) => {
   client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, RichEmbed, messageOwner);
 });
