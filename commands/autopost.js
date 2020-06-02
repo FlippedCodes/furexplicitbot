@@ -10,7 +10,7 @@ function messageFail(client, message, body) {
     .run(client.user, message.channel, body, '', 16449540, false);
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, RichEmbed) => {
   // check DM
   if (message.channel.type === 'dm') return messageFail(client, message, 'This comamnd is for servers only.');
   const [subcmd] = args;
