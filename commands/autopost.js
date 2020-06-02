@@ -29,5 +29,5 @@ module.exports.help = {
   name: 'autopost',
   title: 'Auto-Post e621',
   usage: 'add|remove|list',
-  desc: 'Auto Post e621 pictures in a channel.',
+  desc: 'Autopost e621 pictures in a channel.',
 };
