@@ -50,7 +50,8 @@
             "maxCache": 100,
             "maxChannels": 2,
             "minPostTime": 600000,
-            "maxPostTime": 18000000
+            "maxPostTime": 18000000,
+            "minPics": 100
         }
     }
 }

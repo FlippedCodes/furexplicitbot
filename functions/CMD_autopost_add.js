@@ -47,6 +47,36 @@ async function getTags(message, tags) {
   return safeTags;
 }
 
+async function getAmmount(request) {
+  const rp = require('request-promise');
+  const pics = await rp(request);
+  return pics.posts.length;
+}
+
+function getEndpoint(nsfw, config) {
+  let uri = config.e621.endpoint.sfw;
+  if (nsfw) uri = config.e621.endpoint.nsfw;
+  return uri;
+}
+
+function buildRequest(uri) {
+  const version = require('../package.json');
+  return {
+    method: 'GET',
+    uri,
+    headers: { 'User-Agent': `FurExplicitBot/${version.version} by Flipper on e621` },
+    json: true,
+  };
+}
+
+async function checkAmmount(config, tags, nsfw) {
+  const endpoint = getEndpoint(nsfw, config);
+  const uri = `${endpoint}?tags=${tags} order:random&limit=${config.e621.autopost.maxCache}&login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`;
+  const ammount = await getAmmount(buildRequest(uri));
+  const result = ammount < config.e621.autopost.minPics;
+  return result;
+}
+
 module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
@@ -72,10 +102,13 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   if (tags.length > 255) {
     return messageFail(message, 'Your tags are too long. The maximum length is 255 characters, minus the blacklisted tags in this server.');
   }
+  if (await checkAmmount(config, tags, message.channel.nsfw)) {
+    return messageFail(message, `Your provided tags don't return the minimum ammount of ${config.e621.autopost.maxCache} posts.`);
+  }
   const added = await addAutopost(tags, interval, message.channel.id, message.guild.id, config.e621.autopost.maxChannels);
   switch (added) {
     case true:
-      messageSuccess(message, `Your autopost with the \`${tags}\` has been created. The first post appear soon.`);
+      messageSuccess(message, `Your autopost with the tags \`${tags}\` has been created. The first post appear soon.`);
       return;
     case 1:
       messageFail(message, 'You already have 2 autopost channels in this server!');
