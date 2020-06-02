@@ -63,7 +63,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   const added = await addAutopost(tags, message.guild.id, config.managementServerID);
   switch (added) {
     case true:
-      messageSuccess(message, `Your autopost with the \`${tags}\` has been created.`);
+      messageSuccess(message, `Your autopost with the \`${tags}\` has been created. The first post appear soon.`);
       return;
     case 1:
       messageFail(message, 'You already have 2 autopost channels in this server!');
@@ -72,7 +72,8 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
       messageFail(message, 'You are already using this channel as an autopost channel!');
       return;
     default:
-      break;
+      messageFail(message, 'Woops, seems like the wizard behind the curtain has tripped! Try again later.');
+      return;
   }
 };
 
