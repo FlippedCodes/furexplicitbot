@@ -1,4 +1,5 @@
-const servertagsblacklist = require('../database/models/servertagsblacklist');
+/* eslint-disable no-bitwise */
+const autopostchannel = require('../database/models/autopostchannel');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
@@ -17,9 +18,22 @@ function messageFail(message, body) {
     .then((msg) => msg.delete(10000));
 }
 
-async function addAutopost(tag, serverID, managementServerID) {
-  if (await servertagsblacklist.findOne({ where: { serverID: [serverID, managementServerID], tag } }).catch(errHander)) return false;
-  await servertagsblacklist.findOrCreate({ where: { serverID, tag } }).catch(errHander);
+async function countChannels(serverID) {
+  const result = await autopostchannel.findAndCountAll({ where: { serverID } }).catch(errHander);
+  return result.count;
+}
+
+async function addAutopost(tags, interval, channelID, serverID, maxChannels) {
+  const date = new Date();
+  const nextEvent = date.getTime();
+  if (await countChannels(serverID) > maxChannels) return 1;
+  if (await autopostchannel.findOne({ where: { channelID } }).catch(errHander)) return 2;
+  await autopostchannel.findOrCreate({
+    where: { channelID },
+    defaults: {
+      tags, serverID, interval, nextEvent,
+    },
+  }).catch(errHander);
   return true;
 }
 
@@ -58,7 +72,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, prefix) =>
   if (tags.length > 255) {
     return messageFail(message, 'Your tags are too long. The maximum length is 255 characters, minus the blacklisted tags in this server.');
   }
-  const added = await addAutopost(tags, message.guild.id, config.managementServerID);
+  const added = await addAutopost(tags, interval, message.channel.id, message.guild.id, config.e621.autopost.maxChannels);
   switch (added) {
     case true:
       messageSuccess(message, `Your autopost with the \`${tags}\` has been created. The first post appear soon.`);
