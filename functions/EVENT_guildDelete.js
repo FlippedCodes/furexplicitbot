@@ -1,5 +1,7 @@
 const servertagsblacklist = require('../database/models/servertagsblacklist');
 
+const autosourcechannel = require('../database/models/autosourcechannel');
+
 const autopostchannel = require('../database/models/autopostchannel');
 
 const postcache = require('../database/models/postcache');
@@ -9,6 +11,9 @@ const errHander = (err) => { console.error('ERROR:', err); };
 module.exports.run = async (guild) => {
   // Deletes all blacklisted tags
   servertagsblacklist.destroy({ where: { serverID: guild.id } }).catch(errHander);
+
+  // Deletes all autosource channels
+  autosourcechannel.destroy({ where: { serverID: guild.id } }).catch(errHander);
 
   // Deletes all channels and cache for autopost
   const auotChannelEntries = await autopostchannel.findAll({ where: { serverID: guild.id } }).catch(errHander);
