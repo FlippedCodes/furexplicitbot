@@ -53,5 +53,8 @@
             "maxPostTime": 18000000,
             "minPics": 100
         }
+    },
+    "imageFinder": {
+        "uri": "https://api.kheina.com/v1/search"
     }
 }
