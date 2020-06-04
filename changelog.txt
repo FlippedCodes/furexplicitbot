@@ -1,7 +1,6 @@
 **Changelog:**
 + added auto-post (+autopost) command
 + added +source command, to find the source
-+ added auto-source (+autosource) command
 
 Working on:
 autodetect source
