@@ -14,7 +14,7 @@ function checkURL(orgURL, allowedFiletypes) {
 }
 
 module.exports.run = async (client, message, args, config, RichEmbed) => {
-  if (message.channel.type === 'dm') return messageFail(message, 'This comamnd is for now server only.');
+  if (message.channel.type === 'dm') return messageFail(message, 'This command is - for now - server only.');
   if (!message.channel.nsfw) return messageFail(message, 'I\'m sowwy, bwut thwis iws not yewt awailable for SFW rooms. uwu');
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   let [link] = args;
