@@ -36,7 +36,8 @@ module.exports.run = async (client, message, args, config, RichEmbed) => {
     .setURL(source.source)
     .setImage(`${config.imageFinder.picEndpoint}${source.sha1}.jpg`)
     .setFooter(`on ${site.label} | Found with kheina.com`, site.logo);
-  message.channel.send({ embed });
+  const msg = await message.channel.send({ embed });
+  msg.react('❌');
 };
 
 module.exports.help = {
