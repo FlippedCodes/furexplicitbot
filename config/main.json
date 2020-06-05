@@ -25,8 +25,15 @@
         ],
         "setupFunctions": [
             "SETUP_status",
+            "TCKR_botlistAPI",
             "TCKR_autopost"
         ]
+    },
+    "botList": {
+        "heartBeatInterval": 600000,
+        "discordbotlist": {
+            "endpoint": "https://discordbotlist.com/api/v1/bots/"
+        }
     },
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
     "color_fa": "FAAF3A",
