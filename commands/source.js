@@ -8,7 +8,7 @@ function messageFail(message, body) {
 function checkURL(orgURL, allowedFiletypes) {
   const url = new URL(orgURL);
   const filename = url.pathname.split('/').reverse()[0];
-  const ext = filename.split('.')[1];
+  const ext = filename.slice(filename.lastIndexOf('.') + 1, filename.length);
   const result = allowedFiletypes.includes(ext);
   return result;
 }
