@@ -76,7 +76,7 @@
         "uri": "https://api.kheina.com/v1/search",
         "picEndpoint": "https://cdn.kheina.com/file/kheinacom/",
         "websiteEndpoint": "https://kheina.com/?url=",
-        "minSimilarity": 90,
+        "minSimilarity": 85,
         "websiteCodes": {
             "0": "fa",
             "3": "fn"
