@@ -1,6 +1,6 @@
 {
   "name": "furexplicitbot",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "description": "I'm providing NSFW Furry images from different websites.",
   "main": "index.js",
   "scripts": {
