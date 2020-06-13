@@ -10,7 +10,7 @@ function buildRequest(client, config) {
       Authorization: config.env.get('token_discordbotlist'),
     },
     body: {
-      users: client.users.size,
+      // users: client.users.size,
       guilds: client.guilds.size,
     },
     json: true,
