@@ -12,7 +12,7 @@
         "loading": "714093562576502867",
         "details": "714094023396032593"
     },
-    "reactionsTimeout": "7200000",
+    "reactionsTimeout": 600000,
     "setup": {
         "moduleFolders": {
             "functionsFolder": "functions",
