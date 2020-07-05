@@ -31,7 +31,9 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   if (!await client.functions.get('FUNC_checkBotPermissions').run(message)) {
     // FIXME: catch handler doesnt work
     // message.react('❌').catch();
-    messageFail(message, 'Sowwy, I am missing permissions sewnd the messages to that channel. uwu');
+    if (!config.permissionsServerBlacklist.includes(message.guild.id)) {
+      messageFail(message, 'Sowwy, I am missing permissions sewnd the messages to that channel. uwu');
+    }
     return;
   }
 
