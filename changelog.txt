@@ -1,10 +1,8 @@
 **Changelog:**
-+ added auto-post (+autopost) command
-+ added +source command, to find the source
++ upgraded to Discord.JS v12
 
 Working on:
 autodetect source
 code rewrite for FA and r34, IB
-update code to Discord.JS v.12 ᵏᶦˡˡ ᵐᵉ
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
