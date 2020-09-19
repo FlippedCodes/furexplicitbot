@@ -5,7 +5,7 @@ module.exports.run = async (client, config) => {
   } else {
     setInterval(() => {
       setTimeout(() => {
-        client.user.setActivity(`${client.guilds.size} servers.`, { type: 'LISTENING' });
+        client.user.setActivity(`${client.guilds.cache.size} servers.`, { type: 'LISTENING' });
       }, 20000);
       client.user.setActivity('with \'+help\' command');
     }, 1 * 40000);
