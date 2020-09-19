@@ -123,7 +123,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
   editorNote(message, MessageEmbed);
   await checkSID(client);
   // getting loading emoji
-  const loadingEmoji = client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading);
+  const loadingEmoji = client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading);
   message.react(loadingEmoji).then(async (reaction_loading) => {
     // checking for requested ammounts of pictures and parses tags
     let tags = args.join(' ');
@@ -136,7 +136,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       limmiter(ammount, config, message, MessageEmbed),
     );
     messageSend(config, message, MessageEmbed, result);
-    await reaction_loading.remove(client.user);
+    await reaction_loading.users.remove(client.user);
   })
     .catch((err) => {
       message.channel.send('Sowwy, but it seems like something went wrong... Pleawse report this to my creator. uwu\'')

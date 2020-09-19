@@ -32,13 +32,13 @@ function previewMessage(submission, MessageEmbed, config, message, messageOwner,
     .then((msg) => {
       msg.react('❌');
       Timeout(msg, message.author.id, messageOwner, config);
-      reaction_loading.remove(client.user);
+      reaction_loading.users.remove(client.user);
     });
 }
 
 module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
-  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
+  message.react(client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading)).then((reaction_loading) => {
     const subcmd = args[0];
     let limit = args[1];
     let searchwords = args.join(' ');
@@ -51,7 +51,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
     if (message.channel.nsfw === false) {
       message.reply('EDITOR NOTE: Hey there, I\'m sorry but this feature was taken out in SFW rooms for the time being. I made a mistake with NSFW content being shown in there and haven\'t found time yet to fix it. I hope you understand and sorry for the inconvenience. You can use this command without problems in a NSFW marked room.')
         .then((msg) => msg.delete(30000));
-      reaction_loading.remove(client.user);
+      reaction_loading.users.remove(client.user);
       return;
     }
 
@@ -66,7 +66,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
         if (limit > 10 && message.author.id !== config.owner) {
           message.reply('you can only requwest a maximum of 10 images at the twime.')
             .then((msg) => msg.delete(10000));
-          reaction_loading.remove(client.user);
+          reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 3) {
@@ -87,7 +87,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       //   if (!post) {
       //     message.reply('plewse prwide an id for me to fiwnd.')
       //       .then((msg) => msg.delete(10000));
-      //     reaction_loading.remove(client.user);
+      //     reaction_loading.users.remove(client.user);
       //     return;
       //   }
       //   if (searchwords) {
@@ -119,7 +119,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       //       .then(((msg)) => {
       //         msg.react('❌');
       //         Timeout((msg), message.author.id, messageOwner, config);
-      //         reaction_loading.remove(client.user);
+      //         reaction_loading.users.remove(client.user);
       //       });
       //   });
       //   return;
@@ -127,13 +127,13 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
         if (!searchwords) {
           message.reply('plewse prowide me something I should search.')
             .then((msg) => msg.delete(10000));
-          reaction_loading.remove(client.user);
+          reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 10 && message.author.id !== config.owner) {
           message.reply('you can only requwest a maximum of 10 images at the twime.')
             .then((msg) => msg.delete(10000));
-          reaction_loading.remove(client.user);
+          reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 3) {
@@ -172,7 +172,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       default:
         client.functions.get('invalid_cmd').run(message, subcmd)
           .catch(console.log);
-        reaction_loading.remove(client.user);
+        reaction_loading.users.remove(client.user);
         return;
     }
   })

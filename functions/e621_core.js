@@ -88,20 +88,20 @@ function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) 
       .setTimestamp();
     const msg = await message.channel.send({ embed });
     await msg.react('❌');
-    await msg.react(message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details));
+    await msg.react(message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details));
     Timeout(msg, message.author.id, messageOwner, config);
   });
 }
 
 module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner) => {
-  const reaction_loading = await message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading));
+  const reaction_loading = await message.react(client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading));
   const editedTags = await getTags(message, args);
   const tags = editedTags[0];
   let limit = editedTags[1];
   if (!await checkRequestedLimit(message, limit, reaction_loading)) limit = 10;
   await postPictures(MessageEmbed, message, config, limit, messageOwner, await requestPictures(message, config, tags, limit));
 
-  await reaction_loading.remove(client.user);
+  await reaction_loading.users.remove(client.user);
 };
 
 module.exports.help = {

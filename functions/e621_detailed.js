@@ -1,7 +1,7 @@
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_MessageEmbedMessage')
+  client.functions.get('FUNC_richEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false)
     .then((msg) => msg.delete(10000));
 }
@@ -54,8 +54,8 @@ function getTags(post, embed) {
   if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
 }
 
-function postPicture(reaction, MessageEmbed, previewMessage, config, post) {
-  const embed = new MessageEmbed();
+function postPicture(reaction, RichEmbed, previewMessage, config, post) {
+  const embed = new RichEmbed();
 
   getTags(post, embed);
 
@@ -83,12 +83,12 @@ function postPicture(reaction, MessageEmbed, previewMessage, config, post) {
   reaction.message.edit({ embed });
 }
 
-module.exports.run = async (reaction, config, MessageEmbed) => {
+module.exports.run = async (reaction, config, RichEmbed) => {
   switch (reaction.emoji.identifier) {
-    case await reaction.message.client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.details).identifier: {
+    case await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
-      postPicture(reaction, MessageEmbed, embed, config, await requestPicture(id, config));
+      postPicture(reaction, RichEmbed, embed, config, await requestPicture(id, config));
       return;
     }
     default: return;

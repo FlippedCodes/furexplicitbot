@@ -13,7 +13,7 @@ function tagsReplace(tags, search, replace) {
 }
 
 module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
-  message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then(async (reaction_loading) => {
+  message.react(client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading)).then(async (reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
     tags = tagsReplace(tags, ', ', '+');
@@ -25,13 +25,13 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
     if (message.channel.nsfw === false) {
       message.reply('sowwy, but rule34 is a complete nsfw siwte. So there are almowst no sfw post on there. >.<')
         .then((msg) => msg.delete(30000));
-      reaction_loading.remove(client.user);
+      reaction_loading.users.remove(client.user);
       return;
     }
     if (limit > 10 && message.author.id !== config.owner) {
       message.reply('you can only requwest a maximum of 10 images at the twime.')
         .then((msg) => msg.delete(10000));
-      reaction_loading.remove(client.user);
+      reaction_loading.users.remove(client.user);
       return;
     }
     if (limit > 3) {
@@ -75,7 +75,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
         }
       })
       .then(() => {
-        reaction_loading.remove(client.user);
+        reaction_loading.users.remove(client.user);
       });
   })
     .catch((err) => {
