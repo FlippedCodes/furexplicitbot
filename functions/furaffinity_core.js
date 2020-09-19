@@ -61,18 +61,18 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       case 'recent':
         if (searchwords) {
           message.reply('there awre nwo tags needewd in recent.')
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
         }
         if (limit > 10 && message.author.id !== config.owner) {
           message.reply('you can only requwest a maximum of 10 images at the twime.')
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
           reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 3) {
           const embed = new MessageEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
         }
         Recent(Type.Artwork).then((pool) => {
           for (let i = 0; i < limit; i++) {
@@ -86,13 +86,13 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       //   let post = limit;
       //   if (!post) {
       //     message.reply('plewse prwide an id for me to fiwnd.')
-      //       .then((msg) => msg.delete(10000));
+      //       .then((msg) => msg.delete({ timeout: 10000 }));
       //     reaction_loading.users.remove(client.user);
       //     return;
       //   }
       //   if (searchwords) {
       //     message.reply('there awre nwo tags needewd to get a submission.')
-      //       .then((msg) => msg.delete(10000));
+      //       .then((msg) => msg.delete({ timeout: 10000 }));
       //   }
       //   Submission(post).then((submission) => {
       //     let embed = new MessageEmbed()
@@ -126,20 +126,20 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
       case 'search':
         if (!searchwords) {
           message.reply('plewse prowide me something I should search.')
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
           reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 10 && message.author.id !== config.owner) {
           message.reply('you can only requwest a maximum of 10 images at the twime.')
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
           reaction_loading.users.remove(client.user);
           return;
         }
         if (limit > 3) {
           const embed = new MessageEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
-            .then((msg) => msg.delete(10000));
+            .then((msg) => msg.delete({ timeout: 10000 }));
         }
         Search(searchwords).then((pool) => {
           for (let i = 0; i < limit; i++) {

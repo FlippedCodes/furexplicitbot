@@ -15,7 +15,7 @@ function messageFail(message, body) {
   const client = message.client;
   client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false)
-    .then((msg) => msg.delete(10000));
+    .then((msg) => msg.delete({ timeout: 10000 }));
 }
 
 async function countChannels(serverID) {
