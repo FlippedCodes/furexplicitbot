@@ -1,7 +1,7 @@
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false)
     .then((msg) => msg.delete(10000));
 }
@@ -68,13 +68,13 @@ async function requestPictures(message, config, tags, limit) {
   return posts;
 }
 
-function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
+function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) {
   if (pool.length === 0) return messageFail(message, 'Sowwy, I found no pictures with your tags. uwu');
   if (pool.length !== limit) {
     if (pool.length !== 10 && limit !== 10) messageFail(message, `Thewe arwe ownly ${pool.length + 1} post(s) with your tawgs.`);
   }
   pool.forEach(async (post) => {
-    const embed = new RichEmbed();
+    const embed = new MessageEmbed();
     const extention = post.file.ext;
     let picURL = post.sample.url;
     if (extention === 'gif') picURL = post.file.url;
@@ -93,13 +93,13 @@ function postPictures(RichEmbed, message, config, limit, messageOwner, pool) {
   });
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner) => {
   const reaction_loading = await message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading));
   const editedTags = await getTags(message, args);
   const tags = editedTags[0];
   let limit = editedTags[1];
   if (!await checkRequestedLimit(message, limit, reaction_loading)) limit = 10;
-  await postPictures(RichEmbed, message, config, limit, messageOwner, await requestPictures(message, config, tags, limit));
+  await postPictures(MessageEmbed, message, config, limit, messageOwner, await requestPictures(message, config, tags, limit));
 
   await reaction_loading.remove(client.user);
 };

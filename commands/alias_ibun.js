@@ -1,5 +1,5 @@
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner) => {
-  client.functions.get('inkbunny_core').run(client, message, args, config, RichEmbed, messageOwner)
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner) => {
+  client.functions.get('inkbunny_core').run(client, message, args, config, MessageEmbed, messageOwner)
     .catch(console.log);
 };
 

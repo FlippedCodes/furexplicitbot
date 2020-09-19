@@ -12,7 +12,7 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then(async (reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
@@ -35,7 +35,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       return;
     }
     if (limit > 3) {
-      const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+      const embed = new MessageEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
       message.channel.send({ embed })
         .then((msg) => msg.delete(10000));
     }
@@ -58,7 +58,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
             picURL = json[randomChoice].file_url;
             if (extention === 'webm' || extention === 'swf') arrow = json[randomChoice].file_url;
           }
-          const embed = new RichEmbed()
+          const embed = new MessageEmbed()
             .setColor(config.color_r34)
             .setTitle('Rule34 Link')
             .setURL(`https://rule34.xxx/index.php?page=post&s=view&id=${json[randomChoice].id}`)

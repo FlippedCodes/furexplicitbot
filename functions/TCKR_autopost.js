@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const { Op } = require('sequelize');
 
@@ -16,7 +16,7 @@ function updateTime(channelID, currentTimestamp, interval) {
 }
 
 function postMessage(post, channel, config) {
-  const embed = new RichEmbed();
+  const embed = new MessageEmbed();
   embed
     .setColor(config.e621.color)
     .setTitle(`Artist: ${post.artist} [e621 link]`)
@@ -34,7 +34,7 @@ module.exports.run = (client, config) => {
     const channels = await getChannels(currentTimestamp, config);
     channels.forEach(async (autoPost) => {
       const channelID = autoPost.channelID;
-      const channel = client.channels.find((channel) => channel.id === channelID);
+      const channel = client.channels.cache.find((channel) => channel.id === channelID);
       const post = await client.functions.get('FUNC_autopostGetPictures').run(autoPost.tags, channelID, channel.nsfw);
       postMessage(post, channel, config);
       updateTime(channelID, currentTimestamp, autoPost.interval);

@@ -1,6 +1,6 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
-const embed = new RichEmbed();
+const embed = new MessageEmbed();
 
 module.exports.run = async (user, channel, body, title, color, footer) => {
   if (footer) {
@@ -16,5 +16,5 @@ module.exports.run = async (user, channel, body, title, color, footer) => {
 };
 
 module.exports.help = {
-  name: 'FUNC_richEmbedMessage',
+  name: 'FUNC_MessageEmbedMessage',
 };

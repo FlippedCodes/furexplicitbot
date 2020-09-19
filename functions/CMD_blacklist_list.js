@@ -7,13 +7,13 @@ async function getTags(serverID) {
   return result;
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
   const DBentries = await getTags(message.guild.id);
   const blacklistedTags = [];
   DBentries.forEach((entry) => {
     blacklistedTags.push(entry.tag);
   });
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(message.member.displayColor)
     .setAuthor('Blacklisted tagws in thwis serwer:')
     .setDescription(`\`\`\`${blacklistedTags.join(', ')}\`\`\``);

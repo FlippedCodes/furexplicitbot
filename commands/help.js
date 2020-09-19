@@ -1,6 +1,6 @@
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setAuthor('How to uwse me:');
   if (message.channel.type !== 'dm') embed.setColor(message.member.displayColor);
   // creating embed fields for every command

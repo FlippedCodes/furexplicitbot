@@ -6,7 +6,7 @@ function messageDelete(message, messageOwner) {
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false)
     .then((msg) => msg.delete(10000));
 }
@@ -18,7 +18,7 @@ function checkPermissions(reaction, user, messageOwner) {
   return permissions;
 }
 
-module.exports.run = async (client, reaction, user, config, RichEmbed, messageOwner) => {
+module.exports.run = async (client, reaction, user, config, MessageEmbed, messageOwner) => {
   if (user.bot) return;
   if (!reaction.me) return;
 
@@ -30,7 +30,7 @@ module.exports.run = async (client, reaction, user, config, RichEmbed, messageOw
 
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
-      client.functions.get('e621_detailed').run(reaction, config, RichEmbed);
+      client.functions.get('e621_detailed').run(reaction, config, MessageEmbed);
       return;
     }
     default:

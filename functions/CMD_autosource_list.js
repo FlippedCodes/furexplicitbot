@@ -7,13 +7,13 @@ async function getCheck(serverID) {
   return result;
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
   const DBentries = await getCheck(message.guild.id);
   const enabledChannels = [];
   DBentries.forEach((entry) => {
     enabledChannels.push(entry.channelID);
   });
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(message.member.displayColor)
     .setAuthor('Auto source channels in thwis serwer:')
     .setDescription(`<#${enabledChannels.join('>, <#')}>`);

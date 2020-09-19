@@ -1,7 +1,7 @@
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false);
 }
 
@@ -13,7 +13,7 @@ function checkURL(orgURL, allowedFiletypes) {
   return result;
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed) => {
+module.exports.run = async (client, message, args, config, MessageEmbed) => {
   if (message.channel.type === 'dm') return messageFail(message, 'This command is - for now - server only.');
   if (!message.channel.nsfw) return messageFail(message, 'I\'m sowwy, bwut thwis iws not yewt awailable for SFW rooms. uwu');
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args, config, RichEmbed) => {
   const source = await client.functions.get('FUNC_getSource').run(link);
   if (!source) return messageFail(message, 'Sowwy, i cawn\'t find your pic. uwu');
   const site = config[source.website];
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor(site.color)
     .setAuthor(`${source.artist} [${Math.round(source.similarity)}% similarity]`, null, `${config.imageFinder.websiteEndpoint}${link}`)
     .setTitle(source.title)

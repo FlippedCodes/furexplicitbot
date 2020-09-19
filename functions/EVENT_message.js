@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 function timeout(id, usedRecently, time) {
   usedRecently.add(id);
@@ -7,7 +7,7 @@ function timeout(id, usedRecently, time) {
 
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.author, body, '', 16449540, false);
 }
 
@@ -50,7 +50,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
       .catch(console.log);
     if (!usedRecently.has(message.author.id)) {
       timeout(message.author.id, usedRecently, 5000);
-      cmd.run(client, message, args, config, RichEmbed, messageOwner, config.env.get('fa_cookie_a'), config.env.get('fa_cookie_b'))
+      cmd.run(client, message, args, config, MessageEmbed, messageOwner, config.env.get('fa_cookie_a'), config.env.get('fa_cookie_b'))
         .catch(console.log);
     } else {
       message.reply('sowwy, but you can\'t uwse me that owten. Plewse wait 5 seconds between commands.');

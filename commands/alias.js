@@ -1,6 +1,6 @@
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   // post help text
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setAuthor('Command aliases:')
     .setColor(message.member.displayColor)
     .addField('e621', 'e, e6, e62, e621')

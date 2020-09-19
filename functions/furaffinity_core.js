@@ -18,8 +18,8 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-function previewMessage(submission, RichEmbed, config, message, messageOwner, reaction_loading, client) {
-  const embed = new RichEmbed()
+function previewMessage(submission, MessageEmbed, config, message, messageOwner, reaction_loading, client) {
+  const embed = new MessageEmbed()
     .setAuthor(`Artist: ${submission.author.name}`)
     .setColor(config.color_fa)
     .setTitle('Furaffinity Link')
@@ -36,7 +36,7 @@ function previewMessage(submission, RichEmbed, config, message, messageOwner, re
     });
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   message.react(client.guilds.get(config.emoji.serverID).emojis.get(config.emoji.loading)).then((reaction_loading) => {
     const subcmd = args[0];
@@ -70,13 +70,13 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           return;
         }
         if (limit > 3) {
-          const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+          const embed = new MessageEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
             .then((msg) => msg.delete(10000));
         }
         Recent(Type.Artwork).then((pool) => {
           for (let i = 0; i < limit; i++) {
-            previewMessage(pool[i], RichEmbed, config, message, messageOwner, reaction_loading, client);
+            previewMessage(pool[i], MessageEmbed, config, message, messageOwner, reaction_loading, client);
           }
         });
         return;
@@ -95,7 +95,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
       //       .then((msg) => msg.delete(10000));
       //   }
       //   Submission(post).then((submission) => {
-      //     let embed = new RichEmbed()
+      //     let embed = new MessageEmbed()
       //       .setAuthor(`Artist: ${submission.author.name}`)
       //       .setColor(config.color_fa)
       //       .setTitle('Furaffinity Link')
@@ -137,19 +137,19 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
           return;
         }
         if (limit > 3) {
-          const embed = new RichEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
+          const embed = new MessageEmbed().setDescription('you requwested over 3 images and this might take somwe time. Pleawse don\'t rush me. >.<');
           message.channel.send({ embed })
             .then((msg) => msg.delete(10000));
         }
         Search(searchwords).then((pool) => {
           for (let i = 0; i < limit; i++) {
             const randomChoice = Math.floor(Math.random() * pool.length);
-            previewMessage(pool[randomChoice], RichEmbed, config, message, messageOwner, reaction_loading, client);
+            previewMessage(pool[randomChoice], MessageEmbed, config, message, messageOwner, reaction_loading, client);
           }
         });
         return;
       case 'help':
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
           .setAuthor('USAGE: Furaffinity')
           .setColor(message.member.displayColor)
           .addField('Search', `

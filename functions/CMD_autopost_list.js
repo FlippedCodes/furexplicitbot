@@ -7,9 +7,9 @@ async function getChannels(serverID) {
   return result;
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, prefix) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
   const DBentries = await getChannels(message.guild.id);
-  const embed = new RichEmbed();
+  const embed = new MessageEmbed();
   await DBentries.forEach(async (entry) => {
     const channel = await client.channels.find((channel) => channel.id === entry.channelID);
     embed.addField(`'#${channel.name}' - ${entry.interval}`, `${entry.tags}`, false);

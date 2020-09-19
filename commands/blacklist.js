@@ -6,11 +6,11 @@ function CommandUsage(prefix, cmdName, subcmd) {
 
 // creates a embed messagetemplate for failed actions
 function messageFail(client, message, body) {
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false);
 }
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   // check DM
   if (message.channel.type === 'dm') return messageFail(client, message, 'This comamnd is for servers only.');
   const [subcmd] = args;
@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, config, RichEmbed, messageOwn
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   if (commandValues.includes(subcmd)) {
     client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
-      .run(client, message, args, config, RichEmbed, prefix);
+      .run(client, message, args, config, MessageEmbed, prefix);
   } else {
     messageFail(client, message, CommandUsage(prefix, currentCMD.name, currentCMD.usage));
   }

@@ -1,7 +1,7 @@
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
+  client.functions.get('FUNC_MessageEmbedMessage')
     .run(client.user, message.channel, body, '', 16449540, false)
     .then((msg) => msg.delete(10000));
 }
@@ -22,11 +22,11 @@ const mobile = `
 5. Leave the menu and you are done!`;
 const expain = 'I decided to dwo it thwis way, to save space on my database for other stwuff I cawnt store in Discord itself. Also thwis way eweryone can see the prefix.';
 
-module.exports.run = async (client, message, args, config, RichEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
   // check if user can manage nicknames
   if (!message.member.hasPermission('MANAGE_NICKNAMES')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   // post help text
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setAuthor('Howo two change the prefix:')
     .setColor(message.member.displayColor)
     // .setDescription(description)

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const client = new Discord.Client({ disableEveryone: true });
 
@@ -30,7 +30,7 @@ require('./database/SETUP_DBConnection');
 client.login(config.env.get('token'));
 
 client.on('ready', async () => {
-  console.log(`Logged in as ${client.user.tag} serving ${client.guilds.size} Servers!`);
+  console.log(`Logged in as ${client.user.tag} serving ${client.guilds.cache.size} Servers!`);
 
   // start setup Functions
   config.setup.setupFunctions.forEach((FCN) => {
@@ -49,5 +49,5 @@ client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').
 client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, RichEmbed, messageOwner);
+  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner);
 });
