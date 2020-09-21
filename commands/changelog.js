@@ -17,5 +17,5 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
 module.exports.help = {
   name: 'changelog',
   title: 'Changelog',
-  desc: 'Gwet the resent changes.',
+  desc: 'Gwet the recent changes.',
 };
