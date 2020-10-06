@@ -57,6 +57,7 @@ function getTags(post, embed) {
   if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
   if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
   if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
+  if (post.pools.length !== 0) embed.addField('Pools', formatTags(post.pools), true);
 }
 
 function postPicture(reaction, RichEmbed, previewMessage, config, post) {
