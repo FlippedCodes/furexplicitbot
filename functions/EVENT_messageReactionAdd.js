@@ -28,9 +28,12 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
     return;
   }
 
+  // check if message was sent by bot
+  if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
+
   switch (reaction.message.embeds[0].footer.text) {
-  if (reaction.message.author.id !== config.clientID || config.env.get('inDev')) return;
-      client.functions.get('e621_detailed').run(reaction, config, MessageEmbed);
+    case config.e621.label: {
+      client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
       return;
     }
     default:
