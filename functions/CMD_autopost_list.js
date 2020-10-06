@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
   const DBentries = await getChannels(message.guild.id);
   const embed = new MessageEmbed();
   await DBentries.forEach(async (entry) => {
-    const channel = await client.channels.find((channel) => channel.id === entry.channelID);
+    const channel = await client.channels.cache.find((channel) => channel.id === entry.channelID);
     embed.addField(`'#${channel.name}' - ${entry.interval}`, `${entry.tags}`, false);
   });
   embed
