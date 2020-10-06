@@ -29,7 +29,7 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
   }
 
   switch (reaction.message.embeds[0].footer.text) {
-    case config.e621.label: {
+  if (reaction.message.author.id !== config.clientID || config.env.get('inDev')) return;
       client.functions.get('e621_detailed').run(reaction, config, MessageEmbed);
       return;
     }
