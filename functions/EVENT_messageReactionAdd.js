@@ -33,7 +33,8 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
 
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
-      if (reaction.emoji.name === '❌') client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
+      // if (reaction.emoji.name === '❌') client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
+      client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
       return;
     }
     default:
