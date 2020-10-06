@@ -170,7 +170,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
         message.channel.send({ embed });
         return;
       default:
-        client.functions.get('invalid_cmd').run(message, subcmd)
+        client.functions.get('FUNC_invalid_cmd').run(message, subcmd)
           .catch(console.log);
         reaction_loading.users.remove(client.user);
         return;
@@ -184,5 +184,5 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
 };
 
 module.exports.help = {
-  name: 'furaffinity_core',
+  name: 'FUNC_furaffinity_core',
 };

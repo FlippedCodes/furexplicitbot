@@ -84,8 +84,9 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
+  const allDetailtEmoji = await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier;
   switch (reaction.emoji.identifier) {
-    case await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier: {
+    case allDetailtEmoji: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
       postPicture(reaction, RichEmbed, embed, config, await requestPicture(id, config));
@@ -96,5 +97,5 @@ module.exports.run = async (reaction, config, RichEmbed) => {
 };
 
 module.exports.help = {
-  name: 'e621_detailed',
+  name: 'FUNC_e621_detailed',
 };

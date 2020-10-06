@@ -146,5 +146,5 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
 };
 
 module.exports.help = {
-  name: 'inkbunny_core',
+  name: 'FUNC_inkbunny_core',
 };
