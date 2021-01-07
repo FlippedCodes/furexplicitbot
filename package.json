@@ -21,6 +21,7 @@
     "discord.js": "^12.3.1",
     "furaffinity": "github:FlipperLP/furaffinity",
     "mysql2": "^2.2.2",
+    "nhentai-api": "^3.0.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "sequelize": "^5.22.3"
