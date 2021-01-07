@@ -1,7 +1,12 @@
 **Changelog:**
+__New Stuff__
 + 
+__Important Changes__
+* 
+__Boring Bugfixes__
+* 
 
-Working on:
+__Working on__
 autodetect source
 code rewrite for FA and r34, IB
 allow tags in some channels
