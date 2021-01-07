@@ -1,8 +1,12 @@
 **Changelog:**
-+ upgraded to Discord.JS v12
++ 
 
 Working on:
 autodetect source
 code rewrite for FA and r34, IB
+allow tags in some channels
+pool support for e621
+usersuggestion: default tags for e621 commands
+usersuggestion: add nhentai tag search
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
