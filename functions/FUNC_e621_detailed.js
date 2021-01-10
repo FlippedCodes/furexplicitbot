@@ -89,7 +89,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
   reaction.message.edit({ embed });
 }
 
-async function postReactions(reaction, config, post) {
+async function postPoolReactions(reaction, config, post) {
   const pool = await requestPool(post.pools[0], config);
   if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
   await reaction.message.react('🔢');
@@ -105,7 +105,7 @@ module.exports.run = async (reaction, config, RichEmbed) => {
       const post = await requestPicture(id, config);
       postPicture(reaction, RichEmbed, embed, config, post);
       if (post.pools.length) {
-        postReactions(reaction, config, post);
+        postPoolReactions(reaction, config, post);
       }
       return;
     }

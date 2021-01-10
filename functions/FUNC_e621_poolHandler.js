@@ -96,7 +96,6 @@ async function postReactions(reaction, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
-  const allDetailtEmoji = await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier;
   switch (reaction.emoji.identifier) {
     case allDetailtEmoji: {
       const embed = reaction.message.embeds[0];
