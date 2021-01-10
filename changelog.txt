@@ -1,3 +1,5 @@
+Thanks to everyone using my bot. I would have never thought reaching 400+ servers in a year or so~
+
 **Changelog:**
 __New Stuff__
 + 
@@ -11,7 +13,9 @@ autodetect source
 code rewrite for FA and r34, IB
 allow tags in some channels
 pool support for e621
-usersuggestion: default tags for e621 commands
+add furrynetwork
 usersuggestion: add nhentai tag search
+usersuggestion: default tags for e621 commands
+prune e621 autopost-cache when blacklist gets updated
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
