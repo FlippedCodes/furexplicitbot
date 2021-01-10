@@ -1,4 +1,5 @@
 [comment]: <> (I'm providing NSFW Furry images from different websites.)
+[comment]: <> (You can change the prefix by nicknaming it "CUSTOMNAME | CUSTOMPREFIX")
 
 #### The important stuff
 
