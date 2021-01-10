@@ -11,7 +11,6 @@ function messageFail(message, body) {
     .run(client.user, message.author, body, '', 16449540, false);
 }
 
-
 module.exports.run = async (client, message, config, messageOwner, usedRecently) => {
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
 
