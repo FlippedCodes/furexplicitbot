@@ -28,13 +28,17 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
     return;
   }
 
+  // check if message was sent by bot
+  if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
+
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
-      client.functions.get('e621_detailed').run(reaction, config, MessageEmbed);
-      return;
+      switch (reaction.emoji.name) {
+        case '◀️': return client.functions.get('FUNC_e621_poolHandler').run(reaction, config, MessageEmbed);
+        default: return client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
+      }
     }
-    default:
-      return;
+    default: return;
   }
 };
 

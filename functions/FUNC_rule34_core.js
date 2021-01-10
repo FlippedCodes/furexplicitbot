@@ -86,5 +86,5 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
 };
 
 module.exports.help = {
-  name: 'rule34_core',
+  name: 'FUNC_rule34_core',
 };

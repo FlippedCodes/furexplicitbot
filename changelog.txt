@@ -1,8 +1,21 @@
-**Changelog:**
-+ upgraded to Discord.JS v12
+Thanks to everyone using my bot. I would have never thought reaching 400+ servers in a year or so~
 
-Working on:
+**Changelog:**
+__New Stuff__
++ 
+__Important Changes__
+* 
+__Boring Bugfixes__
+* 
+
+__Working on__
 autodetect source
 code rewrite for FA and r34, IB
+allow tags in some channels
+pool support for e621
+add furrynetwork
+usersuggestion: add nhentai tag search
+usersuggestion: default tags for e621 commands
+prune e621 autopost-cache when blacklist gets updated
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.

@@ -105,5 +105,5 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
 };
 
 module.exports.help = {
-  name: 'e621_core',
+  name: 'FUNC_e621_core',
 };

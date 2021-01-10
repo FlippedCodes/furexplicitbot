@@ -6,11 +6,11 @@ function messageFail(message, body) {
     .then((msg) => msg.delete({ timeout: 10000 }));
 }
 
-function buildRequest(id, config) {
+function buildRequest(id, config, type) {
   const version = require('../package.json');
   return {
     method: 'GET',
-    uri: `https://e621.net/posts/${id}.json?login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`,
+    uri: `https://e621.net/${type}/${id}.json?login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`,
     headers: {
       'User-Agent': `FurExplicitBot/${version.version} by Flipper on e621`,
     },
@@ -20,13 +20,18 @@ function buildRequest(id, config) {
 
 async function getRequest(request) {
   const rp = require('request-promise');
-  const pics = await rp(request);
-  return pics.post;
+  const result = await rp(request);
+  return result;
 }
 
 async function requestPicture(id, config) {
-  const post = await getRequest(buildRequest(id, config));
-  return post;
+  const post = await getRequest(buildRequest(id, config, 'posts'));
+  return post.post;
+}
+
+async function requestPool(id, config) {
+  const pool = await getRequest(buildRequest(id, config, 'pools'));
+  return pool;
 }
 
 function formatTags(tags) {
@@ -52,6 +57,7 @@ function getTags(post, embed) {
   if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
   if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
   if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
+  if (post.pools.length !== 0) embed.addField('Pools', formatTags(post.pools), true);
 }
 
 function postPicture(reaction, RichEmbed, previewMessage, config, post) {
@@ -83,12 +89,24 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
   reaction.message.edit({ embed });
 }
 
+async function postPoolReactions(reaction, config, post) {
+  const pool = await requestPool(post.pools[0], config);
+  if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
+  await reaction.message.react('🔢');
+  if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
+}
+
 module.exports.run = async (reaction, config, RichEmbed) => {
+  const allDetailtEmoji = await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier;
   switch (reaction.emoji.identifier) {
-    case await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier: {
+    case allDetailtEmoji: {
       const embed = reaction.message.embeds[0];
       const id = embed.url.replace('https://e621.net/posts/', '');
-      postPicture(reaction, RichEmbed, embed, config, await requestPicture(id, config));
+      const post = await requestPicture(id, config);
+      postPicture(reaction, RichEmbed, embed, config, post);
+      if (post.pools.length) {
+        postPoolReactions(reaction, config, post);
+      }
       return;
     }
     default: return;
@@ -96,5 +114,5 @@ module.exports.run = async (reaction, config, RichEmbed) => {
 };
 
 module.exports.help = {
-  name: 'e621_detailed',
+  name: 'FUNC_e621_detailed',
 };

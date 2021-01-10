@@ -19,5 +19,5 @@ module.exports.run = async (message, subcmd) => {
 };
 
 module.exports.help = {
-  name: 'invalid_cmd',
+  name: 'FUNC_invalid_cmd',
 };
