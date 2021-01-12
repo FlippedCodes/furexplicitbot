@@ -17,5 +17,6 @@ add furrynetwork
 usersuggestion: add nhentai tag search
 usersuggestion: default tags for e621 commands
 prune e621 autopost-cache when blacklist gets updated
+postcache artist cannot be null
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
