@@ -10,6 +10,7 @@ function buildRequest(client, config) {
       Authorization: config.env.get('token_discordbotlist'),
     },
     body: {
+      // DISABLED: value is wrong
       // users: client.users.size,
       guilds: client.guilds.size,
     },
