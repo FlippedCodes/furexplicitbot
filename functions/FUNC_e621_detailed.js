@@ -97,19 +97,12 @@ async function postPoolReactions(reaction, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
-  const allDetailtEmoji = await reaction.message.client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.details).identifier;
-  switch (reaction.emoji.identifier) {
-    case allDetailtEmoji: {
-      const embed = reaction.message.embeds[0];
-      const id = embed.url.replace('https://e621.net/posts/', '');
-      const post = await requestPicture(id, config);
-      postPicture(reaction, RichEmbed, embed, config, post);
-      if (post.pools.length) {
-        postPoolReactions(reaction, config, post);
-      }
-      return;
-    }
-    default: return;
+  const embed = reaction.message.embeds[0];
+  const id = embed.url.replace('https://e621.net/posts/', '');
+  const post = await requestPicture(id, config);
+  postPicture(reaction, RichEmbed, embed, config, post);
+  if (post.pools.length) {
+    postPoolReactions(reaction, config, post);
   }
 };
 
