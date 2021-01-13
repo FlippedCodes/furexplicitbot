@@ -15,9 +15,7 @@ function Timeout(msg, userID, messageOwner, config) {
   }, config.reactionsTimeout);
 }
 
-function tagsReplace(tags, search, replace) {
-  return tags.replace(new RegExp(search, 'g'), replace);
-}
+function tagsReplace(tags, search, replace) { return tags.replace(new RegExp(search, 'g'), replace); }
 
 async function getTags(message, args) {
   let [limit] = args;
