@@ -35,7 +35,7 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
   // selects what picture service was used
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
-      // reaction selector
+      // reaction selector for e621
       switch (reaction.emoji.name) {
         case 'all_details': return client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
         case '◀️': return client.functions.get('FUNC_e621_poolBack').run(reaction, config, MessageEmbed);
