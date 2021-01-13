@@ -50,7 +50,6 @@ async function storePictures(channelID, pool) {
   });
 }
 
-
 module.exports.run = async (tags, channelID, nsfw) => {
   // FIXME: cache deletion in nsfw setting gets updated
   let post = await getPicture(channelID);
