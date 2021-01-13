@@ -39,6 +39,7 @@ function formatTags(tags) {
   return `\`${joinedTags}\``;
 }
 
+// adds all tags to embed
 function addTags(post, embed) {
   const tags = post.tags;
   const artists = tags.artist.join(', ');
