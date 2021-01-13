@@ -96,20 +96,9 @@ async function postReactions(reaction, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
-  // check, if pool data is in embed
-  switch (reaction.emoji.identifier) {
-    case allDetailtEmoji: {
-      const embed = reaction.message.embeds[0];
-      const id = embed.url.replace('https://e621.net/posts/', '');
-      const post = await requestPicture(id, config);
-      postPicture(reaction, RichEmbed, embed, config, post);
-      if (post.pools.length) {
-        postReactions(reaction, config, post);
-      }
-      return;
-    }
-    default: return;
-  }
+  // check if message is in detailed mode
+  // get embed poolname
+  // check DB for pool entry
 };
 
 module.exports.help = {
