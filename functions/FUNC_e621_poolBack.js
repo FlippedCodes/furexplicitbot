@@ -96,6 +96,7 @@ async function postReactions(reaction, config, post) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
+  // check, if pool data is in embed
   switch (reaction.emoji.identifier) {
     case allDetailtEmoji: {
       const embed = reaction.message.embeds[0];
@@ -112,5 +113,5 @@ module.exports.run = async (reaction, config, RichEmbed) => {
 };
 
 module.exports.help = {
-  name: 'FUNC_e621_poolHandler',
+  name: 'FUNC_e621_poolBack',
 };
