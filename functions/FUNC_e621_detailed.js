@@ -39,7 +39,7 @@ function formatTags(tags) {
   return `\`${joinedTags}\``;
 }
 
-function getTags(post, embed) {
+function addTags(post, embed) {
   const tags = post.tags;
   const artists = tags.artist.join(', ');
   let typeArtists = 'All artists';
@@ -63,7 +63,7 @@ function getTags(post, embed) {
 function postPicture(reaction, RichEmbed, previewMessage, config, post) {
   const embed = new RichEmbed();
 
-  getTags(post, embed);
+  addTags(post, embed);
 
   let source = 'none';
   let typeSources = 'Sources';
