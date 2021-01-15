@@ -1,8 +1,13 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('poolcaches', {
+    ID: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     messageID: {
       type: Sequelize.STRING(30),
-      primaryKey: true,
+      allowNull: false,
     },
     poolIndex: {
       type: Sequelize.INTEGER(2),

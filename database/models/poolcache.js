@@ -2,9 +2,14 @@
 const Sequelize = require('sequelize');
 
 module.exports = sequelize.define('poolcache', {
+  ID: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   messageID: {
     type: Sequelize.STRING(30),
-    primaryKey: true,
+    allowNull: false,
   },
   poolIndex: {
     type: Sequelize.INTEGER(2),
