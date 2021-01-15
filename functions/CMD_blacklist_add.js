@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
       \`\`\`${prefix}${module.exports.help.parent} ${subcmd} TAGNAME\`\`\``);
   }
   if (tag.length > 30) {
-    return messageFail(message, 'Your tawg is too long. The maximum length is 30 characters.');
+    return messageFail(message, 'Your tawg is too lowng. The maximum length is 30 characters.');
   }
   const added = await addTag(tag, message.guild.id, config.managementServerID);
   if (added) {
