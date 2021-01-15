@@ -1,5 +1,7 @@
 const servertagsblacklist = require('../database/models/servertagsblacklist');
 
+const postcache = require('../database/models/postcache');
+
 const errHander = (err) => { console.error('ERROR:', err); };
 
 // creates a embed messagetemplate for succeded actions
