@@ -47,7 +47,7 @@ function formatTags(tags) {
 }
 
 // adds all tags to embed
-function addTags(post, embed) {
+function addTags(post, poolData, embed) {
   const tags = post.tags;
   const artists = tags.artist.join(', ');
   let typeArtists = 'All artists';
@@ -66,12 +66,15 @@ function addTags(post, embed) {
   if (tags.lore.length) embed.addField('Lore tags', formatTags(tags.lore), true);
   if (tags.invalid.length) embed.addField('Invalid tags', formatTags(tags.invalid), true);
   if (post.pools.length) {
+    embed.addField('Pool', `https://e621.net/pools/${poolData.id}`, true);
+    embed.addField('Pool Index', poolData.post_ids.indexOf(post.id), true);
+  }
 }
 
-function postPicture(reaction, RichEmbed, previewMessage, config, post) {
+function postPicture(reaction, RichEmbed, previewMessage, config, post, poolData) {
   const embed = new RichEmbed();
 
-  addTags(post, embed);
+  addTags(post, poolData, embed);
 
   let source = 'none';
   let typeSources = 'Sources';
@@ -116,9 +119,9 @@ module.exports.run = async (reaction, config, RichEmbed) => {
   if (embed.title === 'E621 Link') return;
   const id = embed.url.replace('https://e621.net/posts/', '');
   const post = await requestPicture(id, config);
-  postPicture(reaction, RichEmbed, embed, config, post);
+  const poolData = await requestPool(post.pools[0], config);
+  postPicture(reaction, RichEmbed, embed, config, post, poolData);
   if (post.pools.length) {
-    const poolData = await requestPool(post.pools[0], config);
     await storePool(poolData, reaction.message.id);
     postPoolReactions(reaction, poolData, post);
   }
