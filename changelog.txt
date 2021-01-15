@@ -1,7 +1,7 @@
 Thanks to everyone using my bot. I would have never thought reaching 400+ servers in a year or so~
 
-__If you added the bot before 15.01.2021, make sure you allow manage messages for the bot. This allows for better usage with the pool feature and the ratelimitation for reactions.__
-__Please add the permission manually, because readding the bot will delete your bot configuration (Prefix, Autopost, ...)__
+__If you added the bot before 15.01.2021, make sure you allow manage messages for the bot. This allows for better usage with the pool feature and the rate limitation for reactions.__
+__Please add the permission manually, because reading the bot will delete your bot configuration (Prefix, Autopost, ...)__
 
 **Changelog:**
 __New Stuff__
