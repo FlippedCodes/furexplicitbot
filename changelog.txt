@@ -1,4 +1,4 @@
-Thanks to everyone using my bot. I would have never thought reaching 400+ servers in a year or so~
+**Thanks to everyone using my bot. I would have never thought reaching 400+ server milestone in a year~ While life has been busy I hope to pic back up the development of the bot to bring you new features. **
 
 __If you added the bot before 15.01.2021, make sure you allow manage messages for the bot. This allows for better usage with the pool feature and the rate limitation for reactions.__
 __Please add the permission manually, because reading the bot will delete your bot configuration (Prefix, Autopost, ...)__
