@@ -39,7 +39,7 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
       switch (reaction.emoji.name) {
         case 'all_details': return client.functions.get('FUNC_e621_detailed').run(reaction, config, MessageEmbed);
         case '◀️': return client.functions.get('FUNC_e621_poolBack').run(reaction, config, MessageEmbed);
-        case '🔢': return client.functions.get('FUNC_e621_poolOverview').run(reaction, config, MessageEmbed);
+        // case '🔢': return client.functions.get('FUNC_e621_poolOverview').run(reaction, config, MessageEmbed);
         case '▶️': return client.functions.get('FUNC_e621_poolFore').run(reaction, config, MessageEmbed);
         default: return;
       }
