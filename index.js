@@ -8,7 +8,9 @@ const fs = require('fs');
 
 const config = require('./config/main.json');
 
-const usedRecently = new Set();
+const usedRecentlyMessages = new Set();
+
+const usedRecentlyReactions = new Set();
 
 const messageOwner = new Map();
 
@@ -39,7 +41,7 @@ client.on('ready', async () => {
 });
 
 client.on('message', async (message) => {
-  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecently);
+  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecentlyMessages);
 });
 
 // trigger on guildDelete
@@ -49,5 +51,5 @@ client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').
 client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
 
 client.on('messageReactionAdd', async (reaction, user) => {
-  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner);
+  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
 });
