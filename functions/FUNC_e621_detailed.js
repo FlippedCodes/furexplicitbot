@@ -1,4 +1,8 @@
+const { Op } = require('sequelize');
 
+const poolcache = require('../database/models/poolcache');
+
+const errHander = (err) => { console.error('ERROR:', err); };
 
 function buildRequest(id, config, type) {
   const version = require('../package.json');
