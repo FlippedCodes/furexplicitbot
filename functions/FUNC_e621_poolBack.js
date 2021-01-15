@@ -39,30 +39,17 @@ function formatTags(tags) {
   return `\`${joinedTags}\``;
 }
 
-function getTags(post, embed) {
-  const tags = post.tags;
-  const artists = tags.artist.join(', ');
-  let typeArtists = 'All artists';
-  if (tags.artist.length === 1) typeArtists = 'Artist';
-  embed.setAuthor(`${typeArtists}: ${artists}`);
+function postPicture(reaction, RichEmbed, previewMessage, config, post, poolData) {
+  const embed = new RichEmbed();
 
+  if (post.pools.length) {
+    embed.addField('Pool', `https://e621.net/pools/${poolData.id}`, true);
+    embed.addField('Pool Index', poolData.post_ids.indexOf(post.id), true);
+  }
   const extention = post.file.ext;
   if (extention === 'webm' || extention === 'swf') {
     embed.addField('Direct video link', post.file_url);
   }
-
-  if (tags.character.length !== 0) embed.addField('Character tags', formatTags(tags.character), true);
-  if (tags.species.length !== 0) embed.addField('Species tags', formatTags(tags.species), true);
-  if (tags.copyright.length !== 0) embed.addField('Copyright tags', formatTags(tags.copyright), true);
-  if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
-  if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
-  if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
-}
-
-function postPicture(reaction, RichEmbed, previewMessage, config, post) {
-  const embed = new RichEmbed();
-
-  getTags(post, embed);
 
   let source = 'none';
   let typeSources = 'Sources';
@@ -97,7 +84,8 @@ async function postReactions(reaction, config, post) {
 
 module.exports.run = async (reaction, config, RichEmbed) => {
   // check if message is in detailed mode
-  // get embed poolname
+  // get pool link (for re-use)
+  // get embed poolname (for re-use)
   // check DB for pool entry
 };
 

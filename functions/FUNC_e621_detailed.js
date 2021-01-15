@@ -37,6 +37,7 @@ async function requestPicture(id, config) {
 }
 
 async function requestPool(id, config) {
+  if (!id) return;
   const pool = await getRequest(buildRequest(id, config, 'pools'));
   return pool;
 }
