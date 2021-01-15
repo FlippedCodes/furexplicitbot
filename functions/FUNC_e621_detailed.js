@@ -67,6 +67,7 @@ function addTags(post, poolData, embed) {
   if (tags.invalid.length) embed.addField('Invalid tags', formatTags(tags.invalid), true);
   if (post.pools.length) {
     embed.addField('Pool', `https://e621.net/pools/${poolData.id}`, true);
+    embed.addField('Pool Name', poolData.name, true);
     embed.addField('Pool Index', poolData.post_ids.indexOf(post.id), true);
   }
 }
