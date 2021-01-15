@@ -4,6 +4,15 @@ const poolcache = require('../database/models/poolcache');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
+// async function pruneOldPoolData(config) {
+//   // TODO: get ms bewteen now and creation time. if ms is larger then config.e621.poolHandler.maxCacheTime: get messageID and delete all
+//   const found = await poolcache.findOne({ where: { createdAt } }).catch(errHander);
+//   if (found) {
+//     //
+//     poolcache.destroy({ where: { messageID } }).catch(errHander);
+//   }
+// }
+
 function buildRequest(id, config, type) {
   const version = require('../package.json');
   return {
