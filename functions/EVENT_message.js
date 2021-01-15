@@ -30,7 +30,7 @@ module.exports.run = async (client, message, config, messageOwner, usedRecently)
   }
 
   if (text.indexOf(prefix) !== 0) return;
-  if (!await client.functions.get('FUNC_checkBotPermissions').run(message)) {
+  if (!await client.functions.get('FUNC_checkBotPermissions').run(message, 'SEND_MESSAGES')) {
     // FIXME: catch handler doesnt work
     // message.react('❌').catch();
     if (!config.permissionsServerBlacklist.includes(message.guild.id)) {
