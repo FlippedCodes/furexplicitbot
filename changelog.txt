@@ -20,5 +20,6 @@ prune e621 autopost-cache when blacklist gets updated to force changes
 postcache artist cannot be null, causing errors in the log
 preventing reuse of show all details on e621 if the reaction has been already pressed
 renamed tags in general tags in e621
+added more uwu talk
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
