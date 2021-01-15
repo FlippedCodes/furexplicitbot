@@ -59,13 +59,13 @@ function addTags(post, embed) {
     embed.addField('Direct video link', post.file_url);
   }
 
-  if (tags.character.length !== 0) embed.addField('Character tags', formatTags(tags.character), true);
-  if (tags.species.length !== 0) embed.addField('Species tags', formatTags(tags.species), true);
-  if (tags.copyright.length !== 0) embed.addField('Copyright tags', formatTags(tags.copyright), true);
-  if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
-  if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
-  if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
-  if (post.pools.length !== 0) embed.addField('Pool', `https://e621.net/pools/${post.pools[0]}`, true);
+  if (tags.character.length) embed.addField('Character tags', formatTags(tags.character), true);
+  if (tags.species.length) embed.addField('Species tags', formatTags(tags.species), true);
+  if (tags.copyright.length) embed.addField('Copyright tags', formatTags(tags.copyright), true);
+  if (tags.meta.length) embed.addField('Meta tags', formatTags(tags.meta), true);
+  if (tags.lore.length) embed.addField('Lore tags', formatTags(tags.lore), true);
+  if (tags.invalid.length) embed.addField('Invalid tags', formatTags(tags.invalid), true);
+  if (post.pools.length) {
 }
 
 function postPicture(reaction, RichEmbed, previewMessage, config, post) {
