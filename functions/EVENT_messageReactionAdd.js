@@ -1,3 +1,8 @@
+function timeout(id, usedRecently, time) {
+  usedRecently.add(id);
+  setTimeout(() => usedRecently.delete(id), time);
+}
+
 function messageDelete(message, messageOwner) {
   if (messageOwner.has(message.id)) messageOwner.delete(message.id);
   message.delete();
@@ -18,7 +23,7 @@ function checkPermissions(reaction, user, messageOwner) {
   return permissions;
 }
 
-module.exports.run = async (client, reaction, user, config, MessageEmbed, messageOwner) => {
+module.exports.run = async (client, reaction, user, config, MessageEmbed, messageOwner, usedRecently) => {
   if (user.bot) return;
   // check if reaction is by own bot
   if (!reaction.me) return;
@@ -31,6 +36,15 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
 
   // check if message was sent by bot
   if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
+
+  // check if user hit ratelimit
+  if (usedRecently.has(user.id)) {
+    messageFail(reaction.message, 'sowwy, but you can\'t boop me that owten. Plewse wait 2 seconds between boops.');
+    if (!await client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'MANAGE_MESSAGES')) reaction.remove(user);
+    return;
+  }
+  // add user to ratelimit
+  timeout(user.id, usedRecently, 2000);
 
   // selects what picture service was used
   switch (reaction.message.embeds[0].footer.text) {
