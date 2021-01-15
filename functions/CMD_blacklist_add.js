@@ -25,6 +25,10 @@ async function addTag(tag, serverID, managementServerID) {
   return true;
 }
 
+// function pruneAutopost(params) {
+//   postcache.destroy({ where: { ID: result.ID } }).catch(errHander);
+// }
+
 module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
@@ -40,6 +44,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
   const added = await addTag(tag, message.guild.id, config.managementServerID);
   if (added) {
     messageSuccess(message, `\`${tag}\` has been added to the serwers blacklist.`);
+    // pruneAutopost();
   } else {
     messageFail(message, `\`${tag}\` is already added to thwis serwers backlist.`);
   }
