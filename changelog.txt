@@ -1,5 +1,8 @@
 Thanks to everyone using my bot. I would have never thought reaching 400+ servers in a year or so~
 
+__If you added the bot before 15.01.2021, make sure you allow manage messages for the bot. This allows for better usage with the pool feature and the ratelimitation for reactions.__
+__Please add the permission manually, because readding the bot will delete your bot configuration (Prefix, Autopost, ...)__
+
 **Changelog:**
 __New Stuff__
 + 
@@ -21,5 +24,6 @@ postcache artist cannot be null, causing errors in the log
 preventing reuse of show all details on e621 if the reaction has been already pressed
 renamed tags in general tags in e621
 added more uwu talk
+added timeout to reaction usage to comply with e621 rate limits
 
 If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
