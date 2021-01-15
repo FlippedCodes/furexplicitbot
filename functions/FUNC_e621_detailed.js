@@ -65,7 +65,7 @@ function addTags(post, embed) {
   if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
   if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
   if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
-  if (post.pools.length !== 0) embed.addField('Pools', formatTags(post.pools), true);
+  if (post.pools.length !== 0) embed.addField('Pool', `https://e621.net/pools/${post.pools[0]}`, true);
 }
 
 function postPicture(reaction, RichEmbed, previewMessage, config, post) {
@@ -84,7 +84,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
     .setColor(previewMessage.color)
     .setTitle('E621 Link')
     .setURL(`https://e621.net/posts/${post.id}`)
-    .setDescription(`**Tags:** \`\`\`${post.tags.general.join(', ')}\`\`\``)
+    .setDescription(`**General Tags:** \`\`\`${post.tags.general.join(', ')}\`\`\``)
     .addField('Rating', post.rating, true)
     .addField('Score', post.score.total, true)
     .addField('ID', post.id, true)
@@ -97,20 +97,30 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post) {
   reaction.message.edit({ embed });
 }
 
-async function postPoolReactions(reaction, config, post) {
-  const pool = await requestPool(post.pools[0], config);
+async function postPoolReactions(reaction, pool, post) {
   if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
-  await reaction.message.react('🔢');
+  // DEPRECATED: feature canceled because requieres more DB storage or API calls. Both are not ideal solutions
+  // await reaction.message.react('🔢');
   if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
+}
+
+function storePool(pool, messageID) {
+  pool.post_ids.forEach((postID, poolIndex) => {
+    poolcache.create({ messageID, poolIndex, postID });
+  });
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
   const embed = reaction.message.embeds[0];
+  // check if already showing details
+  if (embed.title === 'E621 Link') return;
   const id = embed.url.replace('https://e621.net/posts/', '');
   const post = await requestPicture(id, config);
   postPicture(reaction, RichEmbed, embed, config, post);
   if (post.pools.length) {
-    postPoolReactions(reaction, config, post);
+    const poolData = await requestPool(post.pools[0], config);
+    await storePool(poolData, reaction.message.id);
+    postPoolReactions(reaction, poolData, post);
   }
 };
 
