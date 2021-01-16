@@ -45,8 +45,8 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
     return;
   }
   // add user to ratelimit
-  timeout(user.id, usedRecently, 2000);
   timeout(user.id, usedRecently, 4000);
+
   // selects what picture service was used
   switch (reaction.message.embeds[0].footer.text) {
     case config.e621.label: {
