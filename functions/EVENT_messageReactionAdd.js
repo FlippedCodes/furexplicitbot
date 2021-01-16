@@ -37,8 +37,7 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
   // check if message was sent by bot
   if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
 
-  const botPerms = await client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'MANAGE_MESSAGES');
-  if (botPerms) reaction.users.remove(user);
+  if (client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'MANAGE_MESSAGES')) reaction.users.remove(user);
 
   // check if user hit ratelimit
   if (usedRecently.has(user.id)) {
