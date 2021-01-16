@@ -85,7 +85,7 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post, poolData
 
   embed
     .setColor(previewMessage.color)
-    .setTitle('E621 Link')
+    .setTitle('e621 Link')
     .setURL(`https://e621.net/posts/${post.id}`)
     .setDescription(`**General Tags:** \`\`\`${post.tags.general.join(', ')}\`\`\``)
     .addField('Rating', post.rating, true)
