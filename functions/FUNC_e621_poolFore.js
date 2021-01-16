@@ -1,9 +1,11 @@
-// creates a embed messagetemplate for failed actions
-function messageFail(message, body) {
-  const client = message.client;
-  client.functions.get('FUNC_richEmbedMessage')
-    .run(client.user, message.channel, body, '', 16449540, false)
-    .then((msg) => msg.delete({ timeout: 10000 }));
+const poolcache = require('../database/models/poolcache');
+
+const errHander = (err) => { console.error('ERROR:', err); };
+
+async function getPool(messageID) {
+  const found = await poolcache.findAll({ where: { messageID } });
+  if (!found) return null;
+  return found;
 }
 
 function buildRequest(id, config, type) {
@@ -29,86 +31,50 @@ async function requestPicture(id, config) {
   return post.post;
 }
 
-async function requestPool(id, config) {
-  const pool = await getRequest(buildRequest(id, config, 'pools'));
-  return pool;
-}
-
-function formatTags(tags) {
-  const joinedTags = tags.join(', ');
-  return `\`${joinedTags}\``;
-}
-
-function getTags(post, embed) {
-  const tags = post.tags;
-  const artists = tags.artist.join(', ');
-  let typeArtists = 'All artists';
-  if (tags.artist.length === 1) typeArtists = 'Artist';
-  embed.setAuthor(`${typeArtists}: ${artists}`);
-
-  const extention = post.file.ext;
-  if (extention === 'webm' || extention === 'swf') {
-    embed.addField('Direct video link', post.file_url);
-  }
-
-  if (tags.character.length !== 0) embed.addField('Character tags', formatTags(tags.character), true);
-  if (tags.species.length !== 0) embed.addField('Species tags', formatTags(tags.species), true);
-  if (tags.copyright.length !== 0) embed.addField('Copyright tags', formatTags(tags.copyright), true);
-  if (tags.meta.length !== 0) embed.addField('Meta tags', formatTags(tags.meta), true);
-  if (tags.lore.length !== 0) embed.addField('Lore tags', formatTags(tags.lore), true);
-  if (tags.invalid.length !== 0) embed.addField('Invalid tags', formatTags(tags.invalid), true);
-}
-
-function postPicture(reaction, RichEmbed, previewMessage, config, post) {
+function postPicture(reaction, RichEmbed, config, color, poolEntry, poolLink, poolName, lastPage, postLink) {
   const embed = new RichEmbed();
 
-  getTags(post, embed);
-
-  let source = 'none';
-  let typeSources = 'Sources';
-  if (post.sources.length !== 0) {
-    source = post.sources.join('\n');
-    if (post.sources.length === 1) typeSources = 'Source';
-  }
-
   embed
-    .setColor(previewMessage.color)
-    .setTitle('E621 Link')
-    .setURL(`https://e621.net/posts/${post.id}`)
-    .setDescription(`**Tags:** \`\`\`${post.tags.general.join(', ')}\`\`\``)
-    .addField('Rating', post.rating, true)
-    .addField('Score', post.score.total, true)
-    .addField('ID', post.id, true)
-    .addField('Resolution', `${post.file.width}x${post.file.height}`, true)
-    .addField(typeSources, source)
-    .addField('Full Picture link', post.file.url)
-    .setImage(post.file.url)
+    .setColor(color)
+    .setTitle('e621 Link')
+    .setURL(`https://e621.net/posts/${poolEntry.postID}`)
+    .addField('Pool Name', poolName, true)
+    .addField('Pool', poolLink, true)
+    .addField('Pool Page', poolEntry.poolIndex + 1, true)
+    .addField('Pool last page', lastPage, true)
+    .addField('Full Picture link', postLink)
+    .setImage(postLink)
     .setFooter(config.e621.label, config.e621.logo)
     .setTimestamp();
+
   reaction.message.edit({ embed });
 }
 
-async function postReactions(reaction, config, post) {
-  const pool = await requestPool(post.pools[0], config);
-  if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
-  await reaction.message.react('🔢');
-  if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
-}
-
 module.exports.run = async (reaction, config, RichEmbed) => {
-  // check, if pool data is in embed
-  switch (reaction.emoji.identifier) {
-    case allDetailtEmoji: {
-      const embed = reaction.message.embeds[0];
-      const id = embed.url.replace('https://e621.net/posts/', '');
-      const post = await requestPicture(id, config);
-      postPicture(reaction, RichEmbed, embed, config, post);
-      if (post.pools.length) {
-        postReactions(reaction, config, post);
-      }
-      return;
-    }
-    default: return;
+  // check if message is in detailed mode
+  if (reaction.message.embeds.length && reaction.message.embeds[0].title === 'e621 Link') {
+    // get pool link (for re-use)
+    const poolLink = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool').value;
+    if (!poolLink) return;
+    // get embed poolname (for re-use)
+    const poolName = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool Name').value;
+    // DISABLED: cause not nessesary:
+    // if (!poolName) return;
+    // get color
+    const color = reaction.message.embeds[0].color;
+    // caclulate new index
+    let newIndex = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool Page').value;
+    // check if index is already at the first page
+    if (newIndex !== 0) --newIndex;
+    else return;
+    // check DB for pool entry
+    const poolData = await getPool(reaction.message.id);
+    // get pic direct link
+    const poolEntry = poolData[newIndex];
+    const post = await requestPicture(poolEntry.postID, config);
+    const postLink = post.file.url;
+    // post pic
+    postPicture(reaction, RichEmbed, config, color, poolEntry, poolLink, poolName, poolData.back.poolIndex, postLink);
   }
 };
 
