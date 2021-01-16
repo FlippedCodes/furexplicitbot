@@ -107,7 +107,9 @@ async function postPoolReactions(reaction, pool, post) {
   if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
 }
 
-function storePool(pool, messageID) {
+async function storePool(pool, messageID) {
+  const alreadyStored = await poolcache.findOne({ where: { messageID } });
+  if (alreadyStored) return;
   pool.post_ids.forEach((postID, poolIndex) => {
     poolcache.create({ messageID, poolIndex, postID });
   });
