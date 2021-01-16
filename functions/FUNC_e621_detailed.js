@@ -67,7 +67,7 @@ function addTags(post, poolData, embed) {
   if (post.pools.length) {
     embed.addField('Pool', `https://e621.net/pools/${poolData.id}`, true);
     embed.addField('Pool Name', poolData.name, true);
-    embed.addField('Pool Index', poolData.post_ids.indexOf(post.id), true);
+    embed.addField('Pool Page', poolData.post_ids.indexOf(post.id) + 1, true);
   }
 }
 
