@@ -4,14 +4,12 @@ const poolcache = require('../database/models/poolcache');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
-// async function pruneOldPoolData(config) {
-//   // TODO: get ms bewteen now and creation time. if ms is larger then config.e621.poolHandler.maxCacheTime: get messageID and delete all
-//   const found = await poolcache.findOne({ where: { createdAt } }).catch(errHander);
-//   if (found) {
-//     //
-//     poolcache.destroy({ where: { messageID } }).catch(errHander);
-//   }
-// }
+async function pruneOldPoolData(config) {
+  const date = new Date();
+  const currentTimestamp = date.getTime();
+  const calculatedTimestamp = currentTimestamp - config.e621.poolHandler.maxCacheTime;
+  poolcache.destroy({ where: { createdAt: { [Op.lt]: calculatedTimestamp } } });
+}
 
 function buildRequest(id, config, type) {
   const version = require('../package.json');
@@ -116,6 +114,7 @@ function storePool(pool, messageID) {
 }
 
 module.exports.run = async (reaction, config, RichEmbed) => {
+  pruneOldPoolData(config);
   const embed = reaction.message.embeds[0];
   // check if already showing details
   if (embed.title === 'E621 Link') return;
