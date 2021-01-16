@@ -1,29 +1,31 @@
-**Thanks to everyone using my bot. I would have never thought reaching 400+ server milestone in a year~ While life has been busy I hope to pic back up the development of the bot to bring you new features. **
+**Thanks to everyone using my bot. I would have never thought reaching 400+ server milestone in a year~ While life has been busy I hope to pic back up the development of the bot to bring you new features.**
 
-__If you added the bot before 15.01.2021, make sure you allow manage messages for the bot. This allows for better usage with the pool feature and the rate limitation for reactions.__
+__If you added the bot before 15.01.2021, make sure you allow "manage messages" permissions for the bot. This allows for better usage with the pool feature and the new rate limitation for reactions.__
 __Please add the permission manually, because reading the bot will delete your bot configuration (Prefix, Autopost, ...)__
 
 **Changelog:**
 __New Stuff__
-+ 
++ pool support for e621
++ added timeout to reaction usage to comply with e621 rate limits
++ added more uwu talk
+
 __Important Changes__
-* 
+* renamed "tags" in "general tags" in e621 more detail-embed
+
 __Boring Bugfixes__
-* 
+* preventing re-use of show all details on e621 if the reaction has been already pressed
+* prune e621 autopost-cache when blacklist gets updated to force changes
+* postcache artist couldn't be null, causing errors in the log, now fixed
 
 __Working on__
-autodetect source
-code rewrite for FA and r34, IB
-allow tags in some channels
-pool support for e621
-add furrynetwork
-usersuggestion: add nhentai tag search
+code rewrite for FA
+code rewrite for r34
+code rewrite for IB
+whitelist/blacklist (not sure yet) tags in certian channels
 usersuggestion: default tags for e621 commands
-prune e621 autopost-cache when blacklist gets updated to force changes
-postcache artist cannot be null, causing errors in the log
-preventing reuse of show all details on e621 if the reaction has been already pressed
-renamed tags in general tags in e621
-added more uwu talk
-added timeout to reaction usage to comply with e621 rate limits
+add furrynetwork command
+usersuggestion: add nhentai command
+(add sofurry command)
+(autodetect source)
 
-If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
+This message is only shown once, per user. If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
