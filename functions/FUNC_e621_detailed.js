@@ -101,10 +101,14 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post, poolData
 }
 
 async function postPoolReactions(reaction, pool, post) {
-  if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
+  // DISABLED: becasue no reactionupdates possible after switched to different page
+  // if (post.id !== pool.post_ids.front) await reaction.message.react('◀️');
   // DEPRECATED: feature canceled because requieres more DB storage or API calls. Both are not ideal solutions
   // await reaction.message.react('🔢');
-  if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
+  // DISABLED: becasue no reactionupdates possible after switched to different page
+  // if (post.id !== pool.post_ids.back) await reaction.message.react('▶️');
+  await reaction.message.react('◀️');
+  await reaction.message.react('▶️');
 }
 
 async function storePool(pool, messageID) {
