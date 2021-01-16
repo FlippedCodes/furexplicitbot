@@ -37,6 +37,9 @@ module.exports.run = async (client, reaction, user, config, MessageEmbed, messag
   // check if message was sent by bot
   if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
 
+  const botPerms = await client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'MANAGE_MESSAGES');
+  if (botPerms) reaction.users.remove(user);
+
   // check if user hit ratelimit
   if (usedRecently.has(user.id)) {
     messageFail(reaction.message, 'sowwy, but you can\'t boop me that owten. Plewse wait 4 seconds between boops.');
