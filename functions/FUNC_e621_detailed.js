@@ -119,7 +119,7 @@ module.exports.run = async (reaction, config, RichEmbed) => {
   pruneOldPoolData(config);
   const embed = reaction.message.embeds[0];
   // check if already showing details
-  if (embed.title === 'E621 Link') return;
+  if (embed.title === 'e621 Link') return;
   const id = embed.url.replace('https://e621.net/posts/', '');
   const post = await requestPicture(id, config);
   const poolData = await requestPool(post.pools[0], config);
