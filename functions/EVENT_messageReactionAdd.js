@@ -26,7 +26,7 @@ function checkPermissions(reaction, user, messageOwner) {
 module.exports.run = async (client, reaction, user, config, MessageEmbed, messageOwner, usedRecently) => {
   if (user.bot) return;
   // check if reaction is by own bot
-  if (!reaction.me) return;
+  if (reaction.me) return;
 
   if (reaction.emoji.name === '❌') {
     if (!checkPermissions(reaction, user, messageOwner)) return messageFail(reaction.message, 'You are nowt allowoed to delewt this message <.<\'');
