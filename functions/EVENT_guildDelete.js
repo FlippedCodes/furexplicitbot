@@ -16,8 +16,8 @@ module.exports.run = async (guild) => {
   autosourcechannel.destroy({ where: { serverID: guild.id } }).catch(errHander);
 
   // Deletes all channels and cache for autopost
-  const auotChannelEntries = await autopostchannel.findAll({ where: { serverID: guild.id } }).catch(errHander);
-  await auotChannelEntries.forEach((entry) => postcache.destroy({ where: { channelID: entry.channelID } }).catch(errHander));
+  const autoChannelEntries = await autopostchannel.findAll({ where: { serverID: guild.id } }).catch(errHander);
+  await autoChannelEntries.forEach((entry) => postcache.destroy({ where: { channelID: entry.channelID } }).catch(errHander));
   await autopostchannel.destroy({ where: { serverID: guild.id } }).catch(errHander);
 };
 
