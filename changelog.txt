@@ -5,24 +5,25 @@ __Please add the permission manually, because reading the bot will delete your b
 
 **Changelog:**
 __New Stuff__
-+ pool support for e621
++ pool support for e621 (might still not work perfectly)
 + added timeout to reaction usage to comply with e621 rate limits
 + added more uwu talk
 
 __Important Changes__
-* renamed "tags" in "general tags" in e621 more detail-embed
+* renamed "tags" in "general tags" in e621 detail-embed
 
 __Boring Bugfixes__
 * preventing re-use of show all details on e621 if the reaction has been already pressed
 * prune e621 autopost-cache when blacklist gets updated to force changes
 * postcache artist couldn't be null, causing errors in the log, now fixed
+* reaction removal from old posts used to cause massive log errors: now checking if permissions are in place
 
 __Working on__
 code rewrite for FA
 code rewrite for r34
 code rewrite for IB
 whitelist/blacklist (not sure yet) tags in certian channels
-usersuggestion: default tags for e621 commands
+usersuggestion: default tags for e621 commands (originally: required score)
 add furrynetwork command
 usersuggestion: add nhentai command
 (add sofurry command)
