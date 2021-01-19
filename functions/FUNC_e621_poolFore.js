@@ -42,6 +42,7 @@ function postPicture(reaction, RichEmbed, config, color, poolEntry, poolLink, po
     .addField('Pool', poolLink, true)
     .addField('Pool Page', poolEntry.poolIndex + 1, true)
     .addField('Pool last page', lastPage + 1, true)
+    .addField('Full Picture link', postLink || 'DELETED')
     .setImage(postLink)
     .setFooter(config.e621.label, config.e621.logo)
     .setTimestamp();
