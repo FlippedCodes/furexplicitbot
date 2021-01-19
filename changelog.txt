@@ -17,7 +17,8 @@ __Boring Bugfixes__
 * prune e621 autopost-cache when blacklist gets updated to force changes
 * postcache artist couldn't be null, causing errors in the log, now fixed
 * reaction removal from old posts used to cause massive log errors: now checking if permissions are in place
-* Code cleanup
+* updated all packages
+* code cleanup
 
 __Working on__
 code rewrite for FA
