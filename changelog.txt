@@ -23,11 +23,11 @@ __Working on__
 code rewrite for FA
 code rewrite for r34
 code rewrite for IB
-whitelist/blacklist (not sure yet) tags in certian channels
-usersuggestion: default tags for e621 commands (originally: required score)
+whitelist/blacklist (not sure yet) tags in certain channels
+user suggestion: default tags for e621 commands (originally: required score)
 add furrynetwork command
-usersuggestion: add nhentai command
+user suggestion: add nhentai command
 (add sofurry command)
 (autodetect source)
 
-This message is only shown once, per user. If you notice any bugs or somethings not working properly, feel free to report it on my discord server. Link is in `+help`.
+This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in +help.
