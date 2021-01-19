@@ -12,13 +12,14 @@ function buildRequest(client, config) {
     body: {
       // DISABLED: value is wrong
       // users: client.users.size,
-      guilds: client.guilds.size,
+      guilds: client.guilds.cache.size,
     },
     json: true,
   };
 }
 
-module.exports.run = (client, config) => {
+module.exports.run = async (client, config) => {
+  rp(await buildRequest(client, config));
   setInterval(async () => {
     rp(await buildRequest(client, config));
   }, config.botList.heartBeatInterval);
