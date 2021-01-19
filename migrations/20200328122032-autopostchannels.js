@@ -8,10 +8,7 @@ module.exports = {
       type: Sequelize.STRING(30),
       allowNull: false,
     },
-    tags: {
-      type: Sequelize.TEXT('tiny'),
-      allowNull: false,
-    },
+    tags: Sequelize.TEXT('tiny'),
     nextEvent: {
       type: Sequelize.DATE,
       allowNull: false,
