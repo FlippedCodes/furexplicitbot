@@ -83,6 +83,7 @@ module.exports.run = async (reaction, config, RichEmbed) => {
     // get pic direct link
     const poolEntry = poolData.find((post) => post.poolIndex === newIndex);
     const post = await requestPicture(poolEntry.postID, config);
+    if (reaction.message.channel.nsfw === false && post.rating !== 's') return messageFail(reaction.message, 'Sowwy, but thwe next page is nsfw.');
     const postLink = post.file.url;
     // post pic
     postPicture(reaction, RichEmbed, config, color, poolEntry, poolLink, poolName, lastIndex, postLink);
