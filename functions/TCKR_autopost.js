@@ -35,6 +35,7 @@ module.exports.run = (client, config) => {
     channels.forEach(async (autoPost) => {
       const channelID = autoPost.channelID;
       const channel = client.channels.cache.find((channel) => channel.id === channelID);
+      if (!channel) return console.warn(`ChannelID ${channelID} couldn't be found`);
       const post = await client.functions.get('FUNC_autopostGetPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
       postMessage(post, channel, config);
       updateTime(channelID, currentTimestamp, autoPost.interval);
