@@ -162,7 +162,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
             The ammount is alternatiwe and doewsn't need to be prowidewd.
             `)
           .addField('Help', `
-            ${prefix}fa
+            ${prefix}fa help
             Get thwis hewlp.
             `)
           .setFooter(client.user.tag, client.user.displayAvatarURL)
