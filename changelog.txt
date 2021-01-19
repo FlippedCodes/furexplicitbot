@@ -11,6 +11,7 @@ __New Stuff__
 
 __Important Changes__
 * renamed "tags" in "general tags" in e621 detail-embed
+* allowed wildcard autoposts
 
 __Boring Bugfixes__
 * preventing re-use of show all details on e621 if the reaction has been already pressed

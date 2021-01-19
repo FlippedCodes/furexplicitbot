@@ -98,11 +98,11 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
       Command usage: 
       \`\`\`${prefix}${module.exports.help.parent} ${subcmd} INTERVALINMILLISECONDS TAGNAME\`\`\``);
   }
-  if (!tagCheck) {
-    return messageFail(message,
-      `Command usage: 
-      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} ${interval} TAGS\`\`\``);
-  }
+  // if (!tagCheck) {
+  //   return messageFail(message,
+  //     `Command usage:
+  //     \`\`\`${prefix}${module.exports.help.parent} ${subcmd} ${interval} TAGS\`\`\``);
+  // }
   const tags = await getTags(message, args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
   if (tags.length > 255) {
     return messageFail(message, 'Your tawgs are too lowng. The maximum length is 255 characters, minus the blackliwsted tawgs in this serwer.');
