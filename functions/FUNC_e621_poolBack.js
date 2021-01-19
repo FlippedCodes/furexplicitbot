@@ -62,15 +62,17 @@ module.exports.run = async (reaction, config, RichEmbed) => {
     // if (!poolName) return;
     // get color
     const color = reaction.message.embeds[0].color;
+    // calculate lastIndex
+    const lastIndex = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool last page').value;
     // caclulate new index
-    let newIndex = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool Page').value;
+    let newIndex = reaction.message.embeds[0].fields.find((header) => header.name === 'Pool Page').value - 1;
     // check if index is already at the first page
     if (newIndex !== 0) --newIndex;
     else return;
     // check DB for pool entry
     const poolData = await getPool(reaction.message.id);
     // get pic direct link
-    const poolEntry = poolData[newIndex];
+    const poolEntry = poolData.find((post) => post.poolIndex === newIndex);
     const post = await requestPicture(poolEntry.postID, config);
     const postLink = post.file.url;
     // post pic
