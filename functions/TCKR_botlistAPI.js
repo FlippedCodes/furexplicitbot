@@ -19,7 +19,6 @@ function buildRequest(client, config) {
 }
 
 module.exports.run = async (client, config) => {
-  rp(await buildRequest(client, config));
   setInterval(async () => {
     rp(await buildRequest(client, config));
   }, config.botList.heartBeatInterval);
