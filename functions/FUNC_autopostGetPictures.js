@@ -2,7 +2,14 @@ const config = require('../config/main.json');
 
 const postcache = require('../database/models/postcache');
 
+const servertagsblacklist = require('../database/models/servertagsblacklist');
+
 const errHander = (err) => { console.error('ERROR:', err); };
+
+async function getBlacklistedTags(serverID) {
+  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.managementServerID] } });
+  return result;
+}
 
 function getEndpoint(nsfw, config) {
   let uri = config.e621.endpoint.sfw;
@@ -50,11 +57,15 @@ async function storePictures(channelID, pool) {
   });
 }
 
-module.exports.run = async (tags, channelID, nsfw) => {
+module.exports.run = async (tags, serverID, channelID, nsfw) => {
   // FIXME: cache deletion in nsfw setting gets updated
+  const blacklistedTagsArray = await getBlacklistedTags(serverID);
+  const suffix = [];
+  blacklistedTagsArray.map((entry) => suffix.push(`-${entry.tag}`));
+
   let post = await getPicture(channelID);
   if (!post) {
-    await storePictures(channelID, await requestPictures(config, nsfw, tags));
+    await storePictures(channelID, await requestPictures(config, nsfw, `${tags} ${suffix.join(' ')}`));
     post = await getPicture(channelID);
   }
   return post;

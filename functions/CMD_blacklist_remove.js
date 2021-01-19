@@ -1,5 +1,7 @@
 const servertagsblacklist = require('../database/models/servertagsblacklist');
 
+const postcache = require('../database/models/postcache');
+
 const errHander = (err) => { console.error('ERROR:', err); };
 
 // creates a embed messagetemplate for succeded actions
@@ -23,6 +25,11 @@ async function removeTag(tag, serverID) {
   return true;
 }
 
+// clear autopost to force changes
+function pruneAutopost(channelID) {
+  postcache.destroy({ where: { channelID } }).catch(errHander);
+}
+
 module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
@@ -35,6 +42,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
   const added = await removeTag(tag, message.guild.id);
   if (added) {
     messageSuccess(message, `\`${tag}\` has been removed from the serwers blacklist.`);
+    pruneAutopost(message.channel.id);
   } else {
     messageFail(message, `\`${tag}\` doesn't exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)`);
   }
