@@ -9,9 +9,9 @@ function messageFail(message, body) {
 // assignes requested posts to user for reactions
 function Timeout(msg, userID, messageOwner, config) {
   messageOwner.set(msg.id, userID);
-  setTimeout(() => {
+  setTimeout(async () => {
     messageOwner.delete(msg.id);
-    msg.reactions.removeAll().catch();
+    if (await msg.client.functions.get('FUNC_checkBotPermissions').run(msg, 'MANAGE_MESSAGES')) msg.reactions.removeAll().catch();
   }, config.reactionsTimeout);
 }
 
