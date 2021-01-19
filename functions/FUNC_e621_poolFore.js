@@ -2,6 +2,14 @@ const poolcache = require('../database/models/poolcache');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
+// creates a embed messagetemplate for failed actions
+function messageFail(message, body) {
+  const client = message.client;
+  client.functions.get('FUNC_MessageEmbedMessage')
+    .run(client.user, message.channel, body, '', 16449540, false)
+    .then((msg) => msg.delete({ timeout: 10000 }));
+}
+
 async function getPool(messageID) {
   const found = await poolcache.findAll({ where: { messageID } });
   if (!found) return null;
@@ -71,6 +79,7 @@ module.exports.run = async (reaction, config, RichEmbed) => {
     else return;
     // check DB for pool entry
     const poolData = await getPool(reaction.message.id);
+    if (!poolData) return messageFail(reaction.message, 'Seewms like I tripped and lost your pool. I\'m sowwy >w< \nThis happewns, when you take too lowng. uwu');
     // get pic direct link
     const poolEntry = poolData.find((post) => post.poolIndex === newIndex);
     const post = await requestPicture(poolEntry.postID, config);
