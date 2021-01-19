@@ -80,7 +80,7 @@
             "minPics": 100
         },
         "poolHandler": {
-            "maxCacheTime": 18000000
+            "maxCacheTime": 600000
         }
     },
     "imageFinder": {
