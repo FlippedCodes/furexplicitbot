@@ -34,9 +34,6 @@ function buildRequestMD(client, config) {
 }
 
 module.exports.run = async (client, config) => {
-  const payload = await buildRequestMD(client, config);
-  const test = await rp(payload);
-  console.log(test);
   setInterval(async () => {
     rp(await buildRequestDBL(client, config));
     rp(await buildRequestMD(client, config));
