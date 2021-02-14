@@ -2,8 +2,8 @@
 __New Stuff__
 none
 
-__Important Changes__
-none
+__(Important) Changes__
+* added servercount to bot websites
 
 __Boring Bugfixes__
 * Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
