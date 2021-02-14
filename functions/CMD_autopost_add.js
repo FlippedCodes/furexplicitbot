@@ -41,10 +41,11 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-async function getTags(message, tags) {
-  tags = tagsReplace(tags, ', ', ' ');
-  const safeTags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
-  return safeTags;
+async function parseTags(tags) {
+  // tags = tagsReplace(tags, ', ', ' ');
+  // const safeTags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
+  // return safeTags;
+  return tagsReplace(tags, ', ', ' ');
 }
 
 async function getAmmount(request) {
@@ -103,9 +104,9 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
   //     `Command usage:
   //     \`\`\`${prefix}${module.exports.help.parent} ${subcmd} ${interval} TAGS\`\`\``);
   // }
-  const tags = await getTags(message, args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
+  const tags = await parseTags(args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
   if (tags.length > 255) {
-    return messageFail(message, 'Your tawgs are too lowng. The maximum length is 255 characters, minus the blackliwsted tawgs in this serwer.');
+    return messageFail(message, 'Your tawgs are too lowng. The maximum length is 255 characters.');
   }
   if (await checkAmmount(config, tags, message.channel.nsfw)) {
     return messageFail(message, `Your prowided tawgs don't return the minimum ammount of ${config.e621.autopost.maxCache} powsts.`);
@@ -113,7 +114,8 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
   const added = await addAutopost(tags, interval, message.channel.id, message.guild.id, config.e621.autopost.maxChannels);
   switch (added) {
     case true:
-      messageSuccess(message, `Your autopowst with the tawgs \`${tags}\` has been created. The first powst appear sowon.`);
+      const tagsDisplay = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
+      messageSuccess(message, `Your autopowst with the tawgs \`${tagsDisplay}\` has been created. The first powst appear sowon.`);
       return;
     case 1:
       messageFail(message, 'You alreawdy hawe 2 autopowst channels in this serwer!');
