@@ -41,6 +41,9 @@
         "heartBeatInterval": 600000,
         "discordbotlist": {
             "endpoint": "https://discordbotlist.com/api/v1/bots/"
+        },
+        "motiondevelopment": {
+            "endpoint": "https://www.motiondevelopment.top/api/"
         }
     },
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",

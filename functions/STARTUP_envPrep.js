@@ -12,6 +12,7 @@ module.exports.run = async (client, fs, config) => {
     config.env.set('e621_login', credetials.e621.login);
     config.env.set('e621_api_key', credetials.e621.api_key);
     config.env.set('token_discordbotlist', credetials.authToken.discordbotlist);
+    config.env.set('token_motiondevelopment', credetials.authToken.motiondevelopment);
   } else {
     config.env.set('inDev', false);
     config.env.set('token', process.env.BotToken);
@@ -20,6 +21,7 @@ module.exports.run = async (client, fs, config) => {
     config.env.set('e621_login', process.env.e621_login);
     config.env.set('e621_api_key', process.env.e621_api_key);
     config.env.set('token_discordbotlist', process.env.token_discordbotlist);
+    config.env.set('token_motiondevelopment', process.env.token_motiondevelopment);
   }
   console.log(`[${module.exports.help.name}] Environment variables set!`);
 };
