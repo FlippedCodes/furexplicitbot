@@ -1,4 +1,4 @@
-const autosourcechannel = require('../database/models/autosourcechannel');
+const autosourcechannel = require('../../database/models/autosourcechannel');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
