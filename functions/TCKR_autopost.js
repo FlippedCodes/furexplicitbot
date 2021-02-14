@@ -4,6 +4,17 @@ const { Op } = require('sequelize');
 
 const autopostchannel = require('../database/models/autopostchannel');
 
+// const postcache = require('../database/models/postcache');
+
+// const errHander = (err) => {
+//   console.error('ERROR:', err);
+// };
+
+// // clear autopost to force changes
+// function pruneAutopost(channelID) {
+//   postcache.destroy({ where: { channelID } }).catch(errHander);
+// }
+
 async function getChannels(currentTimestamp, config) {
   // currentTimestamp += config.e621.autopost.dbOffset;
   const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: currentTimestamp } } });
@@ -36,6 +47,8 @@ module.exports.run = (client, config) => {
       const channelID = autoPost.channelID;
       const channel = client.channels.cache.find((channel) => channel.id === channelID);
       if (!channel) return console.warn(`ChannelID ${channelID} couldn't be found`);
+      // TODO: check if nsfw channel changed and delete cache
+      // if ()
       const post = await client.functions.get('FUNC_autopostGetPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
       postMessage(post, channel, config);
       updateTime(channelID, currentTimestamp, autoPost.interval);
