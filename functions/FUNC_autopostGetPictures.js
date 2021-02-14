@@ -58,14 +58,15 @@ async function storePictures(channelID, pool) {
 }
 
 module.exports.run = async (tags, serverID, channelID, nsfw) => {
-  // FIXME: cache deletion in nsfw setting gets updated
-  const blacklistedTagsArray = await getBlacklistedTags(serverID);
-  const suffix = [];
-  blacklistedTagsArray.map((entry) => suffix.push(`-${entry.tag}`));
-
   let post = await getPicture(channelID);
   if (!post) {
+    // get blacklisted tags to add to the request
+    const blacklistedTagsArray = await getBlacklistedTags(serverID);
+    const suffix = [];
+    blacklistedTagsArray.map((entry) => suffix.push(`-${entry.tag}`));
+    // store requested pics
     await storePictures(channelID, await requestPictures(config, nsfw, `${tags} ${suffix.join(' ')}`));
+    // get first pic
     post = await getPicture(channelID);
   }
   return post;
