@@ -13,6 +13,9 @@ function tagsReplace(tags, search, replace) {
 }
 
 module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
+  const embed = new MessageEmbed().setDescription('**Developer note:** Sorry to inform you, but this command is currently broken. :(');
+  return message.channel.send({ embed });
+  // eslint-disable-next-line no-unreachable
   message.react(client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading)).then(async (reaction_loading) => {
     let [limit] = args;
     let tags = args.join(' ');
