@@ -1,5 +1,5 @@
 # get node
-FROM node:10
+FROM node:12
 
 # RUN apk add --no-cache git
 
