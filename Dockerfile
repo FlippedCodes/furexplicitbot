@@ -1,5 +1,7 @@
-# get node version 16
-FROM node:12.18.4-buster-slim
+# get node
+FROM node:10
+
+# RUN apk add --no-cache git
 
 # Create app directory
 WORKDIR /usr/src/app
