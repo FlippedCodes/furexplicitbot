@@ -1,24 +1,24 @@
 version: '3.3'
 services:
-  # app:
-  #   build:
-  #     context: ./
-  #   depends_on:
-  #     - db-feb
-  #   restart: always
-  #   environment:
-  #     BotToken: ${DISCORD_BOT_TOKEN}
-  #     FA_COOKIE_A: ${FA_COOKIE_A}
-  #     FA_COOKIE_B: ${FA_COOKIE_B}
-  #     e621_login: ${e621_login}
-  #     e621_api_key: ${e621_api_key}
-  #     token_discordbotlist: ${token_discordbotlist}
-  #     token_motiondevelopment: ${token_motiondevelopment}
-  #     DB_dialect: mysql
-  #     DB_host: db-feb
-  #     DB_name: furExplicitBot
-  #     DB_user: furExplicitBot
-  #     DB_passw: ${DB_PASSWORD}
+  app:
+    build:
+      context: ./
+    depends_on:
+      - db-feb
+    restart: always
+    environment:
+      BotToken: ${DISCORD_BOT_TOKEN}
+      FA_COOKIE_A: ${FA_COOKIE_A}
+      FA_COOKIE_B: ${FA_COOKIE_B}
+      e621_login: ${e621_login}
+      e621_api_key: ${e621_api_key}
+      token_discordbotlist: ${token_discordbotlist}
+      token_motiondevelopment: ${token_motiondevelopment}
+      DB_dialect: mysql
+      DB_host: db-feb
+      DB_name: furExplicitBot
+      DB_user: furExplicitBot
+      DB_passw: ${DB_PASSWORD}
   db-feb:
     image: mariadb:latest
     restart: always
