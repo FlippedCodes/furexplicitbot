@@ -1,0 +1,99 @@
+{
+    "name": "FurExplicitBot",
+    "prefix": {
+        "default": "+",
+        "nicknameSpacer": " | "
+    },
+    "owner": "172031697355800577",
+    "managementServerID": "569178297515245578",
+    "clientID": "534828939198070824",
+    "clientIDTesting": "395581313052180483",
+    "emoji": {
+        "serverID": "569178297515245578",
+        "loading": "714093562576502867",
+        "details": "714094023396032593"
+    },
+    "permissionsServerBlacklist": [
+        "110373943822540800",
+        "446425626988249089",
+        "446425626988249089",
+        "450100127256936458",
+        "387812458661937152",
+        "374071874222686211"
+    ],
+    "reactionsTimeout": 600000,
+    "setup": {
+        "moduleFolders": {
+            "functionsFolder": "functions",
+            "commandsFolder": "commands"
+        },
+        "startupFunctions": [
+            "STARTUP_initCommands",
+            "STARTUP_initFunctions",
+            "STARTUP_envPrep"
+        ],
+        "setupFunctions": [
+            "SETUP_status"
+        ]
+    },
+    "botList": {
+        "heartBeatInterval": 600000,
+        "discordbotlist": {
+            "endpoint": "https://discordbotlist.com/api/v1/bots/"
+        },
+        "motiondevelopment": {
+            "endpoint": "https://www.motiondevelopment.top/api/"
+        }
+    },
+    "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
+    "color_fa": "FAAF3A",
+    "logo_r34": "https://rule34.xxx/favicon.ico",
+    "color_r34": "aae5a3",
+    "fa": {
+        "logo": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
+        "color": "FAAF3A",
+        "label": "furaffinity.net"
+    },
+    "fn": {
+        "logo": "https://furrynetwork.com/static-media/icons/apple-touch-icon-76x76@2x.png",
+        "color": "2e76b4",
+        "label": "furrynetwork.com"
+    },
+    "ib": {
+        "logo": "http://2017.furrnion.org/wp-content/themes/vantage/img/social_ib.png",
+        "color": "73d216",
+        "label": "inkbunny.net"
+    },
+    "e621": {
+        "logo": "https://s3.amazonaws.com/gt7sp-prod/decal/76/91/55/8223656485231559176_1.png",
+        "color": "012E57",
+        "label": "e621.net",
+        "endpoint": {
+            "nsfw": "https://e621.net/posts.json",
+            "sfw": "https://e926.net/posts.json"
+        },
+        "autopost": {
+            "intervalChecker": 60000,
+            "dbOffset": 7200000,
+            "maxCache": 100,
+            "maxChannels": 2,
+            "minPostTime": 600000,
+            "maxPostTime": 18000000,
+            "minPics": 100
+        },
+        "poolHandler": {
+            "maxCacheTime": 600000
+        }
+    },
+    "imageFinder": {
+        "uri": "https://api.kheina.com/v1/search",
+        "picEndpoint": "https://cdn.kheina.com/file/kheinacom/",
+        "websiteEndpoint": "https://kheina.com/?url=",
+        "minSimilarity": 85,
+        "websiteCodes": {
+            "0": "fa",
+            "3": "fn"
+        },
+        "allowedFiletypes": ["png", "jpg", "gif"]
+    }
+}

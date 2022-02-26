@@ -1,4 +1,5 @@
 {
+    "name": "FurExplicitBot",
     "prefix": {
         "default": "+",
         "nicknameSpacer": " | "
@@ -32,9 +33,7 @@
             "STARTUP_envPrep"
         ],
         "setupFunctions": [
-            "SETUP_status",
-            "TCKR_botlistAPI",
-            "TCKR_autopost"
+            "SETUP_status"
         ]
     },
     "botList": {
