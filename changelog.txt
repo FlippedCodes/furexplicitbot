@@ -1,14 +1,15 @@
 **Changelog:**
-__New Stuff__
-none
+__Bot update - 3.0.0 - Discord-App-y-fyed the bot__
+New Stuff:
+All commands moved to slash commands
 
-__(Important) Changes__
-* added servercount to bot websites
+Important Changes:
 
-__Boring Bugfixes__
+
+Boring Bug Fixes:
 * Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
 
-__Working on__
+Working on:
 code rewrite for FA
 code rewrite for r34
 code rewrite for IB
@@ -17,6 +18,7 @@ user suggestion: default tags for e621 commands (originally: required score)
 add furrynetwork command
 user suggestion: add nhentai command
 (add sofurry command)
+(user suggestion: add FurryBurru command)
 (autodetect source)
 
-This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in +help.
+This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in /about.
