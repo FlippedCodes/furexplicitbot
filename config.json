@@ -1,8 +1,17 @@
 {
     "name": "FurExplicitBot",
-    "prefix": {
-        "default": "+",
-        "nicknameSpacer": " | "
+    "setup": {
+        "setupFunctions": [
+            "SETUP_status"
+        ]
+    },
+    "commands": {
+        "about": {
+            "text": "./about.txt"
+        },
+        "changelog": {
+            "text": "./changelog.txt"
+        }
     },
     "owner": "172031697355800577",
     "managementServerID": "569178297515245578",
@@ -22,20 +31,6 @@
         "374071874222686211"
     ],
     "reactionsTimeout": 600000,
-    "setup": {
-        "moduleFolders": {
-            "functionsFolder": "functions",
-            "commandsFolder": "commands"
-        },
-        "startupFunctions": [
-            "STARTUP_initCommands",
-            "STARTUP_initFunctions",
-            "STARTUP_envPrep"
-        ],
-        "setupFunctions": [
-            "SETUP_status"
-        ]
-    },
     "botList": {
         "heartBeatInterval": 600000,
         "discordbotlist": {
