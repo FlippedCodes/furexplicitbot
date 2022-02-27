@@ -2,7 +2,7 @@ const Uwuifier = require('uwuifier');
 
 const uwuifier = new Uwuifier({
   spaces: {
-    faces: 0.2,
+    faces: 0.1,
     actions: 0,
     stutters: 0.3,
   },
