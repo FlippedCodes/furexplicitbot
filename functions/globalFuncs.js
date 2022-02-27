@@ -1,3 +1,25 @@
+const Uwuifier = require('uwuifier');
+
+const uwuifier = new Uwuifier({
+  spaces: {
+    faces: 0.2,
+    actions: 0,
+    stutters: 0.3,
+  },
+  words: 0.6,
+  exclamations: 0,
+});
+
+global.uwu = (text) => {
+  const splitText = text.split(' ');
+  const out = splitText.map((word) => {
+    if (word.includes('ßß')) return word.replace('ßß', '');
+    const edit = uwuifier.uwuifySentence(word);
+    return edit;
+  });
+  return out.join(' ');
+};
+
 global.messageFail = async (interaction, body, color, ephemeral) => {
   const sentMessage = await client.functions.get('richEmbedMessage')
     .run(interaction, body, '', color || 16449540, false, ephemeral || true);
