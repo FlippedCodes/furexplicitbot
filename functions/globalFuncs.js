@@ -14,8 +14,7 @@ global.uwu = (text) => {
   const splitText = text.split(' ');
   const out = splitText.map((word) => {
     if (word.includes('ßß')) return word.replace('ßß', '');
-    const edit = uwuifier.uwuifySentence(word);
-    return edit;
+    return uwuifier.uwuifySentence(word);
   });
   return out.join(' ');
 };
