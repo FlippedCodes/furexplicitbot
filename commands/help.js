@@ -6,8 +6,7 @@ module.exports.run = async (interaction) => {
     .setColor(0xFAAF3A)
     .setDescription(uwu('This command is deprecated, please use discord embedded slash-commands feature instead.'))
     .addField(uwu('Still need help?'), uwu(`
-  Read the wiki here: ßßhttps://github.com/FlippedCode/agent-black/wiki
-  or join our server here: ßßhttps://discord.gg/QhfnAWgEMS`));
+  Join our server here: ßßhttps://discord.gg/fMYD6XR`));
   return reply(interaction, { embeds: [embed] });
 };
 
