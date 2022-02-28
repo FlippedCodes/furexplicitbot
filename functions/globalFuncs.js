@@ -11,6 +11,7 @@ const uwuifier = new Uwuifier({
 });
 
 global.uwu = (text) => {
+  // function leaves all words alone with a prefix of "ßß" That way markdown and links can be left untouched by the uwu
   const splitText = text.split(' ');
   const out = splitText.map((word) => {
     if (word.includes('ßß')) return word.replace('ßß', '');
