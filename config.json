@@ -13,8 +13,13 @@
             "text": "./changelog.txt"
         }
     },
+    "functions": {
+        "blacklistTags": {
+            "managementServerID": "569178297515245578"
+        }
+    },
+    "OLD CONFIG BELOW-------------------------------------------------------------": true,
     "owner": "172031697355800577",
-    "managementServerID": "569178297515245578",
     "clientID": "534828939198070824",
     "clientIDTesting": "395581313052180483",
     "emoji": {
