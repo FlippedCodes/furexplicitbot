@@ -10,11 +10,12 @@ async function getTags(servertagsblacklist, serverID) {
 module.exports.run = async (interaction, servertagsblacklist) => {
   const DBentries = await getTags(servertagsblacklist, interaction.guild.id);
   const blacklistedTags = DBentries.map((entry) => entry.tag);
+  const desc = `• ${blacklistedTags.join('\n• ')}`;
 
   const embed = new MessageEmbed()
     .setColor(0xFAAF3A)
     .setAuthor({ name: uwu('Blacklisted tags in this server:') })
-    .setDescription(`• ${blacklistedTags.join('\n• ')}`);
+    .setDescription(desc.length() >= 4000 ? `${desc.slice(0, 4000)}...\nAnd more...` : desc);
   reply(interaction, { embeds: [embed] });
 };
 
