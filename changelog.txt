@@ -4,12 +4,12 @@ New Stuff:
 All commands moved to slash commands
 
 Important Changes:
-
+Advanced UwU talk™
 
 Boring Bug Fixes:
 * Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
 
-Working on:
+Working on/Plans/Ideas:
 code rewrite for FA
 code rewrite for r34
 code rewrite for IB
@@ -17,7 +17,9 @@ whitelist/blacklist (not sure yet) tags in certain channels
 user suggestion: default tags for e621 commands (originally: required score)
 add furrynetwork command
 user suggestion: add nhentai command
+get artist/tag art from FA or e621
 (add sofurry command)
+(add E-Hentai command)
 (user suggestion: add FurryBurru command)
 (autodetect source)
 
