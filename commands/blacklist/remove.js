@@ -1,6 +1,4 @@
-const servertagsblacklist = require('../database/models/servertagsblacklist');
-
-const postcache = require('../database/models/postcache');
+const postcache = require('../../database/models/postcache');
 
 const errHander = (err) => { console.error('ERROR:', err); };
 
@@ -19,9 +17,9 @@ function messageFail(message, body) {
     .then((msg) => msg.delete({ timeout: 10000 }));
 }
 
-async function addTag(tag, serverID, managementServerID) {
-  if (await servertagsblacklist.findOne({ where: { serverID: [serverID, managementServerID], tag } }).catch(errHander)) return false;
-  await servertagsblacklist.findOrCreate({ where: { serverID, tag } }).catch(errHander);
+async function removeTag(tag, serverID) {
+  if (!await servertagsblacklist.findOne({ where: { serverID, tag } }).catch(errHander)) return false;
+  await servertagsblacklist.destroy({ where: { serverID, tag } }).catch(errHander);
   return true;
 }
 
@@ -39,19 +37,13 @@ module.exports.run = async (client, message, args, config, MessageEmbed, prefix)
       `Command usage: 
       \`\`\`${prefix}${module.exports.help.parent} ${subcmd} TAGNAME\`\`\``);
   }
-  if (tag.length > 30) {
-    return messageFail(message, 'Your tawg is too lowng. The maximum length is 30 characters.');
-  }
-  const added = await addTag(tag, message.guild.id, config.managementServerID);
+  const added = await removeTag(tag, message.guild.id);
   if (added) {
-    messageSuccess(message, `\`${tag}\` has been added to the serwers blacklist.`);
+    messageSuccess(message, `\`${tag}\` has been removed from the serwers blacklist.`);
     pruneAutopost(message.channel.id);
   } else {
-    messageFail(message, `\`${tag}\` is already added to thwis serwers backlist.`);
+    messageFail(message, `\`${tag}\` doesn't exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)`);
   }
 };
 
-module.exports.help = {
-  name: 'CMD_blacklist_add',
-  parent: 'blacklist',
-};
+module.exports.data = { subcommand: true };
