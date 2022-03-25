@@ -1,5 +1,4 @@
 {
-    "name": "FurExplicitBot",
     "setup": {
         "setupFunctions": [
             "SETUP_status"
@@ -11,6 +10,18 @@
         },
         "changelog": {
             "text": "./changelog.txt"
+        },
+        "source": {
+            "uri": "https://saucenao.com/search.php",
+            "params": {
+                "db": 999,
+                "output_type": 2,
+                "numres": 10
+              },
+            "minSimilarity": 85,
+            "e621Index": 29,
+            "allowedFiletypes": ["png", "jpg", "gif"],
+            "searcherLogo": "https://cdn.discordapp.com/attachments/569187592919056389/956733059863052358/saucenao.png"
         }
     },
     "functions": {
@@ -84,16 +95,5 @@
         "poolHandler": {
             "maxCacheTime": 600000
         }
-    },
-    "imageFinder": {
-        "uri": "https://api.kheina.com/v1/search",
-        "picEndpoint": "https://cdn.kheina.com/file/kheinacom/",
-        "websiteEndpoint": "https://kheina.com/?url=",
-        "minSimilarity": 85,
-        "websiteCodes": {
-            "0": "fa",
-            "3": "fn"
-        },
-        "allowedFiletypes": ["png", "jpg", "gif"]
     }
 }
