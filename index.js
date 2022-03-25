@@ -12,6 +12,7 @@ global.client = new Client({
 });
 // init config
 global.config = require('./config.json');
+global.config.package = require('./package.json');
 
 global.DEBUG = process.env.NODE_ENV === 'development';
 
@@ -37,7 +38,7 @@ const usedRecentlyReactions = new Set();
 const messageOwner = new Map();
 
 // anouncing debug mode
-if (DEBUG) console.log(`[${config.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
+if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
 
 // Login the bot
 client.login(process.env.DCtoken)
@@ -52,7 +53,7 @@ client.login(process.env.DCtoken)
 
 client.on('ready', async () => {
   // confirm user logged in
-  console.log(`[${config.name}] Logged in as "${client.user.tag}"!`);
+  console.log(`[${config.package.name}] Logged in as "${client.user.tag}"!`);
 
   // setup tables
   console.log('[DB] Syncing tables...');
