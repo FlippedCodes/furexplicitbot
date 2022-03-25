@@ -5,6 +5,7 @@ All commands moved to slash commands
 
 Important Changes:
 Advanced UwU talk™
+Source search as been moved to SauceNAO
 
 Boring Bug Fixes:
 * Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
