@@ -36,13 +36,6 @@ async function getSource(link, nsfw) {
   // check for e621 post, because trusted
   const e6post = preSort.filter((res) => res.header.index_id === config.commands.source.e621Index);
 
-  // const activePost = e6post.length ? e6post[0] : preSort[0];
-  // const imageFinderCnfg = config.imageFinder;
-  // const similarity = result.similarity;
-  // if (similarity < imageFinderCnfg.minSimilarity) return null;
-  // const post = result.sources[0];
-  // post.website = imageFinderCnfg.websiteCodes[post.websiteid];
-  // post.similarity = similarity;
   return e6post.length ? e6post[0] : preSort[0];
 }
 
