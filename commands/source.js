@@ -1,4 +1,4 @@
-// TODO: Eventually also offer a App link inside of discord to look for the source
+// TODO: Eventually also offer a App>link inside of discord to look for the source
 
 const { MessageEmbed } = require('discord.js');
 
@@ -53,11 +53,16 @@ module.exports.run = async (interaction) => {
   const fileTypes = config.commands.source.allowedFiletypes;
   if (!checkURL(link, fileTypes)) return messageFail(interaction, uwu(`Sorry, I don't support this filetype. Only ßß${fileTypes.join(', ßß')}`));
   const source = await getSource(link, interaction.channel.nsfw);
+  // put extern url into source, and if none is provided: set to text which cant pass the regex
+  if (!source.data.source && source.data.ext_urls.length === 1) source.data.source = source.data.ext_urls[0];
+  else source.data.source = 'noSource';
   if (!source || !source.data.source.startsWith('http')) return messageFail(interaction, uwu('Sorry, but i wasn\'t able to find your picture. ßßuwu'));
   const embed = new MessageEmbed()
     .setColor(0xFAAF3A)
-    .setAuthor({ name: `Artist: ${source.data.creator} [${Math.round(source.header.similarity)}% similarity]` })
-    .setTitle('URL')
+    // AWAIT: TODO: Remove this if feature is out of beta
+    .setDescription(`${uwu('This feature is still in beta. Don\'t expect any exact results!')}`)
+    .setAuthor({ name: `Artist: ${source.data.creator || 'Unknown'} [${Math.round(source.header.similarity)}% similarity]` })
+    .setTitle('Image Link')
     .setURL(source.data.source)
     .setThumbnail(source.header.thumbnail)
     .setFooter({ text: 'Found with saucenao.com', iconURL: config.commands.source.searcherLogo });
