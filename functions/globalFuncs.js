@@ -1,14 +1,6 @@
 const Uwuifier = require('uwuifier');
 
-const uwuifier = new Uwuifier({
-  spaces: {
-    faces: 0.1,
-    actions: 0,
-    stutters: 0.3,
-  },
-  words: 0.6,
-  exclamations: 0,
-});
+const uwuifier = new Uwuifier(config.functions.globalFuncs.uwuifier);
 
 global.uwu = (text) => {
   // function leaves all words alone with a prefix of "ßß" That way markdown and links can be left untouched by the uwu

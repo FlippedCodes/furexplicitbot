@@ -25,6 +25,17 @@
         }
     },
     "functions": {
+        "globalFuncs": {
+            "uwuifier": {
+                "spaces": {
+                    "faces": 0.1,
+                    "actions": 0,
+                    "stutters": 0.2
+                  },
+                  "words": 0.5,
+                  "exclamations": 0
+            }
+        },
         "blacklistTags": {
             "managementServerID": "569178297515245578"
         }
