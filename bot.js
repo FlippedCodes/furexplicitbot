@@ -41,7 +41,7 @@ const messageOwner = new Map();
 if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
 
 // Login the bot
-client.login(process.env.DCtoken)
+client.login(process.env.token_discord)
   .then(() => {
     // import Functions and Commands; startup database connection
     fs.readdirSync('./functions/STARTUP').forEach((FCN) => {
@@ -60,9 +60,9 @@ client.on('ready', async () => {
   await sequelize.sync();
   await console.log('[DB] Done syncing!');
 
-  // run startup functions
+  // run setup functions
   config.setup.setupFunctions.forEach((FCN) => {
-    client.functions.get(FCN).run(client, config);
+    client.functions.get(FCN).run();
   });
 });
 
