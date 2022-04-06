@@ -1,11 +1,8 @@
 const clean = (text) => {
   if (typeof (text) === 'string') {
-    return text.replace(/`/g, `\`${String.fromCharCode(8203)}`)
-      .replace(/@/g, `@${String.fromCharCode(8203)}`)
-      .replace(process.env.DCtoken, '****NOPE****')
-      .replace(process.env.DBpassword, '****NOPE****')
-      .replace(process.env.DBhost, '****NOPE****')
-      .replace(process.env.DBusername, '****NOPE****');
+    process.env.forEach((env) => text.replaceAll(env, '****NOPE****'));
+    return text.replaceAll(/`/g, `\`${String.fromCharCode(8203)}`)
+      .replaceAll(/@/g, `@${String.fromCharCode(8203)}`);
   }
   return text;
 };
