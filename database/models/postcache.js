@@ -12,10 +12,10 @@ module.exports = sequelize.define(
     channelID: {
       type: Sequelize.INTEGER(10),
       allowNull: false,
-      references: {
-        model: 'autopostchannels',
-        key: 'channelID',
-      },
+      // references: {
+      //   model: 'autopostchannels',
+      //   key: 'channelID',
+      // },
     },
     postID: {
       type: Sequelize.INTEGER(10),
