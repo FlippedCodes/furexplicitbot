@@ -44,7 +44,7 @@ function getEndpoint(message, config) {
 }
 
 function buildRequest(uri) {
-  const version = require('../package.json');
+  const version = require('../../../../package.json');
   return {
     method: 'GET',
     uri,
