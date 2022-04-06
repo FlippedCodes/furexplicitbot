@@ -13,7 +13,7 @@ module.exports.run = async (interaction, servertagsblacklist) => {
   const desc = `• ${blacklistedTags.join('\n• ')}`;
 
   const embed = new MessageEmbed()
-    .setColor(0xFAAF3A)
+    .setColor('ORANGE')
     .setAuthor({ name: uwu('Blacklisted tags in this server:') })
     .setDescription(desc.length() >= 4000 ? `${desc.slice(0, 4000)}...\nAnd more...` : desc);
   reply(interaction, { embeds: [embed] });

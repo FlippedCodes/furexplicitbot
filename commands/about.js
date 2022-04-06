@@ -7,7 +7,7 @@ module.exports.run = async (interaction) => {
       messageFail(interaction, uwu('Oh, no! Something went wrong. Sorry about that :('));
       return;
     }
-    messageSuccess(interaction, uwu(content), 0xFAAF3A, true);
+    messageSuccess(interaction, uwu(content), 'ORANGE', true);
   });
 };
 

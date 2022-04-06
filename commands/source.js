@@ -58,7 +58,7 @@ module.exports.run = async (interaction) => {
   else source.data.source = 'noSource';
   if (!source || !source.data.source.startsWith('http')) return messageFail(interaction, uwu('Sorry, but i wasn\'t able to find your picture. ßßuwu'));
   const embed = new MessageEmbed()
-    .setColor(0xFAAF3A)
+    .setColor('ORANGE')
     // AWAIT: TODO: Remove this if feature is out of beta
     .setDescription(`${uwu('This feature is still in beta. Don\'t expect any exact results!')}`)
     .setAuthor({ name: `Artist: ${source.data.creator || 'Unknown'} [${Math.round(source.header.similarity)}% similarity]` })
