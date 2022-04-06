@@ -17,16 +17,18 @@ jobs:
     #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     env:
-      DB_PORT: ${{ secrets.DB_PORT }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      DB_PASSWORD_ROOT: ${{ secrets.DB_PASSWORD_ROOT }}
-      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-      FA_COOKIE_A: ${{secrets.FA_COOKIE_A}}
-      FA_COOKIE_B: ${{secrets.FA_COOKIE_B}}
-      E621_LOGIN: ${{secrets.E621_LOGIN}}
-      E621_API_KEY: ${{secrets.E621_API_KEY}}
-      TOKEN_DISCORDBOTLIST: ${{secrets.TOKEN_DISCORDBOTLIST}}
-      TOKEN_MOTIONDEVELOPMENT: ${{secrets.TOKEN_MOTIONDEVELOPMENT}}
+      token_discord: ${{ secrets.TOKEN_DISCORD }}
+      token_uptime: ${{secrets.TOKEN_UPTIME}}
+      token_discordbotlist: ${{secrets.TOKEN_DISCORDBOTLIST}}
+      token_motiondevelopment: ${{secrets.TOKEN_MOTIONDEVELOPMENT}}
+      token_saucenao: ${{secrets.TOKEN_SAUCENAO}}
+      login_fa_cookie_a: ${{secrets.LOGIN_FA_COOKIE_A}}
+      login_fa_cookie_b: ${{secrets.LOGIN_FA_COOKIE_B}}
+      login_e621_user: ${{secrets.E621_LOGIN}}
+      e621_api_key: ${{secrets.E621_API_KEY}}
+      db_port: ${{ secrets.DB_PORT }}
+      db_password: ${{ secrets.DB_PASSWORD }}
+      db_password_root: ${{ secrets.DB_PASSWORD_ROOT }}
 
     steps:
       - uses: actions/checkout@v2
