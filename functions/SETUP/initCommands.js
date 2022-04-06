@@ -28,8 +28,6 @@ module.exports.run = async () => {
 
   // adding all commands
   await jsfiles.forEach((f, i) => {
-    // get module functions and info
-    const probs = require(`../../${f}`);
     // cleanup name
     const cleanName = f
       .replace(/\\|\//g, '_')
@@ -37,6 +35,8 @@ module.exports.run = async () => {
       .replace('.js', '');
     // abort entry if in disabled folder
     if (cleanName.search('archive_') !== -1) return;
+    // get module command and info
+    const probs = require(`../../${f}`);
     // announcing command loading
     if (DEBUG) console.log(`[${module.exports.data.name}]     ${i + 1}) Loaded: ${cleanName}!`);
     // adding command to collection
