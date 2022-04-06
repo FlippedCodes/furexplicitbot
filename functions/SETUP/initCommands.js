@@ -1,21 +1,23 @@
 const Path = require('path');
 
+const fs = require('fs');
+
 const files = [];
 
-function getFiles(fs, Directory) {
+function getFiles(Directory) {
   fs.readdirSync(Directory).forEach((File) => {
     const Absolute = Path.join(Directory, File);
-    if (fs.statSync(Absolute).isDirectory()) return getFiles(fs, Absolute);
+    if (fs.statSync(Absolute).isDirectory()) return getFiles(Absolute);
     files.push(Absolute);
   });
   return files;
 }
 
-module.exports.run = async (fs) => {
+module.exports.run = async () => {
   // create empty array to store command submittions
   const commandsSubmit = [];
   // get all command files
-  const files = await getFiles(fs, './commands/');
+  const files = await getFiles('./commands/');
   // only get file with '.js'
   const jsfiles = files.filter((f) => f.split('.').pop() === 'js');
   const cmdLength = jsfiles.length;

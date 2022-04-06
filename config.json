@@ -3,7 +3,7 @@
         "setupFunctions": [
             "SETUP_status",
             "SETUP_heartbeat",
-            "SETUP_status"
+            "SETUP_initCommands"
         ]
     },
     "commands": {
