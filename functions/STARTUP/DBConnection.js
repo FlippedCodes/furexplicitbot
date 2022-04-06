@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 
-module.exports.run = () => {
+module.exports.run = async () => {
   console.log('[DB] Connecting...');
 
-  const sequelize = new Sequelize(
+  const sequelize = await new Sequelize(
     process.env.DBdatabase,
     process.env.DBusername,
     process.env.DBpassword,
@@ -14,6 +14,11 @@ module.exports.run = () => {
     },
   );
   console.log('[DB] Connected!');
+
+  // setup tables
+  console.log('[DB] Syncing tables...');
+  await sequelize.sync();
+  await console.log('[DB] Done syncing!');
 
   global.sequelize = sequelize;
 };
