@@ -2,9 +2,11 @@ module.exports.run = async () => {
   if (DEBUG) return;
   console.log(`[${module.exports.data.name}] Setting status...`);
   await client.user.setStatus('online');
-  const membercount = await client.guilds.cache.reduce((previousCount, currentGuild) => previousCount + currentGuild.memberCount, 0);
-  // TODO: update activity message
-  await client.user.setActivity(`${membercount} members in Devoravore`, { type: 'WATCHING' });
+  await client.user.setActivity(`${client.guilds.cache.size} servers.`, { type: 'LISTENING' });
+  // TODO: sharing version
+  // const guildCountsArr = await client.shard.fetchClientValues('guilds.cache.size');
+  // const guildCounts = guildCountsArr.reduce((previousCount, currentCount) => previousCount + currentCount, 0);
+  // await client.user.setActivity(`${guildCounts} servers.`, { type: 'LISTENING' });
   console.log(`[${module.exports.data.name}] Status set!`);
 };
 
