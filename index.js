@@ -4,6 +4,8 @@ const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
 // init command builder
 const { SlashCommandBuilder } = require('@discordjs/builders');
+// init p-queue for setup functions, bcause no await
+const { default: PQueue } = require('p-queue');
 // setting essential global values
 // init Discord client
 global.client = new Client({
@@ -40,35 +42,31 @@ const messageOwner = new Map();
 // anouncing debug mode
 if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
 
-// Login the bot
-client.login(process.env.token_discord)
-  .then(() => {
-    // import Functions and Commands; startup database connection
-    fs.readdirSync('./functions/STARTUP').forEach((FCN) => {
-      if (FCN.search('.js') === -1) return;
+(async () => {
+  // startup functions in order
+  const startupQueue = new PQueue({ concurrency: 1 });
+  const files = await fs.readdirSync('./functions/STARTUP');
+  files.forEach((FCN) => {
+    startupQueue.add(async () => {
+      if (!FCN.endsWith('.js')) return;
       const INIT = require(`./functions/STARTUP/${FCN}`);
-      INIT.run(fs);
+      await INIT.run(fs);
     });
   });
+
+  // When done: Login the bot
+  await client.login(process.env.token_discord);
+})();
 
 client.on('ready', async () => {
   // confirm user logged in
   console.log(`[${config.package.name}] Logged in as "${client.user.tag}"!`);
-
-  // setup tables
-  console.log('[DB] Syncing tables...');
-  await sequelize.sync();
-  await console.log('[DB] Done syncing!');
 
   // run setup functions
   config.setup.setupFunctions.forEach((FCN) => {
     client.functions.get(FCN).run();
   });
 });
-
-// client.on('message', async (message) => {
-//   client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecentlyMessages);
-// });
 
 // // trigger on guildDelete
 // client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
