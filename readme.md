@@ -11,11 +11,11 @@ _Because those are the only questions you'll ever ask when adding a bot._
 
 ##### How do I get started with you?
 
-> Uwse `+help` to learwn all thwe commands.
+> I uwse slash commands! You can fwind all the stuff I can do there.
 
 ##### I need some help here...
 
-> I've got you cowered. Join our [help server](https://discord.gg/fMYD6XR)!
+> I've got you cowered. Join our [help serwer](https://discord.gg/fMYD6XR)!
 
 ##### Are this all tricks up your sleeve?
 
