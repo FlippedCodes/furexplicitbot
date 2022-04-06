@@ -24,7 +24,7 @@ async function getSource(link, nsfw) {
   // Unfortunatly the api still posts nsfw content
   // params.hide = nsfw ? 0 : 3;
   params.hide = 0;
-  params.api_key = process.env.SauceNaotoken;
+  params.api_key = process.env.token_sauceNao;
 
   // TODO: add catch for better error handling if website refuses service
   const awnser = await api.get('', { params });
