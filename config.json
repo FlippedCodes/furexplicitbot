@@ -22,6 +22,20 @@
             "e621Index": 29,
             "allowedFiletypes": ["png", "jpg", "gif"],
             "searcherLogo": "https://cdn.discordapp.com/attachments/569187592919056389/956733059863052358/saucenao.png"
+        },
+        "status": {
+            "api": {
+                "endpoint": "https://status.flipped.codes/api/status-page/",
+                "groupName": "FurExplicitBot",
+                "apiCall": {
+                    "services": "flippedcodes",
+                    "uptime": "heartbeat/flippedcodes"
+                }
+            },
+            "embed": {
+                "icon": "https://status.flipped.codes/upload/logo2.png",
+                "url": "https://status.flipped.codes/"
+            }
         }
     },
     "functions": {
