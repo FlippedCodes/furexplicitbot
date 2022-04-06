@@ -28,21 +28,13 @@ function pruneAutopost(channelID) {
   postcache.destroy({ where: { channelID } }).catch(errHander);
 }
 
-module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
-  // check if user can manage servers
-  if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
-  const [subcmd, tag] = args;
-  if (!tag) {
-    return messageFail(message,
-      `Command usage: 
-      \`\`\`${prefix}${module.exports.help.parent} ${subcmd} TAGNAME\`\`\``);
-  }
-  const added = await removeTag(tag, message.guild.id);
+module.exports.run = async (interaction, servertagsblacklist, tag) => {
+  const added = await removeTag(tag, interaction.guild.id);
   if (added) {
-    messageSuccess(message, `\`${tag}\` has been removed from the serwers blacklist.`);
-    pruneAutopost(message.channel.id);
+    messageSuccess(interaction, `\`${tag}\` has been removed from the serwers blacklist.`);
+    pruneAutopost(interaction.channel.id);
   } else {
-    messageFail(message, `\`${tag}\` doesn't exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)`);
+    messageFail(interaction, `\`${tag}\` doesn't exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)`);
   }
 };
 
