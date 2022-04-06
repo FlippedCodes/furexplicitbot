@@ -1,6 +1,8 @@
 {
     "setup": {
         "setupFunctions": [
+            "SETUP_status",
+            "SETUP_heartbeat",
             "SETUP_status"
         ]
     },
@@ -17,7 +19,7 @@
                 "db": 999,
                 "output_type": 2,
                 "numres": 10
-              },
+            },
             "minSimilarity": 85,
             "e621Index": 29,
             "allowedFiletypes": ["png", "jpg", "gif"],
@@ -48,6 +50,16 @@
                   },
                   "words": 0.5,
                   "exclamations": 0
+            }
+        },
+        "heartbeat": {
+            "uptime": {
+                "interval": 50000,
+                "endpoint": "https://status.flipped.codes/api/push/"
+            },
+            "interval": {
+                "botlist": 600000,
+                "uptime": 60000
             }
         },
         "blacklistTags": {
