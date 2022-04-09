@@ -44,7 +44,7 @@
         "globalFuncs": {
             "uwuifier": {
                 "spaces": {
-                    "faces": 0.1,
+                    "faces": 0.08,
                     "actions": 0,
                     "stutters": 0.2
                   },
