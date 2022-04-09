@@ -9,7 +9,11 @@ services:
     environment:
       token_discord: ${token_discord}
       token_uptime: ${token_uptime}
+      token_botsondiscord: ${token_botsondiscord}
       token_discordbotlist: ${token_discordbotlist}
+      token_discordlist: ${token_discordlist}
+      token_discords: ${token_discords}
+      token_discordbots: ${token_discordbots}
       token_motiondevelopment: ${token_motiondevelopment}
       token_saucenao: ${token_saucenao}
       login_fa_cookie_a: ${login_fa_cookie_a}
