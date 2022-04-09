@@ -1,11 +1,20 @@
 const axios = require('axios');
 
-module.exports.run = async () => {
-  const params = {
+const params = (pingRaw) => (
+  {
     msg: 'OK',
-    ping: Math.round(client.ws.ping),
-  };
-  axios.get(`${config.functions.heartbeat.uptime.endpoint}${process.env.token_uptime}`, { params });
+    ping: Math.round(pingRaw),
+  }
+);
+
+function sendHeartbeat() {
+  axios.get(`${config.functions.heartbeat.uptime.endpoint}${process.env.token_uptime}`, { params: params(client.ws.ping) });
+}
+
+module.exports.run = async () => {
+  setInterval(() => {
+    sendHeartbeat();
+  }, config.functions.heartbeat.uptime.interval);
 };
 
 module.exports.data = {
