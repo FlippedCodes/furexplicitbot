@@ -15,11 +15,6 @@ module.exports.run = async () => {
   );
   console.log('[DB] Connected!');
 
-  // setup tables
-  console.log('[DB] Syncing tables...');
-  await sequelize.sync();
-  await console.log('[DB] Done syncing!');
-
   global.sequelize = sequelize;
 };
 
