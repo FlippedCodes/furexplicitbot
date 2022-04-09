@@ -57,9 +57,29 @@
                 "interval": 50000,
                 "endpoint": "https://status.flipped.codes/api/push/"
             },
-            "interval": {
-                "botlist": 600000,
-                "uptime": 60000
+            "discordbotlist": {
+                "interval": 600000,
+                "endpoint": "https://discordbotlist.com/api/v1/bots/"
+            },
+            "motiondevelopment": {
+                "interval": 600000,
+                "endpoint": "https://www.motiondevelopment.top/api/v1.2/bots/"
+            },
+            "discordbots": {
+                "interval": 600000,
+                "endpoint": "https://discord.bots.gg/api/v1/bots/"
+            },
+            "botsondiscord": {
+                "interval": 600000,
+                "endpoint": "https://bots.ondiscord.xyz/bot-api/bots/"
+            },
+            "discords": {
+                "interval": 600000,
+                "endpoint": "https://discords.com/bots/api/bot/"
+            },
+            "discordlist": {
+                "interval": 600000,
+                "endpoint": "https://api.discordlist.space/v2/bots/"
             }
         },
         "blacklistTags": {
