@@ -1,13 +1,15 @@
 const fs = require('fs');
 
-module.exports.run = async (interaction) => {
+module.exports.run = async (interaction, force) => {
   fs.readFile(config.commands.changelog.text, 'utf8', (err, body) => {
     if (err) {
       ERR(err);
       messageFail(interaction, uwu('Something went wrong, try again another time!'));
       return;
     }
-    messageSuccess(interaction, body, 'ORANGE', true);
+    const editBody = force ? `Hello, I have been updated!\n\n${body}` : body;
+    // messageSuccess(interaction, editBody, 'ORANGE', true);
+    reply(interaction, uwu(editBody));
   });
 };
 
