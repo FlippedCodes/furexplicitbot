@@ -1,37 +1,37 @@
 **Shameful self promotion:**
-Sice the bot with all the features is free I will drop a little self plug right here:
-Alongside this popular bot, I also code other useful bots.
-
-
+Since the bot with all the features is free, I will drop a little self plug right here:
+Alongside this popular bot, I also code two other useful bots, that you might like!
+- ßß__I-SH__: I also provide a Service for linking two or more channels from your partnered servers together.
+- ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
 **Changelog:**
-__Bot update - 3.0.0 - Discord-App-y-fyed the bot__
+__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
-Status Page! Run `/status` to see if a service is down.
+Status Page! Run ßß`/status` to see if a service is down.
 
 Important Changes:
-All commands moved to slash commands
-Advanced UwU talk™
-Source search as been moved to SauceNAO
+ßßAll commands moved to slash commands
+Advanced ßßUwU ßßtalk™
+Source search as been moved to ßßSauceNAO
 
 Boring Bug Fixes:
-* Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
+Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
 
-Working on/Plans/Ideas:
+Working ßßon/Plans/Ideas:
 Shard the bot, cause many discord servers now
-code rewrite for FA
-code rewrite for r34
-code rewrite for IB
+code rewrite for ßßFA
+code rewrite for ßßr34
+code rewrite for ßßIB
 whitelist(/blacklist) tags in certain channels
 user suggestion: default tags for e621 commands (originally: required score)
-add furrynetwork command
-user suggestion: add nhentai command
-get artist/tag art from FA or e621
-better Booru API handler and register custom Imageboards
+add ßßfurrynetwork command
+user suggestion: add ßßnhentai command
+get artist/tag art from ßßFA or ßße621
+better ßßBooru API handler and register custom Imageboards
 RP finder and OC information handler
-(add sofurry command)
-(add E-Hentai command)
-(user suggestion: add FurryBurru command)
-(autodetect source - problemetic with API usage rates in SauceNAO)
+(add ßßsofurry command)
+(add ßßE-Hentai command)
+(user suggestion: add ßßFurryBurru command)
+(autodetect source - problemetic with API usage rates in ßßSauceNAO)
 
-This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in /about.
+This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in ßß/about. ^^
