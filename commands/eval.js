@@ -1,6 +1,7 @@
 const clean = (text) => {
   if (typeof (text) === 'string') {
-    process.env.forEach((env) => text.replaceAll(env, '****NOPE****'));
+    // eslint-disable-next-line no-param-reassign
+    Object.values(process.env).forEach((env) => text = text.replaceAll(env, '****NOPE****'));
     return text.replaceAll(/`/g, `\`${String.fromCharCode(8203)}`)
       .replaceAll(/@/g, `@${String.fromCharCode(8203)}`);
   }
