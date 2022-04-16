@@ -18,6 +18,7 @@ const api = axios.create({ baseURL: uptimeConfig.api.endpoint });
 
 function setOverallStatus(params) {
   const { isUpOverall, embed } = params;
+  // checkes if all services are true
   if (isUpOverall.every((isUp) => isUp)) {
     embed.setTitle('All Systems Operational');
     embed.setColor('GREEN');
