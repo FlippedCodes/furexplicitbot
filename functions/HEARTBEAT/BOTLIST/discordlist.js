@@ -3,7 +3,7 @@ const axios = require('axios');
 function sendHeartbeat() {
   axios({
     method: 'post',
-    url: `${config.functions.heartbeat.discordbotlist.endpoint}${client.user.id}`,
+    url: `${config.functions.heartbeat.discordlist.endpoint}${client.user.id}`,
     headers: {
       Authorization: process.env.token_discordlist,
       'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ function sendHeartbeat() {
 module.exports.run = async () => {
   setInterval(() => {
     sendHeartbeat();
-  }, config.functions.heartbeat.discordbotlist.interval);
+  }, config.functions.heartbeat.discordlist.interval);
 };
 
 module.exports.data = {

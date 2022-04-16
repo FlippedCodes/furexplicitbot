@@ -1,5 +1,5 @@
 // Calls all the functions that are needed for a heartbeat
-module.exports.run = async () => {
+module.exports.run = () => {
   if (DEBUG) return;
   console.log(`[${module.exports.data.name}] Start sending heartbeats...`);
   // botlists

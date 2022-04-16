@@ -7,7 +7,6 @@ function sendHeartbeat() {
     headers: {
       key: process.env.token_motiondevelopment,
       'Content-Type': 'application/json',
-      // 'User-Agent': `FurExplicitBot/${config.package.version} by Phil | Flipper#3621 on Discord`,
     },
     data: { guilds: client.guilds.cache.size },
   });
