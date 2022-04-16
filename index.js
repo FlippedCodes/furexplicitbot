@@ -69,7 +69,7 @@ client.on('ready', async () => {
 });
 
 // // trigger on guildDelete
-// client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
+client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
 
 // // trigger on channelDeletion
 // client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
@@ -78,28 +78,8 @@ client.on('ready', async () => {
 //   client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
 // });
 
-client.on('interactionCreate', async (interaction) => {
-  // only guild command
-  if (!await interaction.inGuild()) return messageFail(interaction, uwu('The bot is for server-use only.'));
-
-  // autocomplete hanlder
-  // if (interaction.isAutocomplete()) return client.functions.get('EVENT_autocomplete').run(interaction).catch(ERR);
-  // command handler
-  if (interaction.isCommand()) {
-    // TODO: cleanup code to own event function
-    const mainCMD = interaction.commandName.replace('_dev', '');
-    const command = client.commands.get(DEBUG ? mainCMD : interaction.commandName);
-    if (command) {
-      // if debuging trigger application thinking
-      // TEMP: set to false to test some public commands
-      if (DEBUG) await interaction.deferReply({ ephemeral: false });
-      // check, if user has seen changelo yet
-      client.functions.get('MESSAGE_seenChangelog').run(interaction).catch(ERR);
-      command.run(interaction).catch(ERR);
-      return;
-    }
-  }
-});
+// itneraction is triggered (command, autocomplete, etc.)
+client.on('interactionCreate', (interaction) => client.functions.get('EVENT_interactionCreate').run(interaction));
 
 // logging errors and warns
 client.on('error', (ERR));
