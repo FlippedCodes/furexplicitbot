@@ -1,9 +1,3 @@
-**Shameful self promotion:**
-Since the bot with all the features is free, I will drop a little self plug right here:
-Alongside this popular bot, I also code two other useful bots, that you might like!
-- ßß__I-SH__: I also provide a Service for linking two or more channels from your partnered servers together.
-- ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
-
 **Changelog:**
 __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
@@ -13,25 +7,34 @@ Important Changes:
 ßßAll commands moved to slash commands
 Advanced ßßUwU ßßtalk™
 Source search as been moved to ßßSauceNAO
+Discontinued old prefix ßß'+'
+Removed prefix command, as now using slash commands
+Code rewrite for ßßFA (now using a proper dependency)
 
 Boring Bug Fixes:
 Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
 
-Working ßßon/Plans/Ideas:
+Working ßßon/Plans/Ideas sorted after priority:
+Add a button to rerun a command
 Shard the bot, cause many discord servers now
-code rewrite for ßßFA
 code rewrite for ßßr34
 code rewrite for ßßIB
-whitelist(/blacklist) tags in certain channels
-user suggestion: default tags for e621 commands (originally: required score)
 add ßßfurrynetwork command
+(add ßßsofurry command)
+whitelist(/blacklist) tags in certain channels
+user suggestion: default tags for e621 commands (originally: minimum score)
 user suggestion: add ßßnhentai command
 get artist/tag art from ßßFA or ßße621
 better ßßBooru API handler and register custom Imageboards
 RP finder and OC information handler
-(add ßßsofurry command)
 (add ßßE-Hentai command)
 (user suggestion: add ßßFurryBurru command)
 (autodetect source - problemetic with API usage rates in ßßSauceNAO)
+
+**Shameful self promotion:**
+Since the bot with all the features is free, I will drop a little self plug right here.
+Alongside this popular bot, I also code two other useful bots, that you might like:
+- ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
+- ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
 This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in ßß/about. ^^
