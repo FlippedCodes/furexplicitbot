@@ -3,7 +3,7 @@ const axios = require('axios');
 function sendHeartbeat() {
   axios({
     method: 'post',
-    url: `${config.functions.heartbeat.discordbotlist.endpoint}${client.id}/stats`,
+    url: `${config.functions.heartbeat.discordbotlist.endpoint}${client.user.id}/stats`,
     headers: {
       Authorization: process.env.token_discordbots,
       'Content-Type': 'application/json',
