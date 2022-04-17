@@ -35,7 +35,6 @@ global.ERR = (err) => {
 // creating collections and sets
 client.commands = new Collection();
 client.functions = new Collection();
-const usedRecentlyMessages = new Set();
 const usedRecentlyReactions = new Set();
 const messageOwner = new Map();
 
@@ -69,10 +68,10 @@ client.on('ready', async () => {
 });
 
 // // trigger on guildDelete
-client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
+client.on('guildDelete', (guild) => client.functions.get('EVENT_guildDelete').run(guild));
 
-// // trigger on channelDeletion
-// client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
+// trigger on channelDeletion
+client.on('channelDelete', (channel) => client.functions.get('EVENT_channelDelete').run(channel));
 
 // client.on('messageReactionAdd', async (reaction, user) => {
 //   client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
