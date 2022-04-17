@@ -3,7 +3,7 @@ const servertagsblacklist = require('../database/models/servertagsblacklist');
 module.exports.run = async (interaction) => {
   const subName = interaction.options.getSubcommand(true);
   if (subName !== 'list' && !interaction.memberPermissions.has('MANAGE_GUILD')) {
-    messageFail(interaction, uwu('You don\'t hawe access to this command ßßòwó'));
+    messageFail(interaction, uwu('You don\'t hawe access to this command ßßòwó ßß\nYou need at least the Manage Server permission.'));
     return;
   }
   const tag = interaction.options.getString('tag');

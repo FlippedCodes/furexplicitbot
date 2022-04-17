@@ -1,39 +1,21 @@
-/* eslint-disable no-bitwise */
-const autopostchannel = require('../../database/models/autopostchannel');
+const axios = require('axios');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
-// creates a embed messagetemplate for succeded actions
-function messageSuccess(message, body) {
-  const client = message.client;
-  client.functions.get('FUNC_MessageEmbedMessage')
-    .run(client.user, message.channel, body, '', 4296754, false);
-}
-
-// creates a embed messagetemplate for failed actions
-function messageFail(message, body) {
-  const client = message.client;
-  client.functions.get('FUNC_MessageEmbedMessage')
-    .run(client.user, message.channel, body, '', 16449540, false)
-    .then((msg) => msg.delete({ timeout: 10000 }));
-}
-
-async function countChannels(serverID) {
-  const result = await autopostchannel.findAndCountAll({ where: { serverID } }).catch(errHander);
+async function countChannels(autopostchannel, serverID) {
+  const result = await autopostchannel.findAndCountAll({ where: { serverID } }).catch(ERR);
   return result.count;
 }
 
-async function addAutopost(tags, interval, channelID, serverID, maxChannels) {
+async function addAutopost(autopostchannel, tags, interval, channelID, serverID, maxChannels) {
   const date = new Date();
   const nextEvent = date.getTime();
-  if (await countChannels(serverID) > maxChannels) return 1;
-  if (await autopostchannel.findOne({ where: { channelID } }).catch(errHander)) return 2;
+  if (await countChannels(autopostchannel, serverID) > maxChannels) return 1;
+  if (await autopostchannel.findOne({ where: { channelID } }).catch(ERR)) return 2;
   await autopostchannel.findOrCreate({
     where: { channelID },
     defaults: {
       tags, serverID, interval, nextEvent,
     },
-  }).catch(errHander);
+  }).catch(ERR);
   return true;
 }
 
@@ -41,7 +23,7 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-async function parseTags(tags) {
+function parseTags(tags) {
   // tags = tagsReplace(tags, ', ', ' ');
   // const safeTags = await message.client.functions.get('FUNC_tagsCleanup').run(message, tags);
   // return safeTags;
@@ -49,21 +31,20 @@ async function parseTags(tags) {
 }
 
 async function getAmmount(request) {
-  const axios = require('axios');
   const pics = await axios(request);
-  return pics.posts.length;
+  return pics.data.posts.length;
 }
 
 function getEndpoint(nsfw, config) {
-  let uri = config.e621.endpoint.sfw;
-  if (nsfw) uri = config.e621.endpoint.nsfw;
+  let uri = config.engine.e621.endpoint.sfw;
+  if (nsfw) uri = config.engine.e621.endpoint.nsfw;
   return uri;
 }
 
 function buildRequest(url) {
   return {
     method: 'GET',
-    uri: url,
+    url,
     headers: { 'User-Agent': `FurExplicitBot/${config.package.version} by Flipper on e621` },
     json: true,
   };
@@ -71,31 +52,35 @@ function buildRequest(url) {
 
 async function checkAmmount(config, tags, nsfw) {
   const endpoint = getEndpoint(nsfw, config);
-  const uri = `${endpoint}?tags=${tags} order:random&limit=${config.e621.autopost.maxCache}&login=${config.env.get('e621_login')}&api_key=${config.env.get('e621_api_key')}`;
-  const ammount = await getAmmount(buildRequest(uri));
-  const result = ammount < config.e621.autopost.minPics;
+  const url = `${endpoint}?tags=${tags} order:random&limit=${config.commands.autopost.maxCache}&login=${process.env.login_e621_user}&api_key=${process.env.token_e621}`;
+  const ammount = await getAmmount(buildRequest(url));
+  const result = ammount < config.commands.autopost.minPics;
   return result;
 }
 
-module.exports.run = async (interaction, autopostchannel, servertagsblacklist) => {
-  if (interval > config.e621.autopost.maxPostTime || interval < config.e621.autopost.minPostTime) {
-    return messageFail(interaction, uwu(`Interval needs to be between ßß${config.command.autopost.minPostTime} and ßß${config.command.autopost.maxPostTime} milliseconds.`));
+module.exports.run = async (interaction, autopostchannel) => {
+  if (!DEBUG) await interaction.deferReply({ ephemeral: true });
+  const channel = await interaction.options.getChannel('channel');
+  const tags = parseTags(await interaction.options.getString('tags'));
+  const interval = await interaction.options.getNumber('interval');
+  // checksthe intervall ammount is in the limits
+  if (interval > config.commands.autopost.maxPostTime || interval < config.commands.autopost.minPostTime) {
+    return messageFail(interaction, uwu(`Interval needs to be between ßß${config.commands.autopost.minPostTime}ms and ßß${config.commands.autopost.maxPostTime}ms.`));
   }
-  const tags = await parseTags(args.join(' ').slice(subcmd.length + 1 + interval.length + 1));
   if (tags.length > 255) {
-    return messageFail(interaction, 'Your tawgs are too lowng. The maximum length is 255 characters.');
+    return messageFail(interaction, uwu('Your tags are too long. The maximum length is 255 characters.'));
   }
-  if (await checkAmmount(config, tags, interaction.channel.nsfw)) {
-    return messageFail(interaction, `Your prowided tawgs don't return the minimum ammount of ${config.e621.autopost.maxCache} powsts.`);
+  if (await checkAmmount(config, tags, channel.nsfw)) {
+    return messageFail(interaction, uwu(`Your provided tags don't return the minimum ammount of ßß${config.commands.autopost.maxCache} posts. Try setting simpler tags or mark your channel as nsfw.`));
   }
-  const added = await addAutopost(tags, interval, interaction.channel.id, interaction.guild.id, config.e621.autopost.maxChannels);
+  const added = await addAutopost(autopostchannel, tags, interval, channel.id, interaction.guild.id, config.commands.autopost.maxChannels);
   switch (added) {
     case true:
-      const tagsDisplay = await interaction.client.functions.get('FUNC_tagsCleanup').run(interaction, tags);
-      return messageSuccess(interaction, `Your autopowst with the tawgs \`${tagsDisplay}\` has been created. The first powst appear sowon.`);
-    case 1: return messageFail(interaction, 'You alreawdy hawe 2 autopowst channels in this serwer!');
-    case 2: return messageFail(interaction, 'You are alreawdy uwsing this channel as an autopowst channel!');
-    default: return messageFail(interaction, 'Woops, seems like the wizard behind the curtain has tripped! Try again later. uwu');
+      const tagsDisplay = await interaction.client.functions.get('ENGINE_tagsCleanup').run(interaction, tags);
+      return messageSuccess(interaction, uwu(`Your autopost with the tags ßß\`${tagsDisplay.split(' ').join(' ßß')}\` has been created. The first post will appear soon.`));
+    case 1: return messageFail(interaction, uwu(`You already have ßß${config.commands.autopost.maxChannels} autopost channels in this server!`));
+    case 2: return messageFail(interaction, uwu('You are already using this channel as an autopost channel!'));
+    default: return messageFail(interaction, uwu('Woops, seems like the wizard behind the curtain has tripped! Try again later.'));
   }
 };
 

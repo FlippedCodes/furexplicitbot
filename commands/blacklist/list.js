@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
 
 async function getTags(servertagsblacklist, serverID) {
-  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.managementServerID] }, order: [['tag', 'ASC']] });
+  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.functions.blacklistTags.managementServerID] }, order: [['tag', 'ASC']] });
   return result;
 }
 
@@ -15,7 +15,7 @@ module.exports.run = async (interaction, servertagsblacklist) => {
   const embed = new MessageEmbed()
     .setColor('ORANGE')
     .setAuthor({ name: uwu('Blacklisted tags in this server:') })
-    .setDescription(desc.length() >= 4000 ? `${desc.slice(0, 4000)}...\nAnd more...` : desc);
+    .setDescription(desc.length >= 4000 ? `${desc.slice(0, 4000)}...\nAnd more...` : desc);
   reply(interaction, { embeds: [embed] });
 };
 
