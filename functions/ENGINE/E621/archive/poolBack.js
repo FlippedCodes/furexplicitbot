@@ -1,7 +1,5 @@
 const poolcache = require('../database/models/poolcache');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
 // creates a embed messagetemplate for failed actions
 function messageFail(message, body) {
   const client = message.client;

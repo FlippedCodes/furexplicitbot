@@ -1,7 +1,5 @@
 const postcache = require('../../database/models/postcache');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
 // creates a embed messagetemplate for succeded actions
 function messageSuccess(message, body) {
   const client = message.client;
@@ -18,14 +16,14 @@ function messageFail(message, body) {
 }
 
 async function removeTag(tag, serverID) {
-  if (!await servertagsblacklist.findOne({ where: { serverID, tag } }).catch(errHander)) return false;
-  await servertagsblacklist.destroy({ where: { serverID, tag } }).catch(errHander);
+  if (!await servertagsblacklist.findOne({ where: { serverID, tag } }).catch(ERR)) return false;
+  await servertagsblacklist.destroy({ where: { serverID, tag } }).catch(ERR);
   return true;
 }
 
 // clear autopost to force changes
 function pruneAutopost(channelID) {
-  postcache.destroy({ where: { channelID } }).catch(errHander);
+  postcache.destroy({ where: { channelID } }).catch(ERR);
 }
 
 module.exports.run = async (interaction, servertagsblacklist, tag) => {

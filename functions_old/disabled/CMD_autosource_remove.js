@@ -1,7 +1,5 @@
 const autosourcechannel = require('../database/models/autosourcechannel');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
 // creates a embed messagetemplate for succeded actions
 function messageSuccess(message, body) {
   const client = message.client;
@@ -18,8 +16,8 @@ function messageFail(message, body) {
 }
 
 async function removeCheck(channelID) {
-  if (!await autosourcechannel.findOne({ where: { channelID } }).catch(errHander)) return false;
-  await autosourcechannel.destroy({ where: { channelID } }).catch(errHander);
+  if (!await autosourcechannel.findOne({ where: { channelID } }).catch(ERR)) return false;
+  await autosourcechannel.destroy({ where: { channelID } }).catch(ERR);
   return true;
 }
 

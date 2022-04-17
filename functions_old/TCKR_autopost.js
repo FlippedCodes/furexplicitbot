@@ -6,13 +6,9 @@ const autopostchannel = require('../database/models/autopostchannel');
 
 // const postcache = require('../database/models/postcache');
 
-// const errHander = (err) => {
-//   console.error('ERROR:', err);
-// };
-
 // // clear autopost to force changes
 // function pruneAutopost(channelID) {
-//   postcache.destroy({ where: { channelID } }).catch(errHander);
+//   postcache.destroy({ where: { channelID } }).catch(ERR);
 // }
 
 async function getChannels(currentTimestamp, config) {

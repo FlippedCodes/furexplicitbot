@@ -4,8 +4,6 @@ const postcache = require('../database/models/postcache');
 
 const servertagsblacklist = require('../database/models/servertagsblacklist');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
 async function getBlacklistedTags(serverID) {
   const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.managementServerID] } });
   return result;
@@ -41,9 +39,9 @@ async function requestPictures(config, nsfw, tags) {
 }
 
 async function getPicture(channelID) {
-  const result = await postcache.findOne({ where: { channelID } }).catch(errHander);
+  const result = await postcache.findOne({ where: { channelID } }).catch(ERR);
   if (!result) return null;
-  await postcache.destroy({ where: { ID: result.ID } }).catch(errHander);
+  await postcache.destroy({ where: { ID: result.ID } }).catch(ERR);
   return result;
 }
 
@@ -53,7 +51,7 @@ async function storePictures(channelID, pool) {
     postcache.findOrCreate({
       where: { channelID, postID: post.id },
       defaults: { artist: post.tags.artist[0], directLink: post.file.url },
-    }).catch(errHander);
+    }).catch(ERR);
   });
 }
 

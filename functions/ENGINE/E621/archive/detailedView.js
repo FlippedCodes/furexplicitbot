@@ -2,8 +2,6 @@ const { Op } = require('sequelize');
 
 const poolcache = require('../database/models/poolcache');
 
-const errHander = (err) => { console.error('ERROR:', err); };
-
 async function pruneOldPoolData(config) {
   const date = new Date();
   const currentTimestamp = date.getTime();
