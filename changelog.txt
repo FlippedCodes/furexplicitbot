@@ -7,7 +7,7 @@ Important Changes:
 ßßAll commands moved to slash commands
 Advanced ßßUwU ßßtalk™ (as you can see... works pretty well)
 Source search as been moved to ßßSauceNAO
-Discontinued old prefix ßß'+'
+Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**
 Removed prefix command, as now using slash commands
 Code rewrite for ßßFA (now using a proper ßßdependency)
 Lowered command timeout to ßß3 secounds
