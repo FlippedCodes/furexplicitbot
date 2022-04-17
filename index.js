@@ -6,7 +6,7 @@ const fs = require('fs');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 // init p-queue for setup functions, bcause no await
 const { default: PQueue } = require('p-queue');
-// setting essential global values
+// setting essential global values; additional global values are set in the globalfunc.js file
 // init Discord client
 global.client = new Client({
   disableEveryone: true,
