@@ -1,3 +1,5 @@
+// WARN: TODO: Might be able to remove autoposts from other servers with just their channel ID
+
 const postcache = require('../../database/models/postcache');
 
 async function removeAutopost(autopostchannel, channelID) {
@@ -11,9 +13,9 @@ module.exports.run = async (interaction, autopostchannel) => {
   const channelID = interaction.options.getString('channel', true);
   const removed = await removeAutopost(autopostchannel, channelID);
   if (removed) {
-    messageSuccess(interaction, 'This channel dowes now no longer autopowst.');
+    messageSuccess(interaction, uwu('This channel does now no longer autopost.'));
   } else {
-    messageFail(interaction, 'This channel doewsn\'t have an autopowst configured!');
+    messageFail(interaction, uwu('This channel ßßdoesn\'t have an autopost ßßconfigured!'));
   }
 };
 
