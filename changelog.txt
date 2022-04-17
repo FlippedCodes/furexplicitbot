@@ -9,7 +9,8 @@ Advanced ßßUwU ßßtalk™ (as you can see... works pretty well)
 Source search as been moved to ßßSauceNAO
 Discontinued old prefix ßß'+'
 Removed prefix command, as now using slash commands
-Code rewrite for ßßFA (now using a proper dependency)
+Code rewrite for ßßFA (now using a proper ßßdependency)
+Lowered command timeout to ßß3 secounds
 
 Boring Bug Fixes:
 Blacklisted tags for autoposts no longer get stored permanantly in a DB entry

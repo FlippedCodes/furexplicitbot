@@ -9,6 +9,7 @@ module.exports.run = async (interaction) => {
     // if debuging trigger application thinking
     // TEMP: set to false to test some public commands
     if (DEBUG) await interaction.deferReply({ ephemeral: false });
+    timeout(interaction.author.id, 3000);
     // check, if user has seen changelo yet
     client.functions.get('MESSAGE_seenChangelog').run(interaction).catch(ERR);
     command.run(interaction).catch(ERR);
