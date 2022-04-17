@@ -15,13 +15,14 @@ module.exports.run = async (interaction, autopostchannel, servertagsblacklist) =
   const embed = new MessageEmbed();
   const blacklistedTagsArray = await getBlacklistedTags(servertagsblacklist, interaction.guild.serverID);
   const suffix = blacklistedTagsArray.map((entry) => `-${entry.tag}`);
+  if (DBentries.length === 0) return messageFail(interaction, uwu('There are no autoposts configured.'));
   await DBentries.forEach(async (entry) => {
     const channel = await client.channels.cache.find((channel) => channel.id === entry.channelID);
     embed.addField(`'#${channel.name}' - ${entry.interval}ms`, `${entry.tags} ${suffix.join(' ')}`, false);
   });
   embed
-    .setColor(interaction.member.displayColor)
-    .setAuthor({ text: 'Autopost channels in this server:' });
+    .setColor('green')
+    .setAuthor({ name: 'Autopost channels in this server:' });
   reply(interaction, { embeds: [embed] });
 };
 
