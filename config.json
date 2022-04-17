@@ -105,15 +105,6 @@
         "374071874222686211"
     ],
     "reactionsTimeout": 600000,
-    "botList": {
-        "heartBeatInterval": 600000,
-        "discordbotlist": {
-            "endpoint": "https://discordbotlist.com/api/v1/bots/"
-        },
-        "motiondevelopment": {
-            "endpoint": "https://www.motiondevelopment.top/api/"
-        }
-    },
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
     "color_fa": "FAAF3A",
     "logo_r34": "https://rule34.xxx/favicon.ico",
