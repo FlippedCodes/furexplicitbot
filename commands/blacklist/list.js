@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 
-const config = require('../../config.json');
-
 async function getTags(servertagsblacklist, serverID) {
   const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.functions.blacklistTags.managementServerID] }, order: [['tag', 'ASC']] });
   return result;
