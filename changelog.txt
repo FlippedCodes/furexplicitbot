@@ -11,27 +11,17 @@ Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/)
 Removed prefix command, as now using slash commands
 Code rewrite for ßßFA (now using a proper ßßdependency)
 Lowered command timeout to ßß3 secounds
+Now using ßßFurAffinity-API for better crawling and future command upgrade
 
 Boring Bug Fixes:
 Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
 
-Working ßßon/Plans/Ideas sorted after priority:
+Working on, sorted in priority:
 Kinkfinder aka favorite tags finder
 Add a button to rerun a command
 Shard the bot, cause many discord servers now
-code rewrite for ßßr34
-code rewrite for ßßIB
-add ßßfurrynetwork command
-(add ßßsofurry command)
-whitelist(/blacklist) tags in certain channels
-user suggestion: default tags for e621 commands (originally: minimum score)
-user suggestion: add ßßnhentai command
-get artist/tag art from ßßFA or ßße621
-better ßßBooru API handler and register custom Imageboards
-RP finder and OC information handler
-(add ßßE-Hentai command)
-(user suggestion: add ßßFurryBurru command)
-(autodetect source - problemetic with API usage rates in ßßSauceNAO)
+Add a autopost for ßßfuraffinity for new posts from a artist
+Add a detailed view for ßßfuraffinity
 
 **Shameful self promotion:**
 Since the bot with all the features is free, I will drop a little self plug right here.
