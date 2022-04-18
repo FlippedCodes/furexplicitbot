@@ -1,9 +1,10 @@
-const { Login, Submissions, removeFromInbox } = require('furaffinity-api');
+const { Login } = require('furaffinity-api');
 
 Login(process.env.login_fa_cookie_a, process.env.login_fa_cookie_b);
 
 module.exports.run = async (interaction) => {
-
+  const subName = interaction.options.getSubcommand(true);
+  client.commands.get(`${module.exports.data.name}_${subName}`).run(interaction);
 };
 
 module.exports.data = new CmdBuilder()
@@ -14,16 +15,14 @@ module.exports.data = new CmdBuilder()
     .setDescription('Get the most revent uploaded pictures.')
     .addNumberOption((option) => option
       .setName('ammount')
-      .setDescription('A maximum o...of 24 can be fetched.')
-      .setRequired(true)))
+      .setDescription('A maximum o...of 24 can be fetched.')))
   .addSubcommand((SC) => SC
-    .setName('remove')
+    .setName('search')
     .setDescription('Remove a blacklisted tag.')
     .addStringOption((option) => option
-      .setName('tag')
-      .setDescription('Provide a tag to remove.')
-      .setAutocomplete(true)
-      .setRequired(true)))
-  .addSubcommand((SC) => SC
-    .setName('list')
-    .setDescription('List all blacklisted tags.'));
+      .setName('search')
+      .setDescription('Prowide a search quwerry.')
+      .setRequired(true))
+    .addNumberOption((option) => option
+      .setName('ammount')
+      .setDescription('A maximum o...of 24 can be fetched.')));
