@@ -8,6 +8,7 @@
         ]
     },
     "commands": {
+        "buttonTimeout": 600000,
         "about": {
             "text": "./about.txt"
         },
@@ -97,6 +98,11 @@
         }
     },
     "engine": {
+        "furaffinity": {
+            "logo": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
+            "color": "FAAF3A",
+            "label": "furaffinity.net"
+        },
         "e621": {
             "logo": "https://s3.amazonaws.com/gt7sp-prod/decal/76/91/55/8223656485231559176_1.png",
             "color": "012E57",
@@ -124,7 +130,6 @@
         "387812458661937152",
         "374071874222686211"
     ],
-    "reactionsTimeout": 600000,
     "logo_fa": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
     "color_fa": "FAAF3A",
     "logo_r34": "https://rule34.xxx/favicon.ico",
