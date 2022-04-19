@@ -15,14 +15,15 @@ module.exports.data = new CmdBuilder()
     .setDescription('Get the most revent uploaded pictures.')
     .addNumberOption((option) => option
       .setName('ammount')
-      .setDescription('A maximum o...of 24 can be fetched.')))
-  .addSubcommand((SC) => SC
-    .setName('search')
-    .setDescription('Remove a blacklisted tag.')
-    .addStringOption((option) => option
-      .setName('search')
-      .setDescription('Prowide a search quwerry.')
-      .setRequired(true))
-    .addNumberOption((option) => option
-      .setName('ammount')
       .setDescription('A maximum o...of 24 can be fetched.')));
+// FIXME: https://github.com/recallfuture/furaffinity-api/issues/13
+// .addSubcommand((SC) => SC
+//   .setName('search')
+//   .setDescription('Remove a blacklisted tag.')
+//   .addStringOption((option) => option
+//     .setName('search')
+//     .setDescription('Prowide a search quwerry.')
+//     .setRequired(true))
+//   .addNumberOption((option) => option
+//     .setName('ammount')
+//     .setDescription('A maximum o...of 24 can be fetched.')));
