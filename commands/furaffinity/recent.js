@@ -43,9 +43,9 @@ module.exports.run = async (interaction) => {
   if (ammoumt > 24) return messageFail(interaction, uwu('You can only request a maximum of ßß24 images at the time.'), null, true);
   const rating = interaction.channel.nsfw ? 7 : 1;
   const pics = await Browse({ perpage: 24, rating });
-  pics.reverse().slice(-ammoumt).forEach(async (submission, i) => {
+  pics.reverse().slice(-ammoumt).forEach(async (submission) => {
     const embed = prepareMessage(submission);
-    const message = await reply(interaction, { embeds: [embed], components: [buttons], fetchReply: true }, i);
+    const message = await reply(interaction, { embeds: [embed], components: [buttons], fetchReply: true }, true);
     buttonHandler(message, interaction, embed);
   });
 };
