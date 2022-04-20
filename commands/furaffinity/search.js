@@ -40,8 +40,12 @@ function buttonHandler(message, interaction, orgContent) {
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
   const query = interaction.options.getString('search', true);
-  const ammoumt = interaction.options.getNumber('ammount', false) || 1;
-  if (ammoumt > 24) return messageFail(interaction, uwu('You can only request a maximum of ßß24 images at the time.'), null, true);
+  let ammoumt = interaction.options.getNumber('ammount', false) || 1;
+  if (ammount < 0) ammoumt = 1;
+  if (ammoumt > 24) {
+    ammoumt = 24;
+    messageFail(interaction, uwu('You can only request a maximum of ßß24 images at the time.'), null, true);
+  }
   const rating = interaction.channel.nsfw ? 7 : 1;
   const pics = await Search(query, { perpage: 24, rating });
   pics.reverse().slice(-ammoumt).forEach(async (submission, i) => {
