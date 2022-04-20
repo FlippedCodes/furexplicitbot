@@ -6,14 +6,6 @@ const axios = require('axios');
 
 const uptimeConfig = config.commands.status;
 
-function checkURL(orgURL, allowedFiletypes) {
-  const url = new URL(orgURL);
-  const filename = url.pathname.split('/').reverse()[0];
-  const ext = filename.slice(filename.lastIndexOf('.') + 1, filename.length);
-  const result = allowedFiletypes.includes(ext);
-  return result;
-}
-
 const api = axios.create({ baseURL: uptimeConfig.api.endpoint });
 
 function setOverallStatus(params) {
