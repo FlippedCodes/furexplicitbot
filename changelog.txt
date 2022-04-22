@@ -2,6 +2,7 @@
 __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
+FurAffintiy can now be used in SFW channels as well! (SFW results)
 
 Important Changes:
 ßßAll commands moved to slash commands
