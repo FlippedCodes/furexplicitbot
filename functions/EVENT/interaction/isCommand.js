@@ -21,7 +21,7 @@ module.exports.run = async (interaction) => {
     if (usedRecently.has(userID)) return messageFail(interaction, uwu('Sorry, but you can\'t use me that often. Please wait 3 seconds between commands.'));
     timeout(userID, 3000);
     // check, if user has seen changelo yet
-    client.functions.get('MESSAGE_seenChangelog').run(interaction).catch(ERR);
+    await client.functions.get('MESSAGE_seenChangelog').run(interaction).catch(ERR);
     command.run(interaction).catch(ERR);
     return;
   }
