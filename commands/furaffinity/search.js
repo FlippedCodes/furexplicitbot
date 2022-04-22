@@ -38,19 +38,18 @@ function buttonHandler(message, interaction, orgContent) {
 }
 
 module.exports.run = async (interaction) => {
-  if (!DEBUG) await interaction.deferReply();
   const query = interaction.options.getString('search', true);
-  let ammoumt = interaction.options.getNumber('ammount', false) || 1;
-  if (ammount < 0) ammoumt = 1;
-  if (ammoumt > 24) {
-    ammoumt = 24;
+  let amount = interaction.options.getNumber('amount', false) || 1;
+  if (amount < 0) amount = 1;
+  if (amount > 24) {
+    amount = 24;
     messageFail(interaction, uwu('You can only request a maximum of ßß24 images at the time.'), null, true);
   }
   const rating = interaction.channel.nsfw ? 7 : 1;
   const pics = await Search(query, { perpage: 24, rating });
-  pics.reverse().slice(-ammoumt).forEach(async (submission, i) => {
+  pics.slice(-amount).forEach(async (submission) => {
     const embed = prepareMessage(submission);
-    const message = await reply(interaction, { embeds: [embed], components: [buttons], fetchReply: true }, i);
+    const message = await reply(interaction, { embeds: [embed], components: [buttons], fetchReply: true }, true);
     buttonHandler(message, interaction, embed);
   });
 };
