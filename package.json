@@ -22,7 +22,7 @@
     "axios": "^0.26.1",
     "bufferutil": "^4.0.5",
     "discord.js": "^13.6.0",
-    "furaffinity-api": "^4.3.1",
+    "furaffinity-api": "^4.4.0",
     "mysql2": "^2.3.3",
     "p-queue": "^6.6.2",
     "sequelize": "^6.12.0",
