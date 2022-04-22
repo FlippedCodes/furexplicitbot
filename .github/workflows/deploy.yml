@@ -29,7 +29,7 @@ jobs:
       login_fa_cookie_a: ${{secrets.LOGIN_FA_COOKIE_A}}
       login_fa_cookie_b: ${{secrets.LOGIN_FA_COOKIE_B}}
       login_e621_user: ${{secrets.E621_LOGIN}}
-      e621_api_key: ${{secrets.E621_API_KEY}}
+      token_e621: ${{secrets.E621_API_KEY}}
       db_port: ${{ secrets.DB_PORT }}
       db_password: ${{ secrets.DB_PASSWORD }}
       db_password_root: ${{ secrets.DB_PASSWORD_ROOT }}
