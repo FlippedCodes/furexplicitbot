@@ -18,7 +18,7 @@ module.exports.run = async (interaction, autopostchannel, servertagsblacklist) =
   if (DBentries.length === 0) return messageFail(interaction, uwu('There are no autoposts configured.'));
   await DBentries.forEach(async (entry) => {
     const channel = await client.channels.cache.find((channel) => channel.id === entry.channelID);
-    embed.addField(`'#${channel.name}' - ${entry.interval}ms`, `${entry.tags} ${suffix.join(' ')}`, false);
+    embed.addField(`'#${channel.name}' - ${entry.interval}ms`, `\`${entry.tags} ${suffix.join(' ')}\``, false);
   });
   embed
     .setColor('GREEN')
