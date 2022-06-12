@@ -15,7 +15,7 @@ module.exports.run = async (interaction) => {
   if (command) {
     // if debuging trigger application thinking
     // TEMP: set to false to test some public commands
-    if (DEBUG) await interaction.deferReply({ ephemeral: false });
+    if (DEBUG) await interaction.deferReply();
     // rate limit commands
     const userID = interaction.member.id;
     if (usedRecently.has(userID)) return messageFail(interaction, uwu('Sorry, but you can\'t use me that often. Please wait 3 seconds between commands.'));
