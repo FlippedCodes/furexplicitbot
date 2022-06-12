@@ -10,7 +10,10 @@ const { default: PQueue } = require('p-queue');
 // init Discord client
 global.client = new Client({
   disableEveryone: true,
-  intents: [Intents.FLAGS.GUILDS],
+  intents: [
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILDS,
+  ],
 });
 // init config
 global.config = require('./config.json');
@@ -76,6 +79,9 @@ client.on('channelDelete', (channel) => client.functions.get('EVENT_channelDelet
 // client.on('messageReactionAdd', async (reaction, user) => {
 //   client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
 // });
+
+// TEMP: message Event gets removed once interactions are implemented on discord side
+client.on('messageCreate', (message) => client.functions.get('EVENT_messageCreate').run(message));
 
 // itneraction is triggered (command, autocomplete, etc.)
 client.on('interactionCreate', (interaction) => client.functions.get('EVENT_interactionCreate').run(interaction));
