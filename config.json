@@ -97,6 +97,12 @@
             "managementServerID": "569178297515245578"
         }
     },
+    "customEmoji": {
+        "serverID": "569178297515245578",
+        "emoji": {
+            "details": "714094023396032593"
+        }
+    },
     "engine": {
         "furaffinity": {
             "logo": "https://www.furaffinity.net/themes/beta/img/banners/fa_logo.png",
@@ -117,11 +123,6 @@
     "owner": "172031697355800577",
     "clientID": "534828939198070824",
     "clientIDTesting": "395581313052180483",
-    "emoji": {
-        "serverID": "569178297515245578",
-        "loading": "714093562576502867",
-        "details": "714094023396032593"
-    },
     "permissionsServerBlacklist": [
         "110373943822540800",
         "446425626988249089",
