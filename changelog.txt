@@ -2,8 +2,7 @@
 __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
-FurAffintiy can now be used in SFW channels as well! (SFW results).
-New /suggest command, to find your favorite tags and picutures from e621.
+New /suggest command, to find your favorite tags and kinks from e621.
 
 Important Changes:
 ßßAll commands moved to slash commands.
@@ -16,19 +15,18 @@ Lowered command timeout to ßß3 secounds.
 Now using ßßFurAffinity-API for better crawling and future command upgrade.
 
 Boring Bug Fixes:
-ONGOING: the search function of FA is currently not woring due to an issue in the new dependency.
 Blacklisted tags for autoposts no longer get stored permanantly in a DB entry.
 
 Working on, sorted in priority:
-Kinkfinder aka favorite tags finder
-Add a button to rerun a command
 Shard the bot, cause many discord servers now
+Get pool handler for e621 back up and running, was disabled in the update procedure
+Add a button to rerun a command
 Add a autopost for ßßfuraffinity for new posts from a artist
 Add a detailed view for ßßfuraffinity
 ...And alot more (too long for the update message)
 
 **Shameful self promotion:**
-Since the bot with all the features is free, I will drop a little self plug right here.
+Since the bot with all the features is free, I will drop a little self plug right here. ßß>.>
 Alongside this popular bot, I also code two other useful bots, that you might like:
 - ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
