@@ -21,7 +21,7 @@ module.exports.run = async (interaction, autopostchannel, servertagsblacklist) =
     embed.addField(`'#${channel.name}' - ${entry.interval}ms`, `${entry.tags} ${suffix.join(' ')}`, false);
   });
   embed
-    .setColor('green')
+    .setColor('GREEN')
     .setAuthor({ name: 'Autopost channels in this server:' });
   reply(interaction, { embeds: [embed] });
 };
