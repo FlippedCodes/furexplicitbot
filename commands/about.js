@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 const fs = require('fs');
 
 module.exports.run = async (interaction) => {
@@ -7,7 +9,13 @@ module.exports.run = async (interaction) => {
       messageFail(interaction, uwu('Oh, no! Something went wrong. Sorry about that :('));
       return;
     }
-    messageSuccess(interaction, uwu(content), 'ORANGE', true);
+    const embed = new MessageEmbed();
+    embed.setDescription(uwu(content))
+      .setColor('ORANGE')
+      .setTitle('About')
+      .setThumbnail(config.commands.about.logo);
+    reply(interaction, { embeds: [embed] });
+    // messageSuccess(interaction, uwu(content), 'ORANGE', true);
   });
 };
 

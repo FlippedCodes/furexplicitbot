@@ -1,5 +1,3 @@
-ßß**About:**
-
 Not that much about me here, sorry. 
 
 The e621 pictures are pulled from their API.
