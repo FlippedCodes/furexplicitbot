@@ -37,7 +37,7 @@ function buttonHandler(message, interaction, orgContent) {
   });
 }
 
-module.exports.run = async (interaction) => {
+module.exports.run = async (interaction, rating) => {
   const query = interaction.options.getString('search', true);
   let amount = interaction.options.getNumber('amount', false) || 1;
   if (amount < 0) amount = 1;
@@ -45,7 +45,6 @@ module.exports.run = async (interaction) => {
     amount = 24;
     messageFail(interaction, uwu('You can only request a maximum of ßß24 images at the time.'), null, true);
   }
-  const rating = interaction.channel.nsfw ? 7 : 1;
   const pics = await Search(query, { perpage: 24, rating });
   pics.slice(-amount).forEach(async (submission) => {
     const embed = prepareMessage(submission);
