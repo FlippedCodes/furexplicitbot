@@ -12,7 +12,7 @@ function pruneAutopost(channelID) {
 }
 
 module.exports.run = async (interaction, servertagsblacklist, tag) => {
-  const added = await removeTag(tag, interaction.guild.id);
+  const added = await removeTag(servertagsblacklist, tag, interaction.guild.id);
   if (added) {
     messageSuccess(interaction, 'Tag has been removed from the serwers blacklist.');
     pruneAutopost(interaction.channel.id);
