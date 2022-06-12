@@ -4,9 +4,8 @@ module.exports.run = async (interaction) => {
   const embed = new MessageEmbed()
     .setTitle('Halp')
     .setColor('ORANGE')
-    .setDescription(uwu('This command is deprecated, please use discord embedded slash-commands feature instead. (/)'))
-    .addField(uwu('Still need help?'), uwu(`
-  Join our server here: ßßhttps://discord.gg/fMYD6XR`));
+    .setDescription(uwu('This command is ßßdeprecated, please use discord embedded slash-commands feature instead. ßß(/)'))
+    .addField(uwu('Still need help?'), uwu('Join our server here: ßßhttps://discord.gg/fMYD6XR'));
   return reply(interaction, { embeds: [embed] });
 };
 
