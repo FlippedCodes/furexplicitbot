@@ -8,7 +8,6 @@ module.exports.run = async (interaction, force) => {
       return;
     }
     const editBody = force ? `Hello, I have been updated!\n\n${body}` : body;
-    // messageSuccess(interaction, editBody, 'ORANGE', true);
     reply(interaction, uwu(editBody));
   });
 };
