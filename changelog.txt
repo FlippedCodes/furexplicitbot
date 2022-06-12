@@ -2,21 +2,22 @@
 __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
-FurAffintiy can now be used in SFW channels as well! (SFW results)
+FurAffintiy can now be used in SFW channels as well! (SFW results).
+New /suggest command, to find your favorite tags and picutures from e621.
 
 Important Changes:
-ßßAll commands moved to slash commands
-Advanced ßßUwU ßßtalk™ (as you can see... works pretty well)
-Source search as been moved to ßßSauceNAO
-Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**
-Removed prefix command, as now using slash commands
-Code rewrite for ßßFA (now using a proper ßßdependency)
-Lowered command timeout to ßß3 secounds
-Now using ßßFurAffinity-API for better crawling and future command upgrade
+ßßAll commands moved to slash commands.
+Advanced ßßUwU ßßtalk™ (as you can see... works pretty well).
+Source search as been moved to ßßSauceNAO.
+Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**.
+Removed prefix command, as now using slash commands.
+Code rewrite for ßßFA (now using a proper ßßdependency).
+Lowered command timeout to ßß3 secounds.
+Now using ßßFurAffinity-API for better crawling and future command upgrade.
 
 Boring Bug Fixes:
-ONGOING: the search function of FA is currently not woring due to an issue in the new dependency
-Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
+ONGOING: the search function of FA is currently not woring due to an issue in the new dependency.
+Blacklisted tags for autoposts no longer get stored permanantly in a DB entry.
 
 Working on, sorted in priority:
 Kinkfinder aka favorite tags finder
