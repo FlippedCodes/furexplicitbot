@@ -14,10 +14,10 @@ function pruneAutopost(channelID) {
 module.exports.run = async (interaction, servertagsblacklist, tag) => {
   const added = await removeTag(tag, interaction.guild.id);
   if (added) {
-    messageSuccess(interaction, `\`${tag}\` has been removed from the serwers blacklist.`);
+    messageSuccess(interaction, 'Tag has been removed from the serwers blacklist.');
     pruneAutopost(interaction.channel.id);
   } else {
-    messageFail(interaction, `\`${tag}\` doesn't exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)`);
+    messageFail(interaction, 'This tag doesn\'t exist on the serwers backlist. \n(Keep in mind that we have also globally blocked tags!)');
   }
 };
 
