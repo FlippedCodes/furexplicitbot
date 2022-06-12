@@ -25,6 +25,7 @@ module.exports.data = new CmdBuilder()
     .addStringOption((option) => option
       .setName('tags')
       .setDescription('Lewt  me knowo the twags you want to see!')
+      .setAutocomplete(true)
       .setRequired(true))
     .addNumberOption((option) => option
       .setName('interval')

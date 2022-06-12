@@ -16,5 +16,5 @@ module.exports.run = async (searchInput, serverID) => {
 };
 
 module.exports.data = {
-  name: 'server',
+  name: 'channel',
 };
