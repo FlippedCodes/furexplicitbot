@@ -1,23 +1,8 @@
 const postcache = require('../../database/models/postcache');
 
-// creates a embed messagetemplate for succeded actions
-function messageSuccess(message, body) {
-  const client = message.client;
-  client.functions.get('FUNC_MessageEmbedMessage')
-    .run(client.user, message.channel, body, '', 4296754, false);
-}
-
-// creates a embed messagetemplate for failed actions
-function messageFail(message, body) {
-  const client = message.client;
-  client.functions.get('FUNC_MessageEmbedMessage')
-    .run(client.user, message.channel, body, '', 16449540, false)
-    .then((msg) => msg.delete({ timeout: 10000 }));
-}
-
-async function removeTag(tag, serverID) {
-  if (!await servertagsblacklist.findOne({ where: { serverID, tag } }).catch(ERR)) return false;
-  await servertagsblacklist.destroy({ where: { serverID, tag } }).catch(ERR);
+async function removeTag(servertagsblacklist, id, serverID) {
+  if (!await servertagsblacklist.findOne({ where: { serverID, id } }).catch(ERR)) return false;
+  await servertagsblacklist.destroy({ where: { serverID, id } }).catch(ERR);
   return true;
 }
 
