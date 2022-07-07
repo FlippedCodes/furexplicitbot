@@ -128,6 +128,13 @@
                 "autocomplete": "https://inkbunny.net/api_search_autosuggest.php"
             }
         },
+        "rule34": {
+            "logo": "https://cdn.discordapp.com/attachments/985540873007808512/985540887067103242/unknown.png",
+            "color": "aae5a3",
+            "endpoint": {
+                "main": "https://api.rule34.xxx/index.php",
+                "autocomplete": "https://rule34.xxx/public/autocomplete.php"
+            }
         }
     },
     "OLD CONFIG BELOW-------------------------------------------------------------": true,
