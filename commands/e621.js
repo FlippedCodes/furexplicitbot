@@ -106,4 +106,4 @@ module.exports.data = new CmdBuilder()
   // .setRequired(true))
   .addNumberOption((option) => option
     .setName('amount')
-    .setDescription('A maximum o...of 10 can be fetched.'));
+    .setDescription('A maximum o...of 10 can be prowided.'));

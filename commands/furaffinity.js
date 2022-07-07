@@ -18,7 +18,7 @@ module.exports.data = new CmdBuilder()
     .setDescription('Get the most revent uploaded pictures.')
     .addNumberOption((option) => option
       .setName('amount')
-      .setDescription('A maximum o...of 24 can be fetched.')))
+      .setDescription('A maximum o...of 24 can be prowided.')))
   .addSubcommand((SC) => SC
     .setName('search')
     .setDescription('Remove a blacklisted tag.')
@@ -28,4 +28,4 @@ module.exports.data = new CmdBuilder()
       .setRequired(true))
     .addNumberOption((option) => option
       .setName('amount')
-      .setDescription('A maximum o...of 24 can be fetched.')));
+      .setDescription('A maximum o...of 24 can be prowided.')));
