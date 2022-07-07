@@ -119,6 +119,15 @@
             },
             "poolEndpoint": "https://e621.net/pools.json",
             "autocompleteEndpoint": "https://e621.net/tags/autocomplete.json"
+        },
+        "inkbunny": {
+            "logo": "http://2017.furrnion.org/wp-content/themes/vantage/img/social_ib.png",
+            "color": "73d216",
+            "endpoint": {
+                "main": "https://inkbunny.net/",
+                "autocomplete": "https://inkbunny.net/api_search_autosuggest.php"
+            }
+        },
         }
     },
     "OLD CONFIG BELOW-------------------------------------------------------------": true,
