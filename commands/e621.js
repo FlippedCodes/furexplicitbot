@@ -65,10 +65,12 @@ function buttonHandler(interaction, message, orgContent, submission) {
 
     // TODO: check if collector should be stopped; check permission management
     buttonCollector.stop();
-    if (used.customId === 'delete') {
-      if (interaction.user.id === used || !interaction.memberPermissions.has('MANAGE_MESSAGES')) return message.delete();
-      return;
-    }
+    // TODO: not sure what was planned with the below function, but it broke delete funciton.
+    if (used.customId === 'delete') return message.delete();
+    // if (used.customId === 'delete') {
+    //   if (interaction.user.id === used || !interaction.memberPermissions.has('MANAGE_MESSAGES')) return message.delete();
+    //   return;
+    // }
     client.commands.get(`${module.exports.data.name}_COMPONENT_button_${used.customId}`).run(interaction, message, submission);
   });
   buttonCollector.on('end', async (collected) => {
