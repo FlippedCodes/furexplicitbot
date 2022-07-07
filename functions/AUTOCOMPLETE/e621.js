@@ -2,7 +2,7 @@
 
 module.exports.run = async (interaction) => {
   const command = interaction.options.getFocused(true);
-  const response = await client.functions.get(`AUTOCOMPLETE_RESOLVE_e621_${command.name}`).run(command.value).catch(ERR);
+  const response = await client.functions.get(`AUTOCOMPLETE_RESOLVE_${module.exports.data.name}_${command.name}`).run(command.value).catch(ERR);
   return interaction.respond(response);
 };
 

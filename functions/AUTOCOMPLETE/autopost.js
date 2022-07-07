@@ -9,7 +9,7 @@ module.exports.run = async (interaction) => {
 
   const command = interaction.options.getFocused(true);
   const guildID = interaction.guild.id;
-  const response = await client.functions.get(`AUTOCOMPLETE_RESOLVE_autopost_${command.name}`).run(command.value, guildID).catch(ERR);
+  const response = await client.functions.get(`AUTOCOMPLETE_RESOLVE_${module.exports.data.name}_${command.name}`).run(command.value, guildID).catch(ERR);
   return interaction.respond(response);
 };
 
