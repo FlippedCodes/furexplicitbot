@@ -45,7 +45,7 @@ function prepareMessage(submission) {
   const extention = submission.file.ext;
   let picURL = submission.sample.url;
   if (extention === 'gif') picURL = submission.file.url;
-  if (extention === 'webm' || extention === 'swf') embed.addField('Direct video link', submission.file.url);
+  const video = extention === 'webm' || extention === 'swf' || extention === 'mp4';
   embed
     .setColor(config.engine.e621.color)
     .setTitle(`Artist: ${submission.tags.artist[0]} [e621 link]`)
