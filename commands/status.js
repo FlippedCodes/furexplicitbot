@@ -38,10 +38,10 @@ module.exports.run = async (interaction) => {
   });
   const embed = new MessageEmbed();
   embed.setAuthor({ name: 'Flipped Codes - Status Page [Link]', iconURL: uptimeConfig.embed.icon, url: uptimeConfig.embed.url });
-  embed.setFooter({ text: 'Updated every minute' });
+  embed.setFooter({ text: uwu('Updates every minute') });
   setOverallStatus({ isUpOverall, embed });
   // add all services to embed
-  uptimeInfo.forEach((service) => embed.addField(service.name, `${service.isUp ? '🟢' : '🔴'} ${service.uptimePercentage.toFixed(2)}%`, true));
+  uptimeInfo.forEach((service) => embed.addField(service.name, `${service.isUp ? '🟢' : '🔴'} ${Math.floor(service.uptimePercentage)}%`, true));
   reply(interaction, { embeds: [embed] });
 };
 
