@@ -3,9 +3,11 @@ __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
 New /suggest command, to find your favorite tags and kinks from e621.
+Autocomplete for tags ßß(not advised to use on mobile ßß(Blame ßßDiscord), tags can be used without ßßautocomplete)
 
 Important Changes:
 ßßAll commands moved to slash commands.
+Proper implementation of InkBunny and rule34.
 Advanced ßßUwU ßßtalk™ (as you can see... works pretty well).
 Source search as been moved to ßßSauceNAO.
 Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**.
