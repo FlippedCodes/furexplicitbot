@@ -39,11 +39,6 @@ function addTags(submission, poolData, embed) {
   const typeArtists = tags.artist.length === 1 ? 'Artist' : 'All artists';
   embed.setAuthor({ name: `${typeArtists}: ${artists}`, url: `https://e621.net/posts?tags=${tags.artist[0]}` });
 
-  const extention = submission.file.ext;
-  if (extention === 'webm' || extention === 'swf') {
-    embed.addField('Direct video link', submission.file_url);
-  }
-
   if (tags.character.length) embed.addField('Character tags', formatTags(tags.character), true);
   if (tags.species.length) embed.addField('Species tags', formatTags(tags.species), true);
   if (tags.copyright.length) embed.addField('Copyright tags', formatTags(tags.copyright), true);
