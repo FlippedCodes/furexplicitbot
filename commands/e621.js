@@ -46,12 +46,13 @@ function prepareMessage(submission) {
   let picURL = submission.sample.url;
   if (extention === 'gif') picURL = submission.file.url;
   const video = extention === 'webm' || extention === 'swf' || extention === 'mp4';
+  if (video) embed.addField('Direct video link', submission.file.url);
   embed
     .setColor(config.engine.e621.color)
     .setTitle(`Artist: ${submission.tags.artist[0]} [e621 link]`)
     .setURL(`https://e621.net/posts/${submission.id}`)
     .setImage(picURL)
-    .setFooter({ text: 'Picture from e621.net', iconURL: config.engine.e621.logo });
+    .setFooter({ text: `${video ? 'Video' : 'Picture'} from e621.net`, iconURL: config.engine.e621.logo });
   return embed;
 }
 
