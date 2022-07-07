@@ -76,7 +76,7 @@ function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) 
     const extention = post.file.ext;
     let picURL = post.sample.url;
     if (extention === 'gif') picURL = post.file.url;
-    if (extention === 'webm' || extention === 'swf') embed.addField('Direct video link', post.file.url);
+    if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addField('Direct video link', post.file.url);
     embed
       .setColor(config.e621.color)
       .setTitle(`Artist: ${post.tags.artist[0]} [e621 link]`)
