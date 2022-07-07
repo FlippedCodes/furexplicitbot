@@ -66,6 +66,10 @@ function prepareMessage(submission, orgMessage, poolData) {
     if (submission.sources.length === 1) typeSources = 'Source';
   }
 
+  const extention = submission.file.ext;
+  const video = extention === 'webm' || extention === 'swf' || extention === 'mp4';
+  const videoPicture = video ? 'Video' : 'Picture';
+
   // TODO: better field implementation with map
   embed
     .setColor(orgMessage.embeds[0].color)
@@ -77,9 +81,9 @@ function prepareMessage(submission, orgMessage, poolData) {
     .addField('ID', `${submission.id}`, true)
     .addField('Resolution', `${submission.file.width}x${submission.file.height}`, true)
     .addField(typeSources, source)
-    .addField('Full Picture link', submission.file.url)
-    .setImage(submission.file.url)
-    .setFooter({ text: 'Picture from e621.net', iconURL: config.engine.e621.logo });
+    .addField(`Full ${videoPicture} link`, submission.file.url)
+    .setImage(video ? submission.sample.url : submission.file.url)
+    .setFooter({ text: `${videoPicture} from e621.net`, iconURL: config.engine.e621.logo });
   return embed;
 }
 
