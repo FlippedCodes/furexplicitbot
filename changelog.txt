@@ -1,5 +1,5 @@
 **Changelog:**
-__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
+__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot and much more__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
 New /suggest command, to find your favorite tags and kinks from e621.
