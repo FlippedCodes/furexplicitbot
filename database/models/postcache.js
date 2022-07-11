@@ -10,7 +10,7 @@ module.exports = sequelize.define(
       autoIncrement: true,
     },
     channelID: {
-      type: Sequelize.INTEGER(10),
+      type: Sequelize.STRING(30),
       allowNull: false,
       // references: {
       //   model: 'autopostchannels',
@@ -18,7 +18,7 @@ module.exports = sequelize.define(
       // },
     },
     postID: {
-      type: Sequelize.INTEGER(10),
+      type: Sequelize.INTEGER(20),
       allowNull: false,
     },
     artist: {
