@@ -12,7 +12,8 @@ const buttons = new MessageActionRow()
   .addComponents([
     new MessageButton()
       .setCustomId('details')
-      .setEmoji(client.guilds.cache.get(config.customEmoji.serverID).emojis.cache.get(config.customEmoji.emoji.details))
+      .setEmoji('📖')
+      // .setEmoji(client.guilds.cache.get(config.customEmoji.serverID).emojis.cache.get(config.customEmoji.emoji.details))
       .setLabel('Show details')
       .setStyle('PRIMARY'),
     new MessageButton()
