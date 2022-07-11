@@ -41,7 +41,7 @@ module.exports.run = () => {
     channels.forEach(async (autoPost) => {
       const channelID = autoPost.channelID;
       const channel = client.channels.cache.find((channel) => channel.id === channelID);
-      if (!channel) return console.warn(`ChannelID ${channelID} couldn't be found`);
+      if (!channel) return console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
       const shardID = channel.guild.shardId;
       if (currentShardID !== shardID) return;
       // TODO: check if nsfw channel changed and delete cache
