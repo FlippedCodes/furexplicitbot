@@ -1,5 +1,6 @@
 **Changelog:**
 __Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot and much more__
+⚠️ This build is very new and might have some bugs. If you spot any, please report them to our server in ßß`/about`. Thank you!
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
 New /suggest command, to find your favorite tags and kinks from e621.
@@ -15,9 +16,6 @@ Removed prefix command, as now using slash commands.
 Code rewrite for ßßFA (now using a proper ßßdependency).
 Lowered command timeout to ßß3 secounds.
 Now using ßßFurAffinity-API for better crawling and future command upgrade.
-
-Boring Bug Fixes:
-Blacklisted tags for autoposts no longer get stored permanantly in a DB entry.
 
 Working on, sorted in priority:
 Shard the bot, cause many discord servers now
