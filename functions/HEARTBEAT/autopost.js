@@ -11,9 +11,9 @@ const autopostchannel = require('../../database/models/autopostchannel');
 //   postcache.destroy({ where: { channelID } }).catch(ERR);
 // }
 
-async function getChannels(currentTimestamp, config) {
-  // currentTimestamp += config.e621.autopost.dbOffset;
+async function getChannels(currentTimestamp) {
   const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: currentTimestamp } } });
+  // const result = await autopostchannel.findAll();
   return result;
 }
 
@@ -22,37 +22,36 @@ function updateTime(channelID, currentTimestamp, interval) {
   autopostchannel.update({ nextEvent }, { where: { channelID } });
 }
 
-function postMessage(post, channel, config) {
+function postMessage(post, channel) {
   const embed = new MessageEmbed();
   embed
-    .setColor(config.e621.color)
+    .setColor(config.engine.e621.color)
     .setTitle(`Artist: ${post.artist} [e621 link]`)
     .setURL(`https://e621.net/posts/${post.postID}`)
     .setImage(post.directLink)
-    .setFooter({ text: config.e621.label, iconURL: config.e621.logo })
+    .setFooter({ text: 'Picture from e621.net', iconURL: config.engine.e621.logo })
     .setTimestamp();
-  channel.send({ embed });
+  channel.send({ embeds: [embed] });
 }
 
-module.exports.run = (client, config) => {
+module.exports.run = () => {
   setInterval(async () => {
-    const date = new Date();
-    const currentTimestamp = date.getTime();
-    const channels = await getChannels(currentTimestamp, config);
+    const currentTimestamp = new Date();
+    const channels = await getChannels(currentTimestamp);
     channels.forEach(async (autoPost) => {
       const channelID = autoPost.channelID;
       const channel = client.channels.cache.find((channel) => channel.id === channelID);
+      if (!channel) return console.warn(`ChannelID ${channelID} couldn't be found`);
       const shardID = channel.guild.shardId;
       if (currentShardID !== shardID) return;
-      if (!channel) return console.warn(`ChannelID ${channelID} couldn't be found`);
       // TODO: check if nsfw channel changed and delete cache
       // if ()
       const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
       // tags, channelID, nsfw
-      postMessage(post, channel, config);
+      postMessage(post, channel);
       updateTime(channelID, currentTimestamp, autoPost.interval);
     });
-  }, config.e621.autopost.intervalChecker);
+  }, config.commands.autopost.intervalChecker);
 };
 
 module.exports.help = {
