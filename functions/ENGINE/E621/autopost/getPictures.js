@@ -5,7 +5,7 @@ const postcache = require('../../../../database/models/postcache');
 async function getTags(tagsRaw, serverID) {
   const tags = tagsRaw.replaceAll(', ', ' ');
   const interaction = { guild: { id: serverID } };
-  const safeTags = await interaction.client.functions.get('ENGINE_tagsCleanup').run(interaction, tags);
+  const safeTags = await client.functions.get('ENGINE_tagsCleanup').run(interaction, tags);
   return safeTags;
 }
 
