@@ -29,6 +29,7 @@ global.LOG = (msg) => console.log(`[${currentShardID}]${msg}`);
 
 global.ERR = (err) => {
   console.error(`[${currentShardID}] ERROR:`, err);
+  return;
   if (DEBUG) return;
   const { MessageEmbed } = require('discord.js');
   const embed = new MessageEmbed()
