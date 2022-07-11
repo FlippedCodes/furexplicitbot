@@ -13,6 +13,8 @@ module.exports.run = () => {
   client.functions.get('HEARTBEAT_BOTLIST_motiondevelopment').run();
   // uptime page
   client.functions.get('HEARTBEAT_uptime').run();
+  // autopost (e621)
+  client.functions.get('HEARTBEAT_autopost').run();
 };
 
 module.exports.data = {

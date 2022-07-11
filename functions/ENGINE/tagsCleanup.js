@@ -9,7 +9,8 @@ function tagsReplace(tags, search, replace) {
   return tags.replace(new RegExp(search, 'g'), replace);
 }
 
-module.exports.run = async (interaction, tags) => {
+module.exports.run = async (interaction, tagsOld) => {
+  let tags = tagsOld;
   const blacklistedTags = await getTags(interaction.guild.id);
   const suffix = [];
 
