@@ -1,6 +1,6 @@
-const config = require('../config/main.json');
+// const config = require('../config/main.json');
 
-const autosourcechannel = require('../database/models/autosourcechannel');
+// const autosourcechannel = require('../database/models/autosourcechannel');
 
 async function getCheck(serverID) {
   const result = await autosourcechannel.findAll({ attributes: ['channelID'], where: { serverID } });
