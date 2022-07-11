@@ -1,13 +1,15 @@
 const clean = (text) => {
   if (typeof (text) === 'string') {
-    // eslint-disable-next-line no-param-reassign
-    Object.values(process.env).forEach((env) => text = text.replaceAll(env, '****NOPE****'));
+    Object.values(process.env).forEach((env) => {
+      if (env.length <= 3) return;
+      // eslint-disable-next-line no-param-reassign
+      text = text.replaceAll(env, '****NOPE****');
+    });
     return text.replaceAll(/`/g, `\`${String.fromCharCode(8203)}`)
       .replaceAll(/@/g, `@${String.fromCharCode(8203)}`);
   }
   return text;
 };
-
 module.exports.run = async (interaction) => {
   // check owner permissions
   if (interaction.user.id !== '172031697355800577') return messageFail(interaction, `You are not authorized to use \`/${module.exports.data.name}\``, null, false);
