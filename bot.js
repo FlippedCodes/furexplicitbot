@@ -28,11 +28,11 @@ global.currentShardID = 'Unknown Shard ID';
 global.LOG = (msg) => console.log(`[${currentShardID}]${msg}`);
 
 global.ERR = (err) => {
-  console.error('ERROR:', err);
+  console.error(`[${currentShardID}] ERROR:`, err);
   if (DEBUG) return;
   const { MessageEmbed } = require('discord.js');
   const embed = new MessageEmbed()
-    .setAuthor({ name: `Error: '${err.message}'` })
+    .setAuthor({ name: `[${currentShardID}] Error: '${err.message}'` })
     .setDescription(`STACKTRACE:\n\`\`\`${err.stack.slice(0, 4000)}\`\`\``)
     .setColor('RED');
   client.channels.cache.get(config.logChannel).send({ embeds: [embed] });
