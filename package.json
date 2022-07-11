@@ -1,6 +1,6 @@
 {
   "name": "furexplicitbot",
-  "version": "2.9.3",
+  "version": "3.0.0",
   "description": "I'm providing NSFW Furry images from different websites.",
   "main": "index.js",
   "scripts": {
@@ -12,23 +12,26 @@
   },
   "keywords": [],
   "author": "phil",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/FlipperLP/furexplicitbot/issues"
   },
   "homepage": "https://github.com/FlipperLP/furexplicitbot#readme",
   "dependencies": {
-    "discord.js": "^12.5.1",
-    "furaffinity": "github:FlipperLP/furaffinity",
-    "mysql2": "^2.2.5",
-    "nhentai-api": "^3.0.2",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
-    "sequelize": "^5.22.3"
+    "@discordjs/builders": "^0.11.0",
+    "axios": "^0.26.1",
+    "bufferutil": "^4.0.5",
+    "discord.js": "^13.8.0",
+    "furaffinity-api": "^4.4.0",
+    "mysql2": "^2.3.3",
+    "p-queue": "^6.6.2",
+    "sequelize": "^6.12.0",
+    "utf-8-validate": "^5.0.7",
+    "uwuifier": "^4.0.4"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
   }
 }

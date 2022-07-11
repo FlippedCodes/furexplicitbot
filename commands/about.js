@@ -1,18 +1,24 @@
+const { MessageEmbed } = require('discord.js');
+
 const fs = require('fs');
 
-module.exports.run = async (client, message) => {
-  fs.readFile('./config/about.txt', 'utf8', (err, data) => {
+module.exports.run = async (interaction) => {
+  fs.readFile(config.commands.about.text, 'utf8', (err, content) => {
     if (err) {
-      console.log(err);
-      message.react('❌');
+      LOG(err);
+      messageFail(interaction, uwu('Oh, no! Something went wrong. Sorry about that :('));
       return;
     }
-    message.channel.send(data);
+    const embed = new MessageEmbed();
+    embed.setDescription(uwu(content))
+      .setColor('ORANGE')
+      .setTitle('About')
+      .setThumbnail(config.commands.about.logo);
+    reply(interaction, { embeds: [embed] });
+    // messageSuccess(interaction, uwu(content), 'ORANGE', true);
   });
 };
 
-module.exports.help = {
-  name: 'about',
-  title: 'About',
-  desc: 'Learn mowre about me!',
-};
+module.exports.data = new CmdBuilder()
+  .setName('about')
+  .setDescription('Learn more about me!');

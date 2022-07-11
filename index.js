@@ -1,55 +1,14 @@
-const Discord = require('discord.js');
+const { ShardingManager } = require('discord.js');
 
-const { MessageEmbed } = require('discord.js');
+const manager = new ShardingManager('./bot.js', { token: process.env.token_discord });
 
-const client = new Discord.Client({ disableEveryone: true });
+// manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
 
-const fs = require('fs');
+manager.spawn();
 
-const config = require('./config/main.json');
-
-const usedRecentlyMessages = new Set();
-
-const usedRecentlyReactions = new Set();
-
-const messageOwner = new Map();
-
-// create new collections in client and config
-client.functions = new Discord.Collection();
-client.commands = new Discord.Collection();
-config.env = new Discord.Collection();
-
-// import Functions and Commands
-config.setup.startupFunctions.forEach((FCN) => {
-  const INIT = require(`./functions/${FCN}.js`);
-  INIT.run(client, fs, config);
-});
-
-// create conenction to DB
-require('./database/SETUP_DBConnection');
-
-// Login the bot
-client.login(config.env.get('token'));
-
-client.on('ready', async () => {
-  console.log(`Logged in as ${client.user.tag} serving ${client.guilds.cache.size} Servers!`);
-
-  // start setup Functions
-  config.setup.setupFunctions.forEach((FCN) => {
-    client.functions.get(FCN).run(client, config);
+manager.on('shardCreate', (shard) => {
+  shard.on('spawn', () => {
+    console.log(`Launched shard ${shard.id}`);
+    shard.send({ type: 'shardID', data: { shardID: shard.id } });
   });
-});
-
-client.on('message', async (message) => {
-  client.functions.get('EVENT_message').run(client, message, config, messageOwner, usedRecentlyMessages);
-});
-
-// trigger on guildDelete
-client.on('guildDelete', (guild) => { client.functions.get('EVENT_guildDelete').run(guild); });
-
-// trigger on channelDeletion
-client.on('channelDelete', (channel) => { client.functions.get('EVENT_channelDelete').run(channel); });
-
-client.on('messageReactionAdd', async (reaction, user) => {
-  client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
 });

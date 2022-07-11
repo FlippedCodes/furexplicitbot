@@ -1,22 +1,36 @@
 **Changelog:**
-__New Stuff__
-- none
+__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot and much more__
+New Stuff:
+Status Page! Run ßß`/status` to see if a service is down.
+New /suggest command, to find your favorite tags and kinks from e621.
+Autocomplete for tags ßß(not advised to use on mobile ßß(Blame Discord for bad ßßimplementation), tags can be used without ßßautocomplete)
 
-__(Important) Changes__
-* added servercount to bot websites
+Important Changes:
+ßßAll commands moved to slash commands.
+Proper implementation of InkBunny and rule34.
+Advanced ßßUwU ßßtalk™ (as you can see... works pretty well).
+Source search as been moved to ßßSauceNAO.
+Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**.
+Removed prefix command, as now using slash commands.
+Code rewrite for ßßFA (now using a proper ßßdependency).
+Lowered command timeout to ßß3 secounds.
+Now using ßßFurAffinity-API for better crawling and future command upgrade.
 
-__Boring Bugfixes__
-* Blacklisted tags for autoposts no longer get stored permanantly in a DB entry
+Boring Bug Fixes:
+Blacklisted tags for autoposts no longer get stored permanantly in a DB entry.
 
-__Working on__
-code rewrite for FA
-code rewrite for r34
-code rewrite for IB
-whitelist/blacklist (not sure yet) tags in certain channels
-user suggestion: default tags for e621 commands (originally: required score)
-add furrynetwork command
-user suggestion: add nhentai command
-(add sofurry command)
-(autodetect source)
+Working on, sorted in priority:
+Shard the bot, cause many discord servers now
+Get pool handler for e621 back up and running, was disabled in the update procedure
+Add a button to rerun a command
+Add a autopost for ßßfuraffinity for new posts from a artist
+Add a detailed view for ßßfuraffinity
+...And alot more (too long for the update message)
 
-This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in +help.
+**Shameful self promotion:**
+Since the bot with all the features is free, I will drop a little self plug right here. ßß>.>
+Alongside this popular bot, I also code two other useful bots, that you might like:
+- ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
+- ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
+
+This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in ßß/about. ^^

@@ -7,18 +7,24 @@ services:
       - db-feb
     restart: always
     environment:
-      BotToken: ${DISCORD_BOT_TOKEN}
-      FA_COOKIE_A: ${FA_COOKIE_A}
-      FA_COOKIE_B: ${FA_COOKIE_B}
-      e621_login: ${e621_login}
-      e621_api_key: ${e621_api_key}
+      token_discord: ${token_discord}
+      token_uptime: ${token_uptime}
+      token_botsondiscord: ${token_botsondiscord}
       token_discordbotlist: ${token_discordbotlist}
+      token_discordlist: ${token_discordlist}
+      token_discords: ${token_discords}
+      token_discordbots: ${token_discordbots}
       token_motiondevelopment: ${token_motiondevelopment}
-      DB_dialect: mysql
-      DB_host: db-feb
-      DB_name: furExplicitBot
-      DB_user: furExplicitBot
-      DB_passw: ${DB_PASSWORD}
+      token_saucenao: ${token_saucenao}
+      login_fa_cookie_a: ${login_fa_cookie_a}
+      login_fa_cookie_b: ${login_fa_cookie_b}
+      login_e621_user: ${login_e621_user}
+      token_e621: ${token_e621}
+      db_dialect: mysql
+      db_host: db-feb
+      db_name: furExplicitBot
+      db_user: furExplicitBot
+      db_passw: ${db_password}
   db-feb:
     image: mariadb:latest
     restart: always
@@ -27,10 +33,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD_ROOT}
+      MYSQL_ROOT_PASSWORD: ${db_password_root}
       MYSQL_DATABASE: furExplicitBot
       MYSQL_USER: furExplicitBot
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${db_password}
 
 networks:
   default:

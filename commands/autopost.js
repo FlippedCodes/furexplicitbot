@@ -1,33 +1,44 @@
-// prepares command usage message
-function CommandUsage(prefix, cmdName, subcmd) {
-  return `Command usage: 
-    \`\`\`${prefix}${cmdName} ${subcmd}\`\`\``;
-}
+const autopostchannel = require('../database/models/autopostchannel');
 
-// creates a embed messagetemplate for failed actions
-function messageFail(client, message, body) {
-  client.functions.get('FUNC_MessageEmbedMessage')
-    .run(client.user, message.channel, body, '', 16449540, false);
-}
+const servertagsblacklist = require('../database/models/servertagsblacklist');
 
-module.exports.run = async (client, message, args, config, MessageEmbed) => {
-  // check DM
-  if (message.channel.type === 'dm') return messageFail(client, message, 'This comamnd is for servers only.');
-  const [subcmd] = args;
-  const commandValues = ['add', 'remove', 'list'];
-  const currentCMD = module.exports.help;
-  const prefix = await client.functions.get('FUNC_getPrefix').run(message);
-  if (commandValues.includes(subcmd)) {
-    client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
-      .run(client, message, args, config, MessageEmbed, prefix);
-  } else {
-    messageFail(client, message, CommandUsage(prefix, currentCMD.name, currentCMD.usage));
+module.exports.run = async (interaction) => {
+  const subName = interaction.options.getSubcommand(true);
+  if (subName !== 'list' && !interaction.memberPermissions.has('MANAGE_GUILD')) {
+    messageFail(interaction, uwu('You don\'t hawe access to this command ßßòwó ßß\nYou need at least the Manage Server permission.'));
+    return;
   }
+  client.commands.get(`${module.exports.data.name}_${subName}`).run(interaction, autopostchannel, servertagsblacklist);
 };
 
-module.exports.help = {
-  name: 'autopost',
-  title: 'Auto-Post e621',
-  usage: 'add|remove|list',
-  desc: 'Autopost e621 pictures in a channel.',
-};
+module.exports.data = new CmdBuilder()
+  .setName('autopost')
+  .setDescription('Autopost e621 pictures in a channel.')
+  .addSubcommand((SC) => SC
+    .setName('add')
+    .setDescription('Add a new autopost chwannel.')
+    .addChannelOption((option) => option
+      .setName('channel')
+      .setDescription('Prowide a channel you mwe to post in.')
+      .addChannelType(0)
+      .setRequired(true))
+    .addStringOption((option) => option
+      .setName('tags')
+      .setDescription('Lewt  me knowo the twags you want to see!')
+      .setAutocomplete(true)
+      .setRequired(true))
+    .addNumberOption((option) => option
+      .setName('interval')
+      .setDescription(`The interval in milliseconds. (Nweeds to be between ${config.commands.autopost.minPostTime}ms and ${config.commands.autopost.maxPostTime}ms.)`)
+      .setRequired(true)))
+  .addSubcommand((SC) => SC
+    .setName('remove')
+    .setDescription('Remove a autopost channel.')
+    .addStringOption((option) => option
+      .setName('channel')
+      .setDescription('Provide a autopost to remove.')
+      .setAutocomplete(true)
+      .setRequired(true)))
+  .addSubcommand((SC) => SC
+    .setName('list')
+    .setDescription('List all autopost channels.'));

@@ -1,5 +1,6 @@
 # get node
-FROM node:12
+# TODO: test if functional version
+FROM node:current-buster-slim
 
 # RUN apk add --no-cache git
 
