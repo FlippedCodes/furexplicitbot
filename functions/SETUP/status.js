@@ -1,6 +1,6 @@
 module.exports.run = async () => {
   if (DEBUG) return;
-  console.log(`[${module.exports.data.name}] Setting status...`);
+  LOG(`[${module.exports.data.name}] Setting status...`);
   await client.user.setStatus('online');
   await client.user.setActivity(`${client.guilds.cache.size} servers.`, { type: 'LISTENING' });
   // TODO: sharing version
@@ -8,6 +8,7 @@ module.exports.run = async () => {
   // const guildCounts = guildCountsArr.reduce((previousCount, currentCount) => previousCount + currentCount, 0);
   // await client.user.setActivity(`${guildCounts} servers.`, { type: 'LISTENING' });
   console.log(`[${module.exports.data.name}] Status set!`);
+  LOG(`[${module.exports.data.name}] Status set!`);
 };
 
 module.exports.data = {

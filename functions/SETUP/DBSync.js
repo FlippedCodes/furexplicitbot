@@ -1,8 +1,8 @@
 module.exports.run = async () => {
   // setup tables
-  console.log('[DB] Syncing tables...');
+  LOG('[DB] Syncing tables...');
   await sequelize.sync();
-  await console.log('[DB] Done syncing!');
+  await LOG('[DB] Done syncing!');
 };
 
 module.exports.data = {

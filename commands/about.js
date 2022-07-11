@@ -5,7 +5,7 @@ const fs = require('fs');
 module.exports.run = async (interaction) => {
   fs.readFile(config.commands.about.text, 'utf8', (err, content) => {
     if (err) {
-      console.log(err);
+      LOG(err);
       messageFail(interaction, uwu('Oh, no! Something went wrong. Sorry about that :('));
       return;
     }

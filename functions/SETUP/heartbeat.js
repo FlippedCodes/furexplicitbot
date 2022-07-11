@@ -1,7 +1,7 @@
 // Calls all the functions that are needed for a heartbeat
 module.exports.run = () => {
   if (DEBUG) return;
-  console.log(`[${module.exports.data.name}] Start sending heartbeats...`);
+  LOG(`[${module.exports.data.name}] Start sending heartbeats...`);
   // botlists
   // TODO: Better implementation: call on startup or when servercount changes
   // TODO: Generelize function as all are quite simmilar

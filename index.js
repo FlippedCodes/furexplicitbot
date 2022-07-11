@@ -2,6 +2,13 @@ const { ShardingManager } = require('discord.js');
 
 const manager = new ShardingManager('./bot.js', { token: process.env.token_discord });
 
-manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
+// manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
 
 manager.spawn();
+
+manager.on('shardCreate', (shard) => {
+  shard.on('spawn', () => {
+    console.log(`Launched shard ${shard.id}`);
+    shard.send({ type: 'shardID', data: { shardID: shard.id } });
+  });
+});

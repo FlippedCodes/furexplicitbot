@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports.run = async () => {
-  console.log('[DB] Connecting...');
+  LOG('[DB] Connecting...');
 
   const sequelize = await new Sequelize(
     process.env.DBdatabase,
@@ -13,7 +13,7 @@ module.exports.run = async () => {
       logging: DEBUG ? console.log() : DEBUG,
     },
   );
-  console.log('[DB] Connected!');
+  LOG('[DB] Connected!');
 
   global.sequelize = sequelize;
 };

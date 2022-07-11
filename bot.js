@@ -5,7 +5,7 @@ const fs = require('fs');
 // init command builder
 const { SlashCommandBuilder } = require('@discordjs/builders');
 // init p-queue for setup functions, bcause no await
-const { default: PQueue } = require('p-queue');
+// const { default: PQueue } = require('p-queue');
 // setting essential global values; additional global values are set in the globalfunc.js file
 // init Discord client
 global.client = new Client({
@@ -22,6 +22,10 @@ global.config.package = require('./package.json');
 global.DEBUG = process.env.NODE_ENV === 'development';
 
 global.CmdBuilder = SlashCommandBuilder;
+
+global.currentShardID = 'Unknown Shard ID';
+
+global.LOG = (msg) => console.log(`[${currentShardID}]${msg}`);
 
 global.ERR = (err) => {
   console.error('ERROR:', err);
@@ -42,7 +46,7 @@ const usedRecentlyReactions = new Set();
 const messageOwner = new Map();
 
 // anouncing debug mode
-if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
+if (DEBUG) LOG(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
 
 (async () => {
   // startup functions in order
@@ -50,9 +54,9 @@ if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some func
   const files = await fs.readdirSync('./functions/STARTUP');
   files.forEach((FCN) => {
     startupQueue.add(async () => {
-      if (!FCN.endsWith('.js')) return;
-      const INIT = require(`./functions/STARTUP/${FCN}`);
-      await INIT.run(fs);
+    if (!FCN.endsWith('.js')) return;
+    const INIT = require(`./functions/STARTUP/${FCN}`);
+    await INIT.run(fs);
     });
   });
 
@@ -62,7 +66,7 @@ if (DEBUG) console.log(`[${config.package.name}] Bot is on Debug-Mode. Some func
 
 client.on('ready', async () => {
   // confirm user logged in
-  console.log(`[${config.package.name}] Logged in as "${client.user.tag}"!`);
+  LOG(`[${config.package.name}] Logged in as "${client.user.tag}"!`);
 
   // run setup functions
   config.setup.setupFunctions.forEach((FCN) => {
@@ -90,3 +94,12 @@ client.on('interactionCreate', (interaction) => client.functions.get('EVENT_inte
 client.on('error', (ERR));
 client.on('warn', (ERR));
 process.on('uncaughtException', (ERR));
+
+process.on('message', (message) => {
+  switch (message.type) {
+    case 'shardID':
+      currentShardID = message.data.shardID;
+      return true;
+    default: return false;
+  }
+});
