@@ -42,22 +42,23 @@ global.ERR = (err) => {
 // creating collections and sets
 client.commands = new Collection();
 client.functions = new Collection();
-const usedRecentlyReactions = new Set();
-const messageOwner = new Map();
 
 // anouncing debug mode
 if (DEBUG) LOG(`[${config.package.name}] Bot is on Debug-Mode. Some functions are not going to be loaded.`);
 
 (async () => {
   // startup functions in order
-  const startupQueue = new PQueue({ concurrency: 1 });
+  // const startupQueue = new PQueue({ concurrency: 1 });
   const files = await fs.readdirSync('./functions/STARTUP');
-  files.forEach((FCN) => {
-    startupQueue.add(async () => {
+  files.forEach(async (FCN) => {
     if (!FCN.endsWith('.js')) return;
     const INIT = require(`./functions/STARTUP/${FCN}`);
     await INIT.run(fs);
-    });
+    // startupQueue.add(async () => {
+    //   if (!FCN.endsWith('.js')) return;
+    //   const INIT = require(`./functions/STARTUP/${FCN}`);
+    //   await INIT.run(fs);
+    // });
   });
 
   // When done: Login the bot
@@ -79,10 +80,6 @@ client.on('guildDelete', (guild) => client.functions.get('EVENT_guildDelete').ru
 
 // trigger on channelDeletion
 client.on('channelDelete', (channel) => client.functions.get('EVENT_channelDelete').run(channel));
-
-// client.on('messageReactionAdd', async (reaction, user) => {
-//   client.functions.get('EVENT_messageReactionAdd').run(client, reaction, user, config, MessageEmbed, messageOwner, usedRecentlyReactions);
-// });
 
 // TEMP: message Event gets removed once interactions are implemented on discord side
 client.on('messageCreate', (message) => client.functions.get('EVENT_messageCreate').run(message));
