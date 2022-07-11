@@ -88,10 +88,6 @@
             "discords": {
                 "interval": 600000,
                 "endpoint": "https://discords.com/bots/api/bot/"
-            },
-            "discordlist": {
-                "interval": 600000,
-                "endpoint": "https://api.discordlist.space/v2/bots/"
             }
         },
         "blacklistTags": {
