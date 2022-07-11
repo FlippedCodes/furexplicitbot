@@ -8,7 +8,7 @@ manager.spawn();
 
 manager.on('shardCreate', (shard) => {
   shard.on('spawn', () => {
-    console.log(`Launched shard ${shard.id}`);
+    console.log(`[SHARD MGR] Launched shard ${shard.id}`);
     shard.send({ type: 'shardID', data: { shardID: shard.id } });
   });
 });
