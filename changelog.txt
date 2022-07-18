@@ -17,6 +17,9 @@ Code rewrite for ßßFA (now using a proper ßßdependency).
 Lowered command timeout to ßß3 secounds.
 Now using ßßFurAffinity-API for better crawling and future command upgrade.
 
+Boring Bugfixes:
+Bot was not using public blacklist
+
 Working on, sorted in priority:
 Shard the bot, cause many discord servers now
 Get pool handler for e621 back up and running, was disabled in the update procedure

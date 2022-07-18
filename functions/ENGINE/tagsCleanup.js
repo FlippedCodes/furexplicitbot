@@ -1,7 +1,7 @@
 const servertagsblacklist = require('../../database/models/servertagsblacklist');
 
 async function getTags(serverID) {
-  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.managementServerID] } });
+  const result = await servertagsblacklist.findAll({ attributes: ['tag'], where: { serverID: [serverID, config.functions.blacklistTags.managementServerID] } });
   return result;
 }
 
