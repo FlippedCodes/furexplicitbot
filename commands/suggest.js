@@ -13,13 +13,13 @@ module.exports.data = new CmdBuilder()
   .addSubcommand((SC) => SC
     .setName('start')
     .setDescription('Start the game!'))
-  .addSubcommand((SC) => SC
-    .setName('hint')
-    .setDescription('Sowwy, im bad at this >.< Mind giwing me a hint?')
-    .addStringOption((option) => option
-      .setName('tag')
-      .setDescription('The twag will the prioritized.')
-      .setRequired(true)))
+  // .addSubcommand((SC) => SC
+  //   .setName('hint')
+  //   .setDescription('Sowwy, im bad at this >.< Mind giwing me a hint?')
+  //   .addStringOption((option) => option
+  //     .setName('tag')
+  //     .setDescription('The twag will the prioritized.')
+  //     .setRequired(true)))
   .addSubcommand((SC) => SC
     .setName('reset')
     .setDescription('Went to far int a a rabwit hole? owo You can reswet here!'));
