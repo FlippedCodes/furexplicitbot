@@ -1,5 +1,6 @@
-[comment]: <> (I'm providing NSFW Furry images from different websites.)
-[comment]: <> (To not interfere with other bots you can change the prefix by nicknaming it "CUSTOMNAME | CUSTOMPREFIX")
+<!-- 
+I'm providing NSFW Furry images from different websites.
+-->
 
 #### The important stuff
 
