@@ -6,7 +6,7 @@ module.exports.run = async () => {
   await client.user.setStatus('online');
   const guildCountsArr = await client.shard.fetchClientValues('guilds.cache.size');
   const guildCounts = guildCountsArr.reduce((previousCount, currentCount) => previousCount + currentCount, 0);
-  await client.user.setActivity(`${guildCounts} servers.`, { type: ActivityType.Watching });
+  await client.user.setActivity(`${guildCounts} servers.`, { type: 'WATCHING' });
   LOG(`[${module.exports.data.name}] Status set!`);
 };
 
