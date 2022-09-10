@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-function sendHeartbeat() {
+function sendHeartbeat(guildCount) {
   axios({
     method: 'post',
     url: `${config.functions.heartbeat.discordbots.endpoint}${client.user.id}/stats`,
@@ -9,13 +9,13 @@ function sendHeartbeat() {
       'Content-Type': 'application/json',
       'User-Agent': `FurExplicitBot/${config.package.version} by Phil | Flipper#3621 on Discord`,
     },
-    data: { guildCount: client.guilds.cache.size },
+    data: { guildCount },
   });
 }
 
-module.exports.run = async () => {
+module.exports.run = async (guildCount) => {
   setInterval(() => {
-    sendHeartbeat();
+    sendHeartbeat(guildCount);
   }, config.functions.heartbeat.discordbots.interval);
 };
 

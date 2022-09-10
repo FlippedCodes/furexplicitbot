@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-function sendHeartbeat() {
+function sendHeartbeat(guilds) {
   axios({
     method: 'post',
     url: `${config.functions.heartbeat.motiondevelopment.endpoint}${client.user.id}/stats`,
@@ -8,13 +8,13 @@ function sendHeartbeat() {
       key: process.env.token_motiondevelopment,
       'Content-Type': 'application/json',
     },
-    data: { guilds: client.guilds.cache.size },
+    data: { guilds },
   });
 }
 
-module.exports.run = async () => {
+module.exports.run = async (guildCount) => {
   setInterval(() => {
-    sendHeartbeat();
+    sendHeartbeat(guildCount);
   }, config.functions.heartbeat.motiondevelopment.interval);
 };
 
