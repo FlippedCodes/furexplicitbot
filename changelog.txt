@@ -1,6 +1,5 @@
 **Changelog:**
-__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot and much more__
-⚠️ This build is very new and might have some bugs. If you spot any, please report them to our server in ßß`/about`. Thank you!
+__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
 New Stuff:
 Status Page! Run ßß`/status` to see if a service is down.
 New /suggest command, to find your favorite tags and kinks from e621.
@@ -32,4 +31,4 @@ Alongside this popular bot, I also code two other useful bots, that you might li
 - ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
-This message is only shown once, per user. If you notice any bugs or something's not working properly, feel free to report it on my discord server. Link is in ßß/about. ^^
+⚠️ This message is only shown once, per user. If you notice any bugs, feel free to report it on my discord server. Link is in ßß/about. ^^
