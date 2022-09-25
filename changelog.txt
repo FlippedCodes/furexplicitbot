@@ -1,26 +1,15 @@
 **Changelog:**
-__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
+__Bot update - ßß3.1.0 - ßßShard Bugfixing and Stuff__
 New Stuff:
-Status Page! Run ßß`/status` to see if a service is down.
-New /suggest command, to find your favorite tags and kinks from e621.
-Autocomplete for tags ßß(not advised to use on mobile ßß(Blame Discord for bad ßßimplementation), tags can be used without ßßautocomplete)
+
 
 Important Changes:
-ßßAll commands moved to slash commands.
-Proper implementation of InkBunny and rule34.
-Advanced ßßUwU ßßtalk™ (as you can see... works pretty well).
-Source search as been moved to ßßSauceNAO.
-Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**.
-Removed prefix command, as now using slash commands.
-Code rewrite for ßßFA (now using a proper ßßdependency).
-Lowered command timeout to ßß3 secounds.
-Now using ßßFurAffinity-API for better crawling and future command upgrade.
+The bot will no longer allow any postings in SFW channels, ss Discord gets more strict with content.
 
 Boring Bugfixes:
-Bot was not using public blacklist
+Bot had a oversight with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
 
 Working on, sorted in priority:
-Shard the bot, cause many discord servers now
 Get pool handler for e621 back up and running, was disabled in the update procedure
 Add a button to rerun a command
 ...And alot more (too long for the update message)
