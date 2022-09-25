@@ -23,7 +23,6 @@ async function requestPictures(tags, nsfw) {
       api_key: process.env.token_e621,
     },
   });
-  console.log(response);
   return response.data.posts;
 }
 
@@ -51,11 +50,9 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
     // store requested pics
     const results = await requestPictures(cleanTags, nsfw);
     await storePictures(channelID, results);
-    // TODO: await foreach before posting
     // get first pic
     post = await getPicture(channelID);
   }
-  console.log(channelID);
   return post;
 };
 
