@@ -34,6 +34,7 @@ async function getPicture(channelID) {
 }
 
 async function storePictures(channelID, pool) {
+  if (channelID === '759884280301092884') console.log(pool);
   await pool.forEach((post) => {
     if (post.tags.artist[0] === null || post.file.url === null || post.id === null) return;
     postcache.findOrCreate({
