@@ -30,8 +30,7 @@ function postMessage(post, channel) {
     .setURL(`https://e621.net/posts/${post.postID}`)
     .setImage(post.directLink)
     .setFooter({ text: 'Picture from e621.net', iconURL: config.engine.e621.logo })
-    .setTimestamp()
-    .catch(() => console.error(post));
+    .setTimestamp();
   channel.send({ embeds: [embed] });
 }
 

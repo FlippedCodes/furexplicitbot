@@ -52,6 +52,7 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
     await storePictures(channelID, results);
     // get first pic
     post = await getPicture(channelID);
+    console.log(post);
   }
   return post;
 };
