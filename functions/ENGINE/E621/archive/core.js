@@ -72,7 +72,7 @@ function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) 
     if (pool.length !== 10 && limit !== 10) messageFail(message, `Thewe arwe ownly ${pool.length + 1} post(s) with your tawgs.`);
   }
   pool.forEach(async (post) => {
-    const embed = new MessageEmbed();
+    const embed = new EmbedBuilder();
     const extention = post.file.ext;
     let picURL = post.sample.url;
     if (extention === 'gif') picURL = post.file.url;
@@ -91,7 +91,7 @@ function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) 
   });
 }
 
-module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner) => {
+module.exports.run = async (client, message, args, config, EmbedBuilder, messageOwner) => {
   const reaction_loading = await message.react(client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading));
   const editedTags = await getTags(message, args);
   const tags = editedTags[0];

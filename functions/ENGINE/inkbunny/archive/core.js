@@ -1,8 +1,8 @@
 const rp = require('request-promise');
 
 // prepares message embed
-function messageBuilder(config, MessageEmbed, title, url, image) {
-  return new MessageEmbed()
+function messageBuilder(config, EmbedBuilder, title, url, image) {
+  return new EmbedBuilder()
     .setTitle(title)
     .setURL(url)
     .setImage(image)
@@ -12,17 +12,17 @@ function messageBuilder(config, MessageEmbed, title, url, image) {
 }
 
 // sends note
-function noteSend(message, channel, MessageEmbed) {
-  const embed = new MessageEmbed().setDescription(message);
+function noteSend(message, channel, EmbedBuilder) {
+  const embed = new EmbedBuilder().setDescription(message);
   channel.send({ embed });
 }
 
 // prepares message values and sends
-function messageSend(config, message, MessageEmbed, result) {
+function messageSend(config, message, EmbedBuilder, result) {
   result.submissions.forEach((submission) => {
     const url = `https://inkbunny.net/s/${submission.submission_id}`;
     const title = `Artist: ${submission.username} [Inkbunny link]`;
-    const embed = messageBuilder(config, MessageEmbed, title, url, submission.file_url_full);
+    const embed = messageBuilder(config, EmbedBuilder, title, url, submission.file_url_full);
     message.channel.send({ embed })
       .then((sentMessage) => sentMessage.react('❌'));
   });
@@ -71,11 +71,11 @@ function checkChannelRating(client, channel) {
   }
 }
 
-function limmiter(ammount, config, message, MessageEmbed) {
+function limmiter(ammount, config, message, EmbedBuilder) {
   let newAmmount = ammount;
   if (ammount > 10 && message.author.id !== config.owner) {
     const note = 'You can only requwest a maximum of 10 images at the twime. I hawe limited it fowor you ^w^';
-    noteSend(note, message.channel, MessageEmbed);
+    noteSend(note, message.channel, EmbedBuilder);
     newAmmount = 10;
   }
   return newAmmount;
@@ -114,13 +114,13 @@ async function checkSID(client) {
 }
 
 // TEMP: Editor note
-function editorNote(message, MessageEmbed) {
+function editorNote(message, EmbedBuilder) {
   const note = '**Editor note:** This command is still in beta. There are going to be features added soon. In the meantime, you might experience long image waiting times.';
-  noteSend(note, message.channel, MessageEmbed);
+  noteSend(note, message.channel, EmbedBuilder);
 }
 
-module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner) => {
-  editorNote(message, MessageEmbed);
+module.exports.run = async (client, message, args, config, EmbedBuilder, messageOwner) => {
+  editorNote(message, EmbedBuilder);
   await checkSID(client);
   // getting loading emoji
   const loadingEmoji = client.guilds.cache.get(config.emoji.serverID).emojis.cache.get(config.emoji.loading);
@@ -133,9 +133,9 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
     const result = await seachAssembly(
       await checkChannelRating(client, message.channel),
       tags,
-      limmiter(ammount, config, message, MessageEmbed),
+      limmiter(ammount, config, message, EmbedBuilder),
     );
-    messageSend(config, message, MessageEmbed, result);
+    messageSend(config, message, EmbedBuilder, result);
     await reaction_loading.users.remove(client.user);
   })
     .catch((err) => {

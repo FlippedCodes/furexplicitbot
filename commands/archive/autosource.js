@@ -10,7 +10,7 @@ function messageFail(client, message, body) {
     .run(client.user, message.channel, body, '', 16449540, false);
 }
 
-module.exports.run = async (client, message, args, config, MessageEmbed, messageOwner, fa_token_A, fa_token_B) => {
+module.exports.run = async (client, message, args, config, EmbedBuilder, messageOwner, fa_token_A, fa_token_B) => {
   // check DM
   if (message.channel.type === 'dm') return messageFail(client, message, 'This comamnd is for servers only.');
   const [subcmd] = args;
@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args, config, MessageEmbed, message
   const prefix = await client.functions.get('FUNC_getPrefix').run(message);
   if (commandValues.includes(subcmd)) {
     client.functions.get(`CMD_${currentCMD.name}_${subcmd}`)
-      .run(client, message, args, config, MessageEmbed, prefix);
+      .run(client, message, args, config, EmbedBuilder, prefix);
   } else {
     messageFail(client, message, CommandUsage(prefix, currentCMD.name, currentCMD.usage));
   }

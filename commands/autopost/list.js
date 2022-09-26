@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 async function getChannels(autopostchannel, serverID) {
   const result = await autopostchannel.findAll({ where: { serverID } });
@@ -12,7 +12,7 @@ async function getBlacklistedTags(servertagsblacklist, serverID) {
 
 module.exports.run = async (interaction, autopostchannel, servertagsblacklist) => {
   const DBentries = await getChannels(autopostchannel, interaction.guild.id);
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   const blacklistedTagsArray = await getBlacklistedTags(servertagsblacklist, interaction.guild.serverID);
   const suffix = blacklistedTagsArray.map((entry) => `-${entry.tag}`);
   if (DBentries.length === 0) return messageFail(interaction, uwu('There are no autoposts configured.'));
@@ -21,7 +21,7 @@ module.exports.run = async (interaction, autopostchannel, servertagsblacklist) =
     embed.addField(`'#${channel.name}' - ${entry.interval}ms`, `\`${entry.tags} ${suffix.join(' ')}\``, false);
   });
   embed
-    .setColor('GREEN')
+    .setColor('Green')
     .setAuthor({ name: 'Autopost channels in this server:' });
   reply(interaction, { embeds: [embed] });
 };

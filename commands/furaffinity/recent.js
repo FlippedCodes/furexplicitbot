@@ -1,19 +1,21 @@
 const { Browse } = require('furaffinity-api');
 
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('❌')
       .setLabel('Delete')
-      .setStyle('SECONDARY'),
+      .setStyle(ButtonStyle.Secondary),
   ]);
 
 function prepareMessage(submission) {
   const faConfig = config.engine.furaffinity;
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setAuthor({ name: submission.author.name, url: submission.author.url })
     .setColor(faConfig.color)
     .setTitle(`${submission.title} [Link]`)

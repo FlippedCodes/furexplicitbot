@@ -1,42 +1,44 @@
 const axios = require('axios');
 
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
 const sequelize = require('sequelize');
 
 const personalTag = require('../../database/models/personalTag');
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('like')
       .setEmoji('🔼')
       .setLabel('Smash')
-      .setStyle('PRIMARY'),
-    new MessageButton()
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
       .setCustomId('dislike')
       .setEmoji('🔽')
       .setLabel('Pass')
-      .setStyle('PRIMARY'),
-    new MessageButton()
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
       .setCustomId('ignore')
       .setEmoji('🤔')
       .setLabel('Not sure / Next')
-      .setStyle('SECONDARY'),
-    new MessageButton()
+      .setStyle(ButtonStyle.Secondary),
+    new ButtonBuilder()
       .setCustomId('abort')
       .setEmoji('✖️')
       .setLabel('Abort')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
-const buttonsContinue = new MessageActionRow()
+const buttonsContinue = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('continue')
       .setEmoji('🔀')
       .setLabel('Continue')
-      .setStyle('PRIMARY'),
+      .setStyle(ButtonStyle.Primary),
   ]);
 
 async function getGate(userID) {
@@ -132,7 +134,7 @@ async function requestPictures(tags, nsfw) {
 }
 
 function prepareSubmissionPost(submission, tags, count) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   const extention = submission.file.ext;
   let picURL = submission.sample.url;
   if (extention === 'gif') picURL = submission.file.url;
@@ -148,7 +150,7 @@ function prepareSubmissionPost(submission, tags, count) {
 }
 
 function endMessage(tags, message) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   embed
     .setColor(config.engine.e621.color)
     .setTitle('Done!')

@@ -1,18 +1,20 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
 const IBconfig = config.engine.inkbunny;
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('✖️')
       .setLabel('Delete')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
 function prepareMessage(submission, orgMessage, poolData) {
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setColor(orgMessage.embeds[0].color)
     .setTitle(`${submission.title}`)
     .setURL(`https://inkbunny.net/s/${submission.submission_id}`)

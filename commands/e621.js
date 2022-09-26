@@ -1,20 +1,22 @@
 const axios = require('axios');
 
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('details')
       .setEmoji('📖')
       // .setEmoji(client.guilds.cache.get(config.customEmoji.serverID).emojis.cache.get(config.customEmoji.emoji.details))
       .setLabel('Show details')
-      .setStyle('PRIMARY'),
-    new MessageButton()
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('✖️')
       .setLabel('Delete')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
 async function getTags(interaction) {
@@ -42,7 +44,7 @@ async function requestPictures(tags, limit, nsfw) {
 }
 
 function prepareMessage(submission) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   const extention = submission.file.ext;
   let picURL = submission.sample.url;
   if (extention === 'gif') picURL = submission.file.url;

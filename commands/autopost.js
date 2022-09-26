@@ -20,7 +20,7 @@ module.exports.data = new CmdBuilder()
     .addChannelOption((option) => option
       .setName('channel')
       .setDescription('Prowide a channel you mwe to post in.')
-      .addChannelType(0)
+      .addChannelTypes(0)
       .setRequired(true))
     .addStringOption((option) => option
       .setName('tags')
