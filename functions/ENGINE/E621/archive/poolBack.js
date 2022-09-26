@@ -44,11 +44,14 @@ function postPicture(reaction, RichEmbed, config, color, poolEntry, poolLink, po
     .setColor(color)
     .setTitle('e621 Link')
     .setURL(`https://e621.net/posts/${poolEntry.postID}`)
-    .addField('Pool Name', poolName, true)
-    .addField('Pool', poolLink, true)
-    .addField('Pool Page', poolEntry.poolIndex + 1, true)
-    .addField('Pool last page', lastPage + 1, true)
-    .addField('Full Picture link', postLink || 'DELETED')
+    .addFields([
+      { name: 'Pool Name', value: poolName, inline: true },
+      { name: 'Pool', value: poolLink, inline: true },
+      // TODO: orginally without ``; precautious implementation with: check if needed
+      { name: 'Pool Page', value: `${poolEntry.poolIndex + 1}`, inline: true },
+      { name: 'Pool last page', value: `${lastPage + 1}`, inline: true },
+      { name: 'Full Picture link', value: postLink || 'DELETED' },
+    ])
     .setImage(postLink)
     .setFooter(config.e621.label, config.e621.logo)
     .setTimestamp();

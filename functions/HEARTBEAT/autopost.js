@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const { Op } = require('sequelize');
 
@@ -23,7 +23,7 @@ function updateTime(channelID, currentTimestamp, interval) {
 }
 
 function postMessage(post, channel) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   embed
     .setColor(config.engine.e621.color)
     .setTitle(`Artist: ${post.artist} [e621 link]`)

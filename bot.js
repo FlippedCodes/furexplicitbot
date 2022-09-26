@@ -1,20 +1,16 @@
 // init Discord
-const { Client, Intents, Collection } = require('discord.js');
+const { Client, IntentsBitField, Collection } = require('discord.js');
 // init file system
 const fs = require('fs');
 // init command builder
 const { SlashCommandBuilder } = require('@discordjs/builders');
-// init p-queue for setup functions, bcause no await
-// const { default: PQueue } = require('p-queue');
-// setting essential global values; additional global values are set in the globalfunc.js file
+// use contructor to create intent bit field
+const intents = new IntentsBitField([
+  IntentsBitField.Flags.Guilds,
+  IntentsBitField.Flags.GuildMessages,
+]);
 // init Discord client
-global.client = new Client({
-  disableEveryone: true,
-  intents: [
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILDS,
-  ],
-});
+global.client = new Client({ disableEveryone: true, intents });
 // init config
 global.config = require('./config.json');
 global.config.package = require('./package.json');
@@ -31,11 +27,11 @@ global.ERR = (err) => {
   console.error(`[${currentShardID}] ERROR:`, err);
   return;
   if (DEBUG) return;
-  const { MessageEmbed } = require('discord.js');
-  const embed = new MessageEmbed()
+  const { EmbedBuilder } = require('discord.js');
+  const embed = new EmbedBuilder()
     .setAuthor({ name: `[${currentShardID}] Error: '${err.message}'` })
     .setDescription(`STACKTRACE:\n\`\`\`${err.stack.slice(0, 4000)}\`\`\``)
-    .setColor('RED');
+    .setColor('Red');
   client.channels.cache.get(config.logChannel).send({ embeds: [embed] });
   return;
 };
