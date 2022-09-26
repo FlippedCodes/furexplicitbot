@@ -1,6 +1,6 @@
 # get node
-# TODO: test if functional version
-FROM node:current-buster-slim
+# needs to be this version, otherwise breakes uwuifier
+FROM node:18.5.0-buster-slim
 
 # RUN apk add --no-cache git
 
