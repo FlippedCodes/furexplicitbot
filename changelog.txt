@@ -4,10 +4,11 @@ New Stuff:
 
 
 Important Changes:
-The bot will no longer allow any postings in SFW channels, ss Discord gets more strict with content.
+#####The bot will no longer allow any postings in SFW channels, ss Discord gets more strict with content.
 
 Boring Bugfixes:
-Bot had a oversight with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
+#####Bot had a oversight with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
+#####notNull Violation because bot attamps adding posts to databse that dont have a artist
 
 Working on, sorted in priority:
 Get pool handler for e621 back up and running, was disabled in the update procedure
