@@ -1,5 +1,8 @@
 // Calls all the functions that are needed for a heartbeat
 module.exports.run = async () => {
+  // autopost (e621)
+  client.functions.get('HEARTBEAT_autopost').run();
+
   if (DEBUG) return;
   LOG(`[${module.exports.data.name}] Start sending heartbeats...`);
   // botlists
@@ -14,8 +17,6 @@ module.exports.run = async () => {
   client.functions.get('HEARTBEAT_BOTLIST_motiondevelopment').run(guildCount);
   // uptime page
   client.functions.get('HEARTBEAT_uptime').run();
-  // autopost (e621)
-  client.functions.get('HEARTBEAT_autopost').run();
 };
 
 module.exports.data = {
