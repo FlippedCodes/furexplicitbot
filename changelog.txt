@@ -18,7 +18,7 @@ Add a button to rerun a command
 **Shameful self promotion:**
 Since the bot with all the features is free, I will drop a little self plug right here. ßß>.>
 Alongside this popular bot, I also code two other useful bots, that you might like:
-- ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
+- ßß__I-SH__: Have one or multiple partnered servers? With I-SH you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
 ⚠️ This message is only shown once, per user. If you notice any bugs, feel free to report it on my discord server. Link is in ßß/about. ^^
