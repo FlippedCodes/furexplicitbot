@@ -4,11 +4,12 @@ New Stuff:
 
 
 Important Changes:
-TODO: The bot will no longer allow any postings in SFW channels, ss Discord gets more strict with content.
+I will no longer support SFW channels, as Discord gets more strict with content.
 
 Boring Bugfixes:
-FIXME: Bot had a oversight with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
-FIXME: notNull Violation because bot attamps adding posts to databse that dont have a artist
+I had a brainfart with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
+notNull Violation errors, because app attamps adding posts to databse that dont have a artist
+FIXME: shard issues (hopefully) fixed 
 
 Working on, sorted in priority:
 Get pool handler for e621 back up and running, was disabled in the update procedure

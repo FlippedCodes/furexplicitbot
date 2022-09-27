@@ -86,6 +86,7 @@ function buttonHandler(interaction, message, orgContent, submission) {
 
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
+  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('This command is only available in ßßage-restricted channels.'));
   let amount = interaction.options.getNumber('amount', false) || 1;
   // provided amount checking
   if (amount < 0) amount = 1;

@@ -142,6 +142,7 @@ async function requestPictures(sid, text, submissions_per_page) {
 
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
+  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('This command is only available in ßßage-restricted channels.'));
   await checkSID();
   let amount = interaction.options.getNumber('amount', false) || 1;
   // provided amount checking

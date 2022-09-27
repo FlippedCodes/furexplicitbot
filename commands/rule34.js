@@ -108,7 +108,7 @@ function buttonHandler(interaction, message, orgContent, submission) {
 
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
-  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('Sorry, but rule34 is a completly NSFW site. So there are almost no SFW post on there. Please try again in a NSFW channel.'));
+  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('This command is only available in ßßage-restricted channels.'));
 
   let amount = interaction.options.getNumber('amount', false) || 1;
   // provided amount checking

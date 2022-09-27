@@ -2,6 +2,7 @@ const personalTag = require('../database/models/personalTag');
 
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
+  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('This command is only available in ßßage-restricted channels.'));
 
   const subName = interaction.options.getSubcommand(true);
   client.commands.get(`${module.exports.data.name}_${subName}`).run(interaction, personalTag);

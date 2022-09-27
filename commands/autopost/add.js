@@ -63,6 +63,7 @@ module.exports.run = async (interaction, autopostchannel) => {
   const channel = await interaction.options.getChannel('channel');
   const tags = parseTags(await interaction.options.getString('tags'));
   const interval = await interaction.options.getNumber('interval');
+  if (!channel.nsfw) return messageFail(interaction, uwu('Please make sure your channels is marked as ßßage-restricted!'));
   // checksthe intervall ammount is in the limits
   if (interval > config.commands.autopost.maxPostTime || interval < config.commands.autopost.minPostTime) {
     return messageFail(interaction, uwu(`Interval needs to be between ßß${config.commands.autopost.minPostTime}ms and ßß${config.commands.autopost.maxPostTime}ms.`));

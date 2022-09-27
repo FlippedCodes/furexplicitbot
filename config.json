@@ -53,6 +53,7 @@
         }
     },
     "functions": {
+        "allowSFWChannels": false,
         "globalFuncs": {
             "uwuifier": {
                 "spaces": {
