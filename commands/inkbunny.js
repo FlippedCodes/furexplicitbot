@@ -1,6 +1,8 @@
 const axios = require('axios');
 
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
 const IBconfig = config.engine.inkbunny;
 
@@ -8,19 +10,19 @@ const URLAss = (apiFunction) => `api_${apiFunction}.php`;
 
 const sid = {};
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('details')
       .setEmoji('📖')
       // .setEmoji(client.guilds.cache.get(config.customEmoji.serverID).emojis.cache.get(config.customEmoji.emoji.details))
       .setLabel('Show details')
-      .setStyle('PRIMARY'),
-    new MessageButton()
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('✖️')
       .setLabel('Delete')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
 async function getTags(interaction) {
@@ -39,12 +41,13 @@ const api = axios.create({
 });
 
 function prepareMessage(submission) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   // TODO: submission.mimetype = 'image/png'; check for video prefix
   const extention = submission.mimetype;
   let picURL = submission.file_url_screen;
   if (extention === 'image/gif') picURL = submission.file_url_full;
-  if (!extention.startsWith('image/')) embed.addField('Direct link', submission.file_url_full);
+  if (!extention.startsWith('image/')) embed.addFields([{ name: 'Direct link', value: submission.file_url_full }]);
+
   embed
     .setColor(IBconfig.color)
     .setTitle(`Artist: ${submission.username} [InkBunny link]`)
@@ -139,6 +142,7 @@ async function requestPictures(sid, text, submissions_per_page) {
 
 module.exports.run = async (interaction) => {
   if (!DEBUG) await interaction.deferReply();
+  if (!interaction.channel.nsfw) return messageFail(interaction, uwu('This command is only available in ßßage-restricted channels.'));
   await checkSID();
   let amount = interaction.options.getNumber('amount', false) || 1;
   // provided amount checking

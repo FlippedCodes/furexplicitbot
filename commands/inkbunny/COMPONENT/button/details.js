@@ -1,31 +1,30 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
 const IBconfig = config.engine.inkbunny;
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('✖️')
       .setLabel('Delete')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
 function prepareMessage(submission, orgMessage, poolData) {
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setColor(orgMessage.embeds[0].color)
     .setTitle(`${submission.title}`)
     .setURL(`https://inkbunny.net/s/${submission.submission_id}`)
     .setAuthor({ name: `Artist: ${submission.username}`, url: `https://inkbunny.net/${submission.username}` })
-    // .setDescription(`**Tags:** \`\`\`${formatTags(submission.tags)}\`\`\``)
-    .addField('Type', `${submission.type_name}`, true)
-    // .addField('Mime type', `${submission.mimetype}`, true)
-    .addField('Rating', `:regional_indicator_${submission.rating_name.toLowerCase().slice(0, 1)}:`, true)
-    // .addField('Score', `${submission.score}`, true)
-    .addField('ID', `${submission.submission_id}`, true)
-    // .addField('Resolution', `${submission.width}x${submission.height}`, true)
-    // .addField(typeSources, source)
-    .addField('Full picture link', submission.file_url_full)
+    .addFields([
+      { name: 'Type', value: `${submission.type_name}`, inline: true },
+      { name: 'Rating', value: `:regional_indicator_${submission.rating_name.toLowerCase().slice(0, 1)}:`, inline: true },
+      { name: 'ID', value: `${submission.submission_id}`, inline: true },
+      { name: 'Full picture link', value: submission.file_url_full },
+    ])
     .setImage(submission.file_url_full)
     .setFooter({ text: 'Picture from inkbunny.net', iconURL: IBconfig.logo });
   return embed;

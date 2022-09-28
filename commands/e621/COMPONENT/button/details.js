@@ -1,12 +1,14 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const {
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+} = require('discord.js');
 
-const buttons = new MessageActionRow()
+const buttons = new ActionRowBuilder()
   .addComponents([
-    new MessageButton()
+    new ButtonBuilder()
       .setCustomId('delete')
       .setEmoji('✖️')
       .setLabel('Delete')
-      .setStyle('DANGER'),
+      .setStyle(ButtonStyle.Danger),
   ]);
 
 async function requestPool(poolID, nsfw) {
@@ -39,23 +41,26 @@ function addTags(submission, poolData, embed) {
   const typeArtists = tags.artist.length === 1 ? 'Artist' : 'All artists';
   embed.setAuthor({ name: `${typeArtists}: ${artists}`, url: `https://e621.net/posts?tags=${tags.artist[0]}` });
 
-  if (tags.character.length) embed.addField('Character tags', formatTags(tags.character), true);
-  if (tags.species.length) embed.addField('Species tags', formatTags(tags.species), true);
-  if (tags.copyright.length) embed.addField('Copyright tags', formatTags(tags.copyright), true);
-  if (tags.meta.length) embed.addField('Meta tags', formatTags(tags.meta), true);
-  if (tags.lore.length) embed.addField('Lore tags', formatTags(tags.lore), true);
-  if (tags.invalid.length) embed.addField('Invalid tags', formatTags(tags.invalid), true);
+  if (tags.character.length) embed.addFields([{ name: 'Character tags', value: formatTags(tags.character), inline: true }]);
+  if (tags.species.length) embed.addFields([{ name: 'Species tags', value: formatTags(tags.species), inline: true }]);
+  if (tags.copyright.length) embed.addFields([{ name: 'Copyright tags', value: formatTags(tags.copyright), inline: true }]);
+  if (tags.meta.length) embed.addFields([{ name: 'Meta tags', value: formatTags(tags.meta), inline: true }]);
+  if (tags.lore.length) embed.addFields([{ name: 'Lore tags', value: formatTags(tags.lore), inline: true }]);
+  if (tags.invalid.length) embed.addFields([{ name: 'Invalid tags', value: formatTags(tags.invalid), inline: true }]);
   // TODO: need to check if poolData is null or other statement is required
   if (poolData) {
-    embed.addField('Pool', `https://e621.net/pools/${poolData.id}`, true);
-    embed.addField('Pool Name', poolData.name, true);
-    embed.addField('Pool Page', poolData.post_ids.indexOf(submission.id) + 1, true);
-    embed.addField('Pool last page', `${poolData.post_count}`, true);
+    embed.addFields([
+      { name: 'Pool', value: `https://e621.net/pools/${poolData.id}`, inline: true },
+      { name: 'Pool Name', value: poolData.name, inline: true },
+      // TODO: orginally without ``; precautious implementation with: check if needed
+      { name: 'Pool Page', value: `${poolData.post_ids.indexOf(submission.id) + 1}`, inline: true },
+      { name: 'Pool last page', value: `${poolData.post_count}`, inline: true },
+    ]);
   }
 }
 
 function prepareMessage(submission, orgMessage, poolData) {
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
 
   addTags(submission, poolData, embed);
 
@@ -76,12 +81,14 @@ function prepareMessage(submission, orgMessage, poolData) {
     .setTitle('e621 Link')
     .setURL(`https://e621.net/posts/${submission.id}`)
     .setDescription(`**General Tags:** \`\`\`${submission.tags.general.join(', ')}\`\`\``)
-    .addField('Rating', `:regional_indicator_${submission.rating}:`, true)
-    .addField('Score', `${submission.score.total}`, true)
-    .addField('ID', `${submission.id}`, true)
-    .addField('Resolution', `${submission.file.width}x${submission.file.height}`, true)
-    .addField(typeSources, source)
-    .addField(`Full ${videoPicture} link`, submission.file.url)
+    .addFields([
+      { name: 'Rating', value: `:regional_indicator_${submission.rating}:`, inline: true },
+      { name: 'Score', value: `${submission.score.total}`, inline: true },
+      { name: 'ID', value: `${submission.id}`, inline: true },
+      { name: 'Resolution', value: `${submission.file.width}x${submission.file.height}`, inline: true },
+      { name: typeSources, value: source },
+      { name: `Full ${videoPicture} link`, value: submission.file.url },
+    ])
     .setImage(video ? submission.sample.url : submission.file.url)
     .setFooter({ text: `${videoPicture} from e621.net`, iconURL: config.engine.e621.logo });
   return embed;

@@ -1,6 +1,6 @@
 // TODO: Eventually also offer a App>link inside of discord to look for the source
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const axios = require('axios');
 
@@ -13,10 +13,10 @@ function setOverallStatus(params) {
   // checkes if all services are true
   if (isUpOverall.every((isUp) => isUp)) {
     embed.setTitle('All Systems Operational');
-    embed.setColor('GREEN');
+    embed.setColor('Green');
   } else {
     embed.setTitle('Partially Degraded');
-    embed.setColor('ORANGE');
+    embed.setColor('Orange');
   }
 }
 
@@ -36,12 +36,13 @@ module.exports.run = async (interaction) => {
     isUpOverall.push(isUp);
     return { name: service.name, uptimePercentage, isUp };
   });
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
   embed.setAuthor({ name: 'Flipped Codes - Status Page [Link]', iconURL: uptimeConfig.embed.icon, url: uptimeConfig.embed.url });
   embed.setFooter({ text: uwu('Updates every minute') });
   setOverallStatus({ isUpOverall, embed });
   // add all services to embed
-  uptimeInfo.forEach((service) => embed.addField(service.name, `${service.isUp ? '🟢' : '🔴'} ${Math.floor(service.uptimePercentage)}%`, true));
+  uptimeInfo.forEach((service) => embed.addFields([{ name: service.name, value: `${service.isUp ? '🟢' : '🔴'} ${Math.floor(service.uptimePercentage)}%`, inline: true }]));
+
   reply(interaction, { embeds: [embed] });
 };
 

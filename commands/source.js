@@ -1,6 +1,6 @@
 // TODO: Eventually also offer a App>link inside of discord to look for the source
 
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const axios = require('axios');
 
@@ -57,8 +57,8 @@ module.exports.run = async (interaction) => {
   if (!source.data.source && source.data.ext_urls.length === 1) source.data.source = source.data.ext_urls[0];
   else source.data.source = 'noSource';
   if (!source || !source.data.source.startsWith('http')) return messageFail(interaction, uwu('Sorry, but i wasn\'t able to find your picture. ßßuwu'));
-  const embed = new MessageEmbed()
-    .setColor('ORANGE')
+  const embed = new EmbedBuilder()
+    .setColor('Orange')
     // AWAIT: TODO: Remove this if feature is out of beta
     .setDescription(`${uwu('This feature is still in beta. Don\'t expect any exact results!')}`)
     .setAuthor({ name: `Artist: ${source.data.creator || 'Unknown'} [${Math.round(source.header.similarity)}% similarity]` })

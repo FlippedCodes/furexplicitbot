@@ -21,7 +21,7 @@ async function removeCheck(channelID) {
   return true;
 }
 
-module.exports.run = async (client, message, args, config, MessageEmbed, prefix) => {
+module.exports.run = async (client, message, args, config, EmbedBuilder, prefix) => {
   // check if user can manage servers
   if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   const channelID = message.channel.id;

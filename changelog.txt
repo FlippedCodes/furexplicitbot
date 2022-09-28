@@ -1,26 +1,18 @@
 **Changelog:**
-__Bot update - ßß3.0.0 - ßßDiscord-App-y-fyed the bot__
+__Bot update - ßß3.1.0 - ßßShard Bugfixing and Stuff__
 New Stuff:
-Status Page! Run ßß`/status` to see if a service is down.
-New /suggest command, to find your favorite tags and kinks from e621.
-Autocomplete for tags ßß(not advised to use on mobile ßß(Blame Discord for bad ßßimplementation), tags can be used without ßßautocomplete)
+none
 
 Important Changes:
-ßßAll commands moved to slash commands.
-Proper implementation of InkBunny and rule34.
-Advanced ßßUwU ßßtalk™ (as you can see... works pretty well).
-Source search as been moved to ßßSauceNAO.
-Discontinued old prefix ßß'+' --> ßß**You need to use slash commands ßß(/) now!ßß**.
-Removed prefix command, as now using slash commands.
-Code rewrite for ßßFA (now using a proper ßßdependency).
-Lowered command timeout to ßß3 secounds.
-Now using ßßFurAffinity-API for better crawling and future command upgrade.
+I will no longer support SFW channels, as Discord gets more strict with content.
 
 Boring Bugfixes:
-Bot was not using public blacklist
+I had a brainfart with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
+notNull Violation errors, because app attamps adding posts to databse that dont have a artist
+shard issues (hopefully) fixed
+autopost now checking for channel permissions
 
 Working on, sorted in priority:
-Shard the bot, cause many discord servers now
 Get pool handler for e621 back up and running, was disabled in the update procedure
 Add a button to rerun a command
 ...And alot more (too long for the update message)
@@ -28,7 +20,7 @@ Add a button to rerun a command
 **Shameful self promotion:**
 Since the bot with all the features is free, I will drop a little self plug right here. ßß>.>
 Alongside this popular bot, I also code two other useful bots, that you might like:
-- ßß__I-SH__: Have one or multiple partnered servers? Now you can link a channel between them!
+- ßß__I-SH__: Have one or multiple partnered servers? With I-SH you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
 ⚠️ This message is only shown once, per user. If you notice any bugs, feel free to report it on my discord server. Link is in ßß/about. ^^
