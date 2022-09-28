@@ -60,7 +60,11 @@ async function main() {
       return;
     }
     // check, if bot has permission to send messages
-    if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) return console.warn(`[${currentShardID}] ChannelID ${channelID} has no permissions`);
+    if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) {
+      // DISABLED: console spam, needed to update in the future
+      // console.warn(`[${currentShardID}] ChannelID ${channelID} has no permissions`);
+      return;
+    }
 
     if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
     // const shardID = channel.guild.shardId;
