@@ -1,7 +1,7 @@
 **Changelog:**
 __Bot update - ßß3.1.0 - ßßShard Bugfixing and Stuff__
 New Stuff:
-
+none
 
 Important Changes:
 I will no longer support SFW channels, as Discord gets more strict with content.
