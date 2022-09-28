@@ -1,16 +1,17 @@
 **Changelog:**
-__Bot update - ßß3.1.1 - ßßShard Bugfixing and Stuff__
+__Bot update - ßß3.1.2 - ßßShard ßßBugfixing and Stuff__
 New Stuff:
 none
 
 Important Changes:
-I will no longer support SFW channels, as Discord gets more strict with content.
+I will no longer support SFW channels, as Discord gets more strict with content. To keep funtionality in your channels, switch to NSFW.
 
 Boring Bugfixes:
-I had a brainfart with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
+I had a brainfart with blacklisting ßß"rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
 notNull Violation errors, because app attamps adding posts to databse that dont have a artist
-shard issues (hopefully) fixed
-autopost now checking for channel permissions
+shard issues ßß(hopefully) fixed
+autopost now checking for channel permissions to prevent console errors
+ßß/blacklist ßßadd now properly formats userinput
 
 Working on, sorted in priority:
 Get pool handler for e621 back up and running, was disabled in the update procedure
