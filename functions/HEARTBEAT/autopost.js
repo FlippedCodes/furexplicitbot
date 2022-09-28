@@ -54,6 +54,7 @@ async function main() {
     const channel = client.channels.cache.find((channel) => channel.id === channelID);
     if (!channel) {
       const shardOut = await client.shard.fetchClientValues(`channels.cache.find((channel) => channel.id === ${channelID})`);
+      console.log(shardOut);
       if (!shardOut.length) console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
       return;
     }
