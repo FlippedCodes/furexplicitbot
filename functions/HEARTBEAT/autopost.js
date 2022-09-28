@@ -35,7 +35,7 @@ function postMessage(post, channel) {
 }
 
 // abort postingas channel is sfw
-function abortMessage(channel) {
+function abortMessage(channel, channelID, currentTimestamp, autoPostInterval) {
   const embed = new EmbedBuilder();
   const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
   const body = 'As per the newest bot update and to further comply with discords guidelines, the bot will no longer post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
@@ -44,6 +44,7 @@ function abortMessage(channel) {
     .setDescription(body)
     .setTitle(title);
   channel.send({ embeds: [embed] });
+  updateTime(channelID, currentTimestamp, autoPostInterval);
 }
 
 async function main() {
@@ -61,7 +62,7 @@ async function main() {
     // check, if bot has permission to send messages
     if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) return console.warn(`[${currentShardID}] ChannelID ${channelID} has no permissions`);
 
-    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel);
+    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
