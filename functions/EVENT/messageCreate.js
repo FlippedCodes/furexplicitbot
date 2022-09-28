@@ -1,5 +1,5 @@
 const {
-  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle,
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionsBitField,
 } = require('discord.js');
 
 const discardDeprecationWarning = require('../../database/models/discardDeprecationWarning');
@@ -34,7 +34,7 @@ module.exports.run = async (message) => {
   // return if not prefix
   if (message.author.bot) return;
   // check, if bot has permission to send messages
-  if (!message.channel.guild.me.permissionsIn(message.channel).has('SEND_MESSAGES')) return;
+  if (!message.channel.guild.members.me.permissionsIn(message.channel).has(new PermissionsBitField('SendMessages'))) return;
   // return if not prefix
   if (!message.content.startsWith('+')) return;
 

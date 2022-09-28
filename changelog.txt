@@ -1,5 +1,5 @@
 **Changelog:**
-__Bot update - ßß3.1.0 - ßßShard Bugfixing and Stuff__
+__Bot update - ßß3.1.1 - ßßShard Bugfixing and Stuff__
 New Stuff:
 none
 
