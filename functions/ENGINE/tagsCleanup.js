@@ -19,7 +19,9 @@ module.exports.run = async (interaction, tagsOld) => {
     // users where trying to forbid the fobidden tags again, causing this issue
     suffix.push(` -${entry.tag}`);
   });
+  LOG(tags);
   tags = tags.replaceAll('- ', '');
+  LOG(tags);
   const cleanSuffix = suffix.join('');
   return `${tags}${cleanSuffix}`;
 };
