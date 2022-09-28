@@ -45,6 +45,8 @@ async function storePictures(channelID, pool) {
 
 module.exports.run = async (tags, serverID, channelID, nsfw) => {
   let post = await getPicture(channelID);
+  LOG('post already there');
+  LOG(post);
   if (!post) {
     const cleanTags = await getTags(tags, serverID);
     // store requested pics
@@ -52,6 +54,8 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
     await storePictures(channelID, results);
     // get first pic
     post = await getPicture(channelID);
+    LOG('Requested new posts');
+    LOG(post);
   }
   return post;
 };
