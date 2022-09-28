@@ -47,6 +47,7 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
   let post = await getPicture(channelID);
   if (!post) {
     const cleanTags = await getTags(tags, serverID);
+    LOG(cleanTags);
     // store requested pics
     const results = await requestPictures(cleanTags, nsfw);
     await storePictures(channelID, results);
