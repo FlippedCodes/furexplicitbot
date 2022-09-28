@@ -49,12 +49,14 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
   LOG(post);
   if (!post) {
     const cleanTags = await getTags(tags, serverID);
+    LOG('Requested new posts');
+    LOG(cleanTags);
+    LOG(nsfw);
     // store requested pics
     const results = await requestPictures(cleanTags, nsfw);
     await storePictures(channelID, results);
     // get first pic
     post = await getPicture(channelID);
-    LOG('Requested new posts');
     LOG(post);
   }
   return post;
