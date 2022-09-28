@@ -16,6 +16,8 @@ module.exports.run = async (interaction, tagsOld) => {
 
   blacklistedTags.forEach((entry) => {
     tags = tagsReplace(tags, entry.tag, '');
+    // users where trying to forbid the fobidden tags again, causing this issue
+    tags = tagsReplace(tags, ' - ', '');
     suffix.push(` -${entry.tag}`);
   });
   const cleanSuffix = suffix.join('');
