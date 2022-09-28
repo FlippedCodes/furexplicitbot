@@ -12,16 +12,20 @@ function pruneAutopost(channelID) {
 }
 
 module.exports.run = async (interaction, servertagsblacklist, tag) => {
-  if (tag.length > 30) {
+  let tagNew = tag;
+  if (tagNew.length > 30) {
     return messageFail(interaction, uwu('Your tag is too long. The maximum length is ßß30 characters.'));
   }
+  const minus = tagNew.match(/^-.*/gm);
+  if (minus) tagNew = tagNew.replace('-', '');
+  tagNew = tagNew.replaceAll(' ', '_');
   const mgmtServer = config.functions.blacklistTags.managementServerID;
-  const added = await addTag(servertagsblacklist, tag, interaction.guild.id, mgmtServer);
+  const added = await addTag(servertagsblacklist, tagNew, interaction.guild.id, mgmtServer);
   if (added) {
-    messageSuccess(interaction, uwu(`ßß\`${tag}\` has been added to the servers blacklist.`));
+    messageSuccess(interaction, uwu(`ßß\`${tagNew}\` has been added to the servers blacklist.`));
     pruneAutopost(interaction.channel.id);
   } else {
-    messageFail(interaction, uwu(`ßß\`${tag}\` is already added to this servers backlist.`));
+    messageFail(interaction, uwu(`ßß\`${tagNew}\` is already added to this servers backlist.`));
   }
 };
 
