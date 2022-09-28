@@ -53,9 +53,9 @@ async function main() {
     const channelID = autoPost.channelID;
     const channel = client.channels.cache.find((channel) => channel.id === channelID);
     if (!channel) {
-      const shardOut = await client.shard.fetchClientValues(`channels.cache.get('${channelID}')`);
-      console.log(shardOut);
-      if (!shardOut.length) console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
+      // const shardOut = await client.shard.fetchClientValues(`channels.cache.get('${channelID}')`);
+      // console.log(shardOut);
+      // if (!shardOut.length) console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
       return;
     }
     // check, if bot has permission to send messages
@@ -65,6 +65,7 @@ async function main() {
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
+    LOG(post);
     // tags, channelID, nsfw
     postMessage(post, channel);
     updateTime(channelID, currentTimestamp, autoPost.interval);
