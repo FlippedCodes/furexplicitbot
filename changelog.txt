@@ -9,7 +9,8 @@ I will no longer support SFW channels, as Discord gets more strict with content.
 Boring Bugfixes:
 I had a brainfart with blacklisting "rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
 notNull Violation errors, because app attamps adding posts to databse that dont have a artist
-FIXME: shard issues (hopefully) fixed 
+shard issues (hopefully) fixed
+autopost now checking for channel permissions
 
 Working on, sorted in priority:
 Get pool handler for e621 back up and running, was disabled in the update procedure

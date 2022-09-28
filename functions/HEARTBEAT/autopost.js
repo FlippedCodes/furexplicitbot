@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField } = require('discord.js');
 
 const { Op } = require('sequelize');
 
@@ -46,23 +46,32 @@ function abortMessage(channel) {
   channel.send({ embeds: [embed] });
 }
 
+async function main() {
+  const currentTimestamp = new Date();
+  const channels = await getChannels(currentTimestamp);
+  channels.forEach(async (autoPost) => {
+    const channelID = autoPost.channelID;
+    const channel = client.channels.cache.find((channel) => channel.id === channelID);
+    if (!channel) {
+      const shardOut = await client.shard.fetchClientValues(`channels.cache.find((channel) => channel.id === ${channelID})`);
+      if (!shardOut.length) console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
+      return;
+    }
+    // check, if bot has permission to send messages
+    if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) return console.warn(`[${currentShardID}] ChannelID ${channelID} has no permissions`);
+
+    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel);
+    // const shardID = channel.guild.shardId;
+    // if (currentShardID !== shardID) return;
+    const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
+    // tags, channelID, nsfw
+    postMessage(post, channel);
+    updateTime(channelID, currentTimestamp, autoPost.interval);
+  });
+}
+
 module.exports.run = () => {
-  setInterval(async () => {
-    const currentTimestamp = new Date();
-    const channels = await getChannels(currentTimestamp);
-    channels.forEach(async (autoPost) => {
-      const channelID = autoPost.channelID;
-      const channel = client.channels.cache.find((channel) => channel.id === channelID);
-      if (!channel) return console.warn(`[${currentShardID}] ChannelID ${channelID} couldn't be found`);
-      if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel);
-      const shardID = channel.guild.shardId;
-      if (currentShardID !== shardID) return;
-      const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
-      // tags, channelID, nsfw
-      postMessage(post, channel);
-      updateTime(channelID, currentTimestamp, autoPost.interval);
-    });
-  }, config.commands.autopost.intervalChecker);
+  setInterval(() => main(), config.commands.autopost.intervalChecker);
 };
 
 module.exports.help = {
