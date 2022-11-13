@@ -27,8 +27,7 @@ services:
     logging:
       driver: "json-file"
         options:
-          max-size: "5G"
-          max-file: "5"
+          max-size: "500M"
   db-feb:
     image: mariadb:latest
     restart: always
@@ -44,8 +43,7 @@ services:
     logging:
       driver: "json-file"
         options:
-          max-size: "5G"
-          max-file: "5"
+          max-size: "500M"
 
 networks:
   default:
