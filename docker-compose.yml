@@ -45,7 +45,7 @@ networks:
 volumes:
   db_data:
 
-  logging:
+logging:
   driver: "json-file"
     options:
       max-size: "6G"
