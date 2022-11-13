@@ -24,6 +24,11 @@ services:
       db_name: furExplicitBot
       db_user: furExplicitBot
       db_passw: ${db_password}
+    logging:
+      driver: "json-file"
+        options:
+          max-size: "5G"
+          max-file: "5"
   db-feb:
     image: mariadb:latest
     restart: always
@@ -36,6 +41,11 @@ services:
       MYSQL_DATABASE: furExplicitBot
       MYSQL_USER: furExplicitBot
       MYSQL_PASSWORD: ${db_password}
+    logging:
+      driver: "json-file"
+        options:
+          max-size: "5G"
+          max-file: "5"
 
 networks:
   default:
