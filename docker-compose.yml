@@ -26,8 +26,9 @@ services:
       db_passw: ${db_password}
     logging:
       driver: "json-file"
-        options:
-          max-size: "500M"
+      options:
+        max-size: "1G"
+
   db-feb:
     image: mariadb:latest
     restart: always
@@ -42,8 +43,8 @@ services:
       MYSQL_PASSWORD: ${db_password}
     logging:
       driver: "json-file"
-        options:
-          max-size: "500M"
+      options:
+        max-size: "1G"
 
 networks:
   default:
