@@ -26,6 +26,7 @@ global.LOG = (msg) => console.log(`[${currentShardID}]${msg}`);
 global.ERR = (err) => {
   console.error(`[${currentShardID}] ERROR:`, err);
   return;
+  // eslint-disable-next-line no-unreachable
   if (DEBUG) return;
   const { EmbedBuilder } = require('discord.js');
   const embed = new EmbedBuilder()
