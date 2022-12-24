@@ -1,21 +1,17 @@
 **Changelog:**
-__Bot update - ßß3.1.2 - ßßShard ßßBugfixing and Stuff__
+__Bot update - ßß3.2.0 - &&FurAffinity auto posting__
 New Stuff:
-none
+- You can now watch up to 5 FurAffinity artists through the bot and get 
 
 Important Changes:
-I will no longer support SFW channels, as Discord gets more strict with content. To keep funtionality in your channels, switch to NSFW.
+- Removed deprecated warning to now use slash-commands
 
 Boring Bugfixes:
-I had a brainfart with blacklisting ßß"rating:safe" and SFW channels. Caused issues with channels not getting any new posts.
-notNull Violation errors, because app attamps adding posts to databse that dont have a artist
-shard issues ßß(hopefully) fixed
-autopost now checking for channel permissions to prevent console errors
-ßß/blacklist ßßadd now properly formats userinput
+
 
 Working on, sorted in priority:
-Get pool handler for e621 back up and running, was disabled in the update procedure
-Add a button to rerun a command
+- Get pool handler for e621 back up and running, was disabled in the update procedure
+- Add a button to rerun a command
 ...And alot more (too long for the update message)
 
 **Shameful self promotion:**
