@@ -10,7 +10,7 @@ const intents = new IntentsBitField([
   IntentsBitField.Flags.GuildMessages,
 ]);
 // init Discord client
-global.client = new Client({ disableEveryone: true, intents });
+global.client = new Client({ allowedMentions: { parse: ['users', 'roles'], repliedUser: true }, intents });
 // init config
 global.config = require('./config.json');
 global.config.package = require('./package.json');
