@@ -19,7 +19,7 @@ global.DEBUG = process.env.NODE_ENV === 'development';
 
 global.CmdBuilder = SlashCommandBuilder;
 
-global.currentShardID = 'Unknown Shard ID';
+global.currentShardID = -1;
 
 global.LOG = (msg) => console.log(`[${currentShardID}]${msg}`);
 
