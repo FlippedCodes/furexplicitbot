@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/FlipperLP/furexplicitbot#readme",
   "dependencies": {
-    "@discordjs/builders": "^1.2.0",
+    "@discordjs/builders": "^1.4.0",
     "axios": "^0.27.2",
-    "bufferutil": "^4.0.5",
-    "discord.js": "^14.4.0",
-    "furaffinity-api": "^4.4.0",
+    "bufferutil": "^4.0.7",
+    "discord.js": "^14.7.1",
+    "furaffinity-api": "^4.4.3",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.12.0",
-    "utf-8-validate": "^5.0.7",
+    "sequelize": "^6.28.0",
+    "utf-8-validate": "^5.0.10",
     "uwuifier": "^4.0.4"
   },
   "devDependencies": {
