@@ -78,9 +78,6 @@ client.on('guildDelete', (guild) => client.functions.get('EVENT_guildDelete').ru
 // trigger on channelDeletion
 client.on('channelDelete', (channel) => client.functions.get('EVENT_channelDelete').run(channel));
 
-// TEMP: message Event gets removed once interactions are implemented on discord side
-client.on('messageCreate', (message) => client.functions.get('EVENT_messageCreate').run(message));
-
 // itneraction is triggered (command, autocomplete, etc.)
 client.on('interactionCreate', (interaction) => client.functions.get('EVENT_interactionCreate').run(interaction));
 
