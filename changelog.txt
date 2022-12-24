@@ -1,13 +1,13 @@
 **Changelog:**
 __Bot update - ßß3.2.0 - &&FurAffinity auto posting__
 New Stuff:
-- You can now watch up to 5 FurAffinity artists through the bot and get 
+- You can now watch up to 5 &&FurAffinity artists through the bot and get new art directly to discord
 
 Important Changes:
 - Removed deprecated warning to now use slash-commands
 
 Boring Bugfixes:
-
+- &&`@everyone` catch slipped through an update, while it cant be explioted, has been fixed anway
 
 Working on, sorted in priority:
 - Get pool handler for e621 back up and running, was disabled in the update procedure
