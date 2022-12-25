@@ -22,6 +22,10 @@
             "maxPostTime": 18000000,
             "minPics": 100
         },
+        "faAutopost": {
+            "intervalChecker": 1.8e+6,
+            "maxArtists": 5
+        },
         "changelog": {
             "text": "./changelog.txt"
         },
