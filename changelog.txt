@@ -1,13 +1,13 @@
 **Changelog:**
-__Bot update - ßß3.2.0 - &&FurAffinity auto posting__
+__Bot update - ßß3.2.0 - ßßFurAffinity auto posting__
 New Stuff:
-- You can now watch up to 5 &&FurAffinity artists through the bot and get new art directly to discord
+- You can now watch up to 5 ßßFurAffinity artists through the bot and get new art directly to discord
 
 Important Changes:
 - Removed deprecated warning to now use slash-commands
 
 Boring Bugfixes:
-- &&`@everyone` catch slipped through an update, while it cant be explioted, has been fixed anway
+- ßß`@everyone` catch slipped through an update, while it cant be explioted, has been fixed anway
 
 Working on, sorted in priority:
 - Get pool handler for e621 back up and running, was disabled in the update procedure
@@ -15,7 +15,7 @@ Working on, sorted in priority:
 ...And alot more (too long for the update message)
 
 **Shameful self promotion:**
-Since the bot with all the features is free, I will drop a little self plug right here. ßß>.>
+Since the bot with all the features is free, I will drop a little self plug riiight here. ßß>.>
 Alongside this popular bot, I also code two other useful bots, that you might like:
 - ßß__I-SH__: Have one or multiple partnered servers? With I-SH you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
