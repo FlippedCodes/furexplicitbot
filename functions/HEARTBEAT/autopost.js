@@ -61,7 +61,7 @@ async function main() {
     }
     // check, if bot has permission to send messages
     if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) {
-      // DISABLED: console spam, needed to update in the future
+      // DISABLED: console spam, needed to update in the future. Result of sharding
       // console.warn(`[${currentShardID}] ChannelID ${channelID} has no permissions`);
       return;
     }
