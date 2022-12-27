@@ -11,7 +11,7 @@ module.exports.run = async (interaction, autopostfasubmission) => {
   if (DBentries.length === 0) return messageFail(interaction, uwu('There are no autoposts configured.'));
   await DBentries.forEach(async (entry) => {
     const channel = await client.channels.cache.find((channel) => channel.id === entry.channelID);
-    embed.addFields([{ name: `#${channel.name}`, value: entry.artistID, inline: true }]);
+    embed.addFields([{ name: entry.artistID, value: `${channel}`, inline: true }]);
   });
   embed
     .setColor('Green')
