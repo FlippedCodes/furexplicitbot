@@ -48,31 +48,35 @@ async function main() {
   // await houseKeeping();
 
   // get all jobs
-  const posts = await postfacache.findAll().catch(ERR);
+  const channels = client.channels.cache.map((channel) => channel.id);
+  // TODO: sort after job id
+  const posts = await postfacache.findAll({ where: { channelID: channels } }).catch(ERR);
+  // calculate interval between jobs
+  const calcInterval = (config.commands.faAutopost.intervalChecker / 2) / posts.length;
   posts.forEach(async (post) => {
-    const channelID = post.channelID;
-    const channel = client.channels.cache.find((channel) => channel.id === channelID);
-    // if channel doesnt exist, disregard job
-    if (!channel) return;
-    // check, if bot has permission to send messages
-    if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) {
-      return;
-    }
+    setTimeout(async () => {
+      const channelID = post.channelID;
+      const channel = client.channels.cache.find((channel) => channel.id === channelID);
+      // check, if bot has permission to send messages
+      if (!channel.guild.members.me.permissionsIn(channel).has(new PermissionsBitField(['SendMessages', 'ViewChannel']))) {
+        return;
+      }
+      // return abort message if channel is sfw
+      if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
 
-    // return abort message if channel is sfw
-    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
-
-    // get post details and send in channel
-    const submission = await Submission(post.submissionID);
-    // tags, channelID, nsfw
-    await postMessage(submission, channel);
-    await postfacache.destroy({ where: { channelID: post.channelID, submissionID: post.submissionID } }).catch(ERR);
+      // get post details and send in channel
+      const submissionID = post.submissionID;
+      const submission = await Submission(submissionID);
+      // tags, channelID, nsfw
+      await postMessage(submission, channel);
+      await postfacache.destroy({ where: { channelID, submissionID } }).catch(ERR);
+    }, calcInterval);
   });
 }
 
 module.exports.run = () => {
   if (DEBUG) main();
-  setInterval(() => main(), config.commands.faAutopost.intervalChecker);
+  setInterval(() => main(), config.commands.faAutopost.intervalChecker / 2);
 };
 
 module.exports.help = {
