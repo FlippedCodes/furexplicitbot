@@ -29,6 +29,25 @@ services:
       options:
         max-size: "1G"
 
+  worker_faAutpost:
+    build:
+      context: ./workers/faAutopost
+    depends_on:
+      - db-feb
+    restart: always
+    environment:
+      login_fa_cookie_a: ${login_fa_cookie_a}
+      login_fa_cookie_b: ${login_fa_cookie_b}
+      db_dialect: mysql
+      db_host: db-feb
+      db_name: furExplicitBot
+      db_user: furExplicitBot
+      db_passw: ${db_password}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+
   db-feb:
     image: mariadb:latest
     restart: always
