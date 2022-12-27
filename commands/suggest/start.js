@@ -231,8 +231,7 @@ async function newInstance(interaction, results, tags, message) {
   if (message) newMessage = await message.edit(content, true);
   else newMessage = await reply(interaction, content);
   const count = await personalTag.count({ where: { userID: interaction.user.id } });
-  // if (count === 0) messageSuccess(interaction, 'Dev-Note: This feature is still in testing and might change in the future. I just thought it\'s a cool mechanic, that fits well in this bot.\n\n__Placeholder privacy notice__: By continue using this command, you agree, that we will store tags about your e621 browsing behavior. To remove the data, press "Abort" and run `/suggest reset`.');
-  if (count === 0) reply(interaction, 'Dev-Note: This feature is still in testing and might change in the future. I just thought it\'s a cool mechanic, that fits well in this bot.\n\n__Placeholder privacy notice__: By continue using this command, you agree, that we store tag-information about your e621 browsing behavior. To remove the stored data, press "Abort" and run `/suggest reset`.', true);
+  if (count === 0) reply(interaction, '__Placeholder privacy notice__: By continue using this command, you agree, that we store tag-information about your e621 browsing behavior. To remove the stored data at any time, press "Abort" and run `/suggest reset`.', true);
   buttonHandler(interaction, newMessage, embed, results, 0, tags);
 }
 
