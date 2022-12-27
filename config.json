@@ -24,7 +24,7 @@
         },
         "faAutopost": {
             "intervalChecker": 1.8e+6,
-            "maxArtists": 5
+            "maxArtists": 10
         },
         "changelog": {
             "text": "./changelog.txt"

@@ -1,7 +1,7 @@
 **Changelog:**
 __Bot update - ßß3.2.0 - ßßFurAffinity auto posting__
 New Stuff:
-- You can now watch up to 5 ßßFurAffinity artists through the bot and get new art directly to discord
+- You can now watch up to ßß10 ßßFurAffinity artists through the bot and get new art directly to discord
 
 Important Changes:
 - Removed deprecated warning to now use slash-commands
