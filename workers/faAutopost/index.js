@@ -1,4 +1,4 @@
-import { Login, Submissions, removeFromInbox } from 'furaffinity-api';
+import { Login, Submissions, removeFromInbox, unwatchAuthor } from 'furaffinity-api';
 
 import PQueue from 'p-queue';
 
@@ -31,8 +31,7 @@ function createJobs(posts) {
   posts.forEach(async (post) => {
     const artistID = post.author.id;
     const todoChannels = await autopostfasubmission.findAll({ where: { artistID } });
-    // TODO: get function to unfollow artist
-    // if (autopostfasubmission.length === 0) unwollow(artistID);
+    if (autopostfasubmission.length === 0) unwatchAuthor(artistID);
     const bulkData = todoChannels.map((channel) => {
       return {
         channelID: channel.channelID,
@@ -76,7 +75,6 @@ setInterval(async () => {
     await createJobs(posts);
   });
 }, config.intervalChecker);
-// }, 10000);
 
 // logging error; supress crash
 process.on('uncaughtException', (err) => {
