@@ -26,7 +26,7 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.28.0",
     "utf-8-validate": "^5.0.10",
-    "uwuifier": "^4.0.4"
+    "uwuifier": "^4.0.3"
   },
   "devDependencies": {
     "eslint": "^8.5.0",
