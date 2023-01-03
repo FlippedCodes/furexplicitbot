@@ -187,7 +187,7 @@ async function bulkCreateDB(userID, submission, newScore) {
 function buttonHandler(interaction, message, orgContent, results, index, tags) {
   // start button collector
   // TODO: refactor permissions
-  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('MANAGE_MESSAGES');
+  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('ManageMessages');
   const buttonCollector = message.createMessageComponentCollector({ filter, time: config.commands.buttonTimeout });
   buttonCollector.on('collect', async (used) => {
     await buttonCollector.stop();

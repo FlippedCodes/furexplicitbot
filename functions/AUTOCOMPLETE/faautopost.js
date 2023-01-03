@@ -2,7 +2,7 @@
 
 module.exports.run = async (interaction) => {
   // check manage guild permissions
-  if (!interaction.memberPermissions.has('MANAGE_GUILD')) {
+  if (!interaction.memberPermissions.has('ManageGuild')) {
     interaction.respond([{ name: uwu(`You don't hawe access to ßß/${module.exports.data.name} ßßòwó ßß\nYou need at least the Manage Server permission.`), value: '0' }]);
     return;
   }

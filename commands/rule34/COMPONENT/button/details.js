@@ -93,7 +93,7 @@ function prepareMessage(submission, orgMessage, poolData) {
 
 function buttonHandler(message, interaction, orgContent) {
   // start button collector
-  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('MANAGE_MESSAGES');
+  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('ManageMessages');
   const buttonCollector = message.createMessageComponentCollector({ filter, time: config.commands.buttonTimeout });
   buttonCollector.on('collect', async (used) => {
     buttonCollector.stop();

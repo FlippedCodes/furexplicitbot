@@ -23,7 +23,7 @@ async function addCheck(serverID, channelID) {
 
 module.exports.run = async (client, message, args, config, EmbedBuilder, prefix) => {
   // check if user can manage servers
-  if (!message.member.hasPermission('MANAGE_GUILD')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
+  if (!message.member.hasPermission('ManageGuild')) return messageFail(message, 'You dwon\'t hawe access to thwis command òwó');
   if (!message.channel.nsfw) return messageFail(message, 'I\'m sowwy, bwut thwis iws not yewt awailable for SFW rooms. uwu');
   const channelID = message.channel.id;
   const added = await addCheck(message.guild.id, channelID);

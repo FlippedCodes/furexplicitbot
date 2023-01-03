@@ -62,7 +62,7 @@ function prepareMessage(submission) {
 
 function buttonHandler(interaction, message, orgContent, submission) {
   // start button collector
-  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('MANAGE_MESSAGES');
+  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('ManageMessages');
   const buttonCollector = message.createMessageComponentCollector({ filter, time: config.commands.buttonTimeout });
   buttonCollector.on('collect', async (used) => {
     await used.deferUpdate();
@@ -72,7 +72,7 @@ function buttonHandler(interaction, message, orgContent, submission) {
     // TODO: not sure what was planned with the below function, but it broke delete funciton.
     if (used.customId === 'delete') return message.delete();
     // if (used.customId === 'delete') {
-    //   if (interaction.user.id === used || !interaction.memberPermissions.has('MANAGE_MESSAGES')) return message.delete();
+    //   if (interaction.user.id === used || !interaction.memberPermissions.has('ManageMessages')) return message.delete();
     //   return;
     // }
     client.commands.get(`${module.exports.data.name}_COMPONENT_button_${used.customId}`).run(interaction, message, submission);

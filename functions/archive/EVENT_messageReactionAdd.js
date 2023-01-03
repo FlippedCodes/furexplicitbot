@@ -18,7 +18,7 @@ function messageFail(message, body) {
 
 function checkPermissions(reaction, user, messageOwner) {
   let permissions = false;
-  if (reaction.message.guild.member(user).hasPermission('MANAGE_MESSAGES')) permissions = true;
+  if (reaction.message.guild.member(user).hasPermission('ManageMessages')) permissions = true;
   if (messageOwner.has(reaction.message.id)) if (messageOwner.get(reaction.message.id) === user.id) permissions = true;
   return permissions;
 }
@@ -37,7 +37,7 @@ module.exports.run = async (client, reaction, user, config, EmbedBuilder, messag
   // check if message was sent by bot
   if (!config.env.get('inDev')) { if (reaction.message.author.id !== config.clientID) return; }
 
-  if (await client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'MANAGE_MESSAGES')) reaction.users.remove(user);
+  if (await client.functions.get('FUNC_checkBotPermissions').run(reaction.message, 'ManageMessages')) reaction.users.remove(user);
 
   // check if user hit ratelimit
   if (usedRecently.has(user.id)) {
