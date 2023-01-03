@@ -1,5 +1,3 @@
-const { ActivityType } = require('discord.js');
-
 module.exports.run = async () => {
   // FIXME: function loads in when shards are not ready yet, causing a error on startup and no status
   if (DEBUG) return;
