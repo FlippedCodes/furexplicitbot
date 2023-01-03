@@ -31,7 +31,7 @@ function createJobs(posts) {
   posts.forEach(async (post) => {
     const artistID = post.author.id;
     const todoChannels = await autopostfasubmission.findAll({ where: { artistID } });
-    if (autopostfasubmission.length === 0) unwatchAuthor(artistID);
+    if (todoChannels.length === 0) unwatchAuthor(artistID);
     const bulkData = todoChannels.map((channel) => {
       return {
         channelID: channel.channelID,
