@@ -10,15 +10,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "eslint": "^8.30.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
-  },
   "dependencies": {
-    "furaffinity-api": "^4.4.3",
+    "furaffinity-api": "^4.5.0",
     "mysql2": "^2.3.3",
     "p-queue": "^7.3.0",
     "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
   }
 }
