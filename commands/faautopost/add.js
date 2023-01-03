@@ -7,7 +7,6 @@ async function countChannels(autopostfasubmission, serverID) {
 
 async function addAutopost(autopostfasubmission, artistID, channelID, serverID, maxChannels) {
   if (await countChannels(autopostfasubmission, serverID) > maxChannels) return 1;
-  if (await autopostfasubmission.findOne({ where: { channelID } }).catch(ERR)) return 2;
   await autopostfasubmission.findOrCreate({ where: { artistID, channelID, serverID } }).catch(ERR);
   return true;
 }
@@ -24,6 +23,12 @@ module.exports.run = async (interaction, autopostfasubmission) => {
   });
   // check if artist is null
   if (!artist) return;
+  // check, if token works
+  if (artist.watchLink.endsWith('?key=')) {
+    LOG('FA Token got invalidated!');
+    messageFail(interaction, uwu('Woops, seems like the wizard behind the curtain has tripped! Try again later.'));
+    return;
+  }
   // if artist is not already watched by another channel, do so
   if (!artist.stats.watching) artist.watchAuthor();
   const added = await addAutopost(autopostfasubmission, artistID, channel.id, interaction.guild.id, config.commands.faAutopost.maxArtists);
