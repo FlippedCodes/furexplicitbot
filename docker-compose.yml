@@ -29,7 +29,7 @@ services:
       options:
         max-size: "1G"
 
-  worker_faAutpost:
+  worker_faautpost:
     build:
       context: ./workers/faAutopost
     depends_on:
