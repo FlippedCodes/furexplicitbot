@@ -1,9 +1,9 @@
 // init Discord
-const { Client, IntentsBitField, Collection } = require('discord.js');
+const {
+  Client, IntentsBitField, Collection, SlashCommandBuilder,
+} = require('discord.js');
 // init file system
 const fs = require('fs');
-// init command builder
-const { SlashCommandBuilder } = require('@discordjs/builders');
 // use contructor to create intent bit field
 const intents = new IntentsBitField([
   IntentsBitField.Flags.Guilds,
