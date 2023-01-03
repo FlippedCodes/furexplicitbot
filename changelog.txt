@@ -1,7 +1,7 @@
 **Changelog:**
 __Bot update - ßß3.2.0 - ßßFurAffinity auto posting__
 New Stuff:
-- You can now watch up to ßß10 ßßFurAffinity artists through the bot and get new art directly to discord with '/faautopost'
+- You can now watch up to ßß10 ßßFurAffinity artists through the bot and get new art directly to discord with ßß`/faautopost`
 
 Important Changes:
 - Removed deprecated warning to now use slash-commands
@@ -21,4 +21,5 @@ Alongside this popular bot, I also code two other useful bots, that you might li
 - ßß__I-SH__: Have one or multiple partnered servers? With I-SH you can link a channel between them!
 - ßß__AgentBlack__: Global user ban and warn bot to keep your server safe!
 
-⚠️ This message is only shown once, per user. If you notice any bugs, feel free to report it on my discord server. Link is in ßß/about. ^^
+⚠️ This message is only shown once, per user but can be viewed again with ßß`/changelog`
+If you notice any bugs, feel free to report it on my discord server. Link is in ßß/about. ^^
