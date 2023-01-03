@@ -17,7 +17,6 @@ module.exports.run = async (interaction, autopostfasubmission) => {
   } else {
     messageFail(interaction, uwu('This channel ßßdoesn\'t have an autopost ßßconfigured!'));
   }
-  // TODO: create unfollow function
 };
 
 module.exports.data = { subcommand: true };
