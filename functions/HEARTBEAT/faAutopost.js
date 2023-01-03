@@ -6,17 +6,6 @@ const postfacache = require('../../database/models/postfacache');
 
 Login(process.env.login_fa_cookie_a, process.env.login_fa_cookie_b);
 
-// create new jobs from submission list
-// if no channel with artist can be assosiated: unfollow artist
-function getNewPosts() {
-
-}
-
-// delete stuck jobs, that dont belong to any shard
-function houseKeeping() {
-
-}
-
 function postMessage(post, channel) {
   const embed = new EmbedBuilder();
   embed
@@ -44,9 +33,6 @@ function abortMessage(channel) {
 }
 
 async function main() {
-  // await getNewPosts();
-  // await houseKeeping();
-
   // get all jobs
   const channels = client.channels.cache.map((channel) => channel.id);
   // TODO: sort after job id
