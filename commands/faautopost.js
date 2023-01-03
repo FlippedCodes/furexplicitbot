@@ -1,3 +1,7 @@
+const { Login } = require('furaffinity-api');
+
+Login(process.env.login_fa_cookie_a, process.env.login_fa_cookie_b);
+
 const autopostfasubmission = require('../database/models/autopostfasubmission');
 
 module.exports.run = async (interaction) => {
