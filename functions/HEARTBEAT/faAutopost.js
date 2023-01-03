@@ -1,4 +1,4 @@
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField, Colors } = require('discord.js');
 
 const { Login, Submission } = require('furaffinity-api');
 
@@ -26,7 +26,7 @@ function abortMessage(channel) {
   const title = 'Hello! Your channel not marked as ßßage-restricted ßß(NSFW).';
   const body = 'As per the newest bot update and to further comply with discords guidelines, the bot will no longer post any art in any unmarked channel. \nMake sure to adjust the channel settings.';
   embed
-    .setColor('Red')
+    .setColor(Colors.Red)
     .setDescription(body)
     .setTitle(title);
   channel.send({ embeds: [embed] });

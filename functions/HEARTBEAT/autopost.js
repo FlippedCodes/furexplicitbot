@@ -1,4 +1,4 @@
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField, Colors } = require('discord.js');
 
 const { Op } = require('sequelize');
 
@@ -40,7 +40,7 @@ function abortMessage(channel, channelID, currentTimestamp, autoPostInterval) {
   const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
   const body = 'As per the newest bot update and to further comply with discords guidelines, the bot will no longer post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
   embed
-    .setColor('Red')
+    .setColor(Colors.Red)
     .setDescription(body)
     .setTitle(title);
   channel.send({ embeds: [embed] });

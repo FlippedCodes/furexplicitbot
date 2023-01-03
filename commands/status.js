@@ -1,6 +1,6 @@
 // TODO: Eventually also offer a App>link inside of discord to look for the source
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Colors } = require('discord.js');
 
 const axios = require('axios');
 
@@ -13,10 +13,10 @@ function setOverallStatus(params) {
   // checkes if all services are true
   if (isUpOverall.every((isUp) => isUp)) {
     embed.setTitle('All Systems Operational');
-    embed.setColor('Green');
+    embed.setColor(Colors.Green);
   } else {
     embed.setTitle('Partially Degraded');
-    embed.setColor('Orange');
+    embed.setColor(Colors.Orange);
   }
 }
 

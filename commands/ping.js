@@ -1,10 +1,10 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Colors } = require('discord.js');
 
 // Ping kickoff for bot latency
 async function kickoff(interaction) {
   const sendMessage = await new EmbedBuilder()
     .setDescription('📤 Pong...')
-    .setColor('Orange');
+    .setColor(Colors.Orange);
   const sentMessage = await reply(interaction, { embeds: [sendMessage], fetchReply: true });
   return sentMessage;
 }
@@ -17,7 +17,7 @@ function editedMessage(sentMessage, interaction) {
   API latency is \`${api_latency}\`ms`;
   return new EmbedBuilder()
     .setDescription(body)
-    .setColor('Green');
+    .setColor(Colors.Green);
 }
 
 // posts ping message and edits it afterwards

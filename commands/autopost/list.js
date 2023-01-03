@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Colors } = require('discord.js');
 
 async function getChannels(autopostchannel, serverID) {
   const result = await autopostchannel.findAll({ where: { serverID } });
@@ -21,7 +21,7 @@ module.exports.run = async (interaction, autopostchannel, servertagsblacklist) =
     embed.addFields([{ name: `'#${channel.name}' - ${entry.interval}ms`, value: `\`${entry.tags} ${suffix.join(' ')}\``, inline: true }]);
   });
   embed
-    .setColor('Green')
+    .setColor(Colors.Green)
     .setAuthor({ name: 'Autopost channels in this server:' });
   reply(interaction, { embeds: [embed] });
 };

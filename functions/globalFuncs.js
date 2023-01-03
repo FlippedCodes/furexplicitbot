@@ -1,3 +1,5 @@
+const { Colors } = require('discord.js');
+
 const Uwuifier = require('uwuifier');
 
 // FIXME: uwuifier constructor issues
@@ -15,13 +17,13 @@ global.uwu = (text) => {
 
 global.messageFail = async (interaction, body, color, ephemeral) => {
   const sentMessage = await client.functions.get('richEmbedMessage')
-    .run(interaction, body, '', color || 'Red', false, ephemeral || true);
+    .run(interaction, body, '', color || Colors.Red, false, ephemeral || true);
   return sentMessage;
 };
 
 global.messageSuccess = async (interaction, body, color, ephemeral) => {
   const sentMessage = await client.functions.get('richEmbedMessage')
-    .run(interaction, body, '', color || 'Green', false, ephemeral || false);
+    .run(interaction, body, '', color || Colors.Green, false, ephemeral || false);
   return sentMessage;
 };
 

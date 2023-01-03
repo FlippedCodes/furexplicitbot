@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Colors } = require('discord.js');
 
 const fs = require('fs');
 
@@ -11,7 +11,7 @@ module.exports.run = async (interaction) => {
     }
     const embed = new EmbedBuilder();
     embed.setDescription(uwu(content))
-      .setColor('Orange')
+      .setColor(Colors.Orange)
       .setTitle('About')
       .setThumbnail(config.commands.about.logo);
     reply(interaction, { embeds: [embed] });

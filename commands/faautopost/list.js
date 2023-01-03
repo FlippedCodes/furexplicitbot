@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Colors } = require('discord.js');
 
 async function getChannels(autopostfasubmission, serverID) {
   const result = await autopostfasubmission.findAll({ where: { serverID } });
@@ -14,7 +14,7 @@ module.exports.run = async (interaction, autopostfasubmission) => {
     embed.addFields([{ name: entry.artistID, value: `${channel}`, inline: true }]);
   });
   embed
-    .setColor('Green')
+    .setColor(Colors.Green)
     .setAuthor({ name: 'Autopost channels in this server:' });
   reply(interaction, { embeds: [embed] });
 };

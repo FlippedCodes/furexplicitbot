@@ -1,6 +1,6 @@
 // init Discord
 const {
-  Client, IntentsBitField, Collection, SlashCommandBuilder,
+  Client, IntentsBitField, Collection, SlashCommandBuilder, Colors,
 } = require('discord.js');
 // init file system
 const fs = require('fs');
@@ -32,7 +32,7 @@ global.ERR = (err) => {
   const embed = new EmbedBuilder()
     .setAuthor({ name: `[${currentShardID}] Error: '${err.message}'` })
     .setDescription(`STACKTRACE:\n\`\`\`${err.stack.slice(0, 4000)}\`\`\``)
-    .setColor('Red');
+    .setColor(Colors.Red);
   client.channels.cache.get(config.logChannel).send({ embeds: [embed] });
   return;
 };
