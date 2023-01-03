@@ -71,6 +71,7 @@ setInterval(async () => {
   await mainQ.add(async () => {
     // get latest posts
     const posts = await Submissions({ sort: 'old' });
+    if (posts === undefined) console.log('FA Token got invalidated!');
     if (posts.length === 0) return;
     await createJobs(posts);
   });
