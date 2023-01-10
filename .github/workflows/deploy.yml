@@ -42,13 +42,13 @@ jobs:
       #     node-version: ${{ matrix.node-version }}
 
       - name: Update 3rd party docker containers
-        run: docker-compose pull
+        run: docker compose pull
 
       - name: Build app
-        run: docker-compose build
+        run: docker compose build
 
       # - name: Spin up DB
-      # run: docker-compose up -d db
+      # run: docker compose up -d db
 
       # - name: Update DB structure
       #   run: npm i sequelize-cli
@@ -56,4 +56,4 @@ jobs:
 
       # - name: Spin up all other containers
       - name: Spin up containers
-        run: docker-compose up -d db-feb
+        run: docker compose up -d db-feb
