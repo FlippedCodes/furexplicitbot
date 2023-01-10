@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: stardrive
+    runs-on: mainserverJulian
 
     # strategy:
     #   matrix:
@@ -56,4 +56,4 @@ jobs:
 
       # - name: Spin up all other containers
       - name: Spin up containers
-        run: docker-compose up -d db-feb
+        run: docker-compose up -d

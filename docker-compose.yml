@@ -65,10 +65,10 @@ services:
       options:
         max-size: "1G"
 
-networks:
-  default:
-    external:
-      name: nginx_backend
+# networks:
+#   default:
+#     external:
+#       name: nginx_backend
 
 volumes:
   db_data:
