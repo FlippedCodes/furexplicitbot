@@ -1,5 +1,5 @@
 **Changelog:**
-__Bot update - ßß3.2.0 - ßßFurAffinity auto posting__
+__Bot update - ßß3.2.1 - ßßFurAffinity auto posting__
 New Stuff:
 - You can now watch up to ßß10 ßßFurAffinity artists through the bot and get new art directly to discord with ßß`/faautopost`
 
@@ -8,7 +8,7 @@ Important Changes:
 
 Boring Bugfixes:
 - ßß`@everyone` catch slipped through an update, while it cant be explioted, has been fixed anway
-- Updated code 
+- Issue found with FA-Autopost logic, that is sometimes posted a picture twice
 
 Working on, sorted in priority:
 - Get pool handler for e621 back up and running, was disabled in the update procedure

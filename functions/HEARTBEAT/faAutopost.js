@@ -36,9 +36,13 @@ async function main() {
   // get all jobs
   const channels = client.channels.cache.map((channel) => channel.id);
   // TODO: sort after job id
-  const posts = await postfacache.findAll({ where: { channelID: channels } }).catch(ERR);
-  // calculate interval between jobs
-  const calcInterval = (config.commands.faAutopost.intervalChecker / 2) / posts.length;
+  const posts = await postfacache.findAll({
+    attributes: ['ID', 'channelID', 'submissionID'],
+    where: { channelID: channels },
+    order: [['ID', 'ASC']],
+  }).catch(ERR);
+  // calculate interval between jobs to destribute messages evenly
+  const calcInterval = config.commands.faAutopost.intervalChecker / posts.length;
   posts.forEach(async (post) => {
     setTimeout(async () => {
       const channelID = post.channelID;
@@ -55,14 +59,15 @@ async function main() {
       const submission = await Submission(submissionID);
       // tags, channelID, nsfw
       await postMessage(submission, channel);
-      await postfacache.destroy({ where: { channelID, submissionID } }).catch(ERR);
     }, calcInterval);
+    // Needs to be cleared outside of the timeout, so it doesnt get picked up in the next interval
+    post.destroy().catch(ERR);
   });
 }
 
 module.exports.run = () => {
   if (DEBUG) main();
-  setInterval(() => main(), config.commands.faAutopost.intervalChecker / 2);
+  setInterval(() => main(), config.commands.faAutopost.intervalChecker);
 };
 
 module.exports.help = {
