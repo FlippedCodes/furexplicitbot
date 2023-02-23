@@ -14,7 +14,7 @@
     "furaffinity-api": "^4.5.0",
     "mysql2": "^2.3.3",
     "p-queue": "^7.3.0",
-    "sequelize": "^6.28.0"
+    "sequelize": "^6.28.2"
   },
   "devDependencies": {
     "eslint": "^8.31.0",
