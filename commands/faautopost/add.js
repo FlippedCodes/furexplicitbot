@@ -5,8 +5,11 @@ async function countChannels(autopostfasubmission, serverID) {
   return result.count;
 }
 
-async function addAutopost(autopostfasubmission, artistID, channelID, serverID, maxChannels) {
-  if (await countChannels(autopostfasubmission, serverID) > maxChannels) return 1;
+async function addAutopost(autopostfasubmission, artistID, channelID, serverID, faAutopostConfig) {
+  // whitelist switch
+  if (!faAutopostConfig.whitelistedServers.includes(serverID)) {
+    if (await countChannels(autopostfasubmission, serverID) > faAutopostConfig.maxArtists) return 1;
+  }
   await autopostfasubmission.findOrCreate({ where: { artistID, channelID, serverID } }).catch(ERR);
   return true;
 }
@@ -31,7 +34,7 @@ module.exports.run = async (interaction, autopostfasubmission) => {
   }
   // if artist is not already watched by another channel, do so
   if (!artist.stats.watching) artist.watchAuthor();
-  const added = await addAutopost(autopostfasubmission, artistID, channel.id, interaction.guild.id, config.commands.faAutopost.maxArtists);
+  const added = await addAutopost(autopostfasubmission, artistID, channel.id, interaction.guild.id, config.commands.faAutopost);
   switch (added) {
     case true: return messageSuccess(interaction, uwu(`You are now watching ßß\`${artistID}\` in ${channel}. The first post will appear with the next upload of the artist.`));
     case 1: return messageFail(interaction, uwu(`You already watch the max of ßß${config.commands.faAutopost.maxArtists} artists in this server!`));

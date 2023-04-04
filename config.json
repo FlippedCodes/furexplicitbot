@@ -24,7 +24,10 @@
         },
         "faAutopost": {
             "intervalChecker": 1.8e+6,
-            "maxArtists": 10
+            "maxArtists": 10,
+            "whitelistedServers": [
+                "300051375914483715"
+            ]
         },
         "changelog": {
             "text": "./changelog.txt"
