@@ -4,8 +4,9 @@ const postfacache = require('../../database/models/postfacache');
 
 async function removeAutopost(autopostfasubmission, channelID, artistID) {
   if (!await autopostfasubmission.findOne({ where: { channelID, artistID } }).catch(ERR)) return false;
-  await postfacache.destroy({ where: { channelID } }).catch(ERR);
-  await autopostfasubmission.destroy({ where: { channelID } }).catch(ERR);
+  // FIXME: aurtisID is not in postfacache it will just assumed that there isnt anything int he queue for the channel in that moment from that artist.
+  // await postfacache.destroy({ where: { channelID, artistID } }).catch(ERR);
+  await autopostfasubmission.destroy({ where: { channelID, artistID } }).catch(ERR);
   return true;
 }
 
