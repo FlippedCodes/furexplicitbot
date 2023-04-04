@@ -33,7 +33,7 @@ module.exports.run = async (interaction, autopostfasubmission) => {
   if (!artist.stats.watching) artist.watchAuthor();
   const added = await addAutopost(autopostfasubmission, artistID, channel.id, interaction.guild.id, config.commands.faAutopost.maxArtists);
   switch (added) {
-    case true: return messageSuccess(interaction, uwu(`You are now watching ßß\`${artistID}\` in ${channel}. The first post will appear with the next uplaod of the artist.`));
+    case true: return messageSuccess(interaction, uwu(`You are now watching ßß\`${artistID}\` in ${channel}. The first post will appear with the next upload of the artist.`));
     case 1: return messageFail(interaction, uwu(`You already watch the max of ßß${config.commands.faAutopost.maxArtists} artists in this server!`));
     default: return messageFail(interaction, uwu('Woops, seems like the wizard behind the curtain has tripped! Try again later.'));
   }
