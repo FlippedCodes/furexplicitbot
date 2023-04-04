@@ -7,7 +7,7 @@ module.exports.run = async (searchInput, serverID) => {
 
   const output = DBentries.map((entry) => {
     const channel = client.channels.cache.find((channel) => channel.id === entry.channelID);
-    return { name: `#${channel.name} - ${entry.artistID}`, value: entry.channelID };
+    return { name: `#${channel.name} - ${entry.artistID}`, value: `${entry.channelID}_${entry.artistID}` };
   });
   return output;
 };
