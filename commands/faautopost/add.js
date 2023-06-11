@@ -6,7 +6,7 @@ async function countChannels(autopostfasubmission, serverID) {
 }
 
 async function addAutopost(autopostfasubmission, artistID, channelID, serverID, faAutopostConfig) {
-  // whitelist switch
+  // whitelist switch and count total amount
   if (!faAutopostConfig.whitelistedServers.includes(serverID)) {
     if (await countChannels(autopostfasubmission, serverID) > faAutopostConfig.maxArtists) return 1;
   }
