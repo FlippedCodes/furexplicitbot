@@ -8,7 +8,10 @@ async function countChannels(autopostchannel, serverID) {
 async function addAutopost(autopostchannel, tags, interval, channelID, serverID, maxChannels) {
   const date = new Date();
   const nextEvent = date.getTime();
-  if (await countChannels(autopostchannel, serverID) > maxChannels) return 1;
+  // whitelist switch and count total amount
+  if (!config.commands.autopost.whitelistedServers.includes(serverID)) {
+    if (await countChannels(autopostchannel, serverID) > maxChannels) return 1;
+  }
   if (await autopostchannel.findOne({ where: { channelID } }).catch(ERR)) return 2;
   await autopostchannel.findOrCreate({
     where: { channelID },

@@ -20,7 +20,11 @@
             "maxChannels": 2,
             "minPostTime": 600000,
             "maxPostTime": 18000000,
-            "minPics": 100
+            "minPics": 100,
+            "whitelistedServers": [
+                "300051375914483715",
+                "730609289110224947"
+            ]
         },
         "faAutopost": {
             "intervalChecker": 1.8e+6,
