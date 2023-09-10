@@ -1,6 +1,6 @@
 # get node
 # needs to be this version, otherwise breakes uwuifier
-FROM oven/bun:1.0.0
+FROM node:18.5.0-buster-slim
 
 # RUN apk add --no-cache git
 
@@ -11,10 +11,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # building app
-RUN bun install --production
+RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
 # start up the bot
-CMD [ "bun", "start" ]
+CMD [ "npm", "start" ]

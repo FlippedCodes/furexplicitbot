@@ -7,9 +7,17 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Bot",
+            "name": "Launch Node",
             "program": "${workspaceFolder}/index.js",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "bun",
+            "request": "launch",
+            "name": "Launch Bun",
+            "program": "index.js",
+            "cwd": "${workspaceFolder}",
+            // "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -4,7 +4,8 @@
   "description": "I'm providing NSFW Furry images from different websites.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "bun index.js",
+    "startLegacy": "node index.js"
   },
   "repository": {
     "type": "git",
