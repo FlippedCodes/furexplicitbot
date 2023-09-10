@@ -11,7 +11,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # building app
-RUN bun install --production
+RUN bun install
+# RUN bun install --production
 
 # Bundle app source
 COPY . .
