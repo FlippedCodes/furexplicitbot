@@ -17,4 +17,4 @@ RUN npm ci --only=production
 COPY . .
 
 # start up the bot
-CMD [ "npm", "start", "startLegacy" ]
+CMD [ "npm", "run", "startLegacy" ]
