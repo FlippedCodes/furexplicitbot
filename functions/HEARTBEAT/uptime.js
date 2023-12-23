@@ -14,7 +14,6 @@ function sendHeartbeat() {
 }
 
 module.exports.run = async () => {
-  LOG(JSON.parse(process.env.token_uptime)[currentShardID]);
   sendHeartbeat();
   setInterval(() => {
     sendHeartbeat();
