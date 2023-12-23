@@ -6,6 +6,7 @@
     "configurations": [
         {
             "type": "node",
+            "runtimeVersion": "18.5.0",
             "request": "launch",
             "name": "Launch Node",
             "program": "${workspaceFolder}/index.js",
