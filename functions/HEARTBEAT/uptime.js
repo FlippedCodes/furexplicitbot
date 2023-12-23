@@ -14,8 +14,10 @@ function sendHeartbeat() {
 }
 
 module.exports.run = async () => {
+  LOG(JSON.parse(process.env.token_uptime)[currentShardID]);
+  sendHeartbeat();
   setInterval(() => {
-    sendHeartbeat(uptimeToken);
+    sendHeartbeat();
   }, config.functions.heartbeat.uptime.interval * 1000);
 };
 
