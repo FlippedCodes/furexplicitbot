@@ -14,6 +14,7 @@ function getFiles(fs, Directory) {
 
 module.exports.run = async (fs) => {
   // get all function files
+  // TODO: Upgrade to fs.readdirSync(Directory, { recursive: true }); when rebasing to import/export; uwuifier doesn't run on new version
   const files = await getFiles(fs, './functions/');
   // only get file with '.js'
   const jsfiles = files.filter((f) => f.split('.').pop() === 'js');
