@@ -22,6 +22,7 @@ jobs:
       login_e621_user: ${{secrets.E621_LOGIN}}
       token_e621: ${{secrets.E621_API_KEY}}
       db_port: ${{ secrets.DB_PORT }}
+      db_ip: ${{ secrets.DB_IP }}
       db_password: ${{ secrets.DB_PASSWORD }}
       db_password_root: ${{ secrets.DB_PASSWORD_ROOT }}
 

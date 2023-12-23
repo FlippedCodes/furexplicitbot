@@ -52,7 +52,7 @@ services:
     image: mariadb:latest
     restart: always
     ports:
-      - "${db_port}:3306"
+      - "${db_ip}:${db_port}:3306"
     volumes:
       - db_data:/var/lib/mysql
     environment:
