@@ -58,7 +58,7 @@
                 }
             },
             "embed": {
-                "icon": "https://status.flipped.codes/upload/logo2.png",
+                "icon": "https://status.flipped.codes/upload/logo1.png",
                 "url": "https://status.flipped.codes/"
             }
         }
@@ -78,7 +78,7 @@
         },
         "heartbeat": {
             "uptime": {
-                "interval": 50000,
+                "interval": 60,
                 "endpoint": "https://status.flipped.codes/api/push/"
             },
             "discordbotlist": {
