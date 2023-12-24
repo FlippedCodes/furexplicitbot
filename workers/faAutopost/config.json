@@ -1,3 +1,5 @@
 {
-    "intervalChecker": 1.8e+6
+    "intervalChecker": 1.8e+6,
+    "uptimeInterval": 60,
+    "uptimeEndpoint": "https://status.flipped.codes/api/push/"
 }

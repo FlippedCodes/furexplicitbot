@@ -4,6 +4,8 @@ import PQueue from 'p-queue';
 
 import Sequelize from 'sequelize';
 
+import https from 'https';
+
 import { main as intAutopostfasubmission } from './database/models/autopostfasubmission.js';
 
 import { main as intPostfacache } from './database/models/postfacache.js';
@@ -15,6 +17,12 @@ import config from './config.json' assert { type: 'json' };
 const DEBUG = process.env.NODE_ENV === 'development';
 
 let del = [];
+
+function uptimeHeartbeat() {
+  setInterval(() => {
+    https.get(`${config.uptimeEndpoint}${process.env.token_uptime_worker}?status=up&msg=OK`);
+  }, config.uptimeInterval * 1000);
+}
 
 // removes submissions from FA inbox, if they have been imported
 async function cleanupDonePosts() {
@@ -69,6 +77,8 @@ const postfacache = intPostfacache(sequelize);
 await sequelize.sync();
 // login FA
 await Login(process.env.login_fa_cookie_a, process.env.login_fa_cookie_b);
+// startup uptime monitoring
+uptimeHeartbeat();
 // startup cleaner interval
 cleanupDonePosts();
 

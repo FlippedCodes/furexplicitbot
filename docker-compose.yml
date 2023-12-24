@@ -36,6 +36,7 @@ services:
       - db-feb
     restart: always
     environment:
+      token_uptime_worker: ${token_uptime_worker}
       login_fa_cookie_a: ${login_fa_cookie_a}
       login_fa_cookie_b: ${login_fa_cookie_b}
       db_dialect: mysql
