@@ -11,6 +11,7 @@ async function removeAutopost(autopostfasubmission, channelID, artistID) {
 }
 
 module.exports.run = async (interaction, autopostfasubmission) => {
+  if (!DEBUG) await interaction.deferReply({ ephemeral: true });
   const [channelID, artistID] = interaction.options.getString('channel', true).split('_');
   const removed = await removeAutopost(autopostfasubmission, channelID, artistID);
   if (removed) {

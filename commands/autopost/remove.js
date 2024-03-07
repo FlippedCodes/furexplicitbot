@@ -10,6 +10,7 @@ async function removeAutopost(autopostchannel, channelID) {
 }
 
 module.exports.run = async (interaction, autopostchannel) => {
+  if (!DEBUG) await interaction.deferReply({ ephemeral: true });
   const channelID = interaction.options.getString('channel', true);
   const removed = await removeAutopost(autopostchannel, channelID);
   if (removed) {
