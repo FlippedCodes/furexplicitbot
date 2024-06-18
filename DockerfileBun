@@ -1,6 +1,6 @@
 # get node
 # needs to be this version, otherwise breakes uwuifier
-FROM oven/bun:1.0.0
+FROM oven/bun:1.1.2-alpine
 
 # RUN apk add --no-cache git
 
@@ -11,8 +11,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # building app
-RUN bun install
-# RUN bun install --production
+RUN bun update
+
+# RUN bun install
+RUN bun install --production
 
 # Bundle app source
 COPY . .
