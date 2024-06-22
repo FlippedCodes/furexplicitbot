@@ -1,6 +1,6 @@
 # get node
 # needs to be this version, otherwise breakes uwuifier
-FROM node:18.5.0-buster-slim
+FROM node:16.11.0-buster-slim
 
 # RUN apk add --no-cache git
 
