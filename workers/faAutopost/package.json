@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "furaffinity-api": "^4.5.0",
     "mysql2": "^2.3.3",
