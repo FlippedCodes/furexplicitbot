@@ -49,6 +49,26 @@ services:
       options:
         max-size: "1G"
 
+  worker_e621autopost:
+    build:
+      context: ./workers/e621Autopost
+    depends_on:
+      - db-feb
+    restart: always
+    environment:
+      token_uptime_worker_e621: ${token_uptime_worker_e621}
+      login_e621_user: ${login_e621_user}
+      token_e621: ${token_e621}
+      db_dialect: mysql
+      db_host: db-feb
+      db_name: furExplicitBot
+      db_user: furExplicitBot
+      db_passw: ${db_password}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+
   db-feb:
     image: mariadb:latest
     restart: always
