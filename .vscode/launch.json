@@ -18,7 +18,13 @@
             "name": "Launch Bun",
             "program": "index.js",
             "cwd": "${workspaceFolder}",
-            // "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "bun",
+            "request": "launch",
+            "name": "Launch e621worker Bun",
+            "program": "index.js",
+            "cwd": "${workspaceFolder}/workers/e621Autopost",
         }
     ]
 }
