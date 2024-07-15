@@ -11,8 +11,32 @@ const autopostchannel = require('../../database/models/autopostchannel');
 //   postcache.destroy({ where: { channelID } }).catch(ERR);
 // }
 
-async function getChannels(currentTimestamp) {
-  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: currentTimestamp } } });
+function notAgeRestricted(channel, channelID, currentTimestamp, autoPostInterval) {
+  const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
+  const body = 'To further comply with discords guidelines, the bot will not post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
+  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
+}
+
+function notSuccessfullyPosted(channel) {
+  const title = 'Hello! There are no pictures!';
+  const body = `We are sorry to inform you, but in an attempt to keep unnecessary requests to e621 to a minimum, we deleted your autopost in this channel, as we are not able to find any pictures with your tags for over a week.
+Please review your tags below and try again with \`/autopost\`. Thank you for understanding :3`;
+  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
+}
+
+// abort posting as channel is sfw
+function abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body) {
+  const embed = new EmbedBuilder();
+  embed
+    .setColor(Colors.Red)
+    .setDescription(body)
+    .setTitle(title);
+  channel.send({ embeds: [embed] });
+  if (channelID && currentTimestamp && autoPostInterval) updateTime(channelID, currentTimestamp, autoPostInterval);
+}
+
+async function getChannels() {
+  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: new Date() } } });
   // const result = await autopostchannel.findAll();
   return result;
 }
@@ -32,30 +56,6 @@ function postMessage(post, channel) {
     .setFooter({ text: 'Picture from e621.net', iconURL: config.engine.e621.logo })
     .setTimestamp();
   channel.send({ embeds: [embed] });
-}
-
-function notAgeRestricted(channel, channelID, currentTimestamp, autoPostInterval) {
-  const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
-  const body = 'To further comply with discords guidelines, the bot will not post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
-  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
-}
-
-function notSuccessfullyPosted(channel, channelID, currentTimestamp, autoPostInterval) {
-  const title = 'Hello! There are no pictures!';
-  const body = `We are sorry to inform you, but in an attempt to keep unnecessary requests to e621 to a minimum, we deleted your autopost in this channel, as we are not able to find any pictures with your tags for over a week.
-Please review your tags below and try again with \`/autopost\`. Thank you for understanding :3`;
-  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
-}
-
-// abort posting as channel is sfw
-function abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body) {
-  const embed = new EmbedBuilder();
-  embed
-    .setColor(Colors.Red)
-    .setDescription(body)
-    .setTitle(title);
-  channel.send({ embeds: [embed] });
-  updateTime(channelID, currentTimestamp, autoPostInterval);
 }
 
 async function main() {
