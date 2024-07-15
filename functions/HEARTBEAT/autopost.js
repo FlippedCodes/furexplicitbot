@@ -38,7 +38,7 @@ function postMessage(post, channel) {
 function abortMessage(channel, channelID, currentTimestamp, autoPostInterval) {
   const embed = new EmbedBuilder();
   const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
-  const body = 'As per the newest bot update and to further comply with discords guidelines, the bot will no longer post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
+  const body = 'To further comply with discords guidelines, the bot will not post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
   embed
     .setColor(Colors.Red)
     .setDescription(body)
