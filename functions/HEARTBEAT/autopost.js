@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 const autopostchannel = require('../../database/models/autopostchannel');
 
-// const postcache = require('../database/models/postcache');
+const postcache = require('../database/models/postcache');
 
 // // clear autopost to force changes
 // function pruneAutopost(channelID) {
@@ -41,6 +41,20 @@ async function getChannels() {
   return result;
 }
 
+// if not posted in over a week, delete autopost and cache.
+async function cleanupAutopostChannels() {
+  const aWeekAgo = new Date();
+  aWeekAgo.setDate(aWeekAgo.getDate() - 7);
+  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: aWeekAgo } } }).catch(ERR);
+  result.forEach(async (autoPost) => {
+    const channelID = autoPost.channelID;
+    const channel = client.channels.cache.find((channel) => channel.id === channelID);
+    notSuccessfullyPosted(channel);
+    postcache.destroy({ where: { channelID } }).catch(ERR);
+    autopostchannel.destroy({ where: { channelID } }).catch(ERR);
+  });
+}
+
 function updateTime(channelID, currentTimestamp, interval) {
   const nextEvent = Number(currentTimestamp) + Number(interval);
   autopostchannel.update({ nextEvent }, { where: { channelID } });
@@ -59,7 +73,7 @@ function postMessage(post, channel) {
 }
 
 async function main() {
-  const currentTimestamp = new Date();
+  await cleanupAutopostChannels();
   const channels = await getChannels();
   channels.forEach(async (autoPost) => {
     const channelID = autoPost.channelID;
