@@ -21,7 +21,7 @@ function notSuccessfullyPosted(channel) {
   const title = 'Hello! There are no pictures!';
   const body = `We are sorry to inform you, but in an attempt to keep unnecessary requests to e621 to a minimum, we deleted your autopost in this channel, as we are not able to find any pictures with your tags for over a week.
 Please review your tags below and try again with \`/autopost\`. Thank you for understanding :3`;
-  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
+  return abortMessage(channel, null, null, null, title, body);
 }
 
 // abort posting as channel is sfw
