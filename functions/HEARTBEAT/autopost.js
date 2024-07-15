@@ -60,7 +60,7 @@ function abortMessage(channel, channelID, currentTimestamp, autoPostInterval, ti
 
 async function main() {
   const currentTimestamp = new Date();
-  const channels = await getChannels(currentTimestamp);
+  const channels = await getChannels();
   channels.forEach(async (autoPost) => {
     const channelID = autoPost.channelID;
     const channel = client.channels.cache.find((channel) => channel.id === channelID);
@@ -77,14 +77,14 @@ async function main() {
       return;
     }
 
-    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
+    if (!channel.nsfw && !config.functions.allowSFWChannels) return notAgeRestricted(channel, channelID, new Date(), autoPost.interval);
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
     if (!post) return console.warn(`[${currentShardID}] No pictures available for ${channelID}!`);
     // tags, channelID, nsfw
     postMessage(post, channel);
-    updateTime(channelID, currentTimestamp, autoPost.interval);
+    updateTime(channelID, new Date(), autoPost.interval);
   });
 }
 
