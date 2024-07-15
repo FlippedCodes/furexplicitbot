@@ -49,7 +49,7 @@ async function cleanupAutopostChannels() {
   result.forEach(async (autoPost) => {
     const channelID = autoPost.channelID;
     const channel = client.channels.cache.find((channel) => channel.id === channelID);
-    notSuccessfullyPosted(channel);
+    if (channel) notSuccessfullyPosted(channel);
     postcache.destroy({ where: { channelID } }).catch(ERR);
     autopostchannel.destroy({ where: { channelID } }).catch(ERR);
   });
