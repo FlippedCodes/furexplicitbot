@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 const autopostchannel = require('../../database/models/autopostchannel');
 
-const postcache = require('../database/models/postcache');
+const postcache = require('../../database/models/postcache');
 
 // // clear autopost to force changes
 // function pruneAutopost(channelID) {
