@@ -66,10 +66,11 @@ services:
         max-size: "1G"
     networks:
       - default
-      - grafana
+      - grafana_exposed
 
 networks:
-  grafana:
+  grafana_exposed:
+    external: true
 
 volumes:
   db_data:
