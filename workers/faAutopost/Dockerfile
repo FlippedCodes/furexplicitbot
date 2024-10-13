@@ -8,14 +8,14 @@ FROM node:18.5.0-buster-slim
 WORKDIR /usr/src/app
 
 # Get app dependencies
-COPY package*.json ./
-COPY ../../package-lock.json ./
+COPY ./workers/faAutopost/package*.json ./
+COPY ./package-lock.json ./
 
 # building app
 RUN npm ci --omit=dev
 
 # Bundle app source
-COPY . .
+COPY ./workers/faAutopost/. .
 
 # start up the bot
 CMD [ "npm", "start" ]

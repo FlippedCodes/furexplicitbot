@@ -31,7 +31,8 @@ services:
 
   worker_faautpost:
     build:
-      context: ./workers/faAutopost
+      context: .
+      dockerfile: ./workers/faAutopost/Dockerfile
     depends_on:
       - db-feb
     restart: always
