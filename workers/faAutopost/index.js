@@ -1,3 +1,5 @@
+require('./telemetry');
+
 import { Login, Submissions, removeFromInbox, unwatchAuthor } from 'furaffinity-api';
 
 import PQueue from 'p-queue';
