@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 
 # Get app dependencies
 COPY package*.json ./
+COPY ../../package-lock.json ./
 
 # building app
 RUN npm ci --omit=dev
