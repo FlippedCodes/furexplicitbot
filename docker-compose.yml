@@ -24,6 +24,7 @@ services:
       db_name: furExplicitBot
       db_user: furExplicitBot
       db_passw: ${db_password}
+      sentryLink: ${SENTRY_LINK}
     logging:
       driver: "json-file"
       options:
