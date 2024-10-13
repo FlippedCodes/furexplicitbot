@@ -1,9 +1,6 @@
-const Sentry = require('@sentry/node');
+import { init } from '@sentry/node';
 
-const packageFile = require('./package.json');
-
-Sentry.init({
+init({
   dsn: process.env.sentryLink,
   enabled: !!process.env.sentryLink,
-  release: packageFile.version,
 });
