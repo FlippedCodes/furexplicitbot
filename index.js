@@ -6,7 +6,7 @@ const manager = new ShardingManager('./bot.js', { token: process.env.token_disco
 
 manager.spawn({
   delay: 10 * 1000,
-  // timeout: 60 * 1000,
+  timeout: 60 * 1000,
 });
 
 manager.on('shardCreate', (shard) => {
