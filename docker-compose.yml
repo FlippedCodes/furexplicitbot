@@ -58,6 +58,8 @@ services:
       - "${db_ip}:${db_port}:3306"
     volumes:
       - db_data:/var/lib/mysql
+    # Set max_allowed_packet https://stackoverflow.com/questions/39369367/increase-max-allowed-packet-size-in-mysql-docker
+    command: --max_allowed_packet=256M
     environment:
       MYSQL_ROOT_PASSWORD: ${db_password_root}
       MYSQL_DATABASE: furExplicitBot
