@@ -26,6 +26,7 @@
     "discord.js": "^14.8.0",
     "furaffinity-api": "^4.5.2",
     "mysql2": "^3.11.3",
+    "redis": "^4.7.0",
     "sequelize": "^6.28.0",
     "utf-8-validate": "^5.0.10",
     "uwuifier": "4.0.3"
