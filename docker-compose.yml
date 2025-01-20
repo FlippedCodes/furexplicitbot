@@ -73,10 +73,19 @@ services:
       - default
       - grafana_exposed
 
+  redis:
+    image: eqalpha/keydb:alpine_x86_64_v6.3.4
+    command: keydb-server /etc/keydb/redis.conf --server-threads 2
+    volumes:
+    #  - ./keydb.conf:/etc/keydb/keydb.conf
+      - redis_data:/data
+    restart: always
+
 networks:
   grafana_exposed:
     external: true
 
 volumes:
   db_data:
+  redis_data:
 
