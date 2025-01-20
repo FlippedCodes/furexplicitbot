@@ -97,7 +97,6 @@ function mainLoop() {
 // main queue
 mainLoop();
 setInterval(() => mainLoop(), config.intervalChecker);
-// }, 10000);
 
 // logging error; supress crash
 process.on('uncaughtException', (err) => {
