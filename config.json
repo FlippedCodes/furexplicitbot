@@ -2,7 +2,6 @@
     "setup": {
         "setupFunctions": [
             "SETUP_status",
-            "SETUP_heartbeat",
             "SETUP_initCommands",
             "SETUP_DBSync"
         ]
