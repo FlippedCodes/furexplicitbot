@@ -34,13 +34,16 @@ async function getPicture(channelID) {
 }
 
 async function storePictures(channelID, pool) {
-  await pool.forEach((post) => {
-    if (post.tags.artist.length === 0 || post.file.url === null || post.id === null) return;
-    postcache.findOrCreate({
-      where: { channelID, postID: post.id },
-      defaults: { artist: post.tags.artist[0], directLink: post.file.url },
-    }).catch(ERR);
-  });
+  const poolCurated = pool
+    .filter((post) => !(post.tags.artist.length === 0 || post.file.url === null || post.id === null))
+    .map((post) => ({
+      channelID,
+      postID: post.id,
+      artist: post.tags.artist[0],
+      directLink: post.file.url,
+    }));
+
+  await postcache.bulkCreate(poolCurated).catch(ERR);
 }
 
 module.exports.run = async (tags, serverID, channelID, nsfw) => {
