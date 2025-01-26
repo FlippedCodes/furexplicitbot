@@ -42,7 +42,7 @@ async function storePictures(channelID, pool) {
       artist: post.tags.artist[0],
       directLink: post.file.url,
     }));
-
+  await postcache.destroy({ where: { channelID } }).catch(ERR);
   await postcache.bulkCreate(poolCurated).catch(ERR);
 }
 
