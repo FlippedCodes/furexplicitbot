@@ -4,9 +4,9 @@ import Sequelize from 'sequelize';
 
 import https from 'https';
 
-import { main as intAutopostchannel } from './database/models/autopostchannel.js';
+import intPostcache from './database/models/postcache.js';
 
-import { main as intPostcache } from './database/models/postcache.js';
+import intPostjob from './database/models/postjob.js';
 
 const mainQ = new PQueue({ concurrency: 1 });
 
@@ -86,8 +86,8 @@ const sequelize = await new Sequelize(
   },
 );
 // init db models
-const autopostfasubmission = intAutopostfasubmission(sequelize);
-const postfacache = intPostfacache(sequelize);
+const postcache = intPostcache(sequelize);
+const postjob = intPostjob(sequelize);
 // sync DB
 await sequelize.sync();
 // startup uptime monitoring
@@ -96,11 +96,11 @@ uptimeHeartbeat();
 // main queue
 setInterval(async () => {
   await mainQ.add(async () => {
-    // get latest posts
-    const posts = await Submissions({ sort: 'old' });
-    if (posts === undefined) console.log('FA Token got invalidated!');
-    if (posts.length === 0) return;
-    await createJobs(posts);
+    // get oldest jobs
+    const jobs = await postcache.findAll({ where: {  } }).catch(ERR);
+    jobs.forEach((job) => {
+      
+    });
   });
 }, config.intervalChecker);
 
