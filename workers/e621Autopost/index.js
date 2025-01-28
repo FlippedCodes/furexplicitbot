@@ -10,6 +10,10 @@ const mainQ = new PQueue({ concurrency: 1 });
 
 import config from './config.json';
 
+import packageData from './package.json';
+
+config.package = packageData;
+
 const DEBUG = process.env.NODE_ENV === 'development';
 
 const ERR = (err) => {
