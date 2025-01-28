@@ -58,6 +58,7 @@ async function requestPictures(tags) {
       headers: { 'User-Agent': `${config.package.name}/${config.package.version} by Flipper on e621` },
     },
   );
+  if (!responseRaw.ok) return ERR(responseRaw.status);
   const response = await responseRaw.json();
   return response.posts;
 }
