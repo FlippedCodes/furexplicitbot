@@ -92,7 +92,6 @@ setInterval(async () => {
     await createJobs(posts);
   });
 }, config.intervalChecker);
-// }, 10000);
 
 // logging error; suppress crash
 process.on('uncaughtException', (err) => {
