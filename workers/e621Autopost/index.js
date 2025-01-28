@@ -57,6 +57,33 @@ function createJobs(posts) {
   });
 }
 
+async function requestPictures(tags, nsfw) {
+  const e6Config = config.engine.e621;
+  const url = nsfw ? e6Config.endpoint.nsfw : e6Config.endpoint.sfw;
+  const response = await axios({
+    method: 'GET',
+    url,
+    headers: { 'User-Agent': `${config.package.name}/${config.package.version} by Flipper on e621` },
+    params: {
+      tags: `${tags} order:random`,
+      limit: config.commands.autopost.maxCache,
+      login: process.env.login_e621_user,
+      api_key: process.env.token_e621,
+    },
+  });
+  return response.data.posts;
+}
+
+async function storePictures(channelID, pool) {
+  await pool.forEach((post) => {
+    if (post.tags.artist.length === 0 || post.file.url === null || post.id === null) return;
+    postcache.findOrCreate({
+      where: { channelID, postID: post.id },
+      defaults: { artist: post.tags.artist[0], directLink: post.file.url },
+    }).catch(ERR);
+  });
+}
+
 // ============= MAIN =============
 
 // connect DB
