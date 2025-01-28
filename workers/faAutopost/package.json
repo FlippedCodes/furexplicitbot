@@ -1,9 +1,10 @@
 {
-  "name": "faautopost",
+  "name": "@furexplicitbot/faworker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "private": true,
   "scripts": {
     "start": "bun index.js",
     "startLegacy": "node --experimental-specifier-resolution=node --no-warnings index.js"

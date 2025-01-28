@@ -1,9 +1,10 @@
 {
-  "name": "e621autopost",
+  "name": "@furexplicitbot/e621worker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "private": true,
   "scripts": {
     "start": "bun index.js"
   },
