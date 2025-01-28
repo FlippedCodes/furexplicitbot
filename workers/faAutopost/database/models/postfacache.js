@@ -24,9 +24,8 @@ export function main(sequelize) {
           fields: ['channelID', 'submissionID'],
         },
       },
-    }
+    },
   );
 }
 
-
-
+export default main;
