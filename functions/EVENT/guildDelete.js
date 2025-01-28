@@ -8,6 +8,8 @@ const autopostfasubmission = require('../../database/models/autopostfasubmission
 
 const postfacache = require('../../database/models/postfacache');
 
+const postjob = require('../../database/models/postjob');
+
 module.exports.run = async (guild) => {
   // Deletes all blacklisted tags
   servertagsblacklist.destroy({ where: { serverID: guild.id } }).catch(ERR);
@@ -17,7 +19,10 @@ module.exports.run = async (guild) => {
 
   // Deletes all channels and cache for autopost
   const autoChannelEntries = await autopostchannel.findAll({ where: { serverID: guild.id } }).catch(ERR);
-  await autoChannelEntries.forEach((entry) => postcache.destroy({ where: { channelID: entry.channelID } }).catch(ERR));
+  await autoChannelEntries.forEach((entry) => {
+    postcache.destroy({ where: { channelID: entry.channelID } }).catch(ERR)
+    postjob.destroy({ where: { channelID } }).catch(ERR);
+  });
   await autopostchannel.destroy({ where: { serverID: guild.id } }).catch(ERR);
 
   // Deletes all channels and cache for FA autopost
