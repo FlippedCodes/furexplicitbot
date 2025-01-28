@@ -20,11 +20,12 @@
   "homepage": "https://github.com/FlipperLP/furexplicitbot#readme",
   "dependencies": {
     "@discordjs/builders": "^1.5.0",
-    "axios": "^0.27.2",
+    "@sentry/node": "^8.34.0",
+    "axios": "^1.7.7",
     "bufferutil": "^4.0.7",
     "discord.js": "^14.8.0",
-    "furaffinity-api": "^4.5.1",
-    "mysql2": "^2.3.3",
+    "furaffinity-api": "^4.5.2",
+    "mysql2": "^3.11.3",
     "sequelize": "^6.28.0",
     "utf-8-validate": "^5.0.10",
     "uwuifier": "4.0.3"
@@ -34,5 +35,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3"
   },
-  "workspaces": [ "workers/*" ]
+  "workspaces": [
+    "workers/*"
+  ]
 }

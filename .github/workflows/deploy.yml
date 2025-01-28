@@ -27,6 +27,7 @@ jobs:
       db_ip: ${{ secrets.DB_IP }}
       db_password: ${{ secrets.DB_PASSWORD }}
       db_password_root: ${{ secrets.DB_PASSWORD_ROOT }}
+      SENTRY_LINK: ${{ secrets.SENTRY_LINK }}
 
     steps:
       - uses: actions/checkout@v2

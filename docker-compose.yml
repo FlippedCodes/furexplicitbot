@@ -1,4 +1,3 @@
-version: '3.3'
 services:
   app:
     build:
@@ -24,6 +23,7 @@ services:
       db_name: furExplicitBot
       db_user: furExplicitBot
       db_passw: ${db_password}
+      sentryLink: ${SENTRY_LINK}
     logging:
       driver: "json-file"
       options:
@@ -31,7 +31,8 @@ services:
 
   worker_faautpost:
     build:
-      context: ./workers/faAutopost
+      context: .
+      dockerfile: ./workers/faAutopost/Dockerfile
     depends_on:
       - db-feb
     restart: always
@@ -44,6 +45,7 @@ services:
       db_name: furExplicitBot
       db_user: furExplicitBot
       db_passw: ${db_password}
+      sentryLink: ${SENTRY_LINK}
     logging:
       driver: "json-file"
       options:
@@ -76,6 +78,8 @@ services:
       - "${db_ip}:${db_port}:3306"
     volumes:
       - db_data:/var/lib/mysql
+    # Set max_allowed_packet https://stackoverflow.com/questions/39369367/increase-max-allowed-packet-size-in-mysql-docker
+    command: --max_allowed_packet=256M
     environment:
       MYSQL_ROOT_PASSWORD: ${db_password_root}
       MYSQL_DATABASE: furExplicitBot
@@ -85,11 +89,13 @@ services:
       driver: "json-file"
       options:
         max-size: "1G"
+    networks:
+      - default
+      - grafana_exposed
 
-# networks:
-#   default:
-#     external:
-#       name: nginx_backend
+networks:
+  grafana_exposed:
+    external: true
 
 volumes:
   db_data:

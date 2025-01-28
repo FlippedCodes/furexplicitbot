@@ -1,3 +1,5 @@
+import './telemetry';
+
 import { Login, Submissions, removeFromInbox, unwatchAuthor } from 'furaffinity-api';
 
 import PQueue from 'p-queue';
@@ -82,16 +84,19 @@ uptimeHeartbeat();
 // startup cleaner interval
 cleanupDonePosts();
 
-// main queue
-setInterval(async () => {
-  await mainQ.add(async () => {
+function mainLoop() {
+  mainQ.add(async () => {
     // get latest posts
     const posts = await Submissions({ sort: 'old' });
     if (posts === undefined) console.log('FA Token got invalidated!');
     if (posts.length === 0) return;
     await createJobs(posts);
   });
-}, config.intervalChecker);
+}
+
+// main queue
+mainLoop();
+setInterval(() => mainLoop(), config.intervalChecker);
 // }, 10000);
 
 // logging error; supress crash

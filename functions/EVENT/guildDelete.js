@@ -2,6 +2,8 @@ const servertagsblacklist = require('../../database/models/servertagsblacklist')
 
 const autosourcechannel = require('../../database/models/autosourcechannel');
 
+const autopostchannel = require('../../database/models/autopostchannel');
+
 const postcache = require('../../database/models/postcache');
 
 const autopostfasubmission = require('../../database/models/autopostfasubmission');
@@ -28,7 +30,7 @@ module.exports.run = async (guild) => {
   // Deletes all channels and cache for FA autopost
   const FAautoChannelEntries = await autopostfasubmission.findAll({ where: { serverID: guild.id } }).catch(ERR);
   await FAautoChannelEntries.forEach((entry) => postfacache.destroy({ where: { channelID: entry.channelID } }).catch(ERR));
-  await FAautopostchannel.destroy({ where: { serverID: guild.id } }).catch(ERR);
+  await autopostfasubmission.destroy({ where: { serverID: guild.id } }).catch(ERR);
 };
 
 module.exports.data = {

@@ -20,7 +20,7 @@ function postMessage(post, channel) {
   channel.send({ embeds: [embed] });
 }
 
-// abort postingas channel is sfw
+// abort posting as channel is sfw
 function abortMessage(channel) {
   const embed = new EmbedBuilder();
   const title = 'Hello! Your channel not marked as ßßage-restricted ßß(NSFW).';

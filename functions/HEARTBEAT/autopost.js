@@ -4,17 +4,55 @@ const { Op } = require('sequelize');
 
 const autopostchannel = require('../../database/models/autopostchannel');
 
-// const postcache = require('../database/models/postcache');
+const postcache = require('../../database/models/postcache');
 
 // // clear autopost to force changes
 // function pruneAutopost(channelID) {
 //   postcache.destroy({ where: { channelID } }).catch(ERR);
 // }
 
-async function getChannels(currentTimestamp) {
-  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: currentTimestamp } } });
+function notAgeRestricted(channel, channelID, currentTimestamp, autoPostInterval) {
+  const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
+  const body = 'To further comply with discords guidelines, the bot will not post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
+  return abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body);
+}
+
+function notSuccessfullyPosted(channel) {
+  const title = 'Hello! There are no pictures!';
+  const body = `We are sorry to inform you, but in an attempt to keep unnecessary requests to e621 to a minimum, we deleted your autopost in this channel, as we are not able to find any pictures with your tags for over a week.
+Please review your tags and try again with \`/autopost\`. Thank you for understanding :3`;
+  return abortMessage(channel, null, null, null, title, body);
+}
+
+// abort posting as channel is sfw
+function abortMessage(channel, channelID, currentTimestamp, autoPostInterval, title, body) {
+  const embed = new EmbedBuilder();
+  embed
+    .setColor(Colors.Red)
+    .setDescription(body)
+    .setTitle(title);
+  channel.send({ embeds: [embed] });
+  if (channelID && currentTimestamp && autoPostInterval) updateTime(channelID, currentTimestamp, autoPostInterval);
+}
+
+async function getChannels() {
+  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: new Date() } } });
   // const result = await autopostchannel.findAll();
   return result;
+}
+
+// if not posted in over a week, delete autopost and cache.
+async function cleanupAutopostChannels() {
+  const aWeekAgo = new Date();
+  aWeekAgo.setDate(aWeekAgo.getDate() - 7);
+  const result = await autopostchannel.findAll({ where: { nextEvent: { [Op.lt]: aWeekAgo } } }).catch(ERR);
+  result.forEach(async (autoPost) => {
+    const channelID = autoPost.channelID;
+    const channel = client.channels.cache.find((channel) => channel.id === channelID);
+    if (channel) notSuccessfullyPosted(channel);
+    postcache.destroy({ where: { channelID } }).catch(ERR);
+    autopostchannel.destroy({ where: { channelID } }).catch(ERR);
+  });
 }
 
 function updateTime(channelID, currentTimestamp, interval) {
@@ -34,22 +72,9 @@ function postMessage(post, channel) {
   channel.send({ embeds: [embed] });
 }
 
-// abort posting as channel is sfw
-function abortMessage(channel, channelID, currentTimestamp, autoPostInterval) {
-  const embed = new EmbedBuilder();
-  const title = 'Hello! Your channel not marked as ßßage-restricted (NSFW).';
-  const body = 'As per the newest bot update and to further comply with discords guidelines, the bot will no longer post any art in any unmarked channel. \nMake sure to adjust the setting. If you prefer to only get SFW posts, add `rating:safe` to your tags.';
-  embed
-    .setColor(Colors.Red)
-    .setDescription(body)
-    .setTitle(title);
-  channel.send({ embeds: [embed] });
-  updateTime(channelID, currentTimestamp, autoPostInterval);
-}
-
 async function main() {
-  const currentTimestamp = new Date();
-  const channels = await getChannels(currentTimestamp);
+  await cleanupAutopostChannels();
+  const channels = await getChannels();
   channels.forEach(async (autoPost) => {
     const channelID = autoPost.channelID;
     const channel = client.channels.cache.find((channel) => channel.id === channelID);
@@ -66,15 +91,16 @@ async function main() {
       return;
     }
 
-    if (!channel.nsfw && !config.functions.allowSFWChannels) return abortMessage(channel, channelID, currentTimestamp, autoPost.interval);
+    if (!channel.nsfw && !config.functions.allowSFWChannels) return notAgeRestricted(channel, channelID, new Date(), autoPost.interval);
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
-    // ran out of pictures, needs to wait til worker has restocked cache
+    // wait for worker to provide pics
     if (!post) return;
+    // if (!post) return console.warn(`[${currentShardID}] No pictures available for ${channelID}!`);
     // tags, channelID, nsfw
     postMessage(post, channel);
-    updateTime(channelID, currentTimestamp, autoPost.interval);
+    updateTime(channelID, new Date(), autoPost.interval);
   });
 }
 

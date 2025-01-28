@@ -1,10 +1,13 @@
+require('./functions/telemetry');
+
 const { ShardingManager } = require('discord.js');
 
 const manager = new ShardingManager('./bot.js', { token: process.env.token_discord });
 
-// manager.on('shardCreate', (shard) => console.log(`Launched shard ${shard.id}`));
-
-manager.spawn();
+manager.spawn({
+  // delay: 10 * 1000,
+  timeout: 120 * 1000,
+});
 
 manager.on('shardCreate', (shard) => {
   shard.on('spawn', () => {
