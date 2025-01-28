@@ -63,14 +63,18 @@ async function requestPictures(tags, nsfw) {
 }
 
 async function storePictures(channelID, pool) {
-  await pool.forEach((post) => {
-    if (post.tags.artist.length === 0 || post.file.url === null || post.id === null) return;
-    postcache.findOrCreate({
-      where: { channelID, postID: post.id },
-      defaults: { artist: post.tags.artist[0], directLink: post.file.url },
-    }).catch(ERR);
-  });
+  const poolCurated = pool
+    .filter((post) => !(post.tags.artist.length === 0 || post.file.url === null || post.id === null))
+    .map((post) => ({
+      channelID,
+      postID: post.id,
+      artist: post.tags.artist[0],
+      directLink: post.file.url,
+    }));
+  await postcache.destroy({ where: { channelID } }).catch(ERR);
+  await postcache.bulkCreate(poolCurated).catch(ERR);
 }
+
 
 // ============= MAIN =============
 
@@ -99,7 +103,7 @@ setInterval(async () => {
     // get oldest jobs
     const jobs = await postcache.findAll({ where: {  } }).catch(ERR);
     jobs.forEach((job) => {
-      
+
     });
   });
 }, config.intervalChecker);
