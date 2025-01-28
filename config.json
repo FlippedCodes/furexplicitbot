@@ -14,7 +14,7 @@
             "logo": "https://cdn.discordapp.com/avatars/534828939198070824/d1ed4e147d58e53944ee7ad93f77f44c.png?size=4096"
         },
         "autopost": {
-            "intervalChecker": 30000,
+            "intervalChecker": 180000,
             "dbOffset": 7200000,
             "maxCache": 100,
             "maxChannels": 2,
