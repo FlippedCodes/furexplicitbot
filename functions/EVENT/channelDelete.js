@@ -13,7 +13,7 @@ const postjob = require('../../database/models/postjob');
 module.exports.run = async (channel) => {
   // Deletes channel and cache for autopost
   await postcache.destroy({ where: { channelID: channel.id } }).catch(ERR);
-  await postjob.destroy({ where: { channelID } }).catch(ERR);
+  await postjob.destroy({ where: { channelID: channel.id } }).catch(ERR);
   await autopostchannel.destroy({ where: { channelID: channel.id } }).catch(ERR);
 
   // Deletes channel and cache for FA autopost

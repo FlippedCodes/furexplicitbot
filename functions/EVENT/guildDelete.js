@@ -23,7 +23,7 @@ module.exports.run = async (guild) => {
   const autoChannelEntries = await autopostchannel.findAll({ where: { serverID: guild.id } }).catch(ERR);
   await autoChannelEntries.forEach((entry) => {
     postcache.destroy({ where: { channelID: entry.channelID } }).catch(ERR)
-    postjob.destroy({ where: { channelID } }).catch(ERR);
+    postjob.destroy({ where: { channelID: entry.channelID } }).catch(ERR);
   });
   await autopostchannel.destroy({ where: { serverID: guild.id } }).catch(ERR);
 
