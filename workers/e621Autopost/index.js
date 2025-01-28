@@ -2,8 +2,6 @@ import PQueue from 'p-queue';
 
 import Sequelize from 'sequelize';
 
-import https from 'https';
-
 import intPostcache from './database/models/postcache.js';
 
 import intPostjob from './database/models/postjob.js';
@@ -14,69 +12,10 @@ import config from './config.json';
 
 const DEBUG = process.env.NODE_ENV === 'development';
 
-let del = [];
-
-function uptimeHeartbeat() {
-  setInterval(() => {
-    https.get(`${config.uptimeEndpoint}${process.env.token_uptime_worker_e621}?status=up&msg=OK`);
-  }, config.uptimeInterval * 1000);
+const ERR = (err) => {
+  console.error(`[${currentShardID}] ERROR:`, err);
+  return;
 }
-
-// creates jobs for the bot to post in the corresponding channels
-function createJobs(posts) {
-  posts.forEach(async (post) => {
-    const artistID = post.author.id;
-    // check if artist is still needed and unwatch to clean unnesseary submissons
-    const todoChannels = await autopostfasubmission.findAll({ where: { artistID } });
-    if (todoChannels.length === 0) unwatchAuthor(artistID);
-    else {
-      // data preparation to add to db
-      const bulkData = todoChannels.map((channel) => {
-      return {
-        channelID: channel.channelID,
-        submissionID: post.id
-      }
-      });
-      // bulk add db entries
-      if (bulkData.length) await postfacache.bulkCreate(bulkData);
-    }
-    // schedule for deletion
-    del.push(post.id);
-  });
-}
-
-async function requestPictures(tags, nsfw) {
-  const e6Config = config.engine.e621;
-  const url = nsfw ? e6Config.endpoint.nsfw : e6Config.endpoint.sfw;
-  const response = await axios({
-    method: 'GET',
-    url,
-    headers: { 'User-Agent': `${config.package.name}/${config.package.version} by Flipper on e621` },
-    params: {
-      tags: `${tags} order:random`,
-      limit: config.commands.autopost.maxCache,
-      login: process.env.login_e621_user,
-      api_key: process.env.token_e621,
-    },
-  });
-  return response.data.posts;
-}
-
-async function storePictures(channelID, pool) {
-  const poolCurated = pool
-    .filter((post) => !(post.tags.artist.length === 0 || post.file.url === null || post.id === null))
-    .map((post) => ({
-      channelID,
-      postID: post.id,
-      artist: post.tags.artist[0],
-      directLink: post.file.url,
-    }));
-  await postcache.destroy({ where: { channelID } }).catch(ERR);
-  await postcache.bulkCreate(poolCurated).catch(ERR);
-}
-
-
-// ============= MAIN =============
 
 // connect DB
 const sequelize = await new Sequelize(
@@ -94,6 +33,47 @@ const postcache = intPostcache(sequelize);
 const postjob = intPostjob(sequelize);
 // sync DB
 await sequelize.sync();
+
+function uptimeHeartbeat() {
+  setInterval(() => fetch(`${config.uptimeEndpoint}${process.env.token_uptime_worker_e621}?status=up&msg=OK`),
+  config.uptimeInterval * 1000);
+}
+
+async function requestPictures(tags) {
+  const url = new URL(config.endpoint);
+  url.search =  new URLSearchParams({
+    tags: `${tags} order:random`,
+    limit: config.commands.autopost.maxCache,
+    login: process.env.login_e621_user,
+    api_key: process.env.token_e621,
+  }).toString();
+  const responseRaw = await fetch(
+    url,
+    {
+      method: "GET",
+      headers: { 'User-Agent': `${config.package.name}/${config.package.version} by Flipper on e621` },
+    },
+  );
+  const postDataBody = await postDataRaw.json();
+  return postDataBody.posts;
+}
+
+async function storePictures(channelID, pool) {
+  const poolCurated = pool
+    .filter((post) => !(post.tags.artist.length === 0 || post.file.url === null || post.id === null))
+    .map((post) => ({
+      channelID,
+      postID: post.id,
+      artist: post.tags.artist[0],
+      directLink: post.file.url,
+    }));
+  await postcache.destroy({ where: { channelID } }).catch(ERR);
+  await postcache.bulkCreate(poolCurated).catch(ERR);
+  await postjob.destroy({ where: { channelID } }).catch(ERR);
+}
+
+// ============= MAIN =============
+
 // startup uptime monitoring
 uptimeHeartbeat();
 
