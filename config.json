@@ -120,7 +120,7 @@
             "label": "furaffinity.net"
         },
         "e621": {
-            "logo": "https://s3.amazonaws.com/gt7sp-prod/decal/76/91/55/8223656485231559176_1.png",
+            "logo": "https://e621.net/packs/static/main-logo-109ca95d0f436bd372a1.png",
             "color": "012E57",
             "endpoint": {
                 "nsfw": "https://e621.net/posts.json",
