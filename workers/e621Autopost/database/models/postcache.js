@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
-const Sequelize = require('sequelize');
+import { DataTypes } from 'sequelize';
 
-module.exports = sequelize.define(
+export function main(sequelize) {
+  return sequelize.define(
   'postcache',
   {
     ID: {
@@ -38,3 +38,4 @@ module.exports = sequelize.define(
     },
   },
 );
+}

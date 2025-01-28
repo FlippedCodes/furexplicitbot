@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
-const Sequelize = require('sequelize');
+import { DataTypes } from 'sequelize';
 
-module.exports = sequelize.define(
+export function main(sequelize) {
+  return sequelize.define(
   'postjob',
   {
     channelID: {
@@ -14,3 +14,5 @@ module.exports = sequelize.define(
     },
   },
 );
+}
+
