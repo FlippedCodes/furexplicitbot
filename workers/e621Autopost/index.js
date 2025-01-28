@@ -85,8 +85,7 @@ uptimeHeartbeat();
 setInterval(async () => {
   await mainQ.add(async () => {
     // get oldest jobs
-    const jobs = await postcache.findAll({ limit: 2, order: [ 'createdAt', 'DESC' ] }).catch(ERR);
-    console.log(jobs);
+    const jobs = await postjob.findAll({ limit: 2, order: [[ 'createdAt', 'DESC' ]] }).catch(ERR);
     jobs.forEach(async (job) => {
       const results = await requestPictures(job.tags);
       await storePictures(job.channelID, results);
