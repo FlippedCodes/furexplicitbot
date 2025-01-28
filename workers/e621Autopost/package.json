@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "mysql2": "^2.3.3",
+    "p-queue": "^8.1.0",
     "sequelize": "^6.28.0"
   },
   "devDependencies": {
