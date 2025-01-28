@@ -1,0 +1,7 @@
+{
+    "intervalChecker": 2000,
+    "uptimeInterval": 60,
+    "uptimeEndpoint": "https://status.flipped.codes/api/push/",
+    "endpoint": "https://e621.net/posts.json",
+    "maxCache": 100
+}

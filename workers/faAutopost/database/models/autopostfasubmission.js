@@ -24,3 +24,5 @@ export function main(sequelize) {
     },
   );
 }
+
+export default main;

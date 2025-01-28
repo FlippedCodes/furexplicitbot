@@ -2,6 +2,8 @@ const postcache = require('../../database/models/postcache');
 
 const autopostchannel = require('../../database/models/autopostchannel');
 
+const postjob = require('../../database/models/postjob');
+
 async function removeTag(servertagsblacklist, id, serverID) {
   if (!await servertagsblacklist.findOne({ where: { serverID, id } }).catch(ERR)) return false;
   await servertagsblacklist.destroy({ where: { serverID, id } }).catch(ERR);
@@ -13,10 +15,13 @@ async function getAutopostChannels(serverID) {
   return result;
 }
 
-// clear autopost to force changes
+// clear autopost and jobs to force changes
 async function pruneAutopost(serverID) {
   const channelIDs = await getAutopostChannels(serverID);
-  channelIDs.forEach(({ channelID }) => postcache.destroy({ where: { channelID } }).catch(ERR));
+  channelIDs.forEach(({ channelID }) => {
+    postcache.destroy({ where: { channelID } }).catch(ERR);
+    postjob.destroy({ where: { channelID } }).catch(ERR);
+  });
 }
 
 module.exports.run = async (interaction, servertagsblacklist, tag) => {

@@ -2,9 +2,12 @@
 
 const postcache = require('../../database/models/postcache');
 
+const postjob = require('../../database/models/postjob');
+
 async function removeAutopost(autopostchannel, channelID) {
   if (!await autopostchannel.findOne({ where: { channelID } }).catch(ERR)) return false;
   await postcache.destroy({ where: { channelID } }).catch(ERR);
+  await postjob.destroy({ where: { channelID } }).catch(ERR);
   await autopostchannel.destroy({ where: { channelID } }).catch(ERR);
   return true;
 }

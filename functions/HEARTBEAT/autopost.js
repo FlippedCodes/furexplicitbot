@@ -95,7 +95,9 @@ async function main() {
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
-    if (!post) return console.warn(`[${currentShardID}] No pictures available for ${channelID}!`);
+    // wait for worker to provide pics
+    if (!post) return;
+    // if (!post) return console.warn(`[${currentShardID}] No pictures available for ${channelID}!`);
     // tags, channelID, nsfw
     postMessage(post, channel);
     updateTime(channelID, new Date(), autoPost.interval);

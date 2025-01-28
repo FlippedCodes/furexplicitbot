@@ -12,6 +12,7 @@ jobs:
       token_discord: ${{ secrets.DISCORD_BOT_TOKEN }}
       token_uptime: ${{secrets.TOKEN_UPTIME}}
       token_uptime_worker: ${{secrets.TOKEN_UPTIME_WORKER}}
+      token_uptime_worker_e621: ${{secrets.TOKEN_UPTIME_WORKER_E621}}
       token_botsondiscord: ${{secrets.TOKEN_BOTSONDISCORD}}
       token_discordbotlist: ${{secrets.TOKEN_DISCORDBOTLIST}}
       token_discords: ${{secrets.TOKEN_DISCORDS}}
