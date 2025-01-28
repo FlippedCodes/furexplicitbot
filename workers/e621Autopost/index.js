@@ -17,7 +17,7 @@ config.package = packageData;
 const DEBUG = process.env.NODE_ENV === 'development';
 
 const ERR = (err) => {
-  console.error(`[${currentShardID}] ERROR:`, err);
+  console.error(`[e621 worker] ERROR:`, err);
   return;
 }
 
@@ -47,7 +47,7 @@ async function requestPictures(tags) {
   const url = new URL(config.endpoint);
   url.search =  new URLSearchParams({
     tags: `${tags} order:random`,
-    limit: config.commands.autopost.maxCache,
+    limit: config.maxCache,
     login: process.env.login_e621_user,
     api_key: process.env.token_e621,
   }).toString();
@@ -58,8 +58,8 @@ async function requestPictures(tags) {
       headers: { 'User-Agent': `${config.package.name}/${config.package.version} by Flipper on e621` },
     },
   );
-  const postDataBody = await postDataRaw.json();
-  return postDataBody.posts;
+  const response = await responseRaw.json();
+  return response.posts;
 }
 
 async function storePictures(channelID, pool) {
