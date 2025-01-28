@@ -1,5 +1,3 @@
-import { Login, Submissions, removeFromInbox, unwatchAuthor } from 'furaffinity-api';
-
 import PQueue from 'p-queue';
 
 import Sequelize from 'sequelize';
@@ -22,16 +20,6 @@ function uptimeHeartbeat() {
   setInterval(() => {
     https.get(`${config.uptimeEndpoint}${process.env.token_uptime_worker_e621}?status=up&msg=OK`);
   }, config.uptimeInterval * 1000);
-}
-
-// removes submissions from FA inbox, if they have been imported
-async function cleanupDonePosts() {
-  setInterval(async () => {
-    if (del.length === 0) return;
-    await removeFromInbox(del);
-    if (DEBUG) console.log('Cleaned submissions');
-    del = [];
-  }, config.intervalChecker / 2);
 }
 
 // creates jobs for the bot to post in the corresponding channels
@@ -102,12 +90,8 @@ const autopostfasubmission = intAutopostfasubmission(sequelize);
 const postfacache = intPostfacache(sequelize);
 // sync DB
 await sequelize.sync();
-// login FA
-await Login(process.env.login_fa_cookie_a, process.env.login_fa_cookie_b);
 // startup uptime monitoring
 uptimeHeartbeat();
-// startup cleaner interval
-cleanupDonePosts();
 
 // main queue
 setInterval(async () => {
