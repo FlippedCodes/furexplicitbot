@@ -5,11 +5,11 @@ export function main(sequelize) {
     'postjob',
     {
       channelID: {
-        type: Sequelize.STRING(30),
+        type: DataTypes.STRING(30),
         primaryKey: true,
       },
       tags: {
-        type: Sequelize.TEXT('tiny'),
+        type: DataTypes.TEXT('tiny'),
         allowNull: false,
       },
     },

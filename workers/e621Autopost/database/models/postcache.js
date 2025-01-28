@@ -5,12 +5,12 @@ export function main(sequelize) {
     'postcache',
     {
       ID: {
-        type: Sequelize.INTEGER(10),
+        type: DataTypes.INTEGER(10),
         primaryKey: true,
         autoIncrement: true,
       },
       channelID: {
-        type: Sequelize.STRING(30),
+        type: DataTypes.STRING(30),
         allowNull: false,
       // references: {
       //   model: 'autopostchannels',
@@ -18,15 +18,15 @@ export function main(sequelize) {
       // },
       },
       postID: {
-        type: Sequelize.INTEGER(20),
+        type: DataTypes.INTEGER(20),
         allowNull: false,
       },
       artist: {
-        type: Sequelize.TEXT('tiny'),
+        type: DataTypes.TEXT('tiny'),
         allowNull: false,
       },
       directLink: {
-        type: Sequelize.TEXT('tiny'),
+        type: DataTypes.TEXT('tiny'),
         allowNull: false,
       },
     },
