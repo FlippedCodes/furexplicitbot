@@ -2,11 +2,13 @@ const axios = require('axios');
 
 const postcache = require('../../../../database/models/postcache');
 
-async function getTags(tagsRaw, serverID) {
+const postjob = require('../../../../database/models/postjob');
+
+async function getTags(tagsRaw, serverID, nsfw) {
   const tags = tagsRaw.replaceAll(', ', ' ');
   const interaction = { guild: { id: serverID } };
   const safeTags = await client.functions.get('ENGINE_tagsCleanup').run(interaction, tags);
-  return safeTags;
+  return `${safeTags} ${nsfw ? '' : 'rating:s'}`;
 }
 
 async function requestPictures(tags, nsfw) {
@@ -44,16 +46,19 @@ async function storePictures(channelID, pool) {
 }
 
 module.exports.run = async (tags, serverID, channelID, nsfw) => {
-  let post = await getPicture(channelID);
-  if (!post) {
-    const cleanTags = await getTags(tags, serverID);
-    // store requested pics
-    const results = await requestPictures(cleanTags, nsfw);
-    await storePictures(channelID, results);
-    // get first pic
-    post = await getPicture(channelID);
-  }
-  return post;
+  const post = await getPicture(channelID);
+  if (post) return post;
+
+  const cleanTags = await getTags(tags, serverID, nsfw);
+  // create job to get new stack of pictures
+  await postcache.findOrCreate({ where: { channelID }, defaults: { tags: cleanTags } }).catch(ERR);
+  return null;
+  // // store requested pics
+  // const results = await requestPictures(cleanTags, nsfw);
+  // await storePictures(channelID, results);
+  // // get first pic
+  // post = await getPicture(channelID);
+  // return post;
 };
 
 module.exports.help = {

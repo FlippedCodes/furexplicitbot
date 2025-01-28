@@ -70,6 +70,8 @@ async function main() {
     // const shardID = channel.guild.shardId;
     // if (currentShardID !== shardID) return;
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
+    // ran out of pictures, needs to wait til worker has restocked cache
+    if (!post) return;
     // tags, channelID, nsfw
     postMessage(post, channel);
     updateTime(channelID, currentTimestamp, autoPost.interval);
