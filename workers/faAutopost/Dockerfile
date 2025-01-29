@@ -18,4 +18,4 @@ RUN npm ci --omit=dev
 COPY ./workers/faAutopost/. .
 
 # start up the bot
-CMD [ "npm", "start" ]
+CMD [ "npm", "startLegacy" ]
