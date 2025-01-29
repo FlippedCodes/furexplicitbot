@@ -9,7 +9,7 @@ module.exports = sequelize.define(
       primaryKey: true,
     },
     tags: {
-      type: Sequelize.TEXT('tiny'),
+      type: Sequelize.TEXT('medium'),
       allowNull: false,
     },
   },

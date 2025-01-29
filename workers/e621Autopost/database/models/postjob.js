@@ -9,7 +9,7 @@ export function main(sequelize) {
         primaryKey: true,
       },
       tags: {
-        type: DataTypes.TEXT('tiny'),
+        type: DataTypes.TEXT('medium'),
         allowNull: false,
       },
     },
