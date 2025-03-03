@@ -97,6 +97,7 @@ async function main() {
     const post = await client.functions.get('ENGINE_E621_autopost_getPictures').run(autoPost.tags, channel.guild.id, channelID, channel.nsfw);
     // wait for worker to provide pics
     if (!post) return;
+    if (typeof post === 'string') return abortMessage(channel, channelID, new Date(), autoPost.interval, 'Error from autopost worker', post);
     // if (!post) return console.warn(`[${currentShardID}] No pictures available for ${channelID}!`);
     // tags, channelID, nsfw
     postMessage(post, channel);

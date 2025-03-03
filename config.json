@@ -126,6 +126,7 @@
                 "nsfw": "https://e621.net/posts.json",
                 "sfw": "https://e926.net/posts.json"
             },
+            "maxTags": 39,
             "poolEndpoint": "https://e621.net/pools.json",
             "autocompleteEndpoint": "https://e621.net/tags/autocomplete.json"
         },

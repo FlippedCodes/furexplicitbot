@@ -23,6 +23,7 @@ module.exports.run = async (tags, serverID, channelID, nsfw) => {
   if (post) return post;
 
   const cleanTags = await getTags(tags, serverID, nsfw);
+  if (cleanTags.split(' ').length > config.engine.e621.maxTags) return `You are trying to get more then \`${config.engine.e621.maxTags}\` tags, which is a set limit by e621.\nTry combining autopost or blacklisted tags.`;
   // create job to get new stack of pictures
   await postjob.findOrCreate({ where: { channelID }, defaults: { tags: cleanTags } }).catch(ERR);
   return null;
