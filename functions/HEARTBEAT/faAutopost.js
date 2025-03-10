@@ -42,7 +42,7 @@ async function main() {
     order: [['ID', 'ASC']],
   }).catch(ERR);
   // calculate interval between jobs to destribute messages evenly
-  const calcInterval = config.commands.faAutopost.intervalChecker / posts.length;
+  const calcInterval = DEBUG ? 0 : config.commands.faAutopost.intervalChecker / posts.length;
   posts.forEach(async (post) => {
     setTimeout(async () => {
       const channelID = post.channelID;
