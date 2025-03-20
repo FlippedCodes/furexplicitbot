@@ -15,7 +15,7 @@
   "dependencies": {
     "@sentry/node": "^8.34.0",
     "axios": "1.7.7",
-    "furaffinity-api": "^4.5.2",
+    "furaffinity-api": "^4.5.4",
     "mysql2": "^3.11.3",
     "p-queue": "^7.3.0",
     "sequelize": "^6.28.0"
