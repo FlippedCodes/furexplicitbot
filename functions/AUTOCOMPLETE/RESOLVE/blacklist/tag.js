@@ -9,7 +9,7 @@ module.exports.run = async (searchInput, serverID) => {
   const DBentries = await getTags(serverID);
 
   const output = DBentries.map((entry) => ({ name: entry.tag, value: `${entry.id}` }));
-  return output;
+  return output.slice(0, 24);
 };
 
 module.exports.data = {
