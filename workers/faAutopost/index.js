@@ -1,4 +1,4 @@
-import './telemetry';
+import './telemetry.js';
 
 import { Login, Submissions, removeFromInbox, unwatchAuthor } from 'furaffinity-api';
 
