@@ -1,6 +1,6 @@
 # get node
 # needs to be this version, otherwise breakes uwuifier
-FROM oven/bun:1.1-alpine
+FROM oven/bun:1-alpine
 
 # RUN apk add --no-cache git
 
