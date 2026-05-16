@@ -1,6 +1,6 @@
 const { Colors } = require('discord.js');
 
-const Uwuifier = require('uwuifier');
+const Uwuifier = require('uwuifier').default;
 
 // FIXME: uwuifier constructor issues
 const uwuifier = new Uwuifier(config.functions.globalFuncs.uwuifier);
