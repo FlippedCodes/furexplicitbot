@@ -143,7 +143,7 @@
             "color": "aae5a3",
             "endpoint": {
                 "main": "https://api.rule34.xxx/index.php",
-                "autocomplete": "https://ac.rule34.xxx/autocomplete.php"
+                "autocomplete": "https://api.rule34.xxx/autocomplete.php"
             },
             "autopost": {
                 "intervalChecker": 60000,

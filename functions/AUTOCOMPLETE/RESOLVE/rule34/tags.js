@@ -13,7 +13,6 @@ module.exports.run = async (searchInput) => {
     headers: { 'User-Agent': `${config.package.name}/${config.package.version} by "Phil | Flipper#3621" on Discord` },
     params: {
       q: apiSearchVal,
-      expiry: 7,
     },
   });
 
