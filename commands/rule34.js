@@ -50,8 +50,10 @@ async function requestPictures(tags, limit, nsfw) {
   const postsRaw = await axios({
     method: 'GET',
     url: r34Config.endpoint.main,
-    headers: { 'User-Agent': `${config.package.name}/${config.package.version} by "Phil | Flipper#3621" on Discord` },
+    headers: { 'User-Agent': `${config.package.name}/${config.package.version} by "the.phil." on Discord` },
     params: {
+      user_id: process.env.login_rule34_user,
+      api_key: token_rule34,
       tags: `${tags} sort:${sort}:${order}`,
       limit: limit * 100,
       json: 1,

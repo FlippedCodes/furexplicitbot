@@ -28,6 +28,8 @@ jobs:
       db_password: ${{ secrets.DB_PASSWORD }}
       db_password_root: ${{ secrets.DB_PASSWORD_ROOT }}
       SENTRY_LINK: ${{ secrets.SENTRY_LINK }}
+      login_rule34_user: ${{ secrets.login_rule34_user }}
+      token_rule34: ${{ secrets.token_rule34 }}
 
     steps:
       - uses: actions/checkout@v2

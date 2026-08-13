@@ -24,6 +24,8 @@ services:
       db_user: furExplicitBot
       db_passw: ${db_password}
       sentryLink: ${SENTRY_LINK}
+      login_rule34_user: ${login_rule34_user}
+      token_rule34: ${token_rule34}
     logging:
       driver: "json-file"
       options:
