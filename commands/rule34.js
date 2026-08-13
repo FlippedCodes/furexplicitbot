@@ -53,7 +53,7 @@ async function requestPictures(tags, limit, nsfw) {
     headers: { 'User-Agent': `${config.package.name}/${config.package.version} by "the.phil." on Discord` },
     params: {
       user_id: process.env.login_rule34_user,
-      api_key: token_rule34,
+      api_key: process.env.token_rule34,
       tags: `${tags} sort:${sort}:${order}`,
       limit: limit * 100,
       json: 1,
