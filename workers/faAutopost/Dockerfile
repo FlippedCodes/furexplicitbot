@@ -9,10 +9,11 @@ WORKDIR /usr/src/app
 
 # Get app dependencies
 COPY ./workers/faAutopost/package*.json ./
-COPY ./package-lock.json ./
+# COPY ./package-lock.json ./
 
 # building app
-RUN npm ci --omit=dev
+# RUN npm ci --omit=dev
+RUN npm i --omit=dev
 
 # Bundle app source
 COPY ./workers/faAutopost/. .
