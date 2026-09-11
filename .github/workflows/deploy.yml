@@ -38,7 +38,7 @@ jobs:
         run: docker compose pull
 
       - name: Build app
-        run: docker compose build
+        run: docker compose build --no-cache
 
       - name: Spin up containers
         run: docker compose up -d
