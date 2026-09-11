@@ -8,7 +8,8 @@ FROM oven/bun:1-alpine
 WORKDIR /usr/src/app
 
 # Get app dependencies
-COPY package*.json ./
+COPY ./workers/e621Autopost/package*.json ./
+COPY ./package-lock.json ./
 
 # building app
 # RUN bun update
@@ -17,7 +18,7 @@ COPY package*.json ./
 RUN bun install --production
 
 # Bundle app source
-COPY . .
+COPY ./workers/e621Autopost/. .
 
 # start up the bot
 CMD [ "bun", "start" ]
