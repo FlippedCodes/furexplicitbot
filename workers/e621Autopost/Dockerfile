@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 # Get app dependencies
 COPY ./workers/e621Autopost/package*.json ./
-COPY ./package-lock.json ./
+COPY ./bun.lockb ./
 
 # building app
 # RUN bun update
