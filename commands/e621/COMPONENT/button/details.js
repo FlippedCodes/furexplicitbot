@@ -72,7 +72,7 @@ function prepareMessage(submission, orgMessage, poolData) {
     if (submission.sources.length === 1) typeSources = 'Source';
   }
 
-  const extention = submission.file.ext;
+  const extention = submission.files.meta.ext;
   const video = extention === 'webm' || extention === 'swf' || extention === 'mp4';
   const videoPicture = video ? 'Video' : 'Picture';
 
