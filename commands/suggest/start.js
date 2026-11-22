@@ -128,6 +128,7 @@ async function requestPictures(tags, nsfw) {
       limit: 10,
       login: process.env.login_e621_user,
       api_key: process.env.token_e621,
+      mode: 'extended',
     },
   });
   return posts.data;

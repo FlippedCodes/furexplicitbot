@@ -23,6 +23,7 @@ async function requestPool(poolID, nsfw) {
       limit,
       login: process.env.login_e621_user,
       api_key: process.env.token_e621,
+      mode: 'extended',
     },
   });
   return posts.data;

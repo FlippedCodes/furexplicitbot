@@ -50,6 +50,7 @@ async function requestPictures(tags) {
     limit: config.maxCache,
     login: process.env.login_e621_user,
     api_key: process.env.token_e621,
+    mode: 'extended',
   }).toString();
   const responseRaw = await fetch(
     url,
