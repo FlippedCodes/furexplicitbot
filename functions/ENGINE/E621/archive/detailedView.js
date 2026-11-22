@@ -51,7 +51,7 @@ function addTags(post, poolData, embed) {
   if (tags.artist.length === 1) typeArtists = 'Artist';
   embed.setAuthor(`${typeArtists}: ${artists}`);
 
-  const extention = post.file.ext;
+  const extention = post.files.meta.ext;
   if (extention === 'webm' || extention === 'swf') {
     embed.addField('Direct video link', post.file_url);
   }
@@ -92,8 +92,8 @@ function postPicture(reaction, RichEmbed, previewMessage, config, post, poolData
     .addField('ID', post.id, true)
     .addField('Resolution', `${post.file.width}x${post.file.height}`, true)
     .addField(typeSources, source)
-    .addField('Full Picture link', post.file.url)
-    .setImage(post.file.url)
+    .addField('Full Picture link', post.files.original.url)
+    .setImage(post.files.original.url)
     .setFooter(config.e621.label, config.e621.logo)
     .setTimestamp();
   reaction.message.edit({ embed });

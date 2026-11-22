@@ -46,11 +46,11 @@ async function requestPictures(tags, limit, nsfw) {
 
 function prepareMessage(submission) {
   const embed = new EmbedBuilder();
-  const extention = submission.file.ext;
-  let picURL = submission.sample.url;
-  if (extention === 'gif') picURL = submission.file.url;
+  const extention = submission.files.meta.ext;
+  let picURL = submission.files.sample.webp;
+  if (extention === 'gif') picURL = submission.files.original.url;
   const video = extention === 'webm' || extention === 'swf' || extention === 'mp4';
-  if (video) embed.addFields([{ name: 'Direct video link', value: submission.file.url }]);
+  if (video) embed.addFields([{ name: 'Direct video link', value: submission.files.original.url }]);
 
   embed
     .setColor(config.engine.e621.color)

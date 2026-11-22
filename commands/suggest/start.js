@@ -136,10 +136,10 @@ async function requestPictures(tags, nsfw) {
 
 function prepareSubmissionPost(submission, tags, count) {
   const embed = new EmbedBuilder();
-  const extention = submission.file.ext;
+  const extention = submission.files.meta.ext;
   let picURL = submission.sample.url;
-  if (extention === 'gif') picURL = submission.file.url;
-  if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addFields([{ name: 'Direct video link', value: submission.file.url }]);
+  if (extention === 'gif') picURL = submission.files.original.url;
+  if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addFields([{ name: 'Direct video link', value: submission.files.original.url }]);
 
   embed
     .setColor(config.engine.e621.color)

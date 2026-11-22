@@ -84,13 +84,13 @@ function prepareMessage(submission, orgMessage, poolData) {
     .setDescription(`**General Tags:** \`\`\`${submission.tags.general.join(', ')}\`\`\``)
     .addFields([
       { name: 'Rating', value: `:regional_indicator_${submission.rating}:`, inline: true },
-      { name: 'Score', value: `${submission.score.total}`, inline: true },
+      { name: 'Score', value: `${submission.stats.score.total}`, inline: true },
       { name: 'ID', value: `${submission.id}`, inline: true },
-      { name: 'Resolution', value: `${submission.file.width}x${submission.file.height}`, inline: true },
+      { name: 'Resolution', value: `${submission.files.original.width}x${submission.files.original.height}`, inline: true },
       { name: typeSources, value: source },
-      { name: `Full ${videoPicture} link`, value: submission.file.url },
+      { name: `Full ${videoPicture} link`, value: submission.files.original.url },
     ])
-    .setImage(video ? submission.sample.url : submission.file.url)
+    .setImage(video ? submission.files.sample.webp : submission.files.original.url)
     .setFooter({ text: `${videoPicture} from e621.net`, iconURL: config.engine.e621.logo });
   return embed;
 }

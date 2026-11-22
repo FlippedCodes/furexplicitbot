@@ -73,10 +73,10 @@ function postPictures(MessageEmbed, message, config, limit, messageOwner, pool) 
   }
   pool.forEach(async (post) => {
     const embed = new EmbedBuilder();
-    const extention = post.file.ext;
+    const extention = post.files.meta.ext;
     let picURL = post.sample.url;
-    if (extention === 'gif') picURL = post.file.url;
-    if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addFields([{ name: 'Direct video link', value: post.file.url }]);
+    if (extention === 'gif') picURL = post.files.original.url;
+    if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addFields([{ name: 'Direct video link', value: post.files.original.url }]);
 
     embed
       .setColor(config.e621.color)
