@@ -137,7 +137,7 @@ async function requestPictures(tags, nsfw) {
 function prepareSubmissionPost(submission, tags, count) {
   const embed = new EmbedBuilder();
   const extention = submission.files.meta.ext;
-  let picURL = submission.files.sample.url;
+  let picURL = submission.files.sample.webp;
   if (extention === 'gif') picURL = submission.files.original.url;
   if (extention === 'webm' || extention === 'swf' || extention === 'mp4') embed.addFields([{ name: 'Direct video link', value: submission.files.original.url }]);
 
