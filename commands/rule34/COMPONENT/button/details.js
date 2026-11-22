@@ -25,7 +25,7 @@ async function requestPool(poolID, nsfw) {
       api_key: process.env.token_e621,
     },
   });
-  return posts.data.posts;
+  return posts.data;
 }
 
 function formatTags(tags) {

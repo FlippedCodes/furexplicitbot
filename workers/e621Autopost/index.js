@@ -60,7 +60,7 @@ async function requestPictures(tags) {
   );
   if (!responseRaw.ok) return ERR(responseRaw.status);
   const response = await responseRaw.json();
-  return response.posts;
+  return response;
 }
 
 async function storePictures(channelID, pool) {

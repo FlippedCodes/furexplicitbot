@@ -130,7 +130,7 @@ async function requestPictures(tags, nsfw) {
       api_key: process.env.token_e621,
     },
   });
-  return posts.data.posts;
+  return posts.data;
 }
 
 function prepareSubmissionPost(submission, tags, count) {

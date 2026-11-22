@@ -35,7 +35,7 @@ function parseTags(tags) {
 
 async function getAmmount(request) {
   const pics = await axios(request);
-  return pics.data.posts.length;
+  return pics.data.length;
 }
 
 function getEndpoint(nsfw, config) {
