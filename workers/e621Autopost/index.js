@@ -66,12 +66,12 @@ async function requestPictures(tags) {
 
 async function storePictures(channelID, pool) {
   const poolCurated = pool
-    .filter((post) => !(post.tags.artist.length === 0 || post.file.url === null || post.id === null))
+    .filter((post) => !(post.tags.artist.length === 0 || post.files.original.url === null || post.id === null))
     .map((post) => ({
       channelID,
       postID: post.id,
       artist: post.tags.artist[0],
-      directLink: post.file.url,
+      directLink: post.files.original.url,
     }));
   await postcache.destroy({ where: { channelID } }).catch(ERR);
   await postcache.bulkCreate(poolCurated).catch(ERR);
